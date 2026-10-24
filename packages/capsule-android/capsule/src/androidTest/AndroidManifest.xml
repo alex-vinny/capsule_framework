@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+      Test-APK only. AndroidNetworkProviderTest queries ConnectivityManager, which requires
+      ACCESS_NETWORK_STATE. In real apps the CLI auto-declares this permission (AUTO_PERMISSIONS)
+      when the network API is used; it is intentionally NOT in the library's main manifest, so it
+      is not force-merged onto every consumer. The instrumented test APK supplies it here instead.
+      ACCESS_NETWORK_STATE is a normal (install-time) permission — declaring it grants it.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!--
+      CivetwebServerTest talks plain HTTP to http://127.0.0.1, which Android blocks by default
+      (API 28+). Generated apps allow it in their own manifest (cli/src/sync/sync.ts).
+    -->
+    <application android:usesCleartextTraffic="true" />
+
+</manifest>

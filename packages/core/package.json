@@ -1,0 +1,35 @@
+{
+  "name": "@capsule/core",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./routes": {
+      "types": "./dist/router.d.ts",
+      "import": "./dist/router.mjs",
+      "require": "./dist/router.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vitest run",
+    "docs:gen": "node ../../scripts/gen/index.mjs --only core"
+  },
+  "devDependencies": {
+    "happy-dom": "^21.0.4",
+    "tsup": "^9.0.0",
+    "vitest": "^4.1.12",
+    "typescript": "~5.9.3",
+    "typedoc": "~0.28.20",
+    "typedoc-plugin-markdown": "~4.13.1"
+  }
+}

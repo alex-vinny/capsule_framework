@@ -1,0 +1,4 @@
+packages:
+  - "packages/*"
+# examples/ is deliberately NOT here: it is its own pnpm workspace (examples/pnpm-workspace.yaml),
+# so the framework install never pulls in the example apps' dependencies.

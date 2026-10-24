@@ -1,0 +1,63 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+# ...but never the docs (Build/ is capitalized, yet Windows ignorecase matches it)
+!docs/Build/
+
+# SwiftPM build tree (iOS package)
+.build/
+
+# Turbo cache
+.turbo/
+
+# Android build outputs
+packages/capsule-android/capsule/build/
+packages/capsule-android/.gradle/
+packages/capsule-android/local.properties
+
+# CMake / NDK generated files (AGP externalNativeBuild cache)
+.cxx/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+*.ninja
+.ninja_deps
+.ninja_log
+
+# Native compilation artifacts
+*.o
+*.a
+*.so
+*.d
+
+# Generated native wrappers — never commit
+.capsule/
+
+# Test app — dev only, not part of the framework
+my-app/
+
+# Environment
+.env
+.env.local
+*.env
+
+# Logs
+*.log
+
+# Generated docs site — CI builds and gh-deploys it (.github/workflows/docs.yml)
+site/
+
+# CodeSync API runtime data (published bundles + manifest.json)
+packages/codesync-api/storage/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Examples (examples/ — its own pnpm workspace; per-app .gitignore files cover framework caches)
+examples/**/*.tsbuildinfo
+examples/**/.tmp/
+examples/**/bundle.zip

@@ -1,0 +1,27 @@
+name: Feature request
+description: Suggest a capability or improvement
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check the roadmap first (docs → Roadmap) — it may already be planned.
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What you're trying to do and what gets in the way today.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: How it could work
+      description: The API, command or behaviour you have in mind, on which platforms.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and drawbacks
+      description: Workarounds you use now, and costs of the change (size, OTA compatibility, …).

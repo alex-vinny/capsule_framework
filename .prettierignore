@@ -1,0 +1,9 @@
+dist/
+node_modules/
+pnpm-lock.yaml
+my-app/
+**/templates/
+packages/native/
+.capsule/
+**/build/
+site/

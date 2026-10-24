@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:,">
+    <title>Capsule</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; background: #f2f2f7; color: #1c1c1e; min-height: 100vh; }
+      header { background: #fff; border-bottom: 1px solid #e5e5ea; padding: 16px 20px; position: sticky; top: 0; z-index: 10; }
+      header h1 { font-size: 17px; font-weight: 600; }
+      main { padding: 20px; display: flex; flex-direction: column; gap: 20px; max-width: 480px; margin: 0 auto; }
+      .card { background: #fff; border-radius: 12px; padding: 16px; }
+      .card h2 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: #8e8e93; margin-bottom: 12px; }
+      .row { display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid #f2f2f7; gap: 12px; }
+      .row:first-child { border-top: none; }
+      .lbl { color: #8e8e93; flex-shrink: 0; }
+      .val { text-align: right; word-break: break-all; }
+      .btn-row { display: flex; flex-wrap: wrap; gap: 8px; }
+      button { padding: 8px 16px; border-radius: 8px; border: 1px solid #d1d1d6; background: #f2f2f7; color: #1c1c1e; font-size: 14px; font-family: inherit; cursor: pointer; }
+      button:active { background: #e5e5ea; }
+      button.danger { background: #fff0f0; border-color: #ff3b30; color: #ff3b30; }
+      .input-row { display: flex; gap: 8px; }
+      input[type="text"] { flex: 1; padding: 8px 12px; border-radius: 8px; border: 1px solid #d1d1d6; background: #f2f2f7; font-size: 14px; font-family: inherit; color: #1c1c1e; min-width: 0; }
+      input[type="text"]:focus { outline: none; border-color: #007aff; background: #fff; }
+      .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+      .chip { padding: 6px 14px; border-radius: 20px; border: 1px solid #d1d1d6; background: #f2f2f7; font-size: 13px; cursor: pointer; }
+      .chip.active { background: #1c1c1e; color: #fff; border-color: #1c1c1e; }
+      .radio-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
+      .radio-row label { display: flex; align-items: center; gap: 5px; font-size: 13px; cursor: pointer; }
+      .status { font-size: 13px; color: #8e8e93; margin-top: 8px; }
+      .status b { color: #1c1c1e; }
+      .muted { color: #8e8e93; }
+      .warn { color: #ff9500; }
+      .tab-bar { display: flex; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-top: 1px solid rgba(0,0,0,0.1); position: sticky; bottom: 0; }
+      .tab { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 8px 0 12px; gap: 2px; background: none; border: none; cursor: pointer; font-family: inherit; color: #8e8e93; }
+      .tab.active { color: #007aff; }
+      .tab-icon { font-size: 20px; line-height: 1; display: block; }
+      .tab-label { font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/bundle.js"></script>
+  </body>
+</html>

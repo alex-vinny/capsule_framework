@@ -1,0 +1,5 @@
+[
+  { "ghsa_id": "GHSA-1111-2222-3333", "state": "published", "severity": "high", "summary": "RegExp OOB write", "html_url": "https://github.com/o/r/security/advisories/GHSA-1111-2222-3333", "published_at": "2026-07-31T15:09:24Z", "vulnerabilities": [{ "vulnerable_version_range": ">= 0.15.1", "patched_versions": "0.16.0" }] },
+  { "ghsa_id": "GHSA-4444-5555-6666", "state": "published", "severity": "high", "summary": "fixed long ago", "html_url": "https://github.com/o/r/security/advisories/GHSA-4444-5555-6666", "published_at": "2025-01-01T00:00:00Z", "vulnerabilities": [{ "vulnerable_version_range": "< 0.10.0", "patched_versions": "0.10.0" }] },
+  { "ghsa_id": "GHSA-7777-8888-9999", "state": "published", "severity": "low", "summary": "no range given", "html_url": "https://github.com/o/r/security/advisories/GHSA-7777-8888-9999", "published_at": "2026-08-01T00:00:00Z", "vulnerabilities": [] }
+]

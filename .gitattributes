@@ -1,0 +1,19 @@
+# Line endings: LF in the repo and in every checkout, on every OS
+# (matches Prettier's default endOfLine and keeps gradlew/shell scripts runnable).
+* text=auto eol=lf
+
+# Windows batch files need CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binaries — never normalized
+*.png binary
+*.jpg binary
+*.ico binary
+*.jar binary
+*.aar binary
+*.zip binary
+*.so binary
+*.ttf binary
+*.woff binary
+*.woff2 binary

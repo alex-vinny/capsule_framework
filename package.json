@@ -1,0 +1,57 @@
+{
+  "name": "capsule",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write --no-error-on-unmatched-pattern \"packages/*/src/**/*.{ts,tsx}\" \"scripts/**/*.{mjs,js}\" \"examples/**/src/**/*.{ts,tsx,js,jsx,vue}\"",
+    "format:check": "prettier --check --no-error-on-unmatched-pattern \"packages/*/src/**/*.{ts,tsx}\" \"scripts/**/*.{mjs,js}\" \"examples/**/src/**/*.{ts,tsx,js,jsx,vue}\"",
+    "test": "turbo run test",
+    "verify": "node scripts/verify.mjs",
+    "verify:android": "node scripts/verify.mjs --android",
+    "verify:ios": "node scripts/verify.mjs --ios",
+    "docs:check": "node scripts/docs-check.mjs",
+    "docs:lint": "node scripts/docs-lint/bin/docs-lint.mjs",
+    "upkeep": "node scripts/upkeep/index.mjs",
+    "gen": "turbo run build --filter=@capsule/cli && node scripts/gen/index.mjs",
+    "gen:check": "turbo run build --filter=@capsule/cli && node scripts/gen/index.mjs --check",
+    "dev:env": "node scripts/dev-env.mjs",
+    "dev:emulator": "node scripts/emulator.mjs",
+    "dev:examples": "node scripts/examples.mjs",
+    "with-env": "node scripts/with-env.mjs",
+    "update:quickjs": "node scripts/update-quickjs.mjs",
+    "update:civetweb": "node scripts/update-civetweb.mjs",
+    "test:scripts": "node --test \"scripts/**/*.test.mjs\"",
+    "capsule": "node packages/cli/dist/index.js"
+  },
+  "devDependencies": {
+    "eslint": "^10.13.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.10",
+    "turbo": "^2.11.10",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.72.0"
+  },
+  "//": [
+    "pnpm.overrides: transitive security floors no direct bump reaches yet (set by the 2026-10-24 upkeep sweep).",
+    "Drop an entry once pnpm upkeep --only node shows the parent pulls a fixed version on its own.",
+    "brace-expansion 5.0.12: eslint > minimatch 10 (GHSA-3jxr/mh99/rgw5/qhr7/6j4f/q2hr, DoS).",
+    "nanoid 3.3.20: vite 6 / tsup > postcss (GHSA-28wg, GHSA-2v37, infinite loop).",
+    "postcss 8.5.31 + source-map-js 1.2.2: vite 6 / tsup (GHSA-r28c, GHSA-fxqj, GHSA-68fv, source-map file read / DoS).",
+    "fast-uri 3.1.9: codesync-api > fastify 5 > ajv (GHSA-w74x/wjr9/xhq7/333x, URI parsing)."
+  ],
+  "pnpm": {
+    "overrides": {
+      "brace-expansion@>=4.0.0 <5.0.12": "^5.0.12",
+      "nanoid@<3.3.18": "^3.3.20",
+      "postcss@<8.5.23": "^8.5.31",
+      "source-map-js@<1.2.2": "^1.2.2",
+      "fast-uri@>=3.0.0 <3.1.9": "^3.1.9"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+# The example apps are their own pnpm workspace — one install, one lockfile, kept out of the
+# framework's root workspace. Each app links the in-repo @capsule/core (link:../../packages/core);
+# build the framework first (`pnpm install && pnpm build` at the repo root).
+packages:
+  - "*"

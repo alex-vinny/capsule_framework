@@ -1,0 +1,13 @@
+<sdk:sdk-repository>
+  <channel id="channel-0">stable</channel>
+  <remotePackage path="platforms;android-35"><type-details><api-level>35</api-level></type-details><revision><major>2</major></revision><channelRef ref="channel-0"/></remotePackage>
+  <remotePackage path="platforms;android-35-ext14"><type-details><api-level>35x</api-level></type-details><channelRef ref="channel-0"/></remotePackage>
+  <remotePackage path="platforms;android-36"><type-details><api-level>36</api-level></type-details><channelRef ref="channel-0"/></remotePackage>
+  <remotePackage path="platforms;android-36.1"><type-details><api-level>36.1</api-level></type-details><channelRef ref="channel-0"/></remotePackage>
+  <remotePackage path="platforms;android-37.2-beta3"><type-details><api-level>37.1</api-level></type-details><channelRef ref="channel-0"/></remotePackage>
+  <remotePackage path="platforms;android-CANARY"><type-details><api-level>38</api-level></type-details><channelRef ref="channel-3"/></remotePackage>
+  <remotePackage path="ndk;27.2.12479018"><revision><major>27</major><minor>2</minor><micro>12479018</micro></revision></remotePackage>
+  <remotePackage path="ndk;27.3.13750724"><revision><major>27</major><minor>3</minor><micro>13750724</micro></revision></remotePackage>
+  <remotePackage path="ndk;29.0.14206865"><revision><major>29</major><minor>0</minor><micro>14206865</micro></revision></remotePackage>
+  <remotePackage path="ndk;30.0.16138531"><revision><major>30</major><minor>0</minor><micro>16138531</micro><preview>3</preview></revision></remotePackage>
+</sdk:sdk-repository>

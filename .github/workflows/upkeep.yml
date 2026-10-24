@@ -1,0 +1,55 @@
+# Weekly upkeep report — `pnpm upkeep` (scripts/upkeep) posted as one GitHub issue, "Upkeep report",
+# updated in place each run. It covers what Renovate (renovate.json) can't: store requirements and
+# their deadlines, the Android SDK platform/NDK, Xcode/Swift, advisories against vendored C, plus a
+# change-watch on the store policy pages. Process: docs/contributing/upkeep.md.
+
+name: Upkeep
+
+on:
+  schedule:
+    - cron: '0 6 * * 1' # Mondays 06:00 UTC, after Renovate's weekly window
+  workflow_dispatch:
+
+concurrency:
+  group: upkeep
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  report:
+    name: Upkeep report
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6 # version comes from "packageManager" in package.json
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # The store section runs the CLI's own rule evaluator (packages/cli/dist/platform/).
+      - run: pnpm turbo run build --filter=@capsule/cli
+
+      - name: Build the report
+        env:
+          GITHUB_TOKEN: ${{ github.token }} # lifts the GitHub API rate limit (vendored + Swift sections)
+        run: |
+          node scripts/upkeep/index.mjs --markdown > upkeep.md
+          # An issue body holds at most 65536 characters.
+          node -e "const fs=require('fs');const t=fs.readFileSync('upkeep.md','utf8');if(t.length>65000)fs.writeFileSync('upkeep.md',t.slice(0,65000)+'\n\n_…truncated — run pnpm upkeep locally for the full report._\n')"
+          cat upkeep.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Create or update the "Upkeep report" issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create upkeep --color FBCA04 --description "Weekly upkeep report (scripts/upkeep)" --force
+          number=$(gh issue list --label upkeep --state open --search 'in:title "Upkeep report"' --json number --jq '.[0].number')
+          if [ -n "$number" ]; then
+            gh issue edit "$number" --body-file upkeep.md
+          else
+            gh issue create --title "Upkeep report" --label upkeep --body-file upkeep.md
+          fi

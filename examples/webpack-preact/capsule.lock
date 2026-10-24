@@ -1,0 +1,8 @@
+{
+  "capsuleVersion": "0.1.0",
+  "shell": {
+    "platform": "android",
+    "aarHash": "b24a253e6519e70e65a71bb5a052737aa74b0cc176eff57e1c4e69784034ed6e"
+  },
+  "configHash": "ad69eab0223616639e099479a7f1d9c63ba4e1843a2022f8e2e59f1fd5f07da4"
+}

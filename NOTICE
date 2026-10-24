@@ -1,0 +1,11 @@
+Capsule Framework
+Copyright 2024-2026 The Capsule Framework contributors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE), except
+packages/codesync-api, which is licensed under the GNU Affero General Public License v3.0
+(see packages/codesync-api/LICENSE).
+
+It includes third-party software, each under its own license:
+
+- CivetWeb (packages/native/civetweb) — MIT, see packages/native/civetweb/LICENSE.md
+- QuickJS-ng (packages/native/quickjs) — MIT, see packages/native/quickjs/LICENSE

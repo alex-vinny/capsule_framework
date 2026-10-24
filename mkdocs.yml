@@ -1,0 +1,124 @@
+﻿site_name: Capsule Framework
+site_url: https://alex-vinny.github.io/capsule_framework/
+repo_url: https://github.com/alex-vinny/capsule_framework
+repo_name: alex-vinny/capsule_framework
+copyright: Copyright &copy; 2024-2026 Capsule Framework Contributors
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - search.highlight
+    - search.share
+    - content.code.annotate
+nav:
+  - Home: index.md
+  - Guide:
+      - Installation: guide/installation.md
+      - Quickstart: guide/quickstart.md
+      - Hello World: guide/hello-world.md
+      - Push Notifications: guide/push-notifications.md
+      - Database: guide/database.md
+      - AI: guide/ai.md
+      - Plugins: guide/plugins.md
+      - Alerts Styling: guide/alerts-styling.md
+      - Mobile CSS Reset: guide/mobile-css-reset.md
+      - Publishing: guide/publishing.md
+      - Over-the-air Updates: guide/ota-updates.md
+  - Reference:
+      - CLI: reference/cli.md
+      - Core API: reference/core-api.md
+      - Lockfile: reference/lockfile.md
+      - Generated:
+          - Overview: reference/generated/README.md
+          - Core API: reference/generated/core/README.md
+          - CLI: reference/generated/cli.md
+          - Config: reference/generated/config.md
+          - Docs Map: reference/generated/docs-map.md
+  - Concepts:
+      - Architecture: concepts/architecture.md
+      - Principles: concepts/principles.md
+      - vs Ionic/Capacitor: concepts/capsule-vs-ionic-capacitor.md
+      - Extensibility & Positioning: concepts/extensibility-and-positioning.md
+      - Ionic Framework 7 Migration: concepts/ionic-framework7-migration.md
+      - Primers:
+          - Overview: concepts/primers/index.md
+          - Kotlin for C# Devs: concepts/primers/kotlin-for-csharp-devs.md
+          - JNI & C: concepts/primers/jni-and-cpp.md
+          - CivetWeb: concepts/primers/civetweb.md
+          - QuickJS: concepts/primers/quickjs.md
+  - Decisions:
+      - Overview: decisions/index.md
+      - 0001 Embedded Runtime: decisions/0001-embedded-runtime.md
+      - 0002 Capsule UI: decisions/0002-capsule-ui.md
+      - 0003 AI & Agents: decisions/0003-ai-and-agents.md
+      - 0004 Web Serving Transport: decisions/0004-web-serving-transport.md
+      - Decision Log: decisions/log.md
+  - Contributing:
+      - Overview: contributing/index.md
+      - Environment: contributing/environment.md
+      - Commands: contributing/commands.md
+      - Testing: contributing/testing.md
+      - CI: contributing/ci.md
+      - Docker: contributing/docker.md
+      - CodeSync Internals: contributing/codesync-internals.md
+      - Plugin Authoring: contributing/plugin-authoring.md
+      - Template Authoring: contributing/template-authoring.md
+      - iOS Bring-up: contributing/ios-bring-up.md
+      - Android/iOS Parity: contributing/platform-parity.md
+      - Upkeep: contributing/upkeep.md
+      - Release: contributing/release.md
+      - Workflows:
+          - Overview: contributing/workflows/CONTEXT.md
+          - Add Native API: contributing/workflows/add-native-api/CONTEXT.md
+          - Author Plugin: contributing/workflows/author-plugin/CONTEXT.md
+          - Upkeep Sweep: contributing/workflows/upkeep-sweep/CONTEXT.md
+  - Project:
+      - Roadmap: project/roadmap.md
+      - State: project/state.md
+      - History: project/history.md
+      - Known Issues: project/known-issues.md
+      - Infrastructure: project/infrastructure.md
+      - Incidents:
+          - 2026-10 Embedded Server Startup: project/incidents/2026-10-embedded-server-startup.md
+      - Research:
+          - 2026-06-24 Planning Brainstorm: project/research/2026-06-24-planning-brainstorm.md
+          - ChatGPT First Impressions: project/research/chatgpt-first-impressions.md
+          - ChatGPT Plugin Compatibility: project/research/chatgpt-plugin-compatibility.md
+      - Business:
+          - Business Model: project/business/business-model.md
+          - Pricing: project/business/pricing.md
+          - OTA Policy & Liability: project/business/ota-policy-and-liability.md
+      - Server Design:
+          - Overview: project/server-design/overview.md
+          - Database: project/server-design/database.md
+          - File Storage: project/server-design/file-storage.md
+          - Workers: project/server-design/workers.md
+# Page status from each page's front matter (docs/_core/conventions.md#doc-metadata). Material
+# shows an icon in the navigation for a status listed here; `current` is hidden in extra.css.
+extra:
+  status:
+    planned: Planned — designed, not built yet
+    draft: Draft — exploratory, not settled
+    record: Record — kept as written
+extra_css:
+  - stylesheets/extra.css
+markdown_extensions:
+  - pymdownx.superfences
+  - tables
+  - toc:
+      permalink: true
+plugins:
+  - search

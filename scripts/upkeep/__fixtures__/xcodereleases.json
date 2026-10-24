@@ -1,0 +1,5 @@
+[
+  { "name": "Xcode", "version": { "build": "27B48", "number": "27.2", "release": { "rc": 1 } }, "date": { "day": 19, "month": 10, "year": 2026 }, "compilers": { "swift": [{ "number": "6.4.2" }] }, "sdks": { "iOS": [{ "number": "27.2" }] } },
+  { "name": "Xcode", "version": { "build": "27A9275", "number": "27.1", "release": { "release": true } }, "date": { "day": 15, "month": 10, "year": 2026 }, "compilers": { "swift": [{ "number": "6.4" }] }, "sdks": { "iOS": [{ "number": "27.1" }] } },
+  { "name": "Xcode", "version": { "build": "26E100", "number": "26.4", "release": { "release": true } }, "date": { "day": 2, "month": 6, "year": 2026 }, "compilers": { "swift": [{ "number": "6.3" }] }, "sdks": { "iOS": [{ "number": "26.4" }] } }
+]

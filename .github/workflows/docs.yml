@@ -1,0 +1,32 @@
+# Docs site — `mkdocs build --strict` on every pull request (a broken nav entry or link fails it);
+# on main it also publishes to GitHub Pages (gh-pages branch).
+name: Docs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # gh-deploy pushes the gh-pages branch
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # gh-deploy needs the gh-pages history
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.x'
+      - run: pip install --upgrade pip mkdocs-material # mkdocs.yml uses the material theme
+      - run: mkdocs build --strict
+      - if: github.event_name == 'push'
+        run: mkdocs gh-deploy --force

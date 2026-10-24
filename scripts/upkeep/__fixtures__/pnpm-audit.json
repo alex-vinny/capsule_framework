@@ -1,0 +1,8 @@
+{
+  "actions": [],
+  "advisories": {
+    "1101": { "id": 1101, "github_advisory_id": "GHSA-aaaa-bbbb-cccc", "module_name": "esbuild", "severity": "moderate", "title": "dev server CORS", "url": "https://github.com/advisories/GHSA-aaaa-bbbb-cccc", "vulnerable_versions": "<=0.24.2", "patched_versions": ">=0.25.0", "findings": [{ "version": "0.24.0", "paths": ["packages/cli > esbuild"] }] },
+    "1102": { "id": 1102, "github_advisory_id": "GHSA-dddd-eeee-ffff", "module_name": "happy-dom", "severity": "critical", "title": "VM context escape", "url": "https://github.com/advisories/GHSA-dddd-eeee-ffff", "vulnerable_versions": "<20.0.0", "patched_versions": ">=20.0.0", "findings": [{ "version": "14.12.3", "paths": ["packages/core > happy-dom"] }] }
+  },
+  "metadata": { "vulnerabilities": { "moderate": 1, "critical": 1 } }
+}

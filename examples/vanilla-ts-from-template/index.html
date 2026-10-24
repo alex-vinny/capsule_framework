@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:,">
+    <title>Capsule</title>
+    </head>
+  <body>
+    <header class="header">
+      <div class="header-icon">⚡</div>
+      <span class="header-name">Capsule</span>
+    </header>
+
+    <main class="main">
+      <div id="panel-home" class="tab-panel active">
+        <div class="card">
+          <span class="card-badge">Pure TypeScript</span>
+          <h1 class="card-title">Welcome to<br><span>Capsule</span></h1>
+          <p class="card-desc">Your app is ready.<br>Tap below to test native integration.</p>
+          <button class="btn" id="btn-hello">Say Hello</button>
+        </div>
+      </div>
+
+      <div id="panel-server" class="tab-panel">
+        <div class="card">
+          <span class="card-badge">Server Routes</span>
+          <h2 class="card-title"><span>API</span></h2>
+          <p class="card-desc">Backed by QuickJS on device,<br>Node.js in dev mode.</p>
+          <button class="btn" id="btn-rpc">Call hello route</button>
+          <p class="result" id="rpc-result"></p>
+          <button class="btn" id="btn-ping">GET /api/ping</button>
+          <p class="result" id="ping-result"></p>
+          <button class="btn btn-clear" id="btn-clear" hidden>Clear</button>
+        </div>
+      </div>
+    </main>
+
+    <nav class="tab-bar">
+      <button class="tab active" id="tab-home">
+        <span class="tab-icon">⌂</span>
+        <span class="tab-label">Home</span>
+      </button>
+      <button class="tab" id="tab-server">
+        <span class="tab-icon">⚡</span>
+        <span class="tab-label">Server</span>
+      </button>
+    </nav>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

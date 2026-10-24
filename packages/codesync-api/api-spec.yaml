@@ -1,0 +1,271 @@
+openapi: 3.0.3
+info:
+  title: Capsule CodeSync API
+  version: 1.0.0
+  description: |
+    API for serving over‑the‑air (OTA) JavaScript bundles to Capsule apps.
+    Provides health checks, versioned bundle retrieval, and administrative
+    endpoints for publishing, rollback, pausing rollouts, etc.
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+paths:
+  /health:
+    get:
+      summary: Health check
+      operationId: getHealth
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: 2026-09-30T12:34:56.789Z
+  /bundles/{version}:
+    get:
+      summary: Retrieve a JavaScript bundle for a given version (or 'latest')
+      operationId: getBundle
+      parameters:
+        - name: version
+          in: path
+          required: true
+          description: |
+            Version string (semver) or the special value `latest` to get the
+            current version for the requested channel.
+          schema:
+            type: string
+        - name: channel
+          in: query
+          description: |
+            OTA channel (e.g., production, staging). Defaults to `production`.
+          schema:
+            type: string
+            default: production
+      responses:
+        '200':
+          description: JavaScript bundle (gzipped)
+          content:
+            application/javascript:
+              schema:
+                type: string
+                format: binary
+              headers:
+                Content-Encoding:
+                  schema:
+                    type: string
+                    example: gzip
+                Cache-Control:
+                  schema:
+                    type: string
+                    example: public, max-age=86400
+                ETag:
+                  schema:
+                    type: string
+                    description: SHA‑256 of the bundle content
+        '404':
+          description: Version not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /manifest:
+    get:
+      summary: Get the manifest describing the latest version per channel
+      operationId: getManifest
+      parameters:
+        - name: channel
+          in: query
+          description: |
+            If omitted, returns manifest for all known channels.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Manifest JSON
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    version:
+                      type: string
+                      example: 1.2.3
+                    buildNumber:
+                      type: integer
+                      example: 45
+                    publishedAt:
+                      type: string
+                      format: date-time
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /publish:
+    post:
+      summary: Publish a new bundle version
+      operationId: publishBundle
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                bundle:
+                  type: string
+                  format: binary
+                  description: Gzipped JavaScript bundle file
+                version:
+                  type: string
+                  description: Semver version string (e.g., 1.2.3)
+                buildNumber:
+                  type: integer
+                  description: Monotonic build number
+                notes:
+                  type: string
+                  description: Release notes (optional)
+                channel:
+                  type: string
+                  description: OTA channel (default: production)
+                  default: production
+              required: [bundle, version, buildNumber]
+      responses:
+        '201':
+          description: Bundle published
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Version already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /releases:
+    get:
+      summary: List all released versions for a channel
+      operationId: listReleases
+      parameters:
+        - name: channel
+          in: query
+          description: OTA channel (default: production)
+          schema:
+            type: string
+            default: production
+      responses:
+        '200':
+          description: Array of releases
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Release'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /rollback:
+    post:
+      summary: Roll back to the previous version for a channel
+      operationId: rollback
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                channel:
+                  type: string
+                  default: production
+              required: []
+      responses:
+        '200':
+          description: Rollback successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RollbackResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: No previous version to roll back to
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /pause:
+    post:
+      summary: Pause rollout for a channel (halt serving new versions)
+      operationId: pauseRollout
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                channel:
+                  type: string
+                  default: production
+              required: []
+      responses:
+        '200':
+          description: Rollout paused
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PauseResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /resume:
+    post:
+      summary: Resume rollout for a channel
+      operationId: resumeRollout
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                channel:
+                  type: string
+                  default: production
+              required: []
+      responses:
+        '200':
+          description: Rollout resumed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResumeResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /devices:
+    get:
+      summary: Reporting endpoint for apps to ping (optional telemetry)
+      operationId: pingDevice
+      parameters:
+        - name: deviceId
+          in: query
+          description: Unique device identifier (e.g., Installations ID)
+          schema:
+            type: string
+    

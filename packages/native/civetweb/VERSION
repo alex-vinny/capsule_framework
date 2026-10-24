@@ -1,0 +1,4 @@
+repo=https://github.com/civetweb/civetweb
+ref=v1.16
+commit=d7ba35bbb649209c66e582d5a0244ba988a15159
+version=1.16

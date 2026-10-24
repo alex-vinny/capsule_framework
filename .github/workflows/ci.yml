@@ -1,0 +1,135 @@
+# Capsule CI — every layer the framework is tested at (CONTRIBUTING.md → "Tests").
+#
+# Public repo: GitHub-hosted runners (Linux and macOS) are free, so all layers run here.
+#   js                    format · lint · typecheck · test · docs — the same steps as `pnpm verify`
+#   android               AAR build (CivetWeb + QuickJS via CMake) + Kotlin pure-JVM unit tests
+#   android-instrumented  emulator suite — opt-in: run the workflow manually with
+#                         "instrumented" ticked, or label a pull request `instrumented`
+#   ios-linux             `swift test` in the swift:6.4-jammy container (what contributors run)
+#   ios-macos             `swift test` on macOS — adds the Apple-only SQLite3 provider tests
+# Real-device e2e and the interactive camera flows stay manual.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      instrumented:
+        description: Run the emulator instrumented tests (connectedDebugAndroidTest)
+        type: boolean
+        default: false
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  ANDROID_MODULE: packages/capsule-android
+  NDK_VERSION: 27.2.12479018 # = ndkVersion in packages/capsule-android/capsule/build.gradle.kts
+
+jobs:
+  js:
+    name: JS · format, lint, typecheck, test, docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6 # version comes from "packageManager" in package.json
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm format:check
+      - run: pnpm lint
+      - run: pnpm build
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm test:scripts
+      - run: pnpm docs:check
+      # Generated reference (docs/reference/generated) must match the code.
+      - run: node scripts/gen/index.mjs --check
+      # Deeper content checks; advisory until the findings that predate it are cleared.
+      - run: pnpm docs:lint
+        continue-on-error: true
+
+  android:
+    name: Android · build + JVM unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: android-actions/setup-android@v4
+      - run: sdkmanager "ndk;${NDK_VERSION}"
+      - uses: gradle/actions/setup-gradle@v6
+      - name: Build AAR + unit tests
+        working-directory: ${{ env.ANDROID_MODULE }}
+        run: |
+          chmod +x ./gradlew
+          ./gradlew assembleDebug testDebugUnitTest --no-daemon
+      - name: Upload test reports
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: android-unit-test-reports
+          path: ${{ env.ANDROID_MODULE }}/capsule/build/reports/tests/
+
+  android-instrumented:
+    name: Android · instrumented (emulator)
+    if: >-
+      (github.event_name == 'workflow_dispatch' && inputs.instrumented) ||
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'instrumented'))
+    needs: android
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: android-actions/setup-android@v4
+      - run: sdkmanager "ndk;${NDK_VERSION}"
+      - uses: gradle/actions/setup-gradle@v6
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: connectedDebugAndroidTest
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          target: google_apis
+          arch: x86_64
+          working-directory: ${{ env.ANDROID_MODULE }}
+          script: chmod +x ./gradlew && ./gradlew connectedDebugAndroidTest --no-daemon
+      - name: Upload test reports
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: android-instrumented-test-reports
+          path: ${{ env.ANDROID_MODULE }}/capsule/build/reports/androidTests/
+
+  ios-linux:
+    name: iOS · swift test (Linux)
+    runs-on: ubuntu-latest
+    container: swift:6.4-jammy
+    steps:
+      - uses: actions/checkout@v7
+      - run: swift test
+
+  ios-macos:
+    name: iOS · swift test (macOS)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: swift test

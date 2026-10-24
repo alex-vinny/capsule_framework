@@ -1,0 +1,52 @@
+name: Bug report
+description: Something in Capsule doesn't work as documented
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Security issue? Don't file it here — report it privately (see SECURITY.md).
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: The smallest project or command sequence that shows it.
+      placeholder: |
+        1. capsule init …
+        2. …
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      multiple: true
+      options:
+        - Android
+        - iOS
+        - Browser dev mode
+        - CLI only
+        - CodeSync server
+    validations:
+      required: true
+  - type: textarea
+    id: versions
+    attributes:
+      label: Versions
+      description: Capsule packages, OS, device / emulator API level, Node and JDK.
+      placeholder: "@capsule/cli 0.1.0 · Android 15 (API 35) emulator · Node 22 · JDK 17"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Relevant output (`adb logcat`, CLI output, browser console). Remove secrets first.
+      render: text

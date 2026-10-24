@@ -1,0 +1,137 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": [
+    "Dependency PRs for Capsule. The weekly 'Upkeep report' issue (scripts/upkeep, .github/workflows/upkeep.yml) covers what Renovate can't: store requirements, Xcode, the Android SDK platform/NDK, and advisories against vendored C.",
+    "Process: docs/contributing/upkeep.md."
+  ],
+  "extends": ["config:recommended"],
+  "dependencyDashboard": true,
+  "timezone": "Etc/UTC",
+  "schedule": ["* 0-3 * * 1"],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "description": "Android toolchain moves as one unit — AGP needs a minimum Gradle, and the Kotlin plugins share one version (docs/contributing/upkeep.md). After merging, regenerate the CLI's copy: pnpm gen.",
+      "matchDepNames": ["/^com\\.android\\.(application|library)$/", "/^org\\.jetbrains\\.kotlin\\./"],
+      "groupName": "android toolchain"
+    },
+    {
+      "matchPackageNames": ["com.android.tools.build:gradle", "/^org\\.jetbrains\\.kotlin:kotlin-gradle-plugin/"],
+      "groupName": "android toolchain"
+    },
+    {
+      "matchManagers": ["gradle-wrapper"],
+      "groupName": "android toolchain"
+    },
+    {
+      "matchPackageNames": ["/^androidx\\./"],
+      "groupName": "androidx"
+    },
+    {
+      "matchPackageNames": ["/^org\\.jetbrains\\.kotlinx:/"],
+      "groupName": "kotlinx"
+    },
+    {
+      "description": "1.0.0-beta3+ needs the Kotlin 2.3 stdlib (docs/guide/ai.md). Drop this rule in the PR that takes Kotlin to 2.3.",
+      "matchPackageNames": ["com.google.mlkit:genai-prompt"],
+      "allowedVersions": "/^1\\.0\\.0-beta[0-2]$/"
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchPackageNames": [
+        "typescript",
+        "vitest",
+        "/^@vitest\\//",
+        "tsup",
+        "turbo",
+        "prettier",
+        "/^prettier-plugin-/",
+        "eslint",
+        "/^@eslint\\//",
+        "typescript-eslint",
+        "/^@typescript-eslint\\//",
+        "typedoc",
+        "/^typedoc-plugin-/",
+        "@types/node"
+      ],
+      "groupName": "node dev tooling"
+    },
+    {
+      "description": "Example apps: monthly, after framework PRs, one PR per framework.",
+      "matchFileNames": ["examples/**"],
+      "schedule": ["* 0-3 1 * *"],
+      "prPriority": -1,
+      "groupName": "examples (other)"
+    },
+    {
+      "matchFileNames": ["examples/**"],
+      "matchPackageNames": ["react", "react-dom", "/^@types/react/", "@vitejs/plugin-react", "/^@testing-library/react/"],
+      "groupName": "examples: react"
+    },
+    {
+      "matchFileNames": ["examples/**"],
+      "matchPackageNames": ["vue", "/^@vue\\//", "@vitejs/plugin-vue", "vue-tsc"],
+      "groupName": "examples: vue"
+    },
+    {
+      "matchFileNames": ["examples/**"],
+      "matchPackageNames": ["svelte", "/^@sveltejs\\//", "svelte-check"],
+      "groupName": "examples: svelte"
+    },
+    {
+      "matchFileNames": ["examples/**"],
+      "matchPackageNames": ["/^@angular\\//", "/^@angular-devkit\\//", "zone.js", "rxjs"],
+      "groupName": "examples: angular"
+    },
+    {
+      "matchFileNames": ["examples/**"],
+      "matchPackageNames": ["solid-js", "/solid/", "preact", "/^@preact\\//", "lit", "/^@lit\\//"],
+      "groupName": "examples: solid, preact, lit"
+    },
+    {
+      "matchFileNames": ["examples/**"],
+      "matchPackageNames": ["jquery", "/^@types/jquery/"],
+      "groupName": "examples: jquery"
+    },
+    {
+      "matchFileNames": ["examples/**"],
+      "matchPackageNames": ["vite", "webpack", "/^webpack-/", "rollup", "/^@rollup\\//", "/^@rspack\\//", "tailwindcss", "/^@tailwindcss\\//"],
+      "groupName": "examples: bundlers"
+    },
+    {
+      "description": "Vendored C: a VERSION-only change is wrong — the sources must be re-vendored. Approve on the Dependency Dashboard, then run the update script on the PR branch.",
+      "matchFileNames": ["packages/native/**"],
+      "dependencyDashboardApproval": true,
+      "labels": ["dependencies", "vendored"],
+      "prBodyNotes": [
+        "⚠️ Don't merge as is. On this branch run `node scripts/update-<folder>.mjs {{{newValue}}}` (civetweb or quickjs), commit the re-vendored sources, then run the Android instrumented tests and the Swift suite (docs/contributing/upkeep.md)."
+      ]
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchDepNames": ["swift"],
+      "groupName": "swift image"
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Vendored C pins: packages/native/*/VERSION (repo= then ref=).",
+      "managerFilePatterns": ["/(^|/)packages/native/[^/]+/VERSION$/"],
+      "matchStrings": ["repo=https://github\\.com/(?<depName>[^/\\s]+/[^/\\s]+?)(?:\\.git)?\\r?\\nref=(?<currentValue>\\S+)"],
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver-coerced"
+    },
+    {
+      "customType": "regex",
+      "description": "The swift:X.Y-jammy image `pnpm verify:ios` and the ios-linux CI job build in.",
+      "managerFilePatterns": ["/(^|/)scripts/verify\\.mjs$/", "/(^|/)\\.github/workflows/ci\\.yml$/"],
+      "matchStrings": ["swift:(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?-jammy)"],
+      "depNameTemplate": "swift",
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "docker"
+    }
+  ]
+}

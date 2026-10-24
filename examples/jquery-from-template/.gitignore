@@ -1,0 +1,8 @@
+node_modules/
+.capsule/
+dist/
+.angular/
+.env
+.env.local
+*.env
+*.log

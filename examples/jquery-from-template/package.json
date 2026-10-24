@@ -1,0 +1,19 @@
+{
+  "name": "capsule-example-jquery-from-template",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@capsule/core": "link:../../packages/core",
+    "bootstrap": "^5.3.0",
+    "jquery": "^3.7.0"
+  },
+  "devDependencies": {
+    "vite": "^6.4.5"
+  },
+  "license": "Apache-2.0"
+}

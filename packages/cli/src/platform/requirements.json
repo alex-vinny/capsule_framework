@@ -1,0 +1,70 @@
+{
+  "reviewed": "2026-10-24",
+  "rules": [
+    {
+      "id": "play-target-36",
+      "store": "google-play",
+      "field": "android.targetSdk",
+      "min": 36,
+      "effective": "2026-08-31",
+      "appliesTo": "new-and-updates",
+      "extensionUntil": "2026-11-01",
+      "source": "https://developer.android.com/google/play/requirements/target-sdk",
+      "note": "Phone and tablet apps. Wear OS and Android Automotive OS apps need 35; Android TV and Android XR apps need 34."
+    },
+    {
+      "id": "play-existing-35",
+      "store": "google-play",
+      "field": "android.targetSdk",
+      "min": 35,
+      "effective": "2026-08-31",
+      "appliesTo": "existing",
+      "source": "https://developer.android.com/google/play/requirements/target-sdk",
+      "note": "Below this, an already-published app is hidden from new users on devices newer than its target. Wear OS, Android TV, Android XR and Android Automotive OS apps have lower thresholds (see source)."
+    },
+    {
+      "id": "apple-xcode-26",
+      "store": "app-store",
+      "field": "ios.xcode",
+      "min": "26",
+      "effective": "2026-04-28",
+      "appliesTo": "new-and-updates",
+      "source": "https://developer.apple.com/news/upcoming-requirements/",
+      "note": "App Store Connect uploads must be built with Xcode 26 or later."
+    },
+    {
+      "id": "apple-sdk-26",
+      "store": "app-store",
+      "field": "ios.sdk",
+      "min": "26",
+      "effective": "2026-04-28",
+      "appliesTo": "new-and-updates",
+      "source": "https://developer.apple.com/news/upcoming-requirements/",
+      "note": "Built against the iOS / iPadOS 26 SDK or later (tvOS, visionOS and watchOS 26 likewise)."
+    },
+    {
+      "id": "apple-deployment-13",
+      "store": "app-store",
+      "field": "ios.deploymentTarget",
+      "min": "13",
+      "effective": "2026-09-09",
+      "appliesTo": "new-and-updates",
+      "source": "https://developer.apple.com/news/upcoming-requirements/",
+      "note": "iOS and iPadOS apps uploaded to App Store Connect must target iOS 13 or later."
+    }
+  ],
+  "watch": [
+    {
+      "id": "apple-upcoming",
+      "url": "https://developer.apple.com/news/upcoming-requirements/",
+      "sha256": "7fb8151d1b8f8a9760e42cde88a6bfc294c539c0c139eb1daac21a3d7b05eaea",
+      "reviewed": "2026-10-24"
+    },
+    {
+      "id": "play-target-sdk",
+      "url": "https://developer.android.com/google/play/requirements/target-sdk",
+      "sha256": "13985071dbbeb9df6ecb1578fe5e2ac0dbb17a2adf88a5fba9c50cec074d6085",
+      "reviewed": "2026-10-24"
+    }
+  ]
+}

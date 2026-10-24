@@ -1,0 +1,22 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "@capsule/core",
+  "entryPoints": ["src/index.ts", "src/router.ts"],
+  "tsconfig": "tsconfig.json",
+  "plugin": ["typedoc-plugin-markdown"],
+  "out": "../../docs/reference/generated/core",
+  "readme": "none",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "excludeExternals": true,
+  "disableSources": true,
+  "outputFileStrategy": "modules",
+  "entryFileName": "README.md",
+  "hidePageHeader": true,
+  "hideBreadcrumbs": true,
+  "useCodeBlocks": true,
+  "parametersFormat": "table",
+  "interfacePropertiesFormat": "table",
+  "enumMembersFormat": "table"
+}

@@ -1,0 +1,5 @@
+{
+  "vitest": { "current": "2.1.9", "latest": "4.1.9", "wanted": "2.1.9", "isDeprecated": false, "dependencyType": "devDependencies", "dependentPackages": [{ "name": "@capsule/core", "location": "packages/core" }] },
+  "chalk": { "current": "5.3.0", "latest": "5.4.1", "wanted": "5.4.1", "isDeprecated": false, "dependencyType": "dependencies", "dependentPackages": [{ "name": "@capsule/cli", "location": "packages/cli" }] },
+  "old-thing": { "current": "1.0.0", "latest": "1.0.0", "wanted": "1.0.0", "isDeprecated": true, "dependencyType": "dependencies", "dependentPackages": [] }
+}

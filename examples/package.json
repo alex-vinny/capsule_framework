@@ -1,0 +1,14 @@
+{
+  "name": "capsule-examples",
+  "private": true,
+  "description": "Workspace root for the Capsule example apps (see README.md).",
+  "packageManager": "pnpm@9.15.9",
+  "pnpm": {
+    "overrides": {
+      "@angular/build>vite": "^8.3.3"
+    }
+  },
+  "//": [
+    "pnpm.overrides: @angular/build 22.2 pins vite 8.3.0; 8.3.3 fixes its dev-server advisories (scoped so the other examples keep vite 6)."
+  ]
+}

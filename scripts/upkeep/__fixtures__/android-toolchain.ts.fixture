@@ -1,0 +1,11 @@
+export interface AndroidToolchain {
+  compileSdk: number
+  targetSdk: number | null
+  minSdk: number
+}
+export const ANDROID_TOOLCHAIN: AndroidToolchain = {
+  gradle: '8.9',
+  compileSdk: 35,
+  targetSdk: null,
+  minSdk: 26,
+}
