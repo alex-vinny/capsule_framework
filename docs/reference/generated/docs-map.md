@@ -129,6 +129,7 @@ matches a page's `code:` globs.
 | `packages/core/src/testing/` | [contributing/testing.md](../../contributing/testing.md) |
 | `packages/native/civetweb/` | [concepts/primers/civetweb.md](../../concepts/primers/civetweb.md) |
 | `packages/native/civetweb/include/` | [concepts/primers/civetweb.md](../../concepts/primers/civetweb.md) |
+| `packages/native/civetweb/spm/` | [concepts/primers/civetweb.md](../../concepts/primers/civetweb.md) |
 | `packages/native/civetweb/src/` | [concepts/primers/civetweb.md](../../concepts/primers/civetweb.md) |
 | `packages/native/quickjs/` | [concepts/primers/quickjs.md](../../concepts/primers/quickjs.md) |
 | `scripts/` | [_core/conventions.md](../../_core/conventions.md)<br>[contributing/ci.md](../../contributing/ci.md)<br>[contributing/commands.md](../../contributing/commands.md)<br>[contributing/environment.md](../../contributing/environment.md)<br>[contributing/upkeep.md](../../contributing/upkeep.md) |

@@ -19,7 +19,8 @@ import WebKit
 /// CapsuleBridge handles communication between the JavaScript runtime and native iOS code.
 /// It registers native handlers for JavaScript to call and forwards JavaScript calls to
 /// the appropriate native implementations.
-final class CapsuleBridge: Bridging {
+/// An `NSObject` because WebKit only accepts Objective-C objects as script message handlers.
+final class CapsuleBridge: NSObject, Bridging {
 
     // MARK: - Properties
 
@@ -32,6 +33,7 @@ final class CapsuleBridge: Bridging {
     init(webView: WKWebView, codeSyncManager: CodeSyncManager) {
         self.webView = webView
         self.codeSyncManager = codeSyncManager
+        super.init()
         setupMessageHandler()
     }
 
