@@ -37,10 +37,8 @@ const warnings = []
 function pathExistsCaseExact(absPath) {
   if (!existsSync(absPath)) return false
   const parts = absPath.split(/[\\/]/).filter(Boolean)
-  let cur =
-    absPath.startsWith('/tmp') || !/^[A-Za-z]:$/.test(parts[0])
-      ? (parts.shift() ?? '/')
-      : parts.shift() + sep
+  // Start the walk at the root: the drive on Windows (`D:\`), `/` on POSIX.
+  let cur = /^[A-Za-z]:$/.test(parts[0]) ? parts.shift() + sep : sep
   for (const part of parts) {
     let entries
     try {

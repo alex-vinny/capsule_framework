@@ -6,10 +6,13 @@ The embedded loopback HTTP server behind `CapsuleServer` on **both** platforms
 - **Android** — `packages/capsule-android/capsule/src/main/cpp/CMakeLists.txt` builds it into
   `libcapsule_server.so` together with the JNI glue (`capsule_server_jni.c`).
 - **iOS** — the `CCivetweb` C target in the repo-root `Package.swift`, wrapped by
-  `CivetwebServer.swift`.
+  `CivetwebServer.swift`. SwiftPM compiles `spm/civetweb_spm.c`, which `#include`s
+  `src/civetweb.c` after renaming CivetWeb's `struct ah`: under clang modules it clashes with
+  Darwin's `struct ah` (`netinet6/ah.h`) and the macOS build fails.
 
 Upstream: <https://github.com/civetweb/civetweb> — MIT, see `LICENSE.md`. The pinned commit is in
-`VERSION`. **Do not edit these sources** — every change here is lost on the next update.
+`VERSION`. **Do not edit `include/` or `src/`** — every change there is lost on the next update
+(`spm/` is ours and the script leaves it alone).
 
 ## Compile-time configuration
 

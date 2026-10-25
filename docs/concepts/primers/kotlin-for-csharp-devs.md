@@ -54,7 +54,7 @@ launchUrl ?: "default"                 // elvis: value-or-fallback (C# ??)
 launchUrl!!.length                     // assert non-null (throws if wrong — avoid unless certain)
 ```
 
-See it real: [AppLifecycleController.kt](../../../packages/capsule-android/capsule/src/main/kotlin/dev/capsule/app/AppLifecycleController.kt) —
+See it real: [AppLifecycleController.kt](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/kotlin/dev/capsule/app/AppLifecycleController.kt) —
 `consumeLaunchUrl(): String?` returns nullable; callers must handle the null. `?.let { }` (below) is
 the idiomatic "do this only if non-null."
 
@@ -68,7 +68,7 @@ data class PushToken(val value: String, val platform: String)
 You get constructor, `equals`/`hashCode`, `toString`, and `copy()` for free — exactly like a C#
 `record`. The `@Serializable` annotation is from **kotlinx.serialization** (think `System.Text.Json`
 source-generators): it lets `Json.encodeToJsonElement(token)` produce the JSON the TS side expects.
-Real: [PushProvider.kt](../../../packages/capsule-android/capsule/src/main/kotlin/dev/capsule/push/PushProvider.kt)
+Real: [PushProvider.kt](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/kotlin/dev/capsule/push/PushProvider.kt)
 (`PushToken`, `PushMessage`, `NotificationChannel`).
 
 `@SerialName("wifi")` on an enum constant pins its JSON form — so `ConnectionType.WIFI` serializes as
@@ -87,7 +87,7 @@ sealed class BridgeError(val code: Int, val message: String) {
 }
 ```
 
-Real: [BridgeError.kt](../../../packages/capsule-android/capsule/src/main/kotlin/dev/capsule/protocol/BridgeError.kt).
+Real: [BridgeError.kt](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/kotlin/dev/capsule/protocol/BridgeError.kt).
 `object X : BridgeError(...)` is a **singleton** subtype (Kotlin's `object` = a one-instance type;
 think C# `static`-but-it's-a-value). A `when` over a sealed type is exhaustive — the compiler errors
 if you miss a case, like a switch on a closed union.
@@ -123,7 +123,7 @@ fun interface BridgeEventEmitter {
 val emitter = BridgeEventEmitter { method, params -> bridge.sendNotification(method, params) }
 ```
 
-Real: [BridgeEventEmitter.kt](../../../packages/capsule-android/capsule/src/main/kotlin/dev/capsule/protocol/BridgeEventEmitter.kt)
+Real: [BridgeEventEmitter.kt](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/kotlin/dev/capsule/protocol/BridgeEventEmitter.kt)
 and its use in `CapsuleActivity` / the controllers. In tests it's a recording fake — same seam, no WebView.
 
 ## 7. `suspend fun` ≈ `async`/`await` (without the `await`)
@@ -135,7 +135,7 @@ suspend fun handle(params: JsonElement): JsonElement { … }
 `suspend` ≈ C#'s `async Task<T>` / TS `async (): Promise<T>`, but there's **no `await` keyword** — you
 call a suspend function and it just suspends at that point. Coroutines run on a dispatcher (≈ a
 `TaskScheduler` / the JS event loop). Real: every `BridgeHandler.handle` is `suspend`; see
-[BridgeHandler.kt](../../../packages/capsule-android/capsule/src/main/kotlin/dev/capsule/handlers/BridgeHandler.kt).
+[BridgeHandler.kt](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/kotlin/dev/capsule/handlers/BridgeHandler.kt).
 
 **Callback → suspend bridge** (you'll meet this in push): when a native API hands you a result via a
 callback, `suspendCancellableCoroutine` turns it into a `suspend` value:
@@ -151,7 +151,7 @@ override suspend fun handle(params: JsonElement): JsonElement =
 ```
 
 `cont.resume(x)` ≈ `TaskCompletionSource.SetResult(x)`; `resumeWithException` ≈ `SetException`. Real:
-[PushHandlers.kt](../../../packages/capsule-android/capsule/src/main/kotlin/dev/capsule/handlers/push/PushHandlers.kt).
+[PushHandlers.kt](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/kotlin/dev/capsule/handlers/push/PushHandlers.kt).
 
 ## 8. `when` ≈ `switch` expression (but better)
 
@@ -189,9 +189,9 @@ mapper in `GeolocationHandler.kt`.
 
 ## Where to look next
 
-- Read [BridgeError.kt](../../../packages/capsule-android/capsule/src/main/kotlin/dev/capsule/protocol/BridgeError.kt)
-  (sealed) and [PushProvider.kt](../../../packages/capsule-android/capsule/src/main/kotlin/dev/capsule/push/PushProvider.kt)
+- Read [BridgeError.kt](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/kotlin/dev/capsule/protocol/BridgeError.kt)
+  (sealed) and [PushProvider.kt](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/kotlin/dev/capsule/push/PushProvider.kt)
   (data classes + enums + companion) — they exercise §3–§6 in 100 lines.
-- Then [PushHandlers.kt](../../../packages/capsule-android/capsule/src/main/kotlin/dev/capsule/handlers/push/PushHandlers.kt)
+- Then [PushHandlers.kt](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/kotlin/dev/capsule/handlers/push/PushHandlers.kt)
   for §7 (suspend + the callback bridge).
 - For how Kotlin reaches the C engine, see [jni-and-cpp.md](jni-and-cpp.md).

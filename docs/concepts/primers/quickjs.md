@@ -45,7 +45,7 @@ and an OTA-updatable JS layer that the native capabilities back — is the whole
 
 The JS bundle (built by `capsule build` from your `src/routes` + `src/server/routes`, bundled with
 esbuild into `assets/server/bundle.js`) is loaded once, then invoked per request. The engine surface is
-tiny — [QuickJSEngine.kt](../../../packages/capsule-android/capsule/src/main/kotlin/dev/capsule/runtime/QuickJSEngine.kt):
+tiny — [QuickJSEngine.kt](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/kotlin/dev/capsule/runtime/QuickJSEngine.kt):
 
 ```kotlin
 suspend fun evaluate(bundle: String)                       // load/run the bundle once (defines handlers)
@@ -54,7 +54,7 @@ suspend fun call(fn: String, args: String): String         // call a global fn, 
 
 `evaluate` runs your bundle, which registers route handlers on `globalThis`. Each HTTP/RPC request
 becomes a `call("handleHttpRequest", jsonArgs)` (or `dispatch`) that returns a JSON string. The
-implementation ([QuickJSEngineImpl.kt](../../../packages/capsule-android/capsule/src/main/kotlin/dev/capsule/runtime/QuickJSEngineImpl.kt))
+implementation ([QuickJSEngineImpl.kt](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/kotlin/dev/capsule/runtime/QuickJSEngineImpl.kt))
 crosses JNI into the C engine on its pinned single thread.
 
 ## The hard constraints (these are non-obvious and bite people)

@@ -121,7 +121,7 @@ The whole `dist/` folder is copied into `www/`. **Planned, not built:** strippin
 
 `@capsule/codesync-api` (`packages/codesync-api/`) is the minimal self-hostable delivery server:
 Fastify 5 (multipart uploads via @fastify/multipart 10), one process, a JSON manifest on disk. The contract is
-[`api-spec.yaml`](../../packages/codesync-api/api-spec.yaml) (OpenAPI 3).
+[`api-spec.yaml`](https://github.com/alex-vinny/capsule_framework/blob/main/packages/codesync-api/api-spec.yaml) (OpenAPI 3).
 
 | Endpoint | Auth | Does |
 |---|---|---|

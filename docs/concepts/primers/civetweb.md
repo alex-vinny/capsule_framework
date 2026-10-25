@@ -77,15 +77,15 @@ socket ── CivetWeb (C) ── begin_request callback ── CivetwebServer �
   calls `route()`, and writes the `HttpResponse` back (adding `Cache-Control: no-cache`, because an
   OTA update swaps files behind the same URLs).
 - **The glue** between C and the host language:
-  - Android: [`capsule_server_jni.c`](../../../packages/capsule-android/capsule/src/main/cpp/capsule_server_jni.c),
+  - Android: [`capsule_server_jni.c`](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/cpp/capsule_server_jni.c),
     built into `libcapsule_server.so`. Each CivetWeb worker thread is attached to the JVM once (in
     `init_thread`), so a request never pays for an attach. All JNI lookups happen up front in
     `nativeStart` — a CivetWeb thread can't see app classes through `FindClass`.
-  - iOS: [`CivetwebServer.swift`](../../../packages/capsule-ios/Sources/dev/capsule/runtime/CivetwebServer.swift)
+  - iOS: [`CivetwebServer.swift`](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-ios/Sources/dev/capsule/runtime/CivetwebServer.swift)
     calls the C API directly (the `CCivetweb` target in the repo-root `Package.swift`).
 
-Files: Android [`CivetwebServer.kt`](../../../packages/capsule-android/capsule/src/main/kotlin/dev/capsule/runtime/CivetwebServer.kt)
-and [`RequestRouter.kt`](../../../packages/capsule-android/capsule/src/main/kotlin/dev/capsule/runtime/RequestRouter.kt);
+Files: Android [`CivetwebServer.kt`](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/kotlin/dev/capsule/runtime/CivetwebServer.kt)
+and [`RequestRouter.kt`](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/kotlin/dev/capsule/runtime/RequestRouter.kt);
 iOS the same names under `packages/capsule-ios/Sources/dev/capsule/runtime/`.
 
 ## The one interesting seam: sync server ↔ async handler
@@ -117,7 +117,7 @@ sync entry point, where the awaited work runs on a different scheduler.
   deadlock. So the shutdown runs in the background, and the next `start()` on the same port waits for it.
 
 The owning
-[CapsuleRuntime](../../../packages/capsule-android/capsule/src/main/kotlin/dev/capsule/runtime/CapsuleRuntime.kt)
+[CapsuleRuntime](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/kotlin/dev/capsule/runtime/CapsuleRuntime.kt)
 starts the server before pointing the WebView at the port and stops it on teardown.
 
 ## Where the port comes from

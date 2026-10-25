@@ -41,7 +41,7 @@ the engine *is* C.
 ## The build: CMake compiles the C into a `.so`
 
 Android builds native code with **CMake** + the **NDK** (Native Development Kit — the C/C++ toolchain
-for Android). Capsule's [CMakeLists.txt](../../../packages/capsule-android/capsule/src/main/cpp/CMakeLists.txt)
+for Android). Capsule's [CMakeLists.txt](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/cpp/CMakeLists.txt)
 declares two libraries:
 
 ```cmake
@@ -62,7 +62,7 @@ target_link_libraries(capsule_quickjs_jni quickjs android …)
 
 ## The Kotlin side: `external fun` + `System.loadLibrary`
 
-[QuickJSEngineImpl.kt](../../../packages/capsule-android/capsule/src/main/kotlin/dev/capsule/runtime/QuickJSEngineImpl.kt):
+[QuickJSEngineImpl.kt](https://github.com/alex-vinny/capsule_framework/blob/main/packages/capsule-android/capsule/src/main/kotlin/dev/capsule/runtime/QuickJSEngineImpl.kt):
 
 ```kotlin
 private external fun nativeCreate(): Long                       // returns an opaque pointer

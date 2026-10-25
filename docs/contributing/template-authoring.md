@@ -25,7 +25,7 @@ existing one — `../../templates/capsule-react-ts-template/` is the reference.
 |------------|----------|-------|
 | `package.json` | ✅ | Depends on `@capsule/core`; framework + bundler deps; standard scripts. |
 | web entry | ✅ | `index.html` (Vite-based) or the framework's equivalent. |
-| `src/` | ✅ | The app. Convention: **Home tab + Server tab** (`bridge.call` + `GET /api/ping`) so all templates demo the same surface (see [examples/README.md](../../examples/README.md)). |
+| `src/` | ✅ | The app. Convention: **Home tab + Server tab** (`bridge.call` + `GET /api/ping`) so all templates demo the same surface (see [examples/README.md](https://github.com/alex-vinny/capsule_framework/blob/main/examples/README.md)). |
 | bundler config | ✅ | `vite.config.ts`, `angular.json`, etc. — non-Vite declares `web.devCommand`/`buildCommand` in `capsule.config.ts`. |
 | `tsconfig.json` | for TS | — |
 | `.gitignore` | ✅ | `node_modules/`, build output, `.capsule/`. |
@@ -64,5 +64,5 @@ and copies the subdir; **prod** fetches the manifest from the templates repo and
 
 All 7 official templates now ship a portable `README.md` (the generated app's readme).
 
-See also: [cli.md](../reference/cli.md) (`init` implementation), [examples/README.md](../../examples/README.md)
+See also: [cli.md](../reference/cli.md) (`init` implementation), [examples/README.md](https://github.com/alex-vinny/capsule_framework/blob/main/examples/README.md)
 (the shared Home/Server demo convention).

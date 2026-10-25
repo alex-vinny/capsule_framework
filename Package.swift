@@ -25,7 +25,9 @@ let package = Package(
             name: "CCivetweb",
             path: "packages/native/civetweb",
             exclude: ["README.md", "VERSION", "LICENSE.md"],
-            sources: ["src/civetweb.c"],
+            // spm/civetweb_spm.c wraps src/civetweb.c (it renames an identifier that clashes with
+            // Darwin under clang modules); the .inl files are #included, never compiled alone.
+            sources: ["spm/civetweb_spm.c"],
             publicHeadersPath: "include",
             cSettings: [
                 .define("NO_SSL"),
