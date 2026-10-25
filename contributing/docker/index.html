@@ -3883,7 +3883,7 @@
 <span class="c"># Install SDK components (pin exact versions for reproducibility)</span>
 <span class="k">RUN</span><span class="w"> </span>sdkmanager<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="s2">"platform-tools"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="s2">"platforms;android-35"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">"platforms;android-36"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="s2">"build-tools;35.0.0"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="s2">"extras;android;m2repository"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="s2">"extras;google;m2repository"</span>
@@ -3893,9 +3893,9 @@
 <span class="c"># Each app project brings its own gradlew wrapper — we don't install Gradle globally.</span>
 <span class="c"># The distribution is pre-cached at GRADLE_USER_HOME so gradlew finds it immediately.</span>
 <span class="k">ENV</span><span class="w"> </span><span class="nv">GRADLE_USER_HOME</span><span class="o">=</span>/root/.gradle
-<span class="k">RUN</span><span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="si">${</span><span class="nv">GRADLE_USER_HOME</span><span class="si">}</span>/wrapper/dists/gradle-8.10-bin<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>wget<span class="w"> </span>-q<span class="w"> </span>https://services.gradle.org/distributions/gradle-8.10-bin.zip<span class="w"> </span><span class="se">\</span>
-<span class="w">         </span>-O<span class="w"> </span><span class="si">${</span><span class="nv">GRADLE_USER_HOME</span><span class="si">}</span>/wrapper/dists/gradle-8.10-bin/gradle-8.10-bin.zip
+<span class="k">RUN</span><span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="si">${</span><span class="nv">GRADLE_USER_HOME</span><span class="si">}</span>/wrapper/dists/gradle-8.14.6-bin<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>wget<span class="w"> </span>-q<span class="w"> </span>https://services.gradle.org/distributions/gradle-8.14.6-bin.zip<span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>-O<span class="w"> </span><span class="si">${</span><span class="nv">GRADLE_USER_HOME</span><span class="si">}</span>/wrapper/dists/gradle-8.14.6-bin/gradle-8.14.6-bin.zip
 
 <span class="c"># NOTE: We do NOT attempt to pre-warm the Android Gradle Plugin (AGP) here.</span>
 <span class="c"># AGP warmup requires a valid Android project with settings.gradle — a stub project</span>
@@ -3939,13 +3939,13 @@
 <span class="w">    </span>mv<span class="w"> </span>/tmp/cmdline-tools/cmdline-tools<span class="w"> </span><span class="si">${</span><span class="nv">ANDROID_HOME</span><span class="si">}</span>/cmdline-tools/latest<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>rm<span class="w"> </span>/tmp/cmdline-tools.zip<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>yes<span class="w"> </span><span class="p">|</span><span class="w"> </span>sdkmanager<span class="w"> </span>--licenses<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>sdkmanager<span class="w"> </span><span class="s2">"platform-tools"</span><span class="w"> </span><span class="s2">"platforms;android-35"</span><span class="w"> </span><span class="s2">"build-tools;35.0.0"</span>
+<span class="w">    </span>sdkmanager<span class="w"> </span><span class="s2">"platform-tools"</span><span class="w"> </span><span class="s2">"platforms;android-36"</span><span class="w"> </span><span class="s2">"build-tools;35.0.0"</span>
 
 <span class="c"># Pre-cache Gradle distribution (same version as dev image — must stay in sync)</span>
 <span class="k">ENV</span><span class="w"> </span><span class="nv">GRADLE_USER_HOME</span><span class="o">=</span>/root/.gradle
-<span class="k">RUN</span><span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="si">${</span><span class="nv">GRADLE_USER_HOME</span><span class="si">}</span>/wrapper/dists/gradle-8.10-bin<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>wget<span class="w"> </span>-q<span class="w"> </span>https://services.gradle.org/distributions/gradle-8.10-bin.zip<span class="w"> </span><span class="se">\</span>
-<span class="w">         </span>-O<span class="w"> </span><span class="si">${</span><span class="nv">GRADLE_USER_HOME</span><span class="si">}</span>/wrapper/dists/gradle-8.10-bin/gradle-8.10-bin.zip
+<span class="k">RUN</span><span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="si">${</span><span class="nv">GRADLE_USER_HOME</span><span class="si">}</span>/wrapper/dists/gradle-8.14.6-bin<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>wget<span class="w"> </span>-q<span class="w"> </span>https://services.gradle.org/distributions/gradle-8.14.6-bin.zip<span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>-O<span class="w"> </span><span class="si">${</span><span class="nv">GRADLE_USER_HOME</span><span class="si">}</span>/wrapper/dists/gradle-8.14.6-bin/gradle-8.14.6-bin.zip
 
 <span class="c"># Capsule CLI (installed globally so it's available as a command)</span>
 <span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>@capsule/cli

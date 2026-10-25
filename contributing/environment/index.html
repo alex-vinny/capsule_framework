@@ -2793,10 +2793,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-13-github-organization-repositories" class="md-nav__link">
+  <a href="#step-13-github-repositories" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 13 — GitHub Organization + Repositories
+        Step 13 — GitHub repositories
       
     </span>
   </a>
@@ -4637,18 +4637,18 @@ mv<span class="w"> </span>/tmp/cmdline-unzip/cmdline-tools<span class="w"> </spa
 
 <span class="c1"># Accept licenses and install required components</span>
 yes<span class="w"> </span><span class="p">|</span><span class="w"> </span>sdkmanager<span class="w"> </span>--licenses
-sdkmanager<span class="w"> </span><span class="s2">"platform-tools"</span><span class="w"> </span><span class="s2">"platforms;android-35"</span><span class="w"> </span><span class="s2">"build-tools;35.0.0"</span>
+sdkmanager<span class="w"> </span><span class="s2">"platform-tools"</span><span class="w"> </span><span class="s2">"platforms;android-36"</span><span class="w"> </span><span class="s2">"build-tools;35.0.0"</span><span class="w"> </span><span class="s2">"ndk;27.3.13750724"</span><span class="w"> </span><span class="s2">"cmake;3.22.1"</span>
 </code></pre></div>
 <p><strong>Android Emulator</strong> (skip if testing on a physical device)</p>
-<div class="highlight"><pre><span></span><code>sdkmanager<span class="w"> </span><span class="s2">"emulator"</span><span class="w"> </span><span class="s2">"system-images;android-35;google_apis;x86_64"</span><span class="w">  </span><span class="c1"># Intel/AMD</span>
-<span class="c1"># Apple Silicon: use system-images;android-35;google_apis_playstore;arm64-v8a</span>
+<div class="highlight"><pre><span></span><code>sdkmanager<span class="w"> </span><span class="s2">"emulator"</span><span class="w"> </span><span class="s2">"system-images;android-36;google_apis;x86_64"</span><span class="w">  </span><span class="c1"># Intel/AMD</span>
+<span class="c1"># Apple Silicon: use system-images;android-36;google_apis_playstore;arm64-v8a</span>
 
 avdmanager<span class="w"> </span>create<span class="w"> </span>avd<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--name<span class="w"> </span><span class="s2">"Pixel_8_API35"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--name<span class="w"> </span><span class="s2">"Pixel_8_API36"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--device<span class="w"> </span><span class="s2">"pixel_8"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--package<span class="w"> </span><span class="s2">"system-images;android-35;google_apis;x86_64"</span>
+<span class="w">    </span>--package<span class="w"> </span><span class="s2">"system-images;android-36;google_apis;x86_64"</span>
 
-emulator<span class="w"> </span>-avd<span class="w"> </span>Pixel_8_API35<span class="w"> </span>-no-audio<span class="w"> </span>-no-boot-anim<span class="w"> </span><span class="p">&amp;</span>
+emulator<span class="w"> </span>-avd<span class="w"> </span>Pixel_8_API36<span class="w"> </span>-no-audio<span class="w"> </span>-no-boot-anim<span class="w"> </span><span class="p">&amp;</span>
 </code></pre></div>
 <hr />
 <h3 id="14-ios-prerequisites-macos-only">1.4 iOS prerequisites (macOS only)<a class="headerlink" href="#14-ios-prerequisites-macos-only" title="Permanent link">&para;</a></h3>
@@ -4888,7 +4888,7 @@ adb<span class="w"> </span>devices<span class="w">             </span><span clas
           ├── Node.js 22 (nvm)
           ├── pnpm 9 + Turbo 2
           ├── JDK 17 (Temurin)
-          ├── Android SDK (API 35)
+          ├── Android SDK (API 36)
           └── Docker CLI (via Docker Desktop socket)
     └── Docker Desktop 4.30+         ← runs on Windows, socket shared to WSL2
     └── VS Code                      ← IDE, WSL2 + Dev Containers extension
@@ -4999,8 +4999,10 @@ rm<span class="w"> </span>/tmp/cmdline-tools.zip
 yes<span class="w"> </span><span class="p">|</span><span class="w"> </span>sdkmanager<span class="w"> </span>--licenses<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
 sdkmanager<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="s2">"platform-tools"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="s2">"platforms;android-35"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">"platforms;android-36"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="s2">"build-tools;35.0.0"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">"ndk;27.3.13750724"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">"cmake;3.22.1"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="s2">"extras;android;m2repository"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="s2">"extras;google;m2repository"</span>
 
@@ -5015,7 +5017,7 @@ sdkmanager<span class="w"> </span>--list_installed
 <p>During setup:</p>
 <ul>
 <li>SDK location: <code>C:\Users\&lt;you&gt;\AppData\Local\Android\Sdk</code></li>
-<li>Install Android 15 (API 35) system image</li>
+<li>Install Android 16 (API 36) system image</li>
 </ul>
 <h5 id="52-or-sdk-manager-on-windows-no-android-studio">5.2 Or — SDK Manager on Windows (no Android Studio)<a class="headerlink" href="#52-or-sdk-manager-on-windows-no-android-studio" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><span class="c"># Download cmdline-tools for Windows</span>
@@ -5026,16 +5028,16 @@ sdkmanager<span class="w"> </span>--list_installed
 <span class="c"># C:\android-sdk\cmdline-tools\latest\bin</span>
 <span class="c"># C:\android-sdk\platform-tools</span>
 
-<span class="n">sdkmanager</span> <span class="s2">"platform-tools"</span> <span class="s2">"platforms;android-35"</span> <span class="s2">"build-tools;35.0.0"</span>
-<span class="n">sdkmanager</span> <span class="s2">"emulator"</span> <span class="s2">"system-images;android-35;google_apis;x86_64"</span>
+<span class="n">sdkmanager</span> <span class="s2">"platform-tools"</span> <span class="s2">"platforms;android-36"</span> <span class="s2">"build-tools;35.0.0"</span> <span class="s2">"ndk;27.3.13750724"</span> <span class="s2">"cmake;3.22.1"</span>
+<span class="n">sdkmanager</span> <span class="s2">"emulator"</span> <span class="s2">"system-images;android-36;google_apis;x86_64"</span>
 
 <span class="n">avdmanager</span> <span class="n">create</span> <span class="n">avd</span> <span class="p">`</span>
-    <span class="p">-</span><span class="n">-name</span> <span class="s2">"Pixel_8_API35"</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-name</span> <span class="s2">"Pixel_8_API36"</span> <span class="p">`</span>
     <span class="p">-</span><span class="n">-device</span> <span class="s2">"pixel_8"</span> <span class="p">`</span>
-    <span class="p">-</span><span class="n">-package</span> <span class="s2">"system-images;android-35;google_apis;x86_64"</span>
+    <span class="p">-</span><span class="n">-package</span> <span class="s2">"system-images;android-36;google_apis;x86_64"</span>
 
 <span class="c"># Launch emulator</span>
-<span class="n">emulator</span> <span class="n">-avd</span> <span class="n">Pixel_8_API35</span> <span class="n">-no-audio</span> <span class="n">-no-boot-anim</span>
+<span class="n">emulator</span> <span class="n">-avd</span> <span class="n">Pixel_8_API36</span> <span class="n">-no-audio</span> <span class="n">-no-boot-anim</span>
 </code></pre></div>
 <h5 id="53-adb-on-windows-wsl2-bridge">5.3 ADB on Windows + WSL2 bridge<a class="headerlink" href="#53-adb-on-windows-wsl2-bridge" title="Permanent link">&para;</a></h5>
 <p>ADB runs on Windows host. WSL2 talks to it via <code>host.docker.internal</code>.</p>
@@ -5138,9 +5140,9 @@ docker<span class="w"> </span>compose<span class="w"> </span>version<span class=
 [ ] Node 22 in WSL2 (nvm install 22)
 [ ] pnpm 9 + Turbo 2 in WSL2
 [ ] JDK 17 Temurin in WSL2 (java -version)
-[ ] Android SDK API 35 + Build Tools 35.0.0 in WSL2
+[ ] Android SDK API 36 + Build Tools 35.0.0 + NDK 27.3 + NDK 27.3 in WSL2
 [ ] ANDROID_HOME set in WSL2 ~/.bashrc
-[ ] Android Emulator (Pixel 8 API 35) running on Windows host
+[ ] Android Emulator (Pixel 8 API 36) running on Windows host
 [ ] adb devices shows the emulator from Windows and WSL2
 [ ] Docker Desktop 4.30+ installed, WSL2 integration enabled
 [ ] VS Code with WSL2 + Dev Containers extensions
@@ -5171,22 +5173,15 @@ sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"
 gh<span class="w"> </span>auth<span class="w"> </span>login
 </code></pre></div>
 <hr />
-<h4 id="step-13-github-organization-repositories">Step 13 — GitHub Organization + Repositories<a class="headerlink" href="#step-13-github-organization-repositories" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1"># Create the capsule-framework organization</span>
-<span class="c1"># GitHub web UI: github.com → + → New organization → Free plan</span>
-<span class="c1"># Organization name: capsule-framework</span>
-
-<span class="c1"># Create the monorepo</span>
-gh<span class="w"> </span>repo<span class="w"> </span>create<span class="w"> </span>capsule-framework/capsule<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--public<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--description<span class="w"> </span><span class="s2">"Capsule — app ships inside a managed native capsule"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--clone
-
-<span class="c1"># iOS shell repo (separate — linked as git submodule or Swift Package URL)</span>
-gh<span class="w"> </span>repo<span class="w"> </span>create<span class="w"> </span>capsule-framework/capsule-ios<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--public<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--description<span class="w"> </span><span class="s2">"Capsule iOS shell — XCFramework"</span>
+<h4 id="step-13-github-repositories">Step 13 — GitHub repositories<a class="headerlink" href="#step-13-github-repositories" title="Permanent link">&para;</a></h4>
+<p>The repositories already exist; clone them and sign in to push:</p>
+<div class="highlight"><pre><span></span><code>gh<span class="w"> </span>auth<span class="w"> </span>login<span class="w">                                                      </span><span class="c1"># or a PAT via your credential helper</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/alex-vinny/capsule_framework.git<span class="w">      </span><span class="c1"># framework monorepo (incl. examples/)</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/alex-vinny/capsule-templates.git<span class="w">      </span><span class="c1"># starter templates (separate: churns faster)</span>
 </code></pre></div>
+<p><code>main</code> is protected: the JS, Android build, Swift Linux and Swift macOS CI jobs must pass (admins
+exempt). The iOS shell lives in this monorepo (<code>packages/capsule-ios</code>, Swift Package at the root),
+not in a separate repo.</p>
 <hr />
 <h4 id="step-14-ghcr-docker-buildx">Step 14 — GHCR + Docker buildx<a class="headerlink" href="#step-14-ghcr-docker-buildx" title="Permanent link">&para;</a></h4>
 <p>GHCR is included with your GitHub account — no extra setup.</p>
@@ -5211,8 +5206,7 @@ docker<span class="w"> </span>buildx<span class="w"> </span>ls
 <hr />
 <h4 id="online-checklist">Online Checklist<a class="headerlink" href="#online-checklist" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code>[ ] GitHub CLI authenticated on Windows + WSL2
-[ ] GitHub org capsule-framework created
-[ ] Repo capsule-framework/capsule created and cloned
+[ ] alex-vinny/capsule_framework (and capsule-templates if needed) cloned
 [ ] GHCR: docker login ghcr.io works
 [ ] Docker buildx multi-arch builder created
 [ ] GitHub Actions CI workflow passing
@@ -5344,30 +5338,40 @@ Set SDK path to <code>~/android-sdk</code> and JDK to Eclipse Temurin 17.</p>
 </tr>
 <tr>
 <td>Android SDK Platform</td>
-<td>android-35</td>
-<td>targetSdk in capsule.config.ts</td>
+<td>android-36</td>
+<td>compileSdk and targetSdk 36</td>
 </tr>
 <tr>
 <td>Build Tools</td>
 <td>35.0.0</td>
-<td>Must match platform</td>
+<td>AGP 8.13 default</td>
+</tr>
+<tr>
+<td>NDK</td>
+<td>27.3.13750724</td>
+<td><code>ndkVersion</code> in <code>capsule/build.gradle.kts</code></td>
+</tr>
+<tr>
+<td>CMake</td>
+<td>3.22.1</td>
+<td>QuickJS + CivetWeb native build</td>
 </tr>
 <tr>
 <td>Gradle</td>
-<td>8.10</td>
+<td>8.14.6</td>
 <td>Pinned via gradlew</td>
 </tr>
 <tr>
 <td>AGP</td>
-<td>8.7.x</td>
-<td>Aligns with Gradle 8.10</td>
+<td>8.13.2</td>
+<td><code>gradle/libs.versions.toml</code>; Kotlin 2.3.21 (2.4 needs a newer R8)</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h3 id="52-repository-setup">5.2 Repository setup<a class="headerlink" href="#52-repository-setup" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/capsule-framework/capsule
-<span class="nb">cd</span><span class="w"> </span>capsule
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/alex-vinny/capsule_framework
+<span class="nb">cd</span><span class="w"> </span>capsule_framework
 pnpm<span class="w"> </span>install
 pnpm<span class="w"> </span>build<span class="w">         </span><span class="c1"># Turbo resolves build order automatically</span>
 cp<span class="w"> </span>.env.example<span class="w"> </span>.env.local<span class="w">   </span><span class="c1"># per-machine paths (JAVA_HOME, ANDROID_HOME, …) — git-ignored</span>
@@ -5574,12 +5578,12 @@ capsule<span class="w"> </span>dev<span class="w">     </span><span class="c1">#
 <span class="w">    </span><span class="nt">devices</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/kvm:/dev/kvm</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>emulator<span class="w"> </span>-avd<span class="w"> </span>Pixel_8_API35<span class="w"> </span>-no-window<span class="w"> </span>-no-audio<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight"><pre><span></span><code>emulator<span class="w"> </span>-avd<span class="w"> </span>Pixel_8_API36<span class="w"> </span>-no-window<span class="w"> </span>-no-audio<span class="w"> </span><span class="p">&amp;</span>
 adb<span class="w"> </span>wait-for-device<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>adb<span class="w"> </span>devices
 </code></pre></div>
 <p><strong>Opening the Dev Container:</strong></p>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/capsule-framework/capsule
-code<span class="w"> </span>capsule
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/alex-vinny/capsule_framework
+code<span class="w"> </span>capsule_framework
 <span class="c1"># VS Code prompts: "Reopen in Container" → click it</span>
 <span class="c1"># (or: Ctrl+Shift+P → Dev Containers: Reopen in Container)</span>
 <span class="c1"># First time: ~5–10 min to pull/build (cached after)</span>
@@ -5677,7 +5681,7 @@ code<span class="w"> </span>capsule
 </tr>
 <tr>
 <td>Android SDK</td>
-<td>API 35</td>
+<td>API 36</td>
 <td>✅ host</td>
 <td>✅ host</td>
 <td>❌ container</td>
@@ -5691,7 +5695,7 @@ code<span class="w"> </span>capsule
 </tr>
 <tr>
 <td>Gradle</td>
-<td>8.10</td>
+<td>8.14.6</td>
 <td>auto (gradlew)</td>
 <td>auto</td>
 <td>auto</td>
@@ -5712,7 +5716,7 @@ code<span class="w"> </span>capsule
 </tr>
 <tr>
 <td>Android Emulator</td>
-<td>API 35</td>
+<td>API 36</td>
 <td>✅ host</td>
 <td>✅ host</td>
 <td>✅ host (Mac/Win)</td>
@@ -5753,7 +5757,7 @@ code<span class="w"> </span>capsule
 <div class="highlight"><pre><span></span><code>[ ] Node.js 22 installed (nvm)
 [ ] @capsule/cli installed globally: npm install -g @capsule/cli
 [ ] JDK 17 installed, JAVA_HOME set
-[ ] ANDROID_HOME set, Android SDK API 35 + Build Tools 35.0.0
+[ ] ANDROID_HOME set, Android SDK API 36 + Build Tools 35.0.0 + NDK 27.3 + NDK 27.3
 [ ] Emulator created and boots (or physical device connected via USB)
 [ ] capsule init my-app succeeds
 [ ] capsule add android succeeds
@@ -5764,7 +5768,7 @@ code<span class="w"> </span>capsule
 <h3 id="framework-contributor-path-a">Framework contributor — Path A<a class="headerlink" href="#framework-contributor-path-a" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>[ ] Node.js 22, pnpm 9, Turbo 2 installed
 [ ] JDK 17 installed, JAVA_HOME set
-[ ] ANDROID_HOME set, Android SDK API 35 + Build Tools 35.0.0
+[ ] ANDROID_HOME set, Android SDK API 36 + Build Tools 35.0.0 + NDK 27.3 + NDK 27.3
 [ ] Emulator created and boots
 [ ] Docker Desktop installed, docker compose version shows V2
 [ ] git clone capsule repo

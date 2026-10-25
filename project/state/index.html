@@ -3735,6 +3735,20 @@ fetch client are next (see the roadmap's Phase 6 item).</p>
 emulator (<code>project/history.md</code> → 2026-10-24). Next: a <strong>physical-device</strong> pass (SR-4 repeat, Gemini
 Nano on a supported phone), then the first Phase 6 work — the OTA known gaps
 (<code>contributing/codesync-internals.md</code> → Known gaps) — and iOS bring-up on the macOS runner.</p>
+<p><strong>Open items</strong> (2026-10-24, in rough priority):</p>
+<ol>
+<li>Logo — direction A (split pill) chosen; pick the pair, gap and angle, then export the icon sets
+   (SVG, favicon, Android adaptive, iOS sizes).</li>
+<li>Install the Renovate app on both repos (<code>renovate.json</code> is committed; the app needs a browser).</li>
+<li>Physical Android pass — SR-4 repeat, Gemini Nano on a supported phone.</li>
+<li>iOS on a real device or simulator — CI only builds and runs <code>swift test</code> on macOS.</li>
+<li>npm + Maven publishing (D5) — until then <code>capsule init</code> stops after scaffolding with a hint.</li>
+<li>OTA known gaps (Phase 6) — <code>contributing/codesync-internals.md</code> → Known gaps.</li>
+<li>Status-bar icon contrast under edge-to-edge (white icons on light pages).</li>
+<li>A test for the <code>capsule init</code> failure path (the <code>pnpm install</code> hint).</li>
+<li>Decide ML Kit's size cost vs adr-003's "zero size if unused".</li>
+<li>Two accepted moderate npm advisories in <code>examples/</code> — recheck on the next upkeep sweep.</li>
+</ol>
 <h2 id="resume-a-session">Resume a session<a class="headerlink" href="#resume-a-session" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>cp<span class="w"> </span>.env.example<span class="w"> </span>.env.local<span class="w">   </span><span class="c1"># first time only — then set JAVA_HOME, ANDROID_HOME, AVD_NAME, …</span>
 pnpm<span class="w"> </span>dev:env<span class="w">                 </span><span class="c1"># show the resolved environment (JDK, SDK, AAR override, adb)</span>

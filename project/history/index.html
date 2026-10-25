@@ -5233,6 +5233,29 @@ placeholders, and the PowerShell ZIP step was later replaced (see the 2026-10-24
   on-device model), JVM 212, SR-4 (20 cold starts + 10 relaunches: every launch rendered), the
   <code>react-ts</code> release build end to end (page → bridge → CivetWeb → QuickJS route), all example release
   builds installed and launched.</li>
+<li><strong>Templates + examples brought current:</strong> Angular 19 → 22 (zoneless, TS 6.0), rspack 2, vite ≥ 6.4.5,
+  <code>type: module</code>, <code>@capsule/core ^0.1.0</code>; all 7 templates install and build clean; examples' npm
+  advisories 45 → 2 accepted moderates, templates → 0.</li>
+<li><strong>Published:</strong> <code>alex-vinny/capsule_framework</code> (this repo) and <code>alex-vinny/capsule-templates</code>, both
+  public, each a fresh single-commit history under the GitHub noreply author (the private histories
+  are kept outside the repo). Docs site on GitHub Pages from <code>gh-pages</code>. Nothing on npm/Maven yet (D5).</li>
+<li><strong>First CI runs on GitHub</strong> found five more, all fixed (<code>b7160df</code>, <code>62dbfb8</code>):</li>
+<li><code>docs:check</code> walked paths from a Windows drive root only — the POSIX walk never matched.</li>
+<li>CivetWeb's <code>struct ah</code> clashed with a Darwin header under clang modules (macOS SwiftPM).</li>
+<li>mkdocs <code>--strict</code> rejected links from <code>docs/</code> to files outside it.</li>
+<li><code>CapsuleBridge</code> must inherit <code>NSObject</code> to be a <code>WKScriptMessageHandler</code> — invisible to the
+     Linux job because the file sits behind <code>#if canImport(WebKit)</code>.</li>
+<li><code>docs-map.md</code> was stale (<code>gen --check</code>).
+  Every job green on <code>62dbfb8</code>: JS, Android build + JVM, the emulator job, Swift Linux, Swift macOS, docs.</li>
+<li><strong>GitHub setup:</strong> <code>main</code> protected (required: JS, Android build, Swift Linux, Swift macOS; no
+  force-push or deletion; admins exempt). A push cancels a running manual CI dispatch on the same
+  branch (shared concurrency group) — dispatch again after pushing.</li>
+<li><strong>Fresh-clone check:</strong> the setup docs still said SDK platform 35, Gradle 8.10, AGP 8.7 and the old
+  org URL — <code>contributing/environment.md</code>, <code>commands.md</code> and <code>docker.md</code> now say platform 36, NDK
+  27.3.13750724, CMake 3.22.1, Gradle 8.14.6, AGP 8.13.2 and <code>alex-vinny/capsule_framework</code>. CI's
+  <code>NDK_VERSION</code> (27.2) disagreed with <code>ndkVersion</code> (27.3) and now matches.</li>
+<li><strong>Logo:</strong> direction A (split pill) chosen; the pair (Graphite / Lagoon / crosses), the gap and the
+  angle are still open — then export SVG, favicon, Android adaptive and iOS icon sets.</li>
 </ul>
 
 

@@ -3953,7 +3953,7 @@ pnpm<span class="w"> </span>dev:emulator<span class="w"> </span>stop<span class=
 <code>swiftshader_indirect</code>: host-GPU mode hangs at boot on GPUs without working Vulkan/OpenGL),
 <code>--avd &lt;name&gt;</code> (default <code>AVD_NAME</code>, <code>CapsuleTest</code>).</p>
 <p><strong>Create the AVD (one time):</strong></p>
-<div class="highlight"><pre><span></span><code>pnpm<span class="w"> </span>with-env<span class="w"> </span>avdmanager<span class="w"> </span>create<span class="w"> </span>avd<span class="w"> </span>-n<span class="w"> </span>CapsuleTest<span class="w"> </span>-k<span class="w"> </span><span class="s2">"system-images;android-35;google_apis_playstore;x86_64"</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"Nexus 5"</span>
+<div class="highlight"><pre><span></span><code>pnpm<span class="w"> </span>with-env<span class="w"> </span>avdmanager<span class="w"> </span>create<span class="w"> </span>avd<span class="w"> </span>-n<span class="w"> </span>CapsuleTest<span class="w"> </span>-k<span class="w"> </span><span class="s2">"system-images;android-36;google_apis_playstore;x86_64"</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"Nexus 5"</span>
 </code></pre></div>
 <p>(<code>with-env</code> finds <code>avdmanager</code>, <code>adb</code> and <code>emulator</code> under <code>ANDROID_HOME</code>. Set <code>ANDROID_AVD_HOME</code>
 in <code>.env.local</code> first if your AVDs live off the default disk.)</p>
