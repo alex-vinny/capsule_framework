@@ -1,0 +1,5864 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alex-vinny.github.io/capsule_framework/contributing/environment/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../commands/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Development environment - Capsule Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#capsule-framework-development-environment" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Capsule Framework" class="md-header__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Capsule Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Development environment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guide/installation/" class="md-tabs__link">
+          
+  
+  
+  Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/cli/" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/architecture/" class="md-tabs__link">
+          
+  
+  
+  Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../decisions/" class="md-tabs__link">
+          
+  
+  
+  Decisions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../project/roadmap/" class="md-tabs__link">
+          
+  
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Capsule Framework" class="md-nav__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Capsule Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/hello-world/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hello World
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/push-notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Push Notifications
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/alerts-styling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alerts Styling
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/mobile-css-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile CSS Reset
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/publishing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publishing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ota-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Over-the-air Updates
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/core-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/lockfile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lockfile
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generated
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generated
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/docs-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Principles
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/capsule-vs-ionic-capacitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    vs Ionic/Capacitor
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/extensibility-and-positioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extensibility & Positioning
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/ionic-framework7-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ionic Framework 7 Migration
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Primers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/kotlin-for-csharp-devs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kotlin for C# Devs
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/jni-and-cpp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JNI & C
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/civetweb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CivetWeb
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/quickjs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QuickJS
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decisions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0001-embedded-runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0001 Embedded Runtime
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0002-capsule-ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0002 Capsule UI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0003-ai-and-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0003 AI & Agents
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0004-web-serving-transport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0004 Web Serving Transport
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#platform-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Platform Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-1-getting-started-app-developer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 1 — Getting Started (App Developer)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 1 — Getting Started (App Developer)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-install-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Install prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-install-the-capsule-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Install the Capsule CLI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-android-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Android prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-ios-prerequisites-macos-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 iOS prerequisites (macOS only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-create-your-first-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 2 — Create Your First App
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2 — Create Your First App">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-scaffold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Scaffold
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-add-a-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Add a platform
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-configure-your-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Configure your app
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-3-development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 3 — Development Workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 3 — Development Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-start-the-dev-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Start the dev server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-using-platform-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Using platform APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-run-on-device-emulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Run on device / emulator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-publish-to-stores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Publish to stores
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-4-quick-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 4 — Quick Reference
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 4 — Quick Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cli-cheat-sheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-framework-creator-setup-windows-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 2 — Framework Creator Setup (Windows 11)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2 — Framework Creator Setup (Windows 11)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-you-need-to-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What You Need to Build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-local-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1 — Local MVP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 1 — Local MVP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-windows-terminal-wsl2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1 — Windows Terminal + WSL2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1 — Windows Terminal + WSL2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-windows-terminal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Windows Terminal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-wsl2-ubuntu-2204" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 WSL2 + Ubuntu 22.04
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-set-ubuntu-2204-as-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Set Ubuntu 22.04 as default
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-update-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Update Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-nodejs-22-pnpm-turbo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2 — Node.js 22 + pnpm + Turbo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 2 — Node.js 22 + pnpm + Turbo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-nodejs-22-via-nvm-wsl2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Node.js 22 via nvm (WSL2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-pnpm-9-turbo-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 pnpm 9 + Turbo 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-nodejs-on-windows-for-tools-that-run-on-the-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Node.js on Windows (for tools that run on the host)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-jdk-17-wsl2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — JDK 17 (WSL2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-android-sdk-wsl2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4 — Android SDK (WSL2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-android-emulator-windows-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5 — Android Emulator (Windows host)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 5 — Android Emulator (Windows host)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-install-android-studio-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Install Android Studio (Windows)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-or-sdk-manager-on-windows-no-android-studio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Or — SDK Manager on Windows (no Android Studio)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-adb-on-windows-wsl2-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 ADB on Windows + WSL2 bridge
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-docker-desktop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6 — Docker Desktop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 6 — Docker Desktop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-install-docker-desktop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Install Docker Desktop
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-7-vs-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 7 — VS Code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 7 — VS Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-install-vs-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Install VS Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-essential-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Essential extensions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-open-the-project-in-wsl2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Open the project in WSL2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-8-kotlin-ide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 8 — Kotlin IDE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-9-git-local-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 9 — Git (local config)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-10-local-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 10 — Local Environment Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-11-verify-local-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 11 — Verify Local Setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 11 — Verify Local Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local Checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-8-go-online-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 8 — Go Online (Ecosystem)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 8 — Go Online (Ecosystem)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-12-github-cli-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 12 — GitHub CLI + Authentication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-13-github-organization-repositories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 13 — GitHub Organization + Repositories
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-14-ghcr-docker-buildx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 14 — GHCR + Docker buildx
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-15-secrets-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 15 — Secrets &amp; Tokens
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#online-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Online Checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Next
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-3-framework-contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 3 — Framework Contributors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 3 — Framework Contributors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#50-bootstrap-starting-from-zero-before-the-github-repo-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.0 Bootstrap — Starting from Zero (before the GitHub repo exists)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#51-additional-tools-for-contributors-path-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Additional tools for contributors (Path A)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-repository-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Repository setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-verify-the-android-build-chain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Verify the Android build chain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-run-the-codesync-local-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Run the CodeSync local stack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-test-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Test suite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#56-path-b-docker-first-vs-code-dev-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 Path B — Docker-First (VS Code Dev Container)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#57-path-a-vs-path-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7 Path A vs Path B
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#58-buildnumber-auto-commit-in-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8 buildNumber auto-commit in CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#toolchain-version-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Toolchain Version Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started Checklist
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Started Checklist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#app-developer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        App developer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-contributor-path-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Framework contributor — Path A
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-contributor-path-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Framework contributor — Path B
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ios-macos-only-all-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iOS (macOS only — all paths)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../codesync-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CodeSync Internals
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../template-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Template Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ios-bring-up/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iOS Bring-up
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../platform-parity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android/iOS Parity
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upkeep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_14" id="__nav_6_14_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Workflows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/add-native-api/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add Native API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/author-plugin/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Author Plugin
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/upkeep-sweep/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep Sweep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/known-issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known Issues
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_6" id="__nav_7_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Incidents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Incidents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/incidents/2026-10-embedded-server-startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-10 Embedded Server Startup
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_7" id="__nav_7_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/2026-06-24-planning-brainstorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-24 Planning Brainstorm
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/chatgpt-first-impressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT First Impressions
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/chatgpt-plugin-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT Plugin Compatibility
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_8" id="__nav_7_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Business
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/business-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Model
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/pricing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pricing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/ota-policy-and-liability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Policy & Liability
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_9" id="__nav_7_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Server Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Server Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/file-storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Storage
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/workers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workers
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="capsule-framework-development-environment">Capsule Framework — Development Environment<a class="headerlink" href="#capsule-framework-development-environment" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Three audiences, three sections.</strong></p>
+<ul>
+<li><strong>Building an app with Capsule?</strong> Start at <a href="#part-1--getting-started-app-developer">Part 1 — Getting Started (App Developer)</a>.</li>
+<li><strong>Setting up the creator machine to build the framework itself?</strong> Go to <a href="#part-2--framework-creator-setup-windows-11">Part 2 — Framework Creator Setup (Windows 11)</a>.</li>
+<li><strong>Contributing to the Capsule framework?</strong> Jump to <a href="#part-3--framework-contributors">Part 3 — Framework Contributors</a>.</li>
+</ul>
+</blockquote>
+<hr />
+<h2 id="platform-requirements">Platform Requirements<a class="headerlink" href="#platform-requirements" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Work</th>
+<th>OS requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App development (CLI + web layer)</td>
+<td>Windows, macOS, or Linux</td>
+</tr>
+<tr>
+<td>Android builds and emulator</td>
+<td>Windows, macOS, or Linux</td>
+</tr>
+<tr>
+<td>iOS builds</td>
+<td><strong>macOS only</strong> — Apple constraint</td>
+</tr>
+<tr>
+<td>Docker-based CI builds</td>
+<td>Windows (WSL2), macOS, or Linux</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="part-1-getting-started-app-developer">Part 1 — Getting Started (App Developer)<a class="headerlink" href="#part-1-getting-started-app-developer" title="Permanent link">&para;</a></h2>
+<p>Everything you need to go from zero to a running Capsule app on an Android device or emulator.</p>
+<h3 id="11-install-prerequisites">1.1 Install prerequisites<a class="headerlink" href="#11-install-prerequisites" title="Permanent link">&para;</a></h3>
+<p><strong>Node.js 22 (LTS)</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># macOS / Linux — using nvm</span>
+curl<span class="w"> </span>-o-<span class="w"> </span>https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+<span class="nb">source</span><span class="w"> </span>~/.bashrc<span class="w">   </span><span class="c1"># or ~/.zshrc</span>
+nvm<span class="w"> </span>install<span class="w"> </span><span class="m">22</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>nvm<span class="w"> </span>use<span class="w"> </span><span class="m">22</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>nvm<span class="w"> </span><span class="nb">alias</span><span class="w"> </span>default<span class="w"> </span><span class="m">22</span>
+
+node<span class="w"> </span>--version<span class="w">    </span><span class="c1"># v22.x.x</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># Windows — nvm-windows</span>
+<span class="c"># Download from github.com/coreybutler/nvm-windows/releases</span>
+<span class="n">nvm</span> <span class="n">install</span> <span class="n">22</span>
+<span class="n">nvm</span> <span class="n">use</span> <span class="n">22</span>
+</code></pre></div>
+<p><strong>pnpm</strong> (or npm — both work for app development)</p>
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>pnpm@9
+</code></pre></div>
+<hr />
+<h3 id="12-install-the-capsule-cli">1.2 Install the Capsule CLI<a class="headerlink" href="#12-install-the-capsule-cli" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Note — App developers only.</strong> This step assumes <code>@capsule/cli</code> has been published to npm. If you are building the framework itself, skip Parts 1–4 entirely and go to <a href="#part-3--framework-contributors">Part 3 — Framework Contributors</a>.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>@capsule/cli
+
+capsule<span class="w"> </span>--version<span class="w">    </span><span class="c1"># 1.x.x</span>
+</code></pre></div>
+<hr />
+<h3 id="13-android-prerequisites">1.3 Android prerequisites<a class="headerlink" href="#13-android-prerequisites" title="Permanent link">&para;</a></h3>
+<p>You need a JDK and the Android SDK command-line tools. No Android Studio required.</p>
+<p><strong>JDK 17</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># macOS — SDKMAN</span>
+curl<span class="w"> </span>-s<span class="w"> </span><span class="s2">"https://get.sdkman.io"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+<span class="nb">source</span><span class="w"> </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.sdkman/bin/sdkman-init.sh"</span>
+sdk<span class="w"> </span>install<span class="w"> </span>java<span class="w"> </span><span class="m">17</span>.0.11-tem
+java<span class="w"> </span>-version<span class="w">    </span><span class="c1"># openjdk 17.x.x</span>
+
+<span class="c1"># Linux (Debian/Ubuntu)</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>openjdk-17-jdk-headless
+
+<span class="c1"># Windows — download Eclipse Temurin 17 from adoptium.net, set JAVA_HOME</span>
+</code></pre></div>
+<p><strong>Android SDK command-line tools</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># macOS / Linux</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>~/android-sdk/cmdline-tools
+wget<span class="w"> </span>https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>-O<span class="w"> </span>/tmp/cmdline-tools.zip
+unzip<span class="w"> </span>/tmp/cmdline-tools.zip<span class="w"> </span>-d<span class="w"> </span>/tmp/cmdline-unzip
+mv<span class="w"> </span>/tmp/cmdline-unzip/cmdline-tools<span class="w"> </span>~/android-sdk/cmdline-tools/latest
+
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'export ANDROID_HOME=$HOME/android-sdk'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<span class="nb">source</span><span class="w"> </span>~/.bashrc
+
+<span class="c1"># Accept licenses and install required components</span>
+yes<span class="w"> </span><span class="p">|</span><span class="w"> </span>sdkmanager<span class="w"> </span>--licenses
+sdkmanager<span class="w"> </span><span class="s2">"platform-tools"</span><span class="w"> </span><span class="s2">"platforms;android-35"</span><span class="w"> </span><span class="s2">"build-tools;35.0.0"</span>
+</code></pre></div>
+<p><strong>Android Emulator</strong> (skip if testing on a physical device)</p>
+<div class="highlight"><pre><span></span><code>sdkmanager<span class="w"> </span><span class="s2">"emulator"</span><span class="w"> </span><span class="s2">"system-images;android-35;google_apis;x86_64"</span><span class="w">  </span><span class="c1"># Intel/AMD</span>
+<span class="c1"># Apple Silicon: use system-images;android-35;google_apis_playstore;arm64-v8a</span>
+
+avdmanager<span class="w"> </span>create<span class="w"> </span>avd<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--name<span class="w"> </span><span class="s2">"Pixel_8_API35"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device<span class="w"> </span><span class="s2">"pixel_8"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--package<span class="w"> </span><span class="s2">"system-images;android-35;google_apis;x86_64"</span>
+
+emulator<span class="w"> </span>-avd<span class="w"> </span>Pixel_8_API35<span class="w"> </span>-no-audio<span class="w"> </span>-no-boot-anim<span class="w"> </span><span class="p">&amp;</span>
+</code></pre></div>
+<hr />
+<h3 id="14-ios-prerequisites-macos-only">1.4 iOS prerequisites (macOS only)<a class="headerlink" href="#14-ios-prerequisites-macos-only" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install Xcode 15+ from the Mac App Store, then:</span>
+sudo<span class="w"> </span>xcodebuild<span class="w"> </span>-license<span class="w"> </span>accept
+xcodebuild<span class="w"> </span>-version<span class="w">    </span><span class="c1"># Xcode 15.x or 16.x</span>
+</code></pre></div>
+<hr />
+<h2 id="part-2-create-your-first-app">Part 2 — Create Your First App<a class="headerlink" href="#part-2-create-your-first-app" title="Permanent link">&para;</a></h2>
+<h3 id="21-scaffold">2.1 Scaffold<a class="headerlink" href="#21-scaffold" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Interactive (prompts for template, app ID, etc.)</span>
+capsule<span class="w"> </span>init<span class="w"> </span>my-app
+
+<span class="c1"># Or non-interactive with flags</span>
+capsule<span class="w"> </span>init<span class="w"> </span>my-app<span class="w"> </span>--template<span class="w"> </span>react-ts<span class="w"> </span>--app-id<span class="w"> </span>com.yourcompany.myapp
+
+<span class="c1"># Available templates: react-ts | vue-ts | svelte-ts | vanilla-ts</span>
+<span class="c1"># Community template: --template github:org/template-name</span>
+
+<span class="nb">cd</span><span class="w"> </span>my-app
+pnpm<span class="w"> </span>install
+</code></pre></div>
+<p>What gets generated:</p>
+<div class="highlight"><pre><span></span><code>my-app/
+  src/
+    index.html
+    main.ts
+    App.tsx              # or .vue / .svelte depending on template
+  public/
+  capsule.config.ts      # the ONLY native configuration file
+  capsule.lock           # commit this — pins resolved shell versions
+  package.json
+  vite.config.ts
+</code></pre></div>
+<hr />
+<h3 id="22-add-a-platform">2.2 Add a platform<a class="headerlink" href="#22-add-a-platform" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Android (works on Windows, macOS, Linux)</span>
+capsule<span class="w"> </span>add<span class="w"> </span>android
+
+<span class="c1"># iOS (macOS only)</span>
+capsule<span class="w"> </span>add<span class="w"> </span>ios
+</code></pre></div>
+<p>This generates the thin <code>.capsule/android/</code> or <code>.capsule/ios/</code> wrapper from <code>capsule.lock</code>. The wrapper is gitignored — never edit it directly.</p>
+<hr />
+<h3 id="23-configure-your-app">2.3 Configure your app<a class="headerlink" href="#23-configure-your-app" title="Permanent link">&para;</a></h3>
+<p>Open <code>capsule.config.ts</code> — this is the only file you touch for native configuration:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">defineConfig</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@capsule/cli'</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">defineConfig</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">appId</span><span class="o">:</span><span class="w">   </span><span class="s1">'com.yourcompany.myapp'</span><span class="p">,</span><span class="w">   </span><span class="c1">// reverse-domain, must match store listing</span>
+<span class="w">  </span><span class="nx">appName</span><span class="o">:</span><span class="w"> </span><span class="s1">'My App'</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nx">version</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w">        </span><span class="s1">'1.0.0'</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">buildNumber</span><span class="o">:</span><span class="w"> </span><span class="kt">1</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nx">android</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">minSdk</span><span class="o">:</span><span class="w">    </span><span class="kt">26</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">targetSdk</span><span class="o">:</span><span class="w"> </span><span class="kt">35</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">permissions</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">'CAMERA'</span><span class="p">]</span><span class="w">           </span><span class="c1">// only if your app uses camera</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>See <code>../concepts/principles.md</code> for the full <code>defineConfig</code> reference.</p>
+<hr />
+<h2 id="part-3-development-workflow">Part 3 — Development Workflow<a class="headerlink" href="#part-3-development-workflow" title="Permanent link">&para;</a></h2>
+<h3 id="31-start-the-dev-server">3.1 Start the dev server<a class="headerlink" href="#31-start-the-dev-server" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>capsule<span class="w"> </span>dev
+</code></pre></div>
+<p>What this does:
+- Starts a Vite dev server at <code>http://localhost:5173</code>
+- Runs <code>adb reverse tcp:5173 tcp:5173</code> so the emulator/device loads from your machine
+- Watches for file changes → hot module replacement in <strong>&lt;50ms</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Physical device on the same WiFi</span>
+capsule<span class="w"> </span>dev<span class="w"> </span>--qr<span class="w">            </span><span class="c1"># prints QR code — scan with device</span>
+
+<span class="c1"># Physical device on corporate WiFi / different network</span>
+capsule<span class="w"> </span>dev<span class="w"> </span>--tunnel<span class="w"> </span>--qr<span class="w">   </span><span class="c1"># HTTPS tunnel, no network config needed</span>
+
+<span class="c1"># Custom port</span>
+capsule<span class="w"> </span>dev<span class="w"> </span>--port<span class="w"> </span><span class="m">3000</span>
+</code></pre></div>
+<p>Open the emulator — the app loads and hot-reloads as you edit files in <code>src/</code>.</p>
+<hr />
+<h3 id="32-using-platform-apis">3.2 Using platform APIs<a class="headerlink" href="#32-using-platform-apis" title="Permanent link">&para;</a></h3>
+<p>Import from <code>@capsule/core</code> — no separate packages to install:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">camera</span><span class="p">,</span><span class="w"> </span><span class="nx">geolocation</span><span class="p">,</span><span class="w"> </span><span class="nx">haptics</span><span class="p">,</span><span class="w"> </span><span class="nx">db</span><span class="p">,</span><span class="w"> </span><span class="nx">preferences</span><span class="p">,</span><span class="w"> </span><span class="nx">browser</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@capsule/core'</span>
+
+<span class="c1">// Camera</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">photo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">camera</span><span class="p">.</span><span class="nx">capture</span><span class="p">({</span><span class="w"> </span><span class="nx">quality</span><span class="o">:</span><span class="w"> </span><span class="kt">0.9</span><span class="w"> </span><span class="p">})</span>
+
+<span class="c1">// Collection API — zero SQL, auto-schema</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="o">&lt;</span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span><span class="o">&gt;</span><span class="p">(</span><span class="s1">'items'</span><span class="p">)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">items</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'hello'</span><span class="w"> </span><span class="p">})</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">all</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">items</span><span class="p">.</span><span class="nx">getAll</span><span class="p">()</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">items</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">items</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'world'</span><span class="w"> </span><span class="p">})</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">items</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+
+<span class="c1">// Raw SQL tagged template (values always parameterized — injection-safe)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">recent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">sql</span><span class="o">&lt;</span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}[]</span><span class="o">&gt;</span><span class="sb">`</span>
+<span class="sb">  SELECT * FROM items WHERE name LIKE </span><span class="si">${</span><span class="s1">'%world%'</span><span class="si">}</span><span class="sb"> LIMIT 10</span>
+<span class="sb">`</span>
+
+<span class="c1">// Encrypted named database (developer supplies key)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">biometrics</span><span class="p">.</span><span class="nx">getKey</span><span class="p">(</span><span class="s1">'db-key'</span><span class="p">)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">secureDb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">database</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'secure'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="p">})</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">secrets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">secureDb</span><span class="p">.</span><span class="nx">collection</span><span class="o">&lt;</span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span><span class="nx">token</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}</span><span class="o">&gt;</span><span class="p">(</span><span class="s1">'secrets'</span><span class="p">)</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">secureDb</span><span class="p">.</span><span class="nx">close</span><span class="p">()</span>
+
+<span class="c1">// Key-value storage (SharedPreferences / UserDefaults)</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">preferences</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span><span class="w"> </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">'theme'</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="s1">'dark'</span><span class="w"> </span><span class="p">})</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">preferences</span><span class="p">.</span><span class="nx">get</span><span class="p">({</span><span class="w"> </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="s1">'theme'</span><span class="w"> </span><span class="p">})</span>
+
+<span class="c1">// In-app browser (Chrome Custom Tabs / SFSafariViewController)</span>
+<span class="c1">// Best for OAuth, payment pages, external links</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">unsub</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">browser</span><span class="p">.</span><span class="nx">onNavigationChange</span><span class="p">(({</span><span class="w"> </span><span class="nx">url</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">url</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">'myapp://callback'</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">browser</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span><span class="w"> </span><span class="nx">unsub</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<span class="p">})</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">browser</span><span class="p">.</span><span class="nx">open</span><span class="p">({</span><span class="w"> </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="s1">'https://accounts.google.com/...'</span><span class="w"> </span><span class="p">})</span>
+
+<span class="c1">// GPS, haptics, push, NFC, Bluetooth, biometrics — all in @capsule/core</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">geolocation</span><span class="p">.</span><span class="nx">getCurrentPosition</span><span class="p">()</span>
+<span class="k">await</span><span class="w"> </span><span class="nx">haptics</span><span class="p">.</span><span class="nx">impact</span><span class="p">(</span><span class="s1">'medium'</span><span class="p">)</span>
+</code></pre></div>
+<p>Unused capabilities are tree-shaken from the release build. Full API reference: <code>core-api.md</code>.</p>
+<hr />
+<h3 id="33-build">3.3 Build<a class="headerlink" href="#33-build" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Debug build</span>
+capsule<span class="w"> </span>build<span class="w"> </span>android
+
+<span class="c1"># Signed release APK</span>
+capsule<span class="w"> </span>build<span class="w"> </span>android<span class="w"> </span>--release
+
+<span class="c1"># Signed AAB (required for Play Store)</span>
+capsule<span class="w"> </span>build<span class="w"> </span>android<span class="w"> </span>--release<span class="w"> </span>--format<span class="w"> </span>aab
+
+<span class="c1"># iOS (macOS only)</span>
+capsule<span class="w"> </span>build<span class="w"> </span>ios<span class="w"> </span>--release
+</code></pre></div>
+<p>Output: <code>.capsule/android/app-release.aab</code> (or <code>.apk</code>)</p>
+<hr />
+<h3 id="34-run-on-device-emulator">3.4 Run on device / emulator<a class="headerlink" href="#34-run-on-device-emulator" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Deploy to the running emulator or connected USB device</span>
+capsule<span class="w"> </span>run<span class="w"> </span>android
+
+<span class="c1"># Target a specific device</span>
+capsule<span class="w"> </span>run<span class="w"> </span>android<span class="w"> </span>--device<span class="w"> </span>&lt;id&gt;<span class="w">    </span><span class="c1"># get IDs from: adb devices</span>
+
+<span class="c1"># iOS</span>
+capsule<span class="w"> </span>run<span class="w"> </span>ios
+</code></pre></div>
+<hr />
+<h3 id="35-publish-to-stores">3.5 Publish to stores<a class="headerlink" href="#35-publish-to-stores" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Android — Play Store</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>android<span class="w"> </span>--track<span class="w"> </span>internal<span class="w">      </span><span class="c1"># internal testing</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>android<span class="w"> </span>--track<span class="w"> </span>production<span class="w">    </span><span class="c1"># production</span>
+
+<span class="c1"># iOS — App Store Connect</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>ios<span class="w"> </span>--track<span class="w"> </span>testflight
+capsule<span class="w"> </span>publish<span class="w"> </span>ios<span class="w"> </span>--track<span class="w"> </span>production
+</code></pre></div>
+<p>See <code>publishing.md</code> for signing setup and full publish options.</p>
+<hr />
+<h2 id="part-4-quick-reference">Part 4 — Quick Reference<a class="headerlink" href="#part-4-quick-reference" title="Permanent link">&para;</a></h2>
+<h3 id="cli-cheat-sheet">CLI cheat sheet<a class="headerlink" href="#cli-cheat-sheet" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>capsule<span class="w"> </span>init<span class="w"> </span>&lt;name&gt;<span class="w">                      </span><span class="c1"># scaffold new app</span>
+capsule<span class="w"> </span>add<span class="w"> </span>android<span class="w"> </span><span class="p">|</span><span class="w"> </span>ios<span class="w">                </span><span class="c1"># add platform</span>
+capsule<span class="w"> </span>sync<span class="w">                             </span><span class="c1"># regenerate .capsule/ wrappers</span>
+capsule<span class="w"> </span>dev<span class="w">                              </span><span class="c1"># start dev server + hot reload</span>
+capsule<span class="w"> </span>build<span class="w"> </span>android<span class="w"> </span><span class="o">[</span>--release<span class="o">]</span><span class="w">        </span><span class="c1"># build APK/AAB</span>
+capsule<span class="w"> </span>build<span class="w"> </span>ios<span class="w"> </span><span class="o">[</span>--release<span class="o">]</span><span class="w">            </span><span class="c1"># build IPA (macOS only)</span>
+capsule<span class="w"> </span>run<span class="w"> </span>android<span class="w"> </span><span class="p">|</span><span class="w"> </span>ios<span class="w">                </span><span class="c1"># deploy to device/emulator</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>android<span class="w"> </span><span class="p">|</span><span class="w"> </span>ios<span class="w">            </span><span class="c1"># upload to store</span>
+capsule<span class="w"> </span>version<span class="w"> </span>bump<span class="w"> </span>patch<span class="p">|</span>minor<span class="p">|</span>major<span class="w">   </span><span class="c1"># manage version numbers</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w">                 </span><span class="c1"># push OTA update (CodeSync)</span>
+capsule<span class="w"> </span>update<span class="w">                           </span><span class="c1"># update capsule shell version</span>
+capsule<span class="w"> </span>doctor<span class="w">                           </span><span class="c1"># diagnose environment issues</span>
+</code></pre></div>
+<h3 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>capsule<span class="w"> </span>doctor<span class="w">          </span><span class="c1"># verify environment — always run this first</span>
+capsule<span class="w"> </span>sync<span class="w">            </span><span class="c1"># regenerate wrappers if something looks wrong</span>
+adb<span class="w"> </span>devices<span class="w">             </span><span class="c1"># confirm emulator/device is visible</span>
+</code></pre></div>
+<hr />
+<h2 id="part-2-framework-creator-setup-windows-11">Part 2 — Framework Creator Setup (Windows 11)<a class="headerlink" href="#part-2-framework-creator-setup-windows-11" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Audience</strong>: The creator of Capsule — setting up a Windows 11 Pro machine to build the framework from scratch.</p>
+<p>This is not the app-developer getting-started guide. This is the environment needed to build, test, and publish the Capsule framework itself.</p>
+</blockquote>
+<hr />
+<h3 id="what-you-need-to-build">What You Need to Build<a class="headerlink" href="#what-you-need-to-build" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>Tools Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@capsule/cli</code> (Node/TypeScript)</td>
+<td>Node ≥ 22.12, pnpm, TypeScript</td>
+</tr>
+<tr>
+<td><code>@capsule/core</code> (TypeScript)</td>
+<td>Node 22, pnpm, TypeScript</td>
+</tr>
+<tr>
+<td>Android shell (Kotlin AAR)</td>
+<td>JDK 17, Android SDK, Gradle</td>
+</tr>
+<tr>
+<td>CodeSync backend (Node/Fastify)</td>
+<td>Node 22, Docker, PostgreSQL, Redis</td>
+</tr>
+<tr>
+<td>CodeSync dashboard (React)</td>
+<td>Node 22</td>
+</tr>
+<tr>
+<td>Docker images</td>
+<td>Docker Desktop</td>
+</tr>
+<tr>
+<td>Publishing / CI/CD</td>
+<td>GitHub account, GHCR, GitHub Actions</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Phase 1 — Local MVP
+  Windows 11 Pro
+    └── WSL2 (Ubuntu 22.04)          ← primary dev environment
+          ├── Node.js 22 (nvm)
+          ├── pnpm 9 + Turbo 2
+          ├── JDK 17 (Temurin)
+          ├── Android SDK (API 35)
+          └── Docker CLI (via Docker Desktop socket)
+    └── Docker Desktop 4.30+         ← runs on Windows, socket shared to WSL2
+    └── VS Code                      ← IDE, WSL2 + Dev Containers extension
+    └── Git (local config only)
+    └── Windows Terminal
+    └── ADB (platform-tools)        ← Windows side
+    └── Android Emulator             ← Windows host (KVM not available in WSL2)
+
+Phase 8 — Go Online / Ecosystem  (after local MVP works)
+  └── GitHub CLI (gh)               ← Windows + WSL2
+  └── GitHub org + repos
+  └── GHCR (container registry)
+  └── GitHub Actions CI/CD
+</code></pre></div>
+<hr />
+<h3 id="phase-1-local-mvp">Phase 1 — Local MVP<a class="headerlink" href="#phase-1-local-mvp" title="Permanent link">&para;</a></h3>
+<h4 id="step-1-windows-terminal-wsl2">Step 1 — Windows Terminal + WSL2<a class="headerlink" href="#step-1-windows-terminal-wsl2" title="Permanent link">&para;</a></h4>
+<h5 id="11-windows-terminal">1.1 Windows Terminal<a class="headerlink" href="#11-windows-terminal" title="Permanent link">&para;</a></h5>
+<p>Download from Microsoft Store or: <code>winget install Microsoft.WindowsTerminal</code></p>
+<h5 id="12-wsl2-ubuntu-2204">1.2 WSL2 + Ubuntu 22.04<a class="headerlink" href="#12-wsl2-ubuntu-2204" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="c"># Run as Administrator in PowerShell</span>
+<span class="n">wsl</span> <span class="p">-</span><span class="n">-install</span> <span class="n">-d</span> <span class="n">Ubuntu</span><span class="p">-</span><span class="n">22</span><span class="p">.</span><span class="n">04</span>
+<span class="c"># Restart when prompted</span>
+</code></pre></div>
+<p>After restart, Ubuntu will finish setup. Create your UNIX username + password.</p>
+<div class="highlight"><pre><span></span><code><span class="c"># Verify</span>
+<span class="n">wsl</span> <span class="p">-</span><span class="n">-list</span> <span class="p">-</span><span class="n">-verbose</span>
+<span class="c"># Should show Ubuntu-22.04  Running  2</span>
+</code></pre></div>
+<h5 id="13-set-ubuntu-2204-as-default">1.3 Set Ubuntu 22.04 as default<a class="headerlink" href="#13-set-ubuntu-2204-as-default" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="n">wsl</span> <span class="p">-</span><span class="n">-set-default</span> <span class="n">Ubuntu</span><span class="p">-</span><span class="n">22</span><span class="p">.</span><span class="n">04</span>
+</code></pre></div>
+<h5 id="14-update-ubuntu">1.4 Update Ubuntu<a class="headerlink" href="#14-update-ubuntu" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="c1"># Inside WSL2 Ubuntu terminal</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>upgrade<span class="w"> </span>-y
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>curl<span class="w"> </span>wget<span class="w"> </span>git<span class="w"> </span>unzip<span class="w"> </span>zip<span class="w"> </span>ca-certificates<span class="w"> </span>build-essential
+</code></pre></div>
+<hr />
+<h4 id="step-2-nodejs-22-pnpm-turbo">Step 2 — Node.js 22 + pnpm + Turbo<a class="headerlink" href="#step-2-nodejs-22-pnpm-turbo" title="Permanent link">&para;</a></h4>
+<h5 id="21-nodejs-22-via-nvm-wsl2">2.1 Node.js 22 via nvm (WSL2)<a class="headerlink" href="#21-nodejs-22-via-nvm-wsl2" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install nvm</span>
+curl<span class="w"> </span>-o-<span class="w"> </span>https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+
+<span class="c1"># Reload shell</span>
+<span class="nb">source</span><span class="w"> </span>~/.bashrc
+
+<span class="c1"># Install and use Node 22</span>
+nvm<span class="w"> </span>install<span class="w"> </span><span class="m">22</span>
+nvm<span class="w"> </span>use<span class="w"> </span><span class="m">22</span>
+nvm<span class="w"> </span><span class="nb">alias</span><span class="w"> </span>default<span class="w"> </span><span class="m">22</span>
+
+node<span class="w"> </span>--version<span class="w">   </span><span class="c1"># v22.x.x</span>
+npm<span class="w"> </span>--version<span class="w">    </span><span class="c1"># 10.x.x</span>
+</code></pre></div>
+<h5 id="22-pnpm-9-turbo-2">2.2 pnpm 9 + Turbo 2<a class="headerlink" href="#22-pnpm-9-turbo-2" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>pnpm@9<span class="w"> </span>turbo@2
+
+pnpm<span class="w"> </span>--version<span class="w">   </span><span class="c1"># 9.x.x</span>
+turbo<span class="w"> </span>--version<span class="w">  </span><span class="c1"># 2.x.x</span>
+</code></pre></div>
+<h5 id="23-nodejs-on-windows-for-tools-that-run-on-the-host">2.3 Node.js on Windows (for tools that run on the host)<a class="headerlink" href="#23-nodejs-on-windows-for-tools-that-run-on-the-host" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="c"># Download nvm-windows from github.com/coreybutler/nvm-windows/releases</span>
+<span class="c"># Install, then:</span>
+<span class="n">nvm</span> <span class="n">install</span> <span class="n">22</span>
+<span class="n">nvm</span> <span class="n">use</span> <span class="n">22</span>
+<span class="n">npm</span> <span class="n">install</span> <span class="n">-g</span> <span class="n">pnpm</span><span class="nv">@9</span>
+</code></pre></div>
+<hr />
+<h4 id="step-3-jdk-17-wsl2">Step 3 — JDK 17 (WSL2)<a class="headerlink" href="#step-3-jdk-17-wsl2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install Eclipse Temurin 17 (the same JDK used in the Docker images)</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>wget<span class="w"> </span>apt-transport-https<span class="w"> </span>gnupg
+
+wget<span class="w"> </span>-qO<span class="w"> </span>-<span class="w"> </span>https://packages.adoptium.net/artifactory/api/gpg/key/public<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/adoptium.gpg
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"deb [signed-by=/usr/share/keyrings/adoptium.gpg] \</span>
+<span class="s2">  https://packages.adoptium.net/artifactory/deb </span><span class="k">$(</span>.<span class="w"> </span>/etc/os-release<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$VERSION_CODENAME</span><span class="s2">"</span><span class="k">)</span><span class="s2"> main"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/adoptium.list
+
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>temurin-17-jdk
+
+java<span class="w"> </span>-version
+<span class="c1"># openjdk version "17.0.x" ... Temurin</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Set JAVA_HOME</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'export JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'export PATH=$JAVA_HOME/bin:$PATH'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<span class="nb">source</span><span class="w"> </span>~/.bashrc
+</code></pre></div>
+<hr />
+<h4 id="step-4-android-sdk-wsl2">Step 4 — Android SDK (WSL2)<a class="headerlink" href="#step-4-android-sdk-wsl2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create SDK directory</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>~/android-sdk/cmdline-tools
+
+<span class="c1"># Download command-line tools</span>
+wget<span class="w"> </span>-q<span class="w"> </span>https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>-O<span class="w"> </span>/tmp/cmdline-tools.zip
+unzip<span class="w"> </span>-q<span class="w"> </span>/tmp/cmdline-tools.zip<span class="w"> </span>-d<span class="w"> </span>/tmp/cmdline-unzip
+mv<span class="w"> </span>/tmp/cmdline-unzip/cmdline-tools<span class="w"> </span>~/android-sdk/cmdline-tools/latest
+rm<span class="w"> </span>/tmp/cmdline-tools.zip
+
+<span class="c1"># Set environment variables</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'export ANDROID_HOME=$HOME/android-sdk'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<span class="nb">source</span><span class="w"> </span>~/.bashrc
+
+<span class="c1"># Accept licenses and install required SDK components</span>
+yes<span class="w"> </span><span class="p">|</span><span class="w"> </span>sdkmanager<span class="w"> </span>--licenses<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+sdkmanager<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">"platform-tools"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">"platforms;android-35"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">"build-tools;35.0.0"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">"extras;android;m2repository"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">"extras;google;m2repository"</span>
+
+<span class="c1"># Verify</span>
+sdkmanager<span class="w"> </span>--list_installed
+</code></pre></div>
+<hr />
+<h4 id="step-5-android-emulator-windows-host">Step 5 — Android Emulator (Windows host)<a class="headerlink" href="#step-5-android-emulator-windows-host" title="Permanent link">&para;</a></h4>
+<p>The Android Emulator must run on the <strong>Windows host</strong> (not inside WSL2 — KVM is not available on Windows WSL2).</p>
+<h5 id="51-install-android-studio-windows">5.1 Install Android Studio (Windows)<a class="headerlink" href="#51-install-android-studio-windows" title="Permanent link">&para;</a></h5>
+<p>Download from <code>developer.android.com/studio</code> (Ladybug 2024.2 or later).</p>
+<p>During setup:</p>
+<ul>
+<li>SDK location: <code>C:\Users\&lt;you&gt;\AppData\Local\Android\Sdk</code></li>
+<li>Install Android 15 (API 35) system image</li>
+</ul>
+<h5 id="52-or-sdk-manager-on-windows-no-android-studio">5.2 Or — SDK Manager on Windows (no Android Studio)<a class="headerlink" href="#52-or-sdk-manager-on-windows-no-android-studio" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="c"># Download cmdline-tools for Windows</span>
+<span class="c"># From developer.android.com/tools/releases/cmdline-tools</span>
+<span class="c"># Extract to C:\android-sdk\cmdline-tools\latest\</span>
+
+<span class="c"># Add to PATH (System Environment Variables):</span>
+<span class="c"># C:\android-sdk\cmdline-tools\latest\bin</span>
+<span class="c"># C:\android-sdk\platform-tools</span>
+
+<span class="n">sdkmanager</span> <span class="s2">"platform-tools"</span> <span class="s2">"platforms;android-35"</span> <span class="s2">"build-tools;35.0.0"</span>
+<span class="n">sdkmanager</span> <span class="s2">"emulator"</span> <span class="s2">"system-images;android-35;google_apis;x86_64"</span>
+
+<span class="n">avdmanager</span> <span class="n">create</span> <span class="n">avd</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-name</span> <span class="s2">"Pixel_8_API35"</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-device</span> <span class="s2">"pixel_8"</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-package</span> <span class="s2">"system-images;android-35;google_apis;x86_64"</span>
+
+<span class="c"># Launch emulator</span>
+<span class="n">emulator</span> <span class="n">-avd</span> <span class="n">Pixel_8_API35</span> <span class="n">-no-audio</span> <span class="n">-no-boot-anim</span>
+</code></pre></div>
+<h5 id="53-adb-on-windows-wsl2-bridge">5.3 ADB on Windows + WSL2 bridge<a class="headerlink" href="#53-adb-on-windows-wsl2-bridge" title="Permanent link">&para;</a></h5>
+<p>ADB runs on Windows host. WSL2 talks to it via <code>host.docker.internal</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c"># Windows: ensure adb is in PATH</span>
+<span class="n">adb</span> <span class="n">version</span>    <span class="c"># Android Debug Bridge version 1.x.x</span>
+<span class="n">adb</span> <span class="n">devices</span>    <span class="c"># lists connected emulators/devices</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># WSL2: point to host ADB server</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'export ANDROID_ADB_SERVER_ADDRESS=host.docker.internal'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'export ANDROID_ADB_SERVER_PORT=5037'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<span class="nb">source</span><span class="w"> </span>~/.bashrc
+
+adb<span class="w"> </span>devices<span class="w">   </span><span class="c1"># connects to the host ADB server automatically</span>
+</code></pre></div>
+<hr />
+<h4 id="step-6-docker-desktop">Step 6 — Docker Desktop<a class="headerlink" href="#step-6-docker-desktop" title="Permanent link">&para;</a></h4>
+<h5 id="61-install-docker-desktop">6.1 Install Docker Desktop<a class="headerlink" href="#61-install-docker-desktop" title="Permanent link">&para;</a></h5>
+<p>Download from <code>docker.com/products/docker-desktop</code>.</p>
+<p>Settings to enable:</p>
+<ul>
+<li><code>General → Use the WSL 2 based engine</code> ✅</li>
+<li><code>Resources → WSL Integration → Ubuntu-22.04</code> ✅</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Verify from WSL2</span>
+docker<span class="w"> </span>--version
+docker<span class="w"> </span>compose<span class="w"> </span>version
+</code></pre></div>
+<hr />
+<h4 id="step-7-vs-code">Step 7 — VS Code<a class="headerlink" href="#step-7-vs-code" title="Permanent link">&para;</a></h4>
+<h5 id="71-install-vs-code">7.1 Install VS Code<a class="headerlink" href="#71-install-vs-code" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="n">winget</span> <span class="n">install</span> <span class="n">Microsoft</span><span class="p">.</span><span class="n">VisualStudioCode</span>
+</code></pre></div>
+<h5 id="72-essential-extensions">7.2 Essential extensions<a class="headerlink" href="#72-essential-extensions" title="Permanent link">&para;</a></h5>
+<p>Install from Extensions panel (<code>Ctrl+Shift+X</code>):</p>
+<div class="highlight"><pre><span></span><code>dbaeumer.vscode-eslint             ESLint
+esbenp.prettier-vscode             Prettier
+ms-vscode.vscode-typescript-next   Latest TS language server
+fwcd.kotlin                        Kotlin syntax + completion
+ms-azuretools.vscode-docker        Docker explorer
+ms-vscode-remote.remote-wsl        WSL2 integration
+ms-vscode-remote.remote-containers Dev Containers
+eamodio.gitlens                    Git lens
+streetsidesoftware.code-spell-checker  Spell check
+</code></pre></div>
+<h5 id="73-open-the-project-in-wsl2">7.3 Open the project in WSL2<a class="headerlink" href="#73-open-the-project-in-wsl2" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="c1"># From WSL2 terminal, inside your project folder:</span>
+code<span class="w"> </span>.
+<span class="c1"># VS Code opens with the WSL2 remote — file system is Linux, tools are Linux</span>
+</code></pre></div>
+<hr />
+<h4 id="step-8-kotlin-ide">Step 8 — Kotlin IDE<a class="headerlink" href="#step-8-kotlin-ide" title="Permanent link">&para;</a></h4>
+<p>For Kotlin/AAR work:</p>
+<ul>
+<li><strong>Android Studio</strong> (free, specialized) — download from <code>developer.android.com/studio</code></li>
+<li><strong>IntelliJ IDEA</strong> (free Community edition) — download from <code>jetbrains.com/idea</code></li>
+</ul>
+<p>Set the project JDK to Temurin 17.</p>
+<hr />
+<h4 id="step-9-git-local-config">Step 9 — Git (local config)<a class="headerlink" href="#step-9-git-local-config" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c"># Windows</span>
+<span class="n">winget</span> <span class="n">install</span> <span class="n">Git</span><span class="p">.</span><span class="n">Git</span>
+<span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">user</span><span class="p">.</span><span class="n">name</span> <span class="s2">"Your Name"</span>
+<span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">user</span><span class="p">.</span><span class="n">email</span> <span class="s2">"you@example.com"</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># WSL2</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"Your Name"</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"you@example.com"</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>init.defaultBranch<span class="w"> </span>main
+</code></pre></div>
+<hr />
+<h4 id="step-10-local-environment-variables">Step 10 — Local Environment Variables<a class="headerlink" href="#step-10-local-environment-variables" title="Permanent link">&para;</a></h4>
+<p>Create <code>~/.capsule-dev.env</code> (never commit):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ~/.capsule-dev.env</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CAPSULE_KEYSTORE_PATH</span><span class="o">=</span>/path/to/debug.jks
+<span class="nb">export</span><span class="w"> </span><span class="nv">CAPSULE_KEYSTORE_PASS</span><span class="o">=</span>debug
+<span class="nb">export</span><span class="w"> </span><span class="nv">CAPSULE_KEY_ALIAS</span><span class="o">=</span>debug
+<span class="nb">export</span><span class="w"> </span><span class="nv">CAPSULE_KEY_PASS</span><span class="o">=</span>debug
+</code></pre></div>
+<p>Add to <code>~/.bashrc</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span>~/.capsule-dev.env<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>~/.capsule-dev.env
+</code></pre></div>
+<hr />
+<h4 id="step-11-verify-local-setup">Step 11 — Verify Local Setup<a class="headerlink" href="#step-11-verify-local-setup" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># From WSL2</span>
+node<span class="w"> </span>--version<span class="w">          </span><span class="c1"># v22.x.x</span>
+pnpm<span class="w"> </span>--version<span class="w">          </span><span class="c1"># 9.x.x</span>
+turbo<span class="w"> </span>--version<span class="w">         </span><span class="c1"># 2.x.x</span>
+java<span class="w"> </span>-version<span class="w">           </span><span class="c1"># openjdk 17 Temurin</span>
+sdkmanager<span class="w"> </span>--version<span class="w">    </span><span class="c1"># 12.0 or later</span>
+adb<span class="w"> </span>version<span class="w">             </span><span class="c1"># connects to host ADB</span>
+docker<span class="w"> </span>--version<span class="w">        </span><span class="c1"># 27.x.x</span>
+docker<span class="w"> </span>compose<span class="w"> </span>version<span class="w">  </span><span class="c1"># 2.x.x</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c"># From Windows PowerShell</span>
+<span class="n">adb</span> <span class="n">devices</span>             <span class="c"># emulator-5554   device  (if emulator running)</span>
+<span class="n">docker</span> <span class="p">-</span><span class="n">-version</span>        <span class="c"># Docker version 27.x.x</span>
+</code></pre></div>
+<h5 id="local-checklist">Local Checklist<a class="headerlink" href="#local-checklist" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>[ ] WSL2 Ubuntu 22.04 installed and updated
+[ ] Node 22 in WSL2 (nvm install 22)
+[ ] pnpm 9 + Turbo 2 in WSL2
+[ ] JDK 17 Temurin in WSL2 (java -version)
+[ ] Android SDK API 35 + Build Tools 35.0.0 in WSL2
+[ ] ANDROID_HOME set in WSL2 ~/.bashrc
+[ ] Android Emulator (Pixel 8 API 35) running on Windows host
+[ ] adb devices shows the emulator from Windows and WSL2
+[ ] Docker Desktop 4.30+ installed, WSL2 integration enabled
+[ ] VS Code with WSL2 + Dev Containers extensions
+[ ] Git configured (name + email) on Windows + WSL2
+[ ] All verify commands in Step 11 pass
+</code></pre></div>
+<blockquote>
+<p>Once this checklist is complete — <strong>build the local MVP</strong> before continuing to Phase 8 (Go Online / Ecosystem).</p>
+</blockquote>
+<hr />
+<h3 id="phase-8-go-online-ecosystem">Phase 8 — Go Online (Ecosystem)<a class="headerlink" href="#phase-8-go-online-ecosystem" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>Do this after the local MVP is running end-to-end.</p>
+</blockquote>
+<h4 id="step-12-github-cli-authentication">Step 12 — GitHub CLI + Authentication<a class="headerlink" href="#step-12-github-cli-authentication" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c"># Windows</span>
+<span class="n">winget</span> <span class="n">install</span> <span class="n">GitHub</span><span class="p">.</span><span class="nb">cli</span>
+<span class="n">gh</span> <span class="n">auth</span> <span class="n">login</span>
+<span class="c"># Choose: GitHub.com → HTTPS → Authenticate with browser</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># WSL2</span>
+curl<span class="w"> </span>-fsSL<span class="w"> </span>https://cli.github.com/packages/githubcli-archive-keyring.gpg<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>dd<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/usr/share/keyrings/githubcli-archive-keyring.gpg
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"deb [arch=</span><span class="k">$(</span>dpkg<span class="w"> </span>--print-architecture<span class="k">)</span><span class="s2"> signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/github-cli.list<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>gh
+
+gh<span class="w"> </span>auth<span class="w"> </span>login
+</code></pre></div>
+<hr />
+<h4 id="step-13-github-organization-repositories">Step 13 — GitHub Organization + Repositories<a class="headerlink" href="#step-13-github-organization-repositories" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create the capsule-framework organization</span>
+<span class="c1"># GitHub web UI: github.com → + → New organization → Free plan</span>
+<span class="c1"># Organization name: capsule-framework</span>
+
+<span class="c1"># Create the monorepo</span>
+gh<span class="w"> </span>repo<span class="w"> </span>create<span class="w"> </span>capsule-framework/capsule<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--public<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--description<span class="w"> </span><span class="s2">"Capsule — app ships inside a managed native capsule"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--clone
+
+<span class="c1"># iOS shell repo (separate — linked as git submodule or Swift Package URL)</span>
+gh<span class="w"> </span>repo<span class="w"> </span>create<span class="w"> </span>capsule-framework/capsule-ios<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--public<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--description<span class="w"> </span><span class="s2">"Capsule iOS shell — XCFramework"</span>
+</code></pre></div>
+<hr />
+<h4 id="step-14-ghcr-docker-buildx">Step 14 — GHCR + Docker buildx<a class="headerlink" href="#step-14-ghcr-docker-buildx" title="Permanent link">&para;</a></h4>
+<p>GHCR is included with your GitHub account — no extra setup.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Authenticate Docker with GHCR</span>
+gh<span class="w"> </span>auth<span class="w"> </span>token<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span>ghcr.io<span class="w"> </span>-u<span class="w"> </span>YOUR_GITHUB_USERNAME<span class="w"> </span>--password-stdin
+
+<span class="c1"># Create a buildx builder for multi-arch (linux/amd64 + linux/arm64)</span>
+docker<span class="w"> </span>buildx<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>capsule-builder<span class="w"> </span>--use<span class="w"> </span>--bootstrap
+docker<span class="w"> </span>buildx<span class="w"> </span>ls
+</code></pre></div>
+<hr />
+<h4 id="step-15-secrets-tokens">Step 15 — Secrets &amp; Tokens<a class="headerlink" href="#step-15-secrets-tokens" title="Permanent link">&para;</a></h4>
+<p>Add to <code>~/.capsule-dev.env</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">GITHUB_TOKEN</span><span class="o">=</span>ghp_xxxxxxxxxxxxxxxxxxxx<span class="w">      </span><span class="c1"># GitHub PAT with packages:write</span>
+</code></pre></div>
+<p>For CI, these go into GitHub repository/organization secrets:</p>
+<ul>
+<li><code>GITHUB_TOKEN</code> — auto-provided by Actions</li>
+<li><code>CAPSULE_KEYSTORE_PASS</code>, <code>CAPSULE_KEY_ALIAS</code>, <code>CAPSULE_KEY_PASS</code></li>
+<li><code>PLAY_STORE_JSON_KEY_DATA</code> (when ready for store publishing)</li>
+</ul>
+<hr />
+<h4 id="online-checklist">Online Checklist<a class="headerlink" href="#online-checklist" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>[ ] GitHub CLI authenticated on Windows + WSL2
+[ ] GitHub org capsule-framework created
+[ ] Repo capsule-framework/capsule created and cloned
+[ ] GHCR: docker login ghcr.io works
+[ ] Docker buildx multi-arch builder created
+[ ] GitHub Actions CI workflow passing
+</code></pre></div>
+<hr />
+<h4 id="whats-next">What's Next<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h4>
+<p>Once the local checklist is complete, proceed to <a href="../../project/roadmap/">roadmap.md</a> to start building Phase 1.</p>
+<hr />
+<h2 id="part-3-framework-contributors">Part 3 — Framework Contributors<a class="headerlink" href="#part-3-framework-contributors" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>This section is for contributors building Capsule itself</strong> — the CLI, the Kotlin AAR, the Swift XCFramework, the CodeSync backend. Skip if you are building an app with Capsule.</p>
+</blockquote>
+<p>Two setup paths available:</p>
+<div class="highlight"><pre><span></span><code>Path A — Full Local Install          Path B — Docker-First (Dev Container)
+────────────────────────────────     ────────────────────────────────────────
+Install Node, JDK, Android SDK,      Install only Docker Desktop + ADB.
+pnpm, etc. directly on your host.    Everything else runs inside a container.
+
+Pros: fastest iteration, direct      Pros: zero host environment setup,
+  IDE integration, no overhead         identical to CI, onboard in minutes
+Cons: version juggling, "works on    Cons: first build slower, emulator
+  my machine" risk                     still needs host ADB bridge
+</code></pre></div>
+<p><strong>TL;DR</strong>: Use Path B if you want the cleanest setup with the fewest host installs. Use Path A if you need direct Android Studio access or work heavily on the Kotlin/Swift shells.</p>
+<hr />
+<h3 id="50-bootstrap-starting-from-zero-before-the-github-repo-exists">5.0 Bootstrap — Starting from Zero (before the GitHub repo exists)<a class="headerlink" href="#50-bootstrap-starting-from-zero-before-the-github-repo-exists" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>This is where you actually start.</strong> Section 5.2 assumes a published GitHub repo to clone. If you are bootstrapping the monorepo from scratch (Phase 1), follow this instead.</p>
+</blockquote>
+<p><strong>Prerequisites first</strong> — complete section 1.1 (Node.js 22 + pnpm) and section 1.3 (JDK 17 + Android SDK) before continuing.</p>
+<p><strong>Create the monorepo:</strong></p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>capsule<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>capsule
+
+<span class="c1"># Workspace root</span>
+pnpm<span class="w"> </span>init
+
+<span class="c1"># Dev toolchain</span>
+pnpm<span class="w"> </span>add<span class="w"> </span>-D<span class="w"> </span>-w<span class="w"> </span>turbo@2<span class="w"> </span>typescript<span class="w"> </span>@types/node<span class="w"> </span>eslint<span class="w"> </span>prettier
+pnpm<span class="w"> </span>add<span class="w"> </span>-D<span class="w"> </span>-w<span class="w"> </span>@changesets/cli
+pnpm<span class="w"> </span>changeset<span class="w"> </span>init
+
+<span class="c1"># Package directories</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>packages/cli/src
+mkdir<span class="w"> </span>-p<span class="w"> </span>packages/core/src
+mkdir<span class="w"> </span>-p<span class="w"> </span>packages/capsule-android
+mkdir<span class="w"> </span>-p<span class="w"> </span>examples<span class="w">   </span><span class="c1"># demo apps — their own pnpm workspace (examples/pnpm-workspace.yaml)</span>
+</code></pre></div>
+<p><strong>Create <code>pnpm-workspace.yaml</code>:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nt">packages</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'packages/*'</span>
+<span class="c1"># examples/ is its own pnpm workspace (examples/pnpm-workspace.yaml) — not listed here</span>
+</code></pre></div>
+<p><strong>Create <code>turbo.json</code>:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://turbo.build/schema.json"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"pipeline"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"build"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"dependsOn"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"^build"</span><span class="p">],</span><span class="w"> </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"dist/**"</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"test"</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"dependsOn"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"build"</span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"lint"</span><span class="p">:</span><span class="w">  </span><span class="p">{}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Create <code>tsconfig.base.json</code>:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"compilerOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES2022"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"module"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Node16"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"moduleResolution"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Node16"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"strict"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"declaration"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"declarationMap"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"sourceMap"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Use the local CLI during development</strong> (not the global npm install):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build the CLI package first</span>
+<span class="nb">cd</span><span class="w"> </span>packages/cli<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>../..
+
+<span class="c1"># Run it directly — no global install needed</span>
+node<span class="w"> </span>packages/cli/dist/index.js<span class="w"> </span>--version
+
+<span class="c1"># Or add a root-level convenience script in package.json:</span>
+<span class="c1"># "scripts": { "capsule": "node packages/cli/dist/index.js" }</span>
+<span class="c1"># Then: pnpm capsule --version</span>
+</code></pre></div>
+<p><strong>For test-app development</strong>, use <code>CAPSULE_SHELL_OVERRIDE_PATH</code> to bypass the shell registry (which doesn't exist yet in Phase 1):</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CAPSULE_SHELL_OVERRIDE_PATH</span><span class="o">=</span>/path/to/capsule-debug.aar
+node<span class="w"> </span>../../packages/cli/dist/index.js<span class="w"> </span>build<span class="w"> </span>android
+</code></pre></div>
+<p>Once the monorepo is running locally, continue with Phase 1 in <code>cli.md</code>. Section 5.2 below applies once you have a GitHub remote.</p>
+<hr />
+<h3 id="51-additional-tools-for-contributors-path-a">5.1 Additional tools for contributors (Path A)<a class="headerlink" href="#51-additional-tools-for-contributors-path-a" title="Permanent link">&para;</a></h3>
+<p>App developer prerequisites from Parts 1–4 above are a baseline. Add:</p>
+<p><strong>Turbo 2</strong> (monorepo task pipeline)</p>
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>turbo@2
+turbo<span class="w"> </span>--version<span class="w">   </span><span class="c1"># 2.x.x</span>
+</code></pre></div>
+<p><strong>Docker Desktop 4.30+</strong> (CodeSync local stack + CI parity)</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>version<span class="w">    </span><span class="c1"># Docker Compose version v2.x.x</span>
+</code></pre></div>
+<p><strong>iOS (macOS only)</strong></p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>gem<span class="w"> </span>install<span class="w"> </span>cocoapods<span class="w"> </span>fastlane
+pod<span class="w"> </span>--version<span class="w">        </span><span class="c1"># 1.15.x</span>
+fastlane<span class="w"> </span>--version<span class="w">   </span><span class="c1"># 2.x.x</span>
+</code></pre></div>
+<p><strong>Android Studio</strong> (only needed for heavy Kotlin/AAR work — optional)</p>
+<p>Download: <code>developer.android.com/studio</code> (Ladybug 2024.2 or later).
+Set SDK path to <code>~/android-sdk</code> and JDK to Eclipse Temurin 17.</p>
+<p><strong>Pinned toolchain versions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Version</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Node.js</td>
+<td>22 LTS</td>
+<td>Matches Docker images</td>
+</tr>
+<tr>
+<td>JDK</td>
+<td>17 (Temurin)</td>
+<td>AGP 8.x requirement</td>
+</tr>
+<tr>
+<td>Android SDK Platform</td>
+<td>android-35</td>
+<td>targetSdk in capsule.config.ts</td>
+</tr>
+<tr>
+<td>Build Tools</td>
+<td>35.0.0</td>
+<td>Must match platform</td>
+</tr>
+<tr>
+<td>Gradle</td>
+<td>8.10</td>
+<td>Pinned via gradlew</td>
+</tr>
+<tr>
+<td>AGP</td>
+<td>8.7.x</td>
+<td>Aligns with Gradle 8.10</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="52-repository-setup">5.2 Repository setup<a class="headerlink" href="#52-repository-setup" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/capsule-framework/capsule
+<span class="nb">cd</span><span class="w"> </span>capsule
+pnpm<span class="w"> </span>install
+pnpm<span class="w"> </span>build<span class="w">         </span><span class="c1"># Turbo resolves build order automatically</span>
+cp<span class="w"> </span>.env.example<span class="w"> </span>.env.local<span class="w">   </span><span class="c1"># per-machine paths (JAVA_HOME, ANDROID_HOME, …) — git-ignored</span>
+pnpm<span class="w"> </span>dev:env<span class="w">                 </span><span class="c1"># check what the contributor scripts will use</span>
+</code></pre></div>
+<p><strong>Contributor scripts</strong> (<code>scripts/</code>, Node only — the same on Windows, macOS and Linux; they read
+<code>.env.local</code>, documented key by key in <code>.env.example</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pnpm dev:env</code></td>
+<td>Show the effective JDK / SDK / AAR paths; <code>--sh</code> / <code>--ps</code> emit them for your shell</td>
+</tr>
+<tr>
+<td><code>pnpm with-env [--cwd dir] &lt;cmd&gt;</code></td>
+<td>Run one command with that env (<code>gradlew</code>, <code>adb</code>, <code>emulator</code>, <code>avdmanager</code> resolved per OS)</td>
+</tr>
+<tr>
+<td><code>pnpm dev:emulator start\|stop\|status</code></td>
+<td>Contributor AVD, waits for a full boot (<code>--fresh</code>, <code>--no-wait</code>, <code>--headless</code>, <code>--gpu</code>, <code>--avd</code>)</td>
+</tr>
+<tr>
+<td><code>pnpm dev:examples install\|build\|test\|all</code></td>
+<td>Batch over the example apps in <code>examples/</code> (<code>--release</code>, <code>--filter</code>)</td>
+</tr>
+<tr>
+<td><code>pnpm update:quickjs [ref]</code> / <code>pnpm update:civetweb [tag]</code></td>
+<td>Re-vendor the native sources</td>
+</tr>
+<tr>
+<td><code>pnpm docs:check</code> / <code>pnpm docs:lint</code></td>
+<td>Docs gates (nav + map links / deep consistency)</td>
+</tr>
+</tbody>
+</table>
+<p>Full command reference: <a href="../commands/">commands.md</a>.</p>
+<p><strong>Monorepo structure:</strong></p>
+<div class="highlight"><pre><span></span><code>capsule/
+  packages/
+    cli/                    ← @capsule/cli
+    core/                   ← @capsule/core (JS bridge runtime)
+    capsule-android/        ← Kotlin AAR (Android shell)
+    capsule-ios/            ← Swift XCFramework (iOS shell)
+    codesync-api/           ← Node.js/Fastify backend
+    codesync-dashboard/     ← React dashboard
+  examples/               ← demo apps (own nested pnpm workspace; apps link packages/core)
+    react-ts/  vue-from-template/  …
+  docker/
+  pnpm-workspace.yaml
+  turbo.json
+</code></pre></div>
+<p><strong>Build order</strong> (Turbo handles this via <code>turbo.json</code>):</p>
+<div class="highlight"><pre><span></span><code>1. @capsule/core       — JS bridge runtime
+2. @capsule/cli        — imports core for types
+3. codesync-api        — standalone Node.js service
+4. codesync-dashboard  — standalone React app
+</code></pre></div>
+<hr />
+<h3 id="53-verify-the-android-build-chain">5.3 Verify the Android build chain<a class="headerlink" href="#53-verify-the-android-build-chain" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>examples<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pnpm<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>react-ts<span class="w">   </span><span class="c1"># after the root pnpm install &amp;&amp; pnpm build</span>
+
+node<span class="w"> </span>../../packages/cli/dist/index.js<span class="w"> </span>sync
+node<span class="w"> </span>../../packages/cli/dist/index.js<span class="w"> </span>build<span class="w"> </span>android
+<span class="c1"># → .capsule/android/app-debug.apk</span>
+
+adb<span class="w"> </span>install<span class="w"> </span>.capsule/android/app-debug.apk
+</code></pre></div>
+<hr />
+<h3 id="54-run-the-codesync-local-stack">5.4 Run the CodeSync local stack<a class="headerlink" href="#54-run-the-codesync-local-stack" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>codesync-api<span class="w"> </span>postgres<span class="w"> </span>redis<span class="w"> </span>minio
+
+<span class="c1"># First time only — run migrations</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>codesync-api<span class="w"> </span>npm<span class="w"> </span>run<span class="w"> </span>migrate
+
+curl<span class="w"> </span>http://localhost:3000/health<span class="w">    </span><span class="c1"># {"status":"ok"}</span>
+<span class="c1"># MinIO console → http://localhost:9001  (minioadmin / minioadmin)</span>
+<span class="c1"># Dashboard    → http://localhost:8080</span>
+</code></pre></div>
+<hr />
+<h3 id="55-test-suite">5.5 Test suite<a class="headerlink" href="#55-test-suite" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pnpm<span class="w"> </span><span class="nb">test</span><span class="w">                                  </span><span class="c1"># all packages</span>
+pnpm<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--filter<span class="o">=</span>@capsule/core<span class="w"> </span>--<span class="w"> </span>--coverage
+pnpm<span class="w"> </span>typecheck
+pnpm<span class="w"> </span>lint
+
+<span class="c1"># Android (Kotlin) — with-env applies JAVA_HOME and picks gradlew / gradlew.bat</span>
+pnpm<span class="w"> </span>with-env<span class="w"> </span>--cwd<span class="w"> </span>packages/capsule-android<span class="w"> </span>gradlew<span class="w"> </span>testDebugUnitTest<span class="w">          </span><span class="c1"># JVM unit tests (fast)</span>
+pnpm<span class="w"> </span>with-env<span class="w"> </span>--cwd<span class="w"> </span>packages/capsule-android<span class="w"> </span>gradlew<span class="w"> </span>connectedDebugAndroidTest<span class="w">  </span><span class="c1"># instrumented (running emulator: pnpm dev:emulator start)</span>
+</code></pre></div>
+<hr />
+<h3 id="56-path-b-docker-first-vs-code-dev-container">5.6 Path B — Docker-First (VS Code Dev Container)<a class="headerlink" href="#56-path-b-docker-first-vs-code-dev-container" title="Permanent link">&para;</a></h3>
+<p>What stays on the host:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Host install needed</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker Desktop 4.30+</td>
+<td>✅ Yes</td>
+<td>Container runtime</td>
+</tr>
+<tr>
+<td>VS Code + Dev Containers extension</td>
+<td>✅ Yes</td>
+<td>Your IDE</td>
+</tr>
+<tr>
+<td>ADB (platform-tools)</td>
+<td>✅ Yes</td>
+<td>Bridge to host emulator</td>
+</tr>
+<tr>
+<td>Android Emulator</td>
+<td>✅ Mac/Win</td>
+<td>Cannot run inside Docker on Mac/Win</td>
+</tr>
+<tr>
+<td>Node.js, pnpm, JDK, SDK, Gradle</td>
+<td>❌ No</td>
+<td>Runs in container</td>
+</tr>
+<tr>
+<td>Xcode / iOS tools</td>
+<td>✅ macOS</td>
+<td>Apple constraint</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Linux exception</strong>: With KVM passthrough, even the emulator runs inside the container — 100% containerized.</p>
+<p><strong>Install host ADB only:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># macOS</span>
+brew<span class="w"> </span>install<span class="w"> </span>android-platform-tools
+
+<span class="c1"># Linux</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>adb
+
+<span class="c1"># Windows — download platform-tools-latest-windows.zip from developer.android.com</span>
+</code></pre></div>
+<p><strong><code>.devcontainer/devcontainer.json</code>:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Capsule Framework"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"dockerComposeFile"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"../docker-compose.yml"</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"workspaceFolder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/workspace"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"customizations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"vscode"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"extensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"dbaeumer.vscode-eslint"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"esbenp.prettier-vscode"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ms-vscode.vscode-typescript-next"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"fwcd.kotlin"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ms-azuretools.vscode-docker"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"eamodio.gitlens"</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">"settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"editor.formatOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"editor.defaultFormatter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esbenp.prettier-vscode"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"typescript.tsdk"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node_modules/typescript/lib"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"typescript.enablePromptUseWorkspaceTsdk"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"forwardPorts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">5173</span><span class="p">,</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w"> </span><span class="mi">8080</span><span class="p">,</span><span class="w"> </span><span class="mi">9000</span><span class="p">,</span><span class="w"> </span><span class="mi">9001</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"portsAttributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"5173"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vite dev server"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"3000"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CodeSync API"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"8080"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CodeSync Dashboard"</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"postCreateCommand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pnpm install"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"remoteEnv"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"ANDROID_HOME"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/opt/android-sdk"</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>ADB bridge — container to host emulator:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># docker-compose.yml — dev service additions</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">dev</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">extra_hosts</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"host.docker.internal:host-gateway"</span><span class="w">   </span><span class="c1"># Linux needs explicit; Mac/Win get it automatically</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ANDROID_ADB_SERVER_ADDRESS=host.docker.internal</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ANDROID_ADB_SERVER_PORT=5037</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Inside container terminal:</span>
+adb<span class="w"> </span>connect<span class="w"> </span>host.docker.internal:5555
+adb<span class="w"> </span>devices<span class="w">     </span><span class="c1"># emulator-5555   device</span>
+
+capsule<span class="w"> </span>dev<span class="w">     </span><span class="c1"># Vite runs on container:5173, forwarded to host:5173</span>
+<span class="w">                </span><span class="c1"># CLI runs adb reverse tcp:5173 tcp:5173 automatically</span>
+</code></pre></div>
+<p><strong>Linux — emulator inside container (KVM):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">dev</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">devices</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/kvm:/dev/kvm</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>emulator<span class="w"> </span>-avd<span class="w"> </span>Pixel_8_API35<span class="w"> </span>-no-window<span class="w"> </span>-no-audio<span class="w"> </span><span class="p">&amp;</span>
+adb<span class="w"> </span>wait-for-device<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>adb<span class="w"> </span>devices
+</code></pre></div>
+<p><strong>Opening the Dev Container:</strong></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/capsule-framework/capsule
+code<span class="w"> </span>capsule
+<span class="c1"># VS Code prompts: "Reopen in Container" → click it</span>
+<span class="c1"># (or: Ctrl+Shift+P → Dev Containers: Reopen in Container)</span>
+<span class="c1"># First time: ~5–10 min to pull/build (cached after)</span>
+</code></pre></div>
+<hr />
+<h3 id="57-path-a-vs-path-b">5.7 Path A vs Path B<a class="headerlink" href="#57-path-a-vs-path-b" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Recommended</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New contributor, first setup</td>
+<td><strong>Path B</strong> — fastest to working state</td>
+</tr>
+<tr>
+<td>Heavy Kotlin/AAR work (Android Studio)</td>
+<td><strong>Path A</strong> — better IDE integration</td>
+</tr>
+<tr>
+<td>Windows developer</td>
+<td><strong>Path B</strong> — avoids Windows toolchain pain</td>
+</tr>
+<tr>
+<td>macOS, iOS shell development</td>
+<td>Either — Xcode is always on host</td>
+</tr>
+<tr>
+<td>Linux developer</td>
+<td><strong>Path B</strong> — emulator in container with KVM</td>
+</tr>
+<tr>
+<td>CI environment</td>
+<td>Path B model — exactly what CI uses</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="58-buildnumber-auto-commit-in-ci">5.8 <code>buildNumber</code> auto-commit in CI<a class="headerlink" href="#58-buildnumber-auto-commit-in-ci" title="Permanent link">&para;</a></h3>
+<p><code>capsule publish android|ios</code> auto-increments <code>version.buildNumber</code> in <code>capsule.config.ts</code> after a successful upload and commits the bump. In CI, push it back:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># .github/workflows/release.yml</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">capsule publish android --track internal</span>
+<span class="w">  </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">PLAY_STORE_JSON_KEY_DATA</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.PLAY_STORE_JSON_KEY_DATA }}</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">    </span><span class="no">git config user.name  "capsule-bot"</span>
+<span class="w">    </span><span class="no">git config user.email "bot@capsule.dev"</span>
+<span class="w">    </span><span class="no">git push origin HEAD:${{ github.ref_name }}</span>
+</code></pre></div>
+<p>The commit message includes <code>[skip ci]</code> to prevent a loop.</p>
+<hr />
+<h2 id="toolchain-version-reference">Toolchain Version Reference<a class="headerlink" href="#toolchain-version-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Version</th>
+<th>App dev</th>
+<th>Contributor A</th>
+<th>Contributor B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Node.js</td>
+<td>22 LTS</td>
+<td>✅ host</td>
+<td>✅ host</td>
+<td>❌ container</td>
+</tr>
+<tr>
+<td>pnpm</td>
+<td>9.x</td>
+<td>✅ host</td>
+<td>✅ host</td>
+<td>❌ container</td>
+</tr>
+<tr>
+<td>Turbo</td>
+<td>2.x</td>
+<td>❌</td>
+<td>✅ host</td>
+<td>❌ container</td>
+</tr>
+<tr>
+<td>JDK</td>
+<td>17 (Temurin)</td>
+<td>✅ host</td>
+<td>✅ host</td>
+<td>❌ container</td>
+</tr>
+<tr>
+<td>Android SDK</td>
+<td>API 35</td>
+<td>✅ host</td>
+<td>✅ host</td>
+<td>❌ container</td>
+</tr>
+<tr>
+<td>Build Tools</td>
+<td>35.0.0</td>
+<td>✅ host</td>
+<td>✅ host</td>
+<td>❌ container</td>
+</tr>
+<tr>
+<td>Gradle</td>
+<td>8.10</td>
+<td>auto (gradlew)</td>
+<td>auto</td>
+<td>auto</td>
+</tr>
+<tr>
+<td>Docker Desktop</td>
+<td>4.30+</td>
+<td>❌ optional</td>
+<td>✅ host</td>
+<td>✅ required</td>
+</tr>
+<tr>
+<td>ADB</td>
+<td>latest</td>
+<td>✅ host</td>
+<td>✅ host</td>
+<td>✅ host</td>
+</tr>
+<tr>
+<td>Android Emulator</td>
+<td>API 35</td>
+<td>✅ host</td>
+<td>✅ host</td>
+<td>✅ host (Mac/Win)</td>
+</tr>
+<tr>
+<td>VS Code Dev Containers</td>
+<td>latest</td>
+<td>❌</td>
+<td>❌ optional</td>
+<td>✅ host</td>
+</tr>
+<tr>
+<td>Xcode</td>
+<td>15+</td>
+<td>✅ macOS (iOS)</td>
+<td>✅ macOS (iOS)</td>
+<td>✅ macOS (iOS)</td>
+</tr>
+<tr>
+<td>CocoaPods</td>
+<td>1.15.x</td>
+<td>❌</td>
+<td>iOS packaging</td>
+<td>iOS packaging</td>
+</tr>
+<tr>
+<td>Fastlane</td>
+<td>2.x</td>
+<td>store publishing</td>
+<td>store publishing</td>
+<td>store publishing</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="getting-started-checklist">Getting Started Checklist<a class="headerlink" href="#getting-started-checklist" title="Permanent link">&para;</a></h2>
+<h3 id="app-developer">App developer<a class="headerlink" href="#app-developer" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>[ ] Node.js 22 installed (nvm)
+[ ] @capsule/cli installed globally: npm install -g @capsule/cli
+[ ] JDK 17 installed, JAVA_HOME set
+[ ] ANDROID_HOME set, Android SDK API 35 + Build Tools 35.0.0
+[ ] Emulator created and boots (or physical device connected via USB)
+[ ] capsule init my-app succeeds
+[ ] capsule add android succeeds
+[ ] capsule dev — app loads in emulator, hot reload works (&lt;50ms)
+[ ] capsule build android — APK builds successfully
+[ ] (iOS, macOS only) Xcode 15+ installed, capsule add ios succeeds
+</code></pre></div>
+<h3 id="framework-contributor-path-a">Framework contributor — Path A<a class="headerlink" href="#framework-contributor-path-a" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>[ ] Node.js 22, pnpm 9, Turbo 2 installed
+[ ] JDK 17 installed, JAVA_HOME set
+[ ] ANDROID_HOME set, Android SDK API 35 + Build Tools 35.0.0
+[ ] Emulator created and boots
+[ ] Docker Desktop installed, docker compose version shows V2
+[ ] git clone capsule repo
+[ ] pnpm install succeeds
+[ ] pnpm build succeeds (Turbo pipeline)
+[ ] capsule build android succeeds (from examples/react-ts)
+[ ] capsule run android deploys to emulator
+[ ] docker compose up — CodeSync stack boots
+</code></pre></div>
+<h3 id="framework-contributor-path-b">Framework contributor — Path B<a class="headerlink" href="#framework-contributor-path-b" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>[ ] Docker Desktop 4.30+ installed and running
+[ ] VS Code + Dev Containers extension installed
+[ ] ADB installed on host (platform-tools)
+[ ] Emulator created and boots on host (Mac/Win) — or KVM verified (Linux)
+[ ] git clone capsule repo
+[ ] VS Code: "Reopen in Container" succeeds
+[ ] Container: pnpm install succeeds (auto-run by postCreateCommand)
+[ ] Container: pnpm build succeeds
+[ ] Host emulator running → container: adb connect host.docker.internal:5555 succeeds
+[ ] Container: capsule build android succeeds
+[ ] Container: capsule dev — hot reload works in emulator
+</code></pre></div>
+<h3 id="ios-macos-only-all-paths">iOS (macOS only — all paths)<a class="headerlink" href="#ios-macos-only-all-paths" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>[ ] Xcode 15+ installed, xcodebuild -version works
+[ ] iOS Simulator available: xcrun simctl list devices
+[ ] Fastlane installed: gem install fastlane
+</code></pre></div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024-2026 Capsule Framework Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.highlight", "search.share", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

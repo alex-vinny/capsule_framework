@@ -1,0 +1,4423 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alex-vinny.github.io/capsule_framework/decisions/log/">
+      
+      
+        <link rel="prev" href="../0004-web-serving-transport/">
+      
+      
+        <link rel="next" href="../../contributing/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Decision log - Capsule Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#capsule-framework-decisions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Capsule Framework" class="md-header__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Capsule Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Decision log
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guide/installation/" class="md-tabs__link">
+          
+  
+  
+  Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/cli/" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/architecture/" class="md-tabs__link">
+          
+  
+  
+  Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Decisions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../contributing/" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../project/roadmap/" class="md-tabs__link">
+          
+  
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Capsule Framework" class="md-nav__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Capsule Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/hello-world/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hello World
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/push-notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Push Notifications
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/alerts-styling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alerts Styling
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/mobile-css-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile CSS Reset
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/publishing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publishing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ota-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Over-the-air Updates
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/core-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/lockfile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lockfile
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generated
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generated
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/docs-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Principles
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/capsule-vs-ionic-capacitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    vs Ionic/Capacitor
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/extensibility-and-positioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extensibility & Positioning
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/ionic-framework7-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ionic Framework 7 Migration
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Primers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/kotlin-for-csharp-devs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kotlin for C# Devs
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/jni-and-cpp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JNI & C
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/civetweb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CivetWeb
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/quickjs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QuickJS
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decisions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0001-embedded-runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0001 Embedded Runtime
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0002-capsule-ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0002 Capsule UI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0003-ai-and-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0003 AI & Agents
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0004-web-serving-transport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0004 Web Serving Transport
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/codesync-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CodeSync Internals
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/plugin-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/template-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Template Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/ios-bring-up/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iOS Bring-up
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/platform-parity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android/iOS Parity
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/upkeep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_14" id="__nav_6_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Workflows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/add-native-api/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add Native API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/author-plugin/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Author Plugin
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/upkeep-sweep/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep Sweep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/known-issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known Issues
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_6" id="__nav_7_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Incidents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Incidents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/incidents/2026-10-embedded-server-startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-10 Embedded Server Startup
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_7" id="__nav_7_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/2026-06-24-planning-brainstorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-24 Planning Brainstorm
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/chatgpt-first-impressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT First Impressions
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/chatgpt-plugin-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT Plugin Compatibility
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_8" id="__nav_7_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Business
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/business-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Model
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/pricing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pricing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/ota-policy-and-liability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Policy & Liability
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_9" id="__nav_7_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Server Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Server Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/file-storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Storage
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/workers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workers
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="capsule-framework-decisions">Capsule Framework — Decisions<a class="headerlink" href="#capsule-framework-decisions" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>This document consolidates all design decisions for the Capsule Framework: API design decisions (Q-series, from spec review) and implementation decisions (D-series, ordered by urgency before each phase).</p>
+</blockquote>
+<hr />
+<h1 id="part-1-api-design-decisions">Part 1 — API &amp; Design Decisions<a class="headerlink" href="#part-1-api-design-decisions" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Gaps, uncertainties, and unresolved design questions to be answered before or during implementation. Add answers inline as they are decided.</p>
+</blockquote>
+<hr />
+<h2 id="q1-sdk-update-what-if-the-capsule-team-falls-behind">Q1 — SDK Update: What If the Capsule Team Falls Behind?<a class="headerlink" href="#q1-sdk-update-what-if-the-capsule-team-falls-behind" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> The "shell as binary dep" model means developers can't bump <code>targetSdk</code> themselves — they wait for a new shell release from the Capsule team.</p>
+<p><strong>Risk:</strong> Google mandates a new <code>targetSdk</code> by a hard deadline (e.g., August each year for Play Store). If the Capsule team hasn't shipped a compatible shell by then, apps can't be updated on the Play Store.</p>
+<p><strong>Questions:</strong>
+- What is the Capsule team's SLA for releasing a new shell when Google/Apple change requirements?
+- Is there a documented emergency path for developers to manually override <code>targetSdk</code> without waiting for a shell release?
+- Should <code>capsule.config.ts</code> expose a <code>android.gradleOverrides: {}</code> escape hatch for exactly this scenario?</p>
+<p><strong>Answer:</strong> <strong>Decided — closed.</strong></p>
+<p>Four-layer approach:</p>
+<p><strong>Layer 1 — Proactive tracking (prevents the crisis).</strong> Capsule team follows Google Developer Preview 1 (January) and Apple WWDC (June) from day one. Work starts on beta SDKs immediately, not after GA release. Since the shell is open source (Q15), community contributors can also submit SDK-update PRs.</p>
+<p><strong>Layer 2 — SLA commitment.</strong> Capsule team ships a compatible shell within <strong>6 weeks of the first stable SDK release</strong>. Google's stable API 36 → Capsule ships compatible shell → developers have 3–4 months before the Play Store deadline. This SLA is published in the docs and tracked via a public GitHub milestone.</p>
+<p><strong>Layer 3 — <code>capsule doctor</code> deadline awareness.</strong> CLI warns proactively:
+<div class="highlight"><pre><span></span><code>⚠ Upcoming deadline: Google requires targetSdk 36 by Aug 31, 2026.
+  Your shell targets 35. Watch for capsule update --shell in the next weeks.
+  Status: https://github.com/capsule-framework/capsule/milestones/sdk-36
+</code></pre></div></p>
+<p><strong>Layer 4 — <code>android.gradleOverrides</code> escape hatch (break-glass only).</strong> If the Capsule team misses the deadline, developers are not stuck:
+<div class="highlight"><pre><span></span><code><span class="nx">android</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">gradleOverrides</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">targetSdk</span><span class="o">:</span><span class="w"> </span><span class="kt">36</span><span class="p">,</span><span class="w">          </span><span class="c1">// emergency override — bypasses managed shell</span>
+<span class="w">    </span><span class="nx">compileSdk</span><span class="o">:</span><span class="w"> </span><span class="kt">36</span><span class="p">,</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+CLI warns loudly: "gradleOverrides bypasses the managed shell. Some capsule features may break. Remove this after running <code>capsule update</code>." The override is injected into the generated <code>build.gradle</code> and is not guaranteed stable across shell versions — it is intentionally a last resort, not a feature.</p>
+<hr />
+<h2 id="q2-plugin-gradle-dependencies">Q2 — Plugin Gradle Dependencies<a class="headerlink" href="#q2-plugin-gradle-dependencies" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> <code>capsule-plugin.json</code> currently only declares <code>permissions</code>, <code>minSdk</code>, and <code>infoPlist</code> keys. It has no way to declare arbitrary Maven dependencies a plugin needs (e.g., <code>com.google.zxing:core:3.5.0</code>).</p>
+<p><strong>Questions:</strong>
+- How does a source plugin declare its own Gradle dependencies?
+- Should <code>capsule-plugin.json</code> gain a <code>dependencies.android[]</code> array of Maven coordinates?
+- How are version conflicts between plugin dependencies resolved (Gradle's resolution strategy)?</p>
+<p><strong>Example of what's missing:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"barcode"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"android"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">"com.google.zxing:core:3.5.0"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"androidx.camera:camera-core:1.3.0"</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Answer:</strong> <strong>Decided — closed.</strong></p>
+<p><code>capsule-plugin.json</code> gains <code>android.dependencies[]</code> and <code>ios.podDependencies[]</code>. Plugin author declares Maven coordinates — no Gradle syntax required:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"android"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"com.google.zxing:core:3.5.0"</span><span class="p">,</span><span class="w"> </span><span class="s2">"androidx.camera:camera-core:1.3.0"</span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"ios"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"podDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZXingObjC"</span><span class="p">,</span><span class="w"> </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"~&gt; 3.6"</span><span class="w"> </span><span class="p">}]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>At <code>capsule sync</code>, the CLI:
+1. Collects all dependencies from installed plugins <strong>and</strong> core overrides (<code>capsule override</code>)
+2. Groups by <code>groupId:artifactId</code>, applies "highest compatible version wins" (mirrors Gradle default)
+3. Hard-errors only when versions are in different majors — names exactly which plugins conflict
+4. Injects the resolved set into the generated <code>build.gradle</code></p>
+<p>Conflict detection runs <strong>before Gradle</strong> — actionable CLI error, not a cryptic build failure:
+<div class="highlight"><pre><span></span><code>✗ Dependency conflict: com.squareup.okhttp3:okhttp
+  @capsule-community/stripe requires 4.9.0
+  @capsule-community/maps requires 4.11.0
+  Resolved to 4.11.0 (highest compatible — patch-level only, safe).
+</code></pre></div></p>
+<p><strong>Rejected alternatives:</strong>
+- <strong><code>build.gradle.fragment</code> file per plugin</strong> — Plugin author writes raw Gradle syntax. Breaks the no-Gradle-knowledge rule; fragile across AGP versions.
+- <strong>Semantic version aliases ("needs-camerax")</strong> — CLI maintains an alias-to-version mapping. Too rigid for community plugins, high Capsule team maintenance burden.
+- <strong>Delegate to <code>android.gradleOverrides</code></strong> — Developer resolves conflicts manually. Last resort, not a first-class solution.</p>
+<hr />
+<h2 id="q3-proguard-r8-rules-for-source-plugins">Q3 — ProGuard / R8 Rules for Source Plugins<a class="headerlink" href="#q3-proguard-r8-rules-for-source-plugins" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> <code>../guide/plugins.md</code> mentions ProGuard as a gotcha for plugins that use reflection, but doesn't specify how a developer adds <code>-keep</code> rules to the generated <code>proguard-rules.pro</code>.</p>
+<p><strong>Questions:</strong>
+- Can a source plugin ship a <code>proguard.rules</code> file that gets merged by the CLI into the generated project?
+- For binary plugins (AAR), do they bundle their own consumer ProGuard rules (standard AAR feature)?
+- Is R8 enabled by default in Capsule release builds?</p>
+<p><strong>Answer:</strong> <strong>Decided — closed.</strong></p>
+<p><strong>AAR plugins (binary integrations):</strong> Standard AAR format embeds consumer ProGuard rules. AGP applies them automatically when the AAR is consumed. No CLI action needed.</p>
+<p><strong>Source plugins and core overrides:</strong> Three-layer approach:</p>
+<p><strong>Layer 1 — Safe default (zero config):</strong> CLI adds a blanket <code>-keep class &lt;plugin.package&gt;.** { *; }</code> for every source plugin and override package. R8 still optimizes the rest of the app; plugin/override classes are preserved.</p>
+<p><strong>Layer 2 — Explicit rules (opt-in optimization):</strong> Plugin ships a <code>proguard.rules</code> file at the plugin root. CLI merges it verbatim into the generated <code>proguard-rules.pro</code>, overriding the blanket keep. Plugin authors who understand R8 use this to enable full optimization.</p>
+<p><strong>Layer 3 — <code>@CapsuleKeep</code> annotations (Phase 2):</strong> Annotation on Kotlin classes generates ProGuard rules at <code>capsule sync</code> time — plugin author never writes ProGuard syntax. Aligns with the existing bridge annotation pattern for TypeScript type generation.</p>
+<p><strong>R8:</strong> Enabled by default on release builds. Blanket keep ensures correctness; explicit <code>proguard.rules</code> unlocks maximum optimization for authors who want it.</p>
+<p><strong>Rejected alternatives:</strong>
+- <strong>Disable R8 entirely for plugin/override packages</strong> — Penalizes app binary size with no benefit to authors who write clean code.
+- <strong>Require all authors to write ProGuard rules</strong> — High barrier, common source of production reflection crashes.</p>
+<hr />
+<h2 id="q4-gradle-agp-build-error-ux">Q4 — Gradle / AGP Build Error UX<a class="headerlink" href="#q4-gradle-agp-build-error-ux" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> When <code>./gradlew</code> fails inside <code>capsule build android</code>, the developer sees raw Gradle output — which is often cryptic and unrelated to anything in <code>capsule.config.ts</code>.</p>
+<p><strong>Questions:</strong>
+- Should the CLI intercept common Gradle error patterns and translate them to actionable Capsule messages?
+- Example: <code>minSdk &lt; 21</code> error → "Set <code>android.minSdk</code> to at least 21 in capsule.config.ts"
+- What is the intended workflow when a Gradle error has no fix at the Capsule config level?</p>
+<p><strong>Answer:</strong> <strong>Decided — closed.</strong></p>
+<p><strong>Layer 1 — Pre-flight validation (before Gradle runs):</strong> <code>capsule build</code> validates config state first. Most common errors are caught here with direct <code>capsule.config.ts</code> field references:
+- minSdk conflict between app config and plugin/override requirements
+- Missing signing config for <code>--release</code> builds
+- Missing <code>google-services.json</code> path
+- Unsatisfied <code>requiresShell</code> ranges on installed plugins</p>
+<p><strong>Layer 2 — Error pattern registry (for what slips through):</strong> CLI maintains a community-contributed JSON registry of <code>{ pattern, capsuleMessage, fix, docsUrl }</code> entries. Gradle stderr is scanned on non-zero exit. Match → human-readable message. No match → raw Gradle output (last 30 lines) + <code>capsule doctor</code> suggestion:</p>
+<div class="highlight"><pre><span></span><code>✗ Build failed: minSdk conflict
+  Plugin "@capsule-community/biometrics" requires android.minSdk ≥ 28.
+  Your app declares android.minSdk: 24.
+  Fix: raise android.minSdk to 28 in capsule.config.ts (drops Android 7.x support)
+  Docs: https://capsule.dev/docs/errors/minsdk-conflict
+</code></pre></div>
+<p>The pattern registry lives as a JSON file in the CLI repo — community PRs add patterns. After real-world usage the registry covers the 80% of common failures. Unknown errors: raw Gradle output + <code>capsule doctor --verbose</code> + GitHub issue link.</p>
+<p><strong>Rejected alternatives:</strong>
+- <strong>Gradle build scan (<code>--scan</code>)</strong> — Uploads data to Gradle infrastructure by default. Privacy concern disproportionate to the benefit.
+- <strong>Full structured Gradle output parsing</strong> — Fragile across Gradle/AGP version combinations, high ongoing maintenance.</p>
+<hr />
+<h2 id="q5-capsule-init-framework-selection">Q5 — <code>capsule init</code> Framework Selection<a class="headerlink" href="#q5-capsule-init-framework-selection" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> The CLI has a <code>capsule init</code> command but the docs don't specify whether it prompts for a web framework (React, Vue, Svelte, etc.) or just scaffolds a bare Vite project.</p>
+<p><strong>Questions:</strong>
+- Does <code>capsule init</code> offer a framework selection menu (React / Vue / Svelte / Vanilla)?
+- Is Angular supported? Angular has its own build pipeline (not Vite-native) — does Capsule support it or explicitly not?
+- Who configures <code>vite.config.ts</code> with the correct framework plugin — the developer manually, or the CLI scaffolds it?</p>
+<p><strong>Answer:</strong> <strong>Decided — closed.</strong></p>
+<p><code>capsule init</code> uses a <code>--template</code> flag backed by a template registry — same mental model as <code>npm create vite@latest</code>:</p>
+<div class="highlight"><pre><span></span><code>capsule<span class="w"> </span>init<span class="w"> </span>my-app<span class="w"> </span>--template<span class="w"> </span>react-ts
+capsule<span class="w"> </span>init<span class="w"> </span>my-app<span class="w"> </span>--template<span class="w"> </span>vue-ts
+capsule<span class="w"> </span>init<span class="w"> </span>my-app<span class="w"> </span>--template<span class="w"> </span>svelte-ts
+capsule<span class="w"> </span>init<span class="w"> </span>my-app<span class="w"> </span>--template<span class="w"> </span>vanilla-ts
+capsule<span class="w"> </span>init<span class="w"> </span>my-app<span class="w"> </span>--template<span class="w"> </span>github:myorg/my-capsule-template<span class="w">  </span><span class="c1"># community / org template</span>
+</code></pre></div>
+<p>Without <code>--template</code>: interactive prompt listing official templates with "Custom (GitHub URL)" at the bottom.</p>
+<p>Official templates live in <code>capsule-framework/templates</code> repo. Each includes a pre-configured <code>vite.config.ts</code>, <code>capsule.config.ts</code>, <code>package.json</code>, and framework-specific entry point. The CLI uses <code>degit</code> to clone the template — no git history, clean working directory.</p>
+<p><strong>Angular:</strong> Not in official templates. Angular's build pipeline diverges enough to require disproportionate ongoing maintenance. Documented explicitly as unsupported with a note on the Vite-based Angular path. Community template via <code>github:</code> URL is the route for Angular users.</p>
+<p><strong>Rejected alternatives:</strong>
+- <strong>Interactive menu built into CLI core</strong> — Framework-specific Vite plugin setup logic lives in CLI, breaks whenever a framework updates its Vite plugin.
+- <strong>Delegate to <code>create-vite</code> first, then add Capsule</strong> — Two sequential interactive sessions on first use. Awkward UX for new developers.
+- <strong>Bare scaffold, developer adds framework manually</strong> — Every developer performs 3–5 manual steps before writing a line of app code. Poor first impression.</p>
+<hr />
+<h2 id="q6-mobile-css-reset-layout-library">Q6 — Mobile CSS Reset / Layout Library<a class="headerlink" href="#q6-mobile-css-reset-layout-library" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> There is no mention of a CSS baseline for mobile layout (safe area insets, tap highlight removal, font normalization, etc.). Ionic provides this as <code>@ionic/core/css</code>. Capsule has no equivalent.</p>
+<p><strong>Questions:</strong>
+- Should Capsule ship a <code>@capsule/mobile-css</code> package with a minimal mobile reset?
+- Minimum contents would include:
+  - <code>env(safe-area-inset-*)</code> variables
+  - <code>-webkit-tap-highlight-color: transparent</code>
+  - <code>touch-action: manipulation</code> on interactive elements
+  - <code>overscroll-behavior: none</code> where appropriate
+  - Viewport height fix for mobile browsers (<code>100dvh</code>)
+- Should this be bundled automatically, or opt-in via <code>capsule.config.ts</code>?
+- Should <code>capsule init</code> prompt "Include Capsule mobile CSS reset? (Y/n)"?</p>
+<p><strong>Answer:</strong> <strong>Decided — closed.</strong></p>
+<p>Two automatic layers — zero developer configuration:</p>
+<p><strong>Layer 1 — Shell injects CSS custom properties (native layer, always on):</strong>
+The shell writes accurate device-specific values to <code>:root</code> at startup and on orientation change:
+<div class="highlight"><pre><span></span><code><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nv">--sai-top</span><span class="p">:</span><span class="w"> </span><span class="mi">44</span><span class="kt">px</span><span class="p">;</span><span class="w">     </span><span class="c">/* safe-area-inset-top — notch / Dynamic Island */</span>
+<span class="w">  </span><span class="nv">--sai-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="kt">px</span><span class="p">;</span><span class="w">  </span><span class="c">/* safe-area-inset-bottom — home indicator */</span>
+<span class="w">  </span><span class="nv">--sai-left</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--sai-right</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+Values come from the native shell, not from <code>env(safe-area-inset-*)</code> CSS which is unreliable inside WebView.</p>
+<p><strong>Layer 2 — CLI injects a minimal mobile reset into the built <code>index.html</code> (~150 bytes, opt-out):</strong>
+<div class="highlight"><pre><span></span><code><span class="o">*,</span><span class="w"> </span><span class="o">*</span><span class="p">::</span><span class="nd">before</span><span class="o">,</span><span class="w"> </span><span class="o">*</span><span class="p">::</span><span class="nd">after</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">box-sizing</span><span class="p">:</span><span class="w"> </span><span class="kc">border-box</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="nt">html</span><span class="o">,</span><span class="w"> </span><span class="nt">body</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span><span class="w"> </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">overscroll-behavior</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="nt">body</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kp">-webkit-</span><span class="n">tap-highlight-color</span><span class="p">:</span><span class="w"> </span><span class="kc">transparent</span><span class="p">;</span><span class="w"> </span><span class="n">touch-action</span><span class="p">:</span><span class="w"> </span><span class="kc">manipulation</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+Opt-out: <code>web.mobileReset: false</code> in <code>capsule.config.ts</code>. No prompt during <code>capsule init</code>.</p>
+<p><strong><code>@capsule/mobile-css</code></strong> may exist as an optional package for utility classes (safe area helpers, styled scroll containers) but is never required and never prompted.</p>
+<p><strong>Rejected alternatives:</strong>
+- <strong>Opt-in package (<code>import '@capsule/mobile-css'</code>)</strong> — Developers forget it on every new project. The framework should be correct by default.
+- <strong>CSS variables only</strong> — Doesn't fix tap highlights, touch behavior, or overscroll. Every developer still writes the same 3 lines manually.
+- <strong>Full mobile UI component library (Ionic-style)</strong> — Out of scope for the framework layer. Capsule is infrastructure, not a design system.</p>
+<hr />
+<h2 id="q7-minimum-plugin-set-to-ship-with-framework">Q7 — Minimum Plugin Set to Ship with Framework<a class="headerlink" href="#q7-minimum-plugin-set-to-ship-with-framework" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> Phase 3 of the roadmap lists camera, filesystem, push, geolocation, and haptics. But some of these are available via standard Web APIs without a plugin.</p>
+<p><strong>Questions:</strong>
+- What is the exact minimum plugin set for a real-world production app?
+- Which capabilities are handled by Web APIs (no plugin needed) vs. require native plugins?
+  - Geolocation: <code>navigator.geolocation</code> works in WebView — plugin needed?
+  - Camera: <code>navigator.mediaDevices.getUserMedia</code> works — is <code>@capsule/camera</code> for native camera UX only?
+  - Push: definitely needs native plugin (APNs/FCM registration)
+- Should there be a "starter bundle" (<code>@capsule/essentials</code>) that installs the common set in one command?</p>
+<p><strong>Answer:</strong> <strong>Decided — closed.</strong> All platform OS APIs are built into <code>@capsule/core</code>. There is no "minimum plugin set" because there are no plugins for platform capabilities. Camera, GPS, push, NFC, Bluetooth, haptics, biometrics, filesystem, microphone, barcode, connectivity, clipboard, share sheet, battery, and device info all ship with the framework and are tree-shaken if unused. <code>@capsule/essentials</code> is not needed — <code>@capsule/core</code> is already the essentials. See the architectural decision in Q16.</p>
+<hr />
+<h2 id="q8-plugin-lts-long-term-support-policy">Q8 — Plugin LTS / Long-Term Support Policy<a class="headerlink" href="#q8-plugin-lts-long-term-support-policy" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> One of the stated goals is to avoid "plugin hell." But this depends on the Capsule team committing to a support timeline for major versions.</p>
+<p><strong>Questions:</strong>
+- How long is a major version of <code>@capsule/core</code> supported after the next major is released?
+- What is the migration path when <code>@capsule/core</code> bumps a major version? Is there a codemod?
+- What happens to community (<code>@capsule-community/*</code>) plugins when <code>@capsule/core</code> bumps? Is there a grace period before they are delisted?
+- Is there a compatibility matrix published (core version × shell version × plugin version)?</p>
+<p><strong>Answer:</strong> <strong>Decided — closed.</strong></p>
+<p>The monolithic core model eliminates the cross-plugin compatibility matrix: there is only one version (core/shell) that everything is tied to. Community integrations still declare a <code>requiresShell</code> semver range. The <code>capsule override</code> mechanism (Q20) further reduces LTS urgency — bugs in core capabilities can be patched surgically without waiting for a new shell release.</p>
+<p><strong>LTS policy: 24-month security window after next major.</strong></p>
+<p>Major version bumps are rare by design — they happen only when:
+- The bridge protocol changes incompatibly
+- A core API must be renamed for platform reasons
+- A minimum supported Android/iOS version is dropped</p>
+<p>Published policy: the previous major receives security patches for <strong>24 months</strong> after the next major ships. This is the Node.js LTS model — well understood by enterprise teams.</p>
+<p><strong><code>capsule migrate</code> command</strong> is required before any major version ships:
+<div class="highlight"><pre><span></span><code>capsule<span class="w"> </span>migrate<span class="w"> </span>--from<span class="w"> </span>v1<span class="w"> </span>--to<span class="w"> </span>v2
+<span class="c1"># Automated codemods: renamed imports, config field changes, deprecated API replacements</span>
+<span class="c1"># Produces a diff — developer reviews and commits</span>
+</code></pre></div>
+Migration guides alone are not sufficient. Automated tooling is the bar.</p>
+<p><strong>Community integrations (<code>@capsule-community/*</code>)</strong> declare their own support policy via <code>capsule-plugin.json</code>. CLI warns at install if a plugin's <code>requiresShell</code> range excludes the current shell version.</p>
+<p><strong>Rejected alternatives:</strong>
+- <strong>Two-version support window (Apple-style)</strong> — Potentially aggressive if majors ship on a fast cadence in early years.
+- <strong>No formal EOL — community takes over</strong> — Unpredictable for enterprises doing multi-year planning. The 24-month window is explicit and contractual.</p>
+<hr />
+<h2 id="q9-codesync-manual-approval-gate-pilot-targeting">Q9 — CodeSync: Manual Approval Gate / Pilot Targeting<a class="headerlink" href="#q9-codesync-manual-approval-gate-pilot-targeting" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> CodeSync supports percentage-based rollout and channels, but has no concept of a named device list or explicit approval step before promoting a rollout.</p>
+<p><strong>Questions:</strong>
+- Can a release be put in "pending approval" state — staged but not delivered to any device until someone approves in the dashboard?
+- Can a specific set of named devices (by <code>device_id</code> or device model) be targeted for a pilot before opening to a percentage rollout?
+- Can devices be grouped by region, locale, or custom metadata tags?
+- Should the dashboard support a "promote to production" workflow with a required approver?</p>
+<p><strong>Answer:</strong> <strong>Decided — closed.</strong></p>
+<p>Channels are the approval mechanism — no new state machine needed. "Approval" is the act of running <code>capsule codesync promote</code>. Role-based access determines who can promote to production.</p>
+<p><strong>Deployment flow:</strong>
+<div class="highlight"><pre><span></span><code>developer publishes → staging channel → QA validates → Releaser promotes → production
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Publish to staging, targeting only QA devices</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--channel<span class="w"> </span>staging<span class="w"> </span>--filter<span class="w"> </span><span class="s2">"metadata.group = 'qa'"</span>
+
+<span class="c1"># After QA sign-off — promotion IS the approval gesture</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>promote<span class="w"> </span>--from<span class="w"> </span>staging<span class="w"> </span>--to<span class="w"> </span>production<span class="w"> </span>--rollout<span class="w"> </span><span class="m">5</span>
+</code></pre></div>
+<p><strong>Role-based access (<code>capsule portal roles</code>):</strong> <code>Developer</code> can publish to any non-production channel. <code>Releaser</code> role required to run <code>promote --to production</code>. This satisfies enterprise compliance without adding a separate approval state to the bundle lifecycle.</p>
+<p><strong>Pilot targeting via device metadata filters:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Target named pilot group before opening to percentage rollout</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--channel<span class="w"> </span>staging<span class="w"> </span>--filter<span class="w"> </span><span class="s2">"metadata.group = 'pilot'"</span>
+<span class="c1"># After pilot validation:</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>promote<span class="w"> </span>--from<span class="w"> </span>staging<span class="w"> </span>--to<span class="w"> </span>production<span class="w"> </span>--rollout<span class="w"> </span><span class="m">5</span>
+</code></pre></div></p>
+<p><strong>Scheduled releases:</strong>
+<div class="highlight"><pre><span></span><code>capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--channel<span class="w"> </span>production<span class="w"> </span>--at<span class="w"> </span><span class="s2">"2026-06-01T09:00:00Z"</span>
+<span class="c1"># Bundle is ready and signed; delivery begins at the specified time</span>
+</code></pre></div>
+Useful for coordinated marketing launches across timezones.</p>
+<p><strong>Dashboard named groups:</strong> Saved filter expressions ("Brazil Enterprise", "Beta Testers"). <code>capsule codesync publish --group "beta-testers"</code> is shorthand for the saved filter. Groups are stored server-side, not in <code>capsule.config.ts</code>.</p>
+<p><strong>Rejected alternatives:</strong>
+- <strong>Formal <code>draft → staged → approved</code> state machine</strong> — Same outcome achievable with channels + RBAC. Extra states add implementation complexity with no behavioral difference.
+- <strong>Named device lists (manual dashboard tagging)</strong> — Only scales to small fleets. Metadata filters compose with channels and rollout %, making them strictly more powerful.</p>
+<hr />
+<h2 id="q10-codesync-version-numbering-convention">Q10 — CodeSync Version Numbering Convention<a class="headerlink" href="#q10-codesync-version-numbering-convention" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> The relationship between the store app version (<code>1.0.0</code>) and the CodeSync bundle version is not explicitly defined as a convention.</p>
+<p><strong>Questions:</strong>
+- Is the CodeSync bundle version always tied to the store version name, or is it independent?
+- Proposed convention: <code>{appVersion}.{bundlePatch}</code> — e.g., store version <code>1.0.0</code>, CodeSync bundles <code>1.0.0+1</code>, <code>1.0.0+2</code>, etc.
+- How is this displayed in the dashboard — does it show <code>1.0.0 (bundle #3)</code> or something else?
+- How does <code>capsule codesync releases</code> output version info in a way that maps clearly to store releases?</p>
+<p><strong>Answer:</strong> <strong>Decided — closed.</strong></p>
+<p><strong>Canonical format:</strong> <code>{appVersion}+{bundlePatch}</code> — semver build metadata. <code>1.0.0+3</code> means the 3rd CodeSync patch on the <code>1.0.0</code> store release. The bundle counter resets to <code>1</code> when <code>appVersion</code> changes.</p>
+<p>Internal API and <code>capsule-bundle.json</code> use the canonical form. CLI and dashboard never surface the <code>+</code> notation directly — they display as two separate dimensions:</p>
+<div class="highlight"><pre><span></span><code>VERSION    BUNDLE  CHANNEL     ROLLOUT  STATUS       PUBLISHED
+1.0.0      +3      production  100%     active       2026-05-21 14:30
+1.0.0      +2      production  —        rolled-back  2026-05-19 09:12
+1.0.0      +1      production  100%     superseded   2026-05-15 16:45
+0.9.1      +7      production  100%     superseded   2026-04-30 10:00
+</code></pre></div>
+<p><code>capsule codesync publish</code> auto-increments the bundle counter within the current <code>appVersion</code> and validates that <code>appVersion</code> in <code>capsule.config.ts</code> matches what's in <code>capsule.lock</code>.</p>
+<p><strong>Rejected alternatives:</strong>
+- <strong>Independent monotonic counter</strong> — Loses the "which store version was this built from" traceability in CLI output. Requires a dashboard lookup to understand context.
+- <strong><code>{appVersion}-bundle.{N}</code> (pre-release notation)</strong> — Pre-release semver implies instability. Semantically wrong for production bundles.
+- <strong>Timestamp-based (<code>1.0.0-20260521.1</code>)</strong> — Verbose in logs, doesn't survive timezone differences in CI pipelines.</p>
+<hr />
+<h2 id="q11-gtm-analytics-native-navigation-events">Q11 — GTM / Analytics: Native Navigation Events<a class="headerlink" href="#q11-gtm-analytics-native-navigation-events" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> GTM works as a standard web script with no plugin needed. However, Android's hardware back button is handled at the native layer and may not fire browser <code>history</code> events.</p>
+<p><strong>Questions:</strong>
+- Does the Capsule shell synthesize <code>popstate</code> or History API events when the Android back button is pressed?
+- If not, GTM's History Change trigger won't track navigation in multi-page Capsule apps — who is responsible for bridging this?
+- Should there be a <code>@capsule/navigation</code> bridge plugin that emits JS navigation events for GTM/analytics?
+- For single-page apps using React Router / Vue Router, this is a non-issue — should the docs clarify this?</p>
+<p><strong>Answer:</strong> <strong>Decided — closed.</strong> <code>capsule.navigation</code> is part of <code>@capsule/core</code> (not a plugin). Robust default behavior, fully overridable.</p>
+<p><strong>Default shell behavior (automatic, no developer code needed):</strong>
+1. Android hardware back button intercepted by shell
+2. Shell calls <code>window.history.back()</code> if <code>history.length &gt; 1</code> → this fires a native <code>popstate</code> event → GTM's History Change trigger fires automatically
+3. If no history to go back to, shell dispatches a <code>capsule:backbutton</code> custom event on <code>window</code> → developer can handle "exit app?" confirmation</p>
+<p><strong>Developer override API (<code>@capsule/core</code>):</strong>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">navigation</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@capsule/core'</span>
+
+<span class="c1">// Override back button completely</span>
+<span class="nx">navigation</span><span class="p">.</span><span class="nx">onBackButton</span><span class="p">((</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">canGoBack</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// custom logic before going back</span>
+<span class="w">    </span><span class="nx">showExitConfirmation</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">confirmed</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">confirmed</span><span class="p">)</span><span class="w"> </span><span class="nx">navigation</span><span class="p">.</span><span class="nx">goBack</span><span class="p">()</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// no history — custom exit flow</span>
+<span class="w">    </span><span class="nx">showExitConfirmation</span><span class="p">()</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">})</span>
+
+<span class="c1">// Listen without overriding (additive)</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'capsule:backbutton'</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">analytics</span><span class="p">.</span><span class="nx">track</span><span class="p">(</span><span class="s1">'back_button_pressed'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">canGoBack</span><span class="o">:</span><span class="w"> </span><span class="kt">e.detail.canGoBack</span><span class="w"> </span><span class="p">})</span>
+<span class="p">})</span>
+</code></pre></div></p>
+<p><strong>For SPA frameworks (React Router, Vue Router):</strong> The <code>popstate</code> event fires normally — their routers already handle it. No action needed.</p>
+<p><strong>For GTM:</strong> The <code>popstate</code> event that fires from <code>window.history.back()</code> is the standard History Change trigger. Works automatically with zero GTM configuration.</p>
+<hr />
+<h2 id="q12-ios-capsule-dev-qr-without-macos">Q12 — iOS: <code>capsule dev --qr</code> Without macOS<a class="headerlink" href="#q12-ios-capsule-dev-qr-without-macos" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> The QR code dev flow is documented for both platforms, but iOS builds always require macOS + Xcode.</p>
+<p><strong>Questions:</strong>
+- If a developer is on Windows/Linux, can they use <code>capsule dev --qr</code> for Android while a teammate handles the iOS side?
+- Is there a cloud macOS option (GitHub Actions macOS runner, Mac-in-Cloud) documented for teams without Apple hardware?
+- Should <code>capsule dev</code> clearly detect the platform and warn "iOS dev requires macOS" before attempting?</p>
+<p><strong>Answer:</strong> <strong>Decided — closed.</strong></p>
+<p>iOS requires macOS. This is Apple policy, not a Capsule limitation. The framework does not attempt to work around it.</p>
+<p><strong>DX handling:</strong>
+- <code>capsule add ios</code> on Windows/Linux → clear warning at setup time (not at build time, when the developer has already invested time)
+- <code>capsule dev</code> on Windows/Linux → starts Android-only mode silently; prints one note: <code>iOS dev requires macOS — running Android only</code>
+- <code>capsule build ios</code> on Windows/Linux → hard error with docs link</p>
+<p><strong>For cross-platform teams (Windows/Linux primary development):</strong>
+Develop and test on Android (95%+ of app code is platform-agnostic). Run iOS builds in CI on GitHub Actions macOS runners. Document this workflow explicitly in the docs as "The Windows/Linux team setup."</p>
+<p><strong>Phase 6 roadmap — <code>capsule build ios --cloud</code>:</strong>
+First-party or partnered Mac-in-Cloud integration. Configures via <code>capsule portal</code> with an API key. Handles production builds only (not dev hot reload — that round-trip is too slow for iteration). Removes the macOS dependency for release builds.</p>
+<p><strong>Rejected alternatives:</strong>
+- <strong>Remote relay (<code>capsule dev --ios-relay &lt;ip&gt;</code>)</strong> — macOS machine on the network serves as the iOS build/deploy relay. Complex networking, niche setup, hard to support and document.
+- <strong>WebKit emulation on Windows</strong> — Apple's rendering stack is not portable. Not realistic.
+- <strong>Hide the constraint</strong> — Worse than being explicit. Developers discover it mid-project rather than at setup time.</p>
+<hr />
+<h2 id="q13-capsule-eject-for-closed-source-plugins">Q13 — <code>capsule eject</code> for Closed-Source Plugins<a class="headerlink" href="#q13-capsule-eject-for-closed-source-plugins" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> <code>capsule eject</code> requires a <code>sourceRepo</code> field in <code>capsule-plugin.json</code>. Closed-source plugins cannot be ejected.</p>
+<p><strong>Questions:</strong>
+- Should closed-source plugins be explicitly prohibited from the <code>@capsule-community/*</code> tier?
+- If a commercial plugin (e.g., a paid SDK wrapper) has no <code>sourceRepo</code>, what is the developer's recourse when it breaks?
+- Should the CLI warn at install time if a plugin has no <code>sourceRepo</code>?</p>
+<p><strong>Answer:</strong> <strong>Decided — closed.</strong></p>
+<p><strong><code>@capsule-community/*</code> scope requires open source.</strong> <code>sourceRepo</code> is a required field to publish under the community scope. Without it, <code>capsule plugin publish</code> rejects:
+<div class="highlight"><pre><span></span><code>✗ Community-scoped plugins must have a sourceRepo in capsule-plugin.json.
+  For closed-source plugins, publish under your own npm scope
+  and declare trust: 'unverified' in capsule.config.ts.
+</code></pre></div></p>
+<p><strong>For closed-source or commercial plugins:</strong> They live outside <code>@capsule-community/*</code>, are <code>trust: 'unverified'</code> by default, and the developer must explicitly acknowledge the risk:
+<div class="highlight"><pre><span></span><code><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">'vendor-sdk-plugin'</span><span class="p">,</span><span class="w"> </span><span class="nx">trust</span><span class="o">:</span><span class="w"> </span><span class="s1">'unverified'</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c1">// required for non-community-scoped plugins</span>
+<span class="p">]</span>
+</code></pre></div></p>
+<p>CLI warning at install for <code>unverified</code> plugins:
+<div class="highlight"><pre><span></span><code>⚠ Plugin "vendor-sdk" has no sourceRepo. capsule override and capsule eject are not available.
+  If this plugin breaks or is abandoned, you cannot fork or patch it.
+  Ensure you have a vendor support contract before shipping this to production.
+</code></pre></div></p>
+<p><strong>The <code>trust: 'unverified'</code> declaration is deliberate friction</strong> — not a blocker, but an acknowledgment. This is the same model as Android's "Unknown sources" toggle.</p>
+<p><strong>Escape hatch context:</strong> For plugins that <em>do</em> have source (even if not in <code>@capsule-community/*</code>), <code>capsule override</code> covers surgical bug fixes and <code>capsule eject</code> covers full forks. For genuinely closed-source plugins, neither is available — the developer's only recourse is the vendor.</p>
+<p><strong>Rejected alternatives:</strong>
+- <strong>Allow closed-source in <code>@capsule-community/*</code> with a <code>"license": "commercial"</code> flag</strong> — Weakens the trust tier signal. The community scope should be a reliable indicator of open, auditable code.
+- <strong>Source escrow requirement for commercial plugins</strong> — Hard to enforce, complex verification process, disproportionate overhead for the community registry.</p>
+<hr />
+<h2 id="q14-capsule-server-device-grouping-by-custom-metadata">Q14 — Capsule Server: Device Grouping by Custom Metadata<a class="headerlink" href="#q14-capsule-server-device-grouping-by-custom-metadata" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> The <code>devices</code> table has a <code>metadata JSONB</code> column, but the dashboard and API don't document how custom metadata is set or queried.</p>
+<p><strong>Questions:</strong>
+- Can the native client send custom metadata at check-in time (e.g., <code>{ "region": "br-south", "tier": "enterprise" }</code>)?
+- Can CodeSync channel targeting use metadata filters (e.g., "deliver to all devices where <code>metadata.region = 'br-south'"</code>)?
+- If not, how do you do region-based or customer-segment-based rollouts?</p>
+<p><strong>Answer:</strong> <strong>Decided — closed.</strong></p>
+<p>Two-layer metadata model — automatic standard metadata + developer-registered business metadata:</p>
+<p><strong>Layer 1 — Shell sends standard metadata at every check-in (zero config):</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"os_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Android 14"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pt-BR"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Sao_Paulo"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"device_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pixel 8"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"app_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"bundle_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0+3"</span>
+<span class="p">}</span>
+</code></pre></div>
+Handles geographic targeting (<code>locale</code>), OS version targeting, and device model targeting with no app code.</p>
+<p><strong>Layer 2 — App registers business metadata via bridge API:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">codesync</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@capsule/core'</span>
+
+<span class="c1">// Called after authentication — when business context is known</span>
+<span class="nx">codesync</span><span class="p">.</span><span class="nx">setDeviceMetadata</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">user_tier</span><span class="o">:</span><span class="w"> </span><span class="kt">user.subscriptionPlan</span><span class="p">,</span><span class="w">  </span><span class="c1">// 'free' | 'pro' | 'enterprise'</span>
+<span class="w">  </span><span class="nx">experiment_group</span><span class="o">:</span><span class="w"> </span><span class="kt">abTest.group</span><span class="p">,</span><span class="w">    </span><span class="c1">// 'control' | 'checkout-v2'</span>
+<span class="w">  </span><span class="nx">store_id</span><span class="o">:</span><span class="w"> </span><span class="kt">user.assignedStore</span><span class="w">       </span><span class="c1">// for retail chains</span>
+<span class="p">})</span>
+</code></pre></div>
+Stored in <code>devices.metadata JSONB</code>. Merged with standard metadata. No PII — docs explicitly warn against storing email/name; use opaque identifiers.</p>
+<p><strong>Channel targeting uses filter expressions on any metadata key:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Geographic (automatic metadata — no app code needed)</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--channel<span class="w"> </span>staging<span class="w"> </span>--filter<span class="w"> </span><span class="s2">"metadata.locale LIKE 'pt-%'"</span>
+
+<span class="c1"># Business segment (custom metadata)</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--channel<span class="w"> </span>staging<span class="w"> </span>--filter<span class="w"> </span><span class="s2">"metadata.user_tier = 'enterprise'"</span>
+
+<span class="c1"># Composable</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--channel<span class="w"> </span>staging<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--filter<span class="w"> </span><span class="s2">"metadata.user_tier = 'enterprise' AND metadata.locale LIKE 'pt-%'"</span>
+</code></pre></div></p>
+<p><strong>Dashboard named groups</strong> are saved filter expressions — <code>capsule codesync publish --group "brazil-enterprise"</code> is shorthand. Groups are stored server-side.</p>
+<p><strong>Rejected alternatives:</strong>
+- <strong>Server-side device tagging via dashboard</strong> — Only practical for fleets under ~100 devices. No scale.
+- <strong>Named device lists (by explicit device IDs)</strong> — Not composable. Doesn't work for dynamic populations (new devices, new users).</p>
+<hr />
+<h2 id="q15-who-maintains-the-capsule-shell-long-term">Q15 — Who Maintains the Capsule Shell Long-Term?<a class="headerlink" href="#q15-who-maintains-the-capsule-shell-long-term" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> The entire framework depends on the Capsule team continuously publishing new shell versions (AAR for Android, XCFramework for iOS) as Google and Apple evolve their platforms.</p>
+<p><strong>Questions:</strong>
+- Is the shell open source? Can the community contribute patches or fork it?
+- If the project is abandoned, is there a documented path for an organization to take over shell maintenance?
+- Should the shell source be published even if the CLI and portal remain proprietary?</p>
+<p><strong>Answer:</strong> <strong>Decided — closed.</strong> Open source from day one. Shell (Kotlin/Swift), CLI, and bridge runtime are all public repositories under the <code>capsule-framework</code> GitHub org. The portal/cloud infrastructure may have a proprietary tier, but the core toolchain is MIT or Apache 2.0. Any developer or organization can fork and continue maintenance. Community SDK-update PRs are explicitly welcome.</p>
+<hr />
+<h2 id="q16-architectural-decision-monolithic-core-sdk">Q16 — Architectural Decision: Monolithic Core SDK<a class="headerlink" href="#q16-architectural-decision-monolithic-core-sdk" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> After design review, a fundamental architectural shift was made from a plugin-based model (where even platform OS APIs were separate packages) to a monolithic core SDK model.</p>
+<p><strong>Decision: Adopted.</strong></p>
+<p><strong>Rule:</strong>
+- If a capability uses an OS API that ships with Android/iOS → it is part of <code>@capsule/core</code>
+- If a capability requires a third-party SDK dependency → it is a community integration (<code>@capsule-community/*</code> or local <code>capsule-plugins/</code>)</p>
+<p><strong>Core capabilities (always in <code>@capsule/core</code>, tree-shaken if unused):</strong>
+Camera, GPS/Geolocation, Push Notifications, NFC, Bluetooth LE, Haptics, Biometrics, Filesystem, Microphone/Audio, Barcode/QR, Connectivity, Clipboard, Share Sheet, Battery, Device Info, Screen Orientation, Accelerometer/Gyroscope, Preferences (key-value), Database (SQLite), Browser (in-app browser), InlineWebView</p>
+<p><strong>Community integrations (separate packages, require third-party SDK):</strong>
+Google Maps, Stripe, Braintree, Firebase, Facebook Auth, Segment, Twilio, etc.</p>
+<p><strong>CodeSync:</strong> Built into <code>@capsule/core</code>. Activated via <code>codeSync.enabled: true</code> in <code>capsule.config.ts</code>. Compiled out when disabled.</p>
+<p><strong>Rationale:</strong> Eliminates plugin compatibility matrix, reduces DX friction (no installs for OS APIs), enables one-version-manages-everything upgrade model. Tree-shaking ensures app size is not penalized for unused capabilities.</p>
+<hr />
+<h2 id="q17-shell-host-strategy-exporn-vs-custom-native-binary">Q17 — Shell Host Strategy: Expo/RN vs Custom Native Binary<a class="headerlink" href="#q17-shell-host-strategy-exporn-vs-custom-native-binary" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> Two options were evaluated: (A) build the native shell as a custom Kotlin/Swift binary maintained by the Capsule team; (B) use Expo/React Native as the shell host, delegating Gradle/AGP/Xcode maintenance to the Expo team.</p>
+<p><strong>Decision: Decided — closed. Custom Kotlin/Swift binary (Option A).</strong></p>
+<p>Rationale: Expo dependency would introduce a large runtime (~12–15 MB), force React-only JS engine, and trade Gradle maintenance pain for Expo major-version migration pain. The open source model (Q15) and community SDK-update SLA (Q1) mitigate the maintenance risk that originally motivated Option B. Full control over the shell means the bridge protocol, WebView configuration, and lifecycle behavior are owned entirely by the project.</p>
+<hr />
+<h2 id="q18-wasm-components-for-community-integrations">Q18 — WASM Components for Community Integrations<a class="headerlink" href="#q18-wasm-components-for-community-integrations" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> Community integrations currently support two modes: binary (AAR/XCFramework via npm) and source (Kotlin/Swift compiled alongside app). WASM components were evaluated as a third mode enabling OTA-updatable logic integrations without native code.</p>
+<p><strong>Decision: Decided — adopt as third mode.</strong></p>
+<p>WASM components work for pure-logic capabilities (barcode decoding, PDF, image processing, crypto, compression). They cannot directly call platform APIs — those still require native code. The split:
+- <strong>Logic integrations</strong> → WASM component, OTA-updatable via CodeSync, single <code>.wasm</code> binary for both platforms
+- <strong>Platform API integrations</strong> → native Kotlin/Swift, store update required</p>
+<p><strong>Toolchain responsibilities (<code>@capsule/cli</code>):</strong>
+<div class="highlight"><pre><span></span><code>capsule<span class="w"> </span>plugin<span class="w"> </span>create<span class="w"> </span>my-barcode<span class="w"> </span>--wasm<span class="w">   </span><span class="c1"># scaffold Rust/C/TS WASM component</span>
+capsule<span class="w"> </span>plugin<span class="w"> </span>build<span class="w"> </span>--wasm<span class="w">               </span><span class="c1"># compile to .wasm via wasm-pack / wasi-sdk</span>
+capsule<span class="w"> </span>plugin<span class="w"> </span>publish<span class="w"> </span>./path<span class="w">             </span><span class="c1"># packages .wasm into npm tarball (same flow)</span>
+</code></pre></div></p>
+<p><strong>Resolved via D2</strong>: WAMR is <strong>not</strong> embedded in the shell. It ships as the <code>@capsule/wasm</code> first-party plugin. Apps that need WASM capabilities install <code>@capsule/wasm</code>; apps that don't pay zero binary size overhead. The shell strictly contains native OS capabilities only — see D2.</p>
+<p><strong>Language support:</strong> Rust (best), C/C++, TypeScript via <code>jco</code>. Other languages are community-supported.</p>
+<hr />
+<h2 id="q19-push-notifications-firebase-sdk-ownership">Q19 — Push Notifications: Firebase SDK Ownership<a class="headerlink" href="#q19-push-notifications-firebase-sdk-ownership" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> Q16's rule states "third-party SDK dependency → community integration." Push notifications on Android require FCM, which is implemented via <code>com.google.firebase:firebase-messaging</code>. This creates a conflict: push feels like a core OS capability, but its Android implementation requires a Google-owned third-party SDK.</p>
+<p><strong>Decision: Decided — Firebase FCM included in <code>@capsule/core</code>. Capsule team owns the dependency version.</strong></p>
+<p><strong>Rationale:</strong> FCM is the only practical Android push mechanism. Every major framework (Expo, Capacitor, React Native) includes it. Google will not abandon its own push infrastructure. The risk of including it is manageable; the cost of not including it is mandatory developer boilerplate.</p>
+<p><strong>Q16 exception rule:</strong> Firebase FCM is a pragmatic exception because it is effectively Android's OS-level push infrastructure despite being distributed as a separate SDK.</p>
+<p><strong>iOS:</strong> APNs is a pure platform API — no third-party SDK, no exception needed.</p>
+<p><strong>Developer configuration in <code>capsule.config.ts</code>:</strong>
+<div class="highlight"><pre><span></span><code><span class="nx">android</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">push</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Path to google-services.json downloaded from Firebase Console</span>
+<span class="w">    </span><span class="c1">// CLI injects this into the generated Android project</span>
+<span class="w">    </span><span class="nx">googleServicesFile</span><span class="o">:</span><span class="w"> </span><span class="kt">process.env.GOOGLE_SERVICES_JSON</span><span class="w">  </span><span class="c1">// e.g. './google-services.json'</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p>The <code>google-services.json</code> is app-specific (contains project ID, API key, app ID). It cannot be bundled in the shell — the app developer generates it from the Firebase Console and provides the path. The CLI copies it to <code>.capsule/android/app/google-services.json</code> during <code>capsule sync</code>.</p>
+<p><strong>Version conflict risk:</strong> Apps that also use Firebase for Firestore/Analytics may encounter Gradle dependency conflicts. Gradle resolves these via "highest compatible version wins," but the Capsule team commits to supporting a range of Firebase BOM versions to reduce friction. If a conflict occurs, <code>android.gradleOverrides</code> is the escape hatch.</p>
+<hr />
+<h2 id="q20-core-capability-override-system">Q20 — Core Capability Override System<a class="headerlink" href="#q20-core-capability-override-system" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> <code>@capsule/core</code> is monolithic — all platform capabilities are compiled into the shell binary. If a bug exists in a core capability (e.g., <code>camera.capture</code>), developers have no path to fix it without: (a) waiting for a Capsule team patch, (b) compiling the entire shell from source, or (c) a full <code>capsule eject</code>-style fork.</p>
+<p><strong>Decision: Decided — closed. Runtime dispatch registry with surgical override support.</strong></p>
+<p><strong>Shell internals (inside the compiled AAR/XCFramework — fixed at build time):</strong>
+<div class="highlight"><pre><span></span><code><span class="kd">object</span><span class="w"> </span><span class="nc">CapsuleBridgeRegistry</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">overrides</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mutableMapOf</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">CapsuleHandler</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">builtins</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">mapOf</span><span class="p">(</span>
+<span class="w">        </span><span class="s">"camera.capture"</span><span class="w">           </span><span class="n">to</span><span class="w"> </span><span class="n">CapsuleCameraHandler</span><span class="p">(),</span>
+<span class="w">        </span><span class="s">"camera.getPermission"</span><span class="w">     </span><span class="n">to</span><span class="w"> </span><span class="n">CapsuleCameraPermissionHandler</span><span class="p">(),</span>
+<span class="w">        </span><span class="s">"gps.getCurrentPosition"</span><span class="w">   </span><span class="n">to</span><span class="w"> </span><span class="n">CapsuleGpsHandler</span><span class="p">(),</span>
+<span class="w">        </span><span class="c1">// ... all core capabilities pre-registered</span>
+<span class="w">    </span><span class="p">)</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">registerOverride</span><span class="p">(</span><span class="n">method</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">handler</span><span class="p">:</span><span class="w"> </span><span class="n">CapsuleHandler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">overrides</span><span class="o">[</span><span class="n">method</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">handler</span><span class="w">   </span><span class="c1">// called at app startup, before any JS runs</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">dispatch</span><span class="p">(</span><span class="n">method</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">:</span><span class="w"> </span><span class="n">JsonObject</span><span class="p">):</span><span class="w"> </span><span class="n">JsonObject</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">overrides</span><span class="o">[</span><span class="n">method</span><span class="o">]</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="n">builtins</span><span class="o">[</span><span class="n">method</span><span class="o">]</span><span class="p">)</span>
+<span class="w">            </span><span class="o">?.</span><span class="na">handle</span><span class="p">(</span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">CapsuleError</span><span class="p">(</span><span class="m">1002</span><span class="p">,</span><span class="w"> </span><span class="s">"METHOD_NOT_FOUND"</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p>The registry is mutable at runtime. Built-ins are the defaults. Overrides win when present. This is a first-class design requirement — not retrofitted.</p>
+<p><strong>Developer workflow:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// capsule.config.ts</span>
+<span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">'./capsule-plugins/camera-fix'</span><span class="p">,</span><span class="w"> </span><span class="nx">overrides</span><span class="o">:</span><span class="w"> </span><span class="s1">'camera'</span><span class="w"> </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// capsule-plugins/camera-fix/android/CameraFix.kt</span>
+<span class="nd">@CapsulePlugin</span><span class="p">(</span><span class="s">"camera-fix"</span><span class="p">)</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">CameraFix</span><span class="p">(</span><span class="n">bridge</span><span class="p">:</span><span class="w"> </span><span class="n">CapsuleBridge</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">CapsuleCoreOverride</span><span class="p">(</span><span class="n">bridge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@BridgeMethod</span><span class="p">(</span><span class="s">"capture"</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">capture</span><span class="p">(</span><span class="n">params</span><span class="p">:</span><span class="w"> </span><span class="n">JsonObject</span><span class="p">):</span><span class="w"> </span><span class="n">JsonObject</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// only this method is intercepted — others fall through to built-in</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">super</span><span class="p">.</span><span class="na">capture</span><span class="p">(</span><span class="n">params</span><span class="p">).</span><span class="na">also</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">            </span><span class="c1">// patch the broken behavior here</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// getPermission(), getSupportedFormats(), etc. → fall through to built-in automatically</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>At <code>capsule sync</code></strong>, the CLI detects the <code>overrides</code> declaration and generates registration code in the thin <code>.capsule/android/</code> wrapper:
+<div class="highlight"><pre><span></span><code><span class="c1">// .capsule/android/CapsuleApp.kt (generated — do not edit)</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">CapsuleApp</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Application</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onCreate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">CapsuleBridgeRegistry</span><span class="p">.</span><span class="na">registerOverride</span><span class="p">(</span><span class="s">"camera.capture"</span><span class="p">,</span><span class="w"> </span><span class="n">CameraFix</span><span class="p">(</span><span class="k">this</span><span class="p">))</span>
+<span class="w">        </span><span class="n">CapsuleShell</span><span class="p">.</span><span class="na">initialize</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>What compiles:</strong> only the developer's fix file — not the shell, not <code>@capsule/core</code>.
+<strong>TypeScript API:</strong> unchanged. <code>camera.capture()</code> still works identically from the web layer.
+<strong>Removal:</strong> when the official shell patch ships, delete the folder and the <code>plugins</code> entry.</p>
+<p><strong>CLI scaffolding:</strong>
+<div class="highlight"><pre><span></span><code>capsule<span class="w"> </span>override<span class="w"> </span>camera
+<span class="c1"># Creates capsule-plugins/camera-override/ pre-populated with the built-in source</span>
+<span class="c1"># (fetched from the open-source shell repo at the currently locked shell version)</span>
+<span class="c1"># Developer deletes all methods they don't need to override.</span>
+</code></pre></div></p>
+<p><strong>What <code>capsule override camera</code> generates</strong> (the scaffold IS the documentation):
+<div class="highlight"><pre><span></span><code><span class="c1">// capsule-plugins/camera-override/android/CameraOverride.kt</span>
+<span class="c1">//</span>
+<span class="c1">// Core capability override for: camera</span>
+<span class="c1">// Shell version this was generated from: 1.4.2</span>
+<span class="c1">//</span>
+<span class="c1">// HOW TO USE:</span>
+<span class="c1">//   1. Delete every method you do NOT need to change — they fall through to the</span>
+<span class="c1">//      built-in implementation automatically. Do not leave empty method bodies.</span>
+<span class="c1">//   2. Use super.capture(params) to call the original built-in from within your fix.</span>
+<span class="c1">//   3. When the official shell patch ships: delete this file and remove the</span>
+<span class="c1">//      plugins entry from capsule.config.ts.</span>
+<span class="c1">//</span>
+<span class="c1">// The TypeScript API (camera.capture() etc.) is unchanged — this only affects</span>
+<span class="c1">// the native layer. No web-side changes needed.</span>
+
+<span class="nd">@CapsulePlugin</span><span class="p">(</span><span class="s">"camera-override"</span><span class="p">)</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">CameraOverride</span><span class="p">(</span><span class="n">bridge</span><span class="p">:</span><span class="w"> </span><span class="n">CapsuleBridge</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">CapsuleCoreOverride</span><span class="p">(</span><span class="n">bridge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// ← EDIT or DELETE: replace with your fix.</span>
+<span class="w">    </span><span class="c1">// Returning super.capture(params) calls the original built-in.</span>
+<span class="w">    </span><span class="nd">@BridgeMethod</span><span class="p">(</span><span class="s">"capture"</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">capture</span><span class="p">(</span><span class="n">params</span><span class="p">:</span><span class="w"> </span><span class="n">JsonObject</span><span class="p">):</span><span class="w"> </span><span class="n">JsonObject</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">super</span><span class="p">.</span><span class="na">capture</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// ← EDIT or DELETE</span>
+<span class="w">    </span><span class="nd">@BridgeMethod</span><span class="p">(</span><span class="s">"getPermission"</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getPermission</span><span class="p">(</span><span class="n">params</span><span class="p">:</span><span class="w"> </span><span class="n">JsonObject</span><span class="p">):</span><span class="w"> </span><span class="n">JsonObject</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">super</span><span class="p">.</span><span class="na">getPermission</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// ... all other camera methods pre-populated ...</span>
+<span class="w">    </span><span class="c1">// Delete the ones you don't touch — fall-through is automatic</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Relationship to <code>capsule eject</code>:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>capsule override</code></th>
+<th><code>capsule eject</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scope</td>
+<td>Single core capability</td>
+<td>Entire community integration</td>
+</tr>
+<tr>
+<td>Use case</td>
+<td>Bug fix / surgical patch</td>
+<td>Long-term customization</td>
+</tr>
+<tr>
+<td>TypeScript API</td>
+<td>Unchanged</td>
+<td>Developer-owned</td>
+</tr>
+<tr>
+<td>Effort</td>
+<td>One Kotlin/Swift file</td>
+<td>Full integration authoring</td>
+</tr>
+<tr>
+<td>Intended lifetime</td>
+<td>Temporary (remove after patch)</td>
+<td>Permanent source dependency</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="q21-database-api-raw-sql-bridge-vs-ergonomic-wrapper">Q21 — Database API: Raw SQL Bridge vs. Ergonomic Wrapper<a class="headerlink" href="#q21-database-api-raw-sql-bridge-vs-ergonomic-wrapper" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> SQLite ships natively on both Android (<code>android.database.sqlite</code>) and iOS (<code>libsqlite3.dylib</code>), making it a core OS API that belongs in <code>@capsule/core</code> by Q16's rule. The question is what shape the TypeScript API should take.</p>
+<p><strong>Decision: Decided — closed. Two-layer ergonomic API with a <code>db</code> singleton.</strong></p>
+<p><strong>Why not expose raw SQL alone:</strong>
+A bridge that only exposes <code>{ sql, values }</code> objects forces every app to manage database handles explicitly, write boilerplate open/close logic on every screen, and wrap every call in a verbose options object. Web developers are not SQLite experts — exposing raw SQL as the <em>only</em> surface raises the floor too high.</p>
+<p><strong>Layer 1 — <code>db</code> singleton (covers 95% of apps):</strong></p>
+<p>The <code>db</code> export is a pre-opened singleton backed by <code>capsule.db</code>. No <code>open()</code> / <code>close()</code> required. The <code>collection()</code> API auto-manages schema — no migration files needed for simple cases. For raw SQL, use the <code>db.sql</code> tagged template with full parameterization.</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">db</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@capsule/core'</span>
+
+<span class="c1">// Zero-SQL CRUD — auto-schema</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="o">&lt;</span><span class="nx">Note</span><span class="o">&gt;</span><span class="p">(</span><span class="s1">'notes'</span><span class="p">)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">note</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">notes</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">'Hello'</span><span class="w"> </span><span class="p">})</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">all</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">notes</span><span class="p">.</span><span class="nx">getAll</span><span class="p">()</span>
+
+<span class="c1">// Raw SQL when you need joins or aggregates — values always parameterized</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">recent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">sql</span><span class="o">&lt;</span><span class="nx">Note</span><span class="p">[]</span><span class="o">&gt;</span><span class="sb">`SELECT * FROM notes ORDER BY id DESC LIMIT 20`</span>
+</code></pre></div>
+<p><strong>Layer 2 — <code>db.collection()</code> for zero-SQL CRUD:</strong></p>
+<p>For tables with simple access patterns, <code>db.collection&lt;T&gt;('name')</code> returns a typed handle with <code>add</code>, <code>get</code>, <code>getAll</code>, <code>where</code>, <code>update</code>, <code>remove</code>. No SQL written. Falls through to <code>db.sql</code> the moment you need joins or complex filters — the two layers compose naturally.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="o">&lt;</span><span class="nx">Note</span><span class="o">&gt;</span><span class="p">(</span><span class="s1">'notes'</span><span class="p">)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">note</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">notes</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">'Hello'</span><span class="w"> </span><span class="p">})</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">all</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">notes</span><span class="p">.</span><span class="nx">getAll</span><span class="p">()</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">one</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">notes</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">note</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+</code></pre></div>
+<p><strong><code>database.open()</code> still available for advanced use:</strong></p>
+<p>Multi-database apps and encrypted databases use <code>database.open({ name, encrypted, encryptionKey })</code>, which returns a <code>DatabaseHandle</code> with the same <code>all/first/run/transaction/schema</code> methods. This is the escape hatch — not the default path.</p>
+<p><strong><code>preferences</code> for key-value storage:</strong></p>
+<p>The <code>preferences</code> capability (<code>SharedPreferences</code> / <code>UserDefaults</code>) is a separate export for lightweight persistent flags, tokens, and settings. It is not SQLite — it has no query capability and is not a substitute for <code>db</code>.</p>
+<p><strong>Rationale:</strong> The layered design follows the same principle as <code>@capsule/core</code> overall — zero-config default that works for the common case, with explicit escape hatches for advanced needs. A developer who only needs to store a list of items should never need to know what SQLite is.</p>
+<p><strong>Rejected alternatives:</strong>
+- <strong>Raw SQL bridge only</strong> — Too verbose for simple use cases. Every app writes the same open/close/schema boilerplate.
+- <strong>ORM bundled in the shell</strong> — Shell binary size penalty for apps that don't use complex queries. Opinionated schema definition conflicts with code-first and migration-first approaches. Community ORMs (Drizzle, Kysely) can target the <code>db</code> bridge natively.
+- <strong>IndexedDB / localStorage on web layer only</strong> — No cross-platform backup, limited query capability, size-constrained by the OS WebView storage quota. Not reliable for production app data.</p>
+<hr />
+<h2 id="q22-ai-llm-inference-agents-ownership-and-shape">Q22 — AI / LLM Inference &amp; Agents: Ownership and Shape<a class="headerlink" href="#q22-ai-llm-inference-agents-ownership-and-shape" title="Permanent link">&para;</a></h2>
+<p><strong>Context:</strong> Every platform is being asked for AI. Q16's rule (OS API → <code>@capsule/core</code>) plus the fact
+that the OS-native on-device models (Apple Foundation Models, Gemini Nano) only cover recent flagships
+raises the question of what an <code>ai</code> capability should be, and whether Capsule should also expose <em>agents</em>.</p>
+<p><strong>Decision: Proposed — see <a href="../0003-ai-and-agents/">adr-003</a> for the full record.</strong> Summary:</p>
+<ul>
+<li><strong><code>ai</code> is a core capability</strong> (<code>@capsule/core</code>, opt-in + tree-shaken per Q16), exposed as an <code>ai</code>
+  singleton via the standard <code>interface → provider → Fake → handler</code> pattern, with a <strong>provider behind
+  it</strong> like <code>geolocation</code>/<code>camera</code>.</li>
+<li><strong>Three tiers, one TS surface, hybrid by default:</strong> Tier 1 OS-native (flagship-only checkbox) · Tier 2
+  bundled engine (<strong>Cactus</strong> primary, <strong>llama.cpp</strong> escape hatch — universal, offline) · Tier 3 cloud
+  (the Phase-5 billing meter). <code>ai.availability()</code> reports the honest tier.</li>
+<li><strong>Agents = <code>@capsule/core/agent</code></strong> — a <em>thin</em> layer where the <strong>native bridge methods are the tool
+  surface</strong> (every Phase-3 API is a free agent tool), the loop runs in <strong>QuickJS</strong> (inference is a bridge
+  call, never in QuickJS), and agent definitions are <strong>OTA-updatable</strong> via Server Code Push. We do <strong>not</strong>
+  build a LangChain-style framework; tool protocol likely <strong>MCP</strong>.</li>
+<li><strong>Constraints (inherit the Phase-3 OTA rules):</strong> models persist <strong>outside</strong> the OTA bundle dirs;
+  <code>ai</code> carries a native-capability version for OTA gating; a per-tool <strong>permission model</strong> for agent tools.</li>
+<li><strong>Phasing:</strong> Tier-1 <code>ai</code> spike in late Phase 3; iOS Tier-1 in Phase 4; Tier 2/3 + agent layer +
+  OTA-updatable agent logic in Phase 6. <strong>Gates before Tier 2+:</strong> confirm Cactus license + <code>.cact</code>
+  longevity (keep the GGUF/llama.cpp escape hatch), MCP-vs-custom tool protocol, tool-permission UX,
+  model-distribution + default tier-escalation policy.</li>
+</ul>
+<hr />
+<h1 id="part-2-implementation-decisions">Part 2 — Implementation Decisions<a class="headerlink" href="#part-2-implementation-decisions" title="Permanent link">&para;</a></h1>
+<p>Decisions that must be made before the relevant phase starts. Ordered by urgency.</p>
+<hr />
+<h2 id="phase-1-foundation">Phase 1 — Foundation<a class="headerlink" href="#phase-1-foundation" title="Permanent link">&para;</a></h2>
+<h3 id="d1-apk-debug-keystore-for-capsule-build-android-release">D1: APK debug keystore for <code>capsule build android --release</code><a class="headerlink" href="#d1-apk-debug-keystore-for-capsule-build-android-release" title="Permanent link">&para;</a></h3>
+<p><strong>Context</strong>: Phase 1 uses a debug keystore for <code>--release</code> builds (real signing lands with publishing in Phase 8+; Fastlane automation in Phase 9 DX). Needs a clear behavior when no keystore is configured.</p>
+<p><strong>Options</strong>:
+- <strong>A — Delegate to Gradle</strong> — Let Gradle use its own auto-generated debug keystore (<code>~/.android/debug.keystore</code>). Zero CLI code. Familiar to Android devs. Capsule just runs <code>./gradlew assembleRelease</code> without injecting signing config. <em>(Recommended — aligns with "shell is a dependency" philosophy: native tooling handles native things)</em>
+- <strong>B — Auto-generate at <code>~/.capsule/debug.keystore</code></strong> — CLI generates a debug keystore once on first build if none found. Capsule-managed, consistent path, no dependency on Android Studio having run first.
+- <strong>C — Require explicit config</strong> — Developer must add <code>android.signing</code> block in <code>capsule.config.ts</code>. Fails with a clear error if missing. Most explicit, most friction for first build.</p>
+<p><strong>Needed before</strong>: Implementing <code>capsule build android --release</code> (Step 3.7).</p>
+<p><strong>Status</strong>: ✅ <strong>DECIDED — Option A (Delegate to Gradle)</strong>
+Gradle auto-manages <code>~/.android/debug.keystore</code>. CLI runs <code>./gradlew assembleRelease</code> without injecting signing config. No CLI keystore code in Phase 1.</p>
+<hr />
+<h2 id="phase-2-embedded-runtime">Phase 2 — Embedded Runtime<a class="headerlink" href="#phase-2-embedded-runtime" title="Permanent link">&para;</a></h2>
+<h3 id="d2-wasm-runtime-wamr-always-embedded-vs-on-demand">D2: WASM runtime (WAMR) — always embedded vs. on-demand<a class="headerlink" href="#d2-wasm-runtime-wamr-always-embedded-vs-on-demand" title="Permanent link">&para;</a></h3>
+<p><strong>Context</strong>: WAMR (~500KB native binary) enables WASM integrations (Q18 above). If always embedded, every app pays the size penalty even if unused.</p>
+<p><strong>Options</strong>:
+- <strong>A — Always embedded</strong> — WAMR is compiled into the AAR for all shells. Simple, one shell variant, no conditional compilation. All apps pay ~500KB regardless.
+- <strong>B — On-demand via config flag</strong> — Shell is built with WAMR only when <code>capsule.config.ts</code> declares <code>wasm: { enabled: true }</code>. CLI downloads the correct AAR variant. Two AAR variants exist in the registry (<code>standard</code>, <code>wasm</code>). <em>(Recommended — aligns with tree-shaking philosophy)</em>
+- <strong>C — Separate plugin</strong> — WASM runtime ships as a first-party plugin <code>@capsule/wasm</code> that adds WAMR to the build. Developer installs only if needed. Cleanest API surface, but adds complexity to the plugin system before it matures.</p>
+<p><strong>Needed before</strong>: Building the shell registry and the second AAR publish (Phase 2).</p>
+<p><strong>Status</strong>: ✅ <strong>DECIDED — Option C (<code>@capsule/wasm</code> first-party plugin)</strong>
+WASM runtime (WAMR) ships as <code>@capsule/wasm</code>, not in the shell. Aligns with the core architectural principle: shell = native OS capabilities only; code-logic integrations = plugins. Community WASM plugin authors declare <code>@capsule/wasm</code> as a peer dependency.</p>
+<hr />
+<h2 id="phase-3-native-apis-expansion">Phase 3 — Native APIs Expansion<a class="headerlink" href="#phase-3-native-apis-expansion" title="Permanent link">&para;</a></h2>
+<h3 id="d3-plugin-override-fallthrough-semantics-for-partial-overrides">D3: Plugin override — fallthrough semantics for partial overrides<a class="headerlink" href="#d3-plugin-override-fallthrough-semantics-for-partial-overrides" title="Permanent link">&para;</a></h3>
+<p><strong>Context</strong>: <code>capsule override camera</code> scaffolds a patch class. If the override only implements some methods, what happens to unimplemented ones?</p>
+<p><strong>Options</strong>:
+- <strong>A — Silent fallthrough</strong> — Unimplemented methods in the override delegate automatically to the built-in handler. No error. Developer gets partial patch behavior by default. <em>(Recommended — lowest friction, least surprising)</em>
+- <strong>B — Explicit delegation required</strong> — Override must call <code>super.methodName(call)</code> to delegate. Unimplemented methods → error 1002 <code>METHOD_NOT_FOUND</code>. Explicit, but breaks anything not consciously delegated.
+- <strong>C — Runtime warning + fallthrough</strong> — Silently falls through (like A) but logs a warning in debug mode: <code>[Capsule] Override for camera.capture not found — falling back to built-in</code>. Best of both worlds for discoverability.</p>
+<p><strong>Needed before</strong>: Implementing <code>capsule override</code> CLI command and the registry dispatch system.</p>
+<p><strong>Status</strong>: ✅ <strong>DECIDED — Option A (silent fallthrough) + full scaffold</strong>
+<code>capsule override &lt;capability&gt;</code> scaffolds a class with ALL capability methods listed (so developer sees the full surface and TypeScript enforces signatures). Developer deletes methods they don't want to touch — deleted methods fall through to the built-in at runtime silently. Methods kept in the class run as the override. No runtime warnings.</p>
+<h3 id="d4-encrypted-database-key-management-model">D4: Encrypted database — key management model<a class="headerlink" href="#d4-encrypted-database-key-management-model" title="Permanent link">&para;</a></h3>
+<p><strong>Context</strong>: The <code>db</code> API (<code>../reference/core-api.md</code>) supports encryption, but key derivation, storage, and rotation are unspecified. This is a security contract that cannot be retrofitted after apps ship.</p>
+<p><strong>Options</strong>:
+- <strong>A — Developer-supplied key</strong> — Developer provides the key explicitly: <code>database.open('secure.db', { key: derivedKey })</code>. Capsule stores nothing. Developer is responsible for key derivation and secure storage (e.g., using the biometrics API). <em>(Recommended — most flexible, no opinion on key derivation)</em>
+- <strong>B — Capsule-managed key via secure storage</strong> — CLI generates a per-app key stored in Android Keystore / iOS Secure Enclave. Transparent to developer. <code>db</code> is encrypted by default with zero config. No rotation support without a migration.
+- <strong>C — Two-tier</strong> — <code>db</code> (unencrypted, default) + <code>database.open('path', { key })</code> (developer-supplied key for sensitive data). Q21 already implies this split — just needs the key contract documented explicitly.</p>
+<p><strong>Needed before</strong>: Implementing the database capability in Phase 3.</p>
+<p><strong>Status</strong>: ✅ <strong>DECIDED — Combined A+B API + Option C for encryption</strong></p>
+<p><code>db</code> exposes two complementary APIs on the same SQLite engine:
+- <code>db.collection&lt;T&gt;()</code> — zero-SQL CRUD with query builder + sync hooks (<code>changesSince</code> / <code>applyChanges</code>). Auto-manages table schema. No migrations needed for simple cases.
+- <code>db.sql</code> tagged template literal — full SQLite access for joins, aggregates, DDL. Values always parameterized (no injection risk). Collection tables and raw SQL tables share the same database file.
+- <code>db.schema()</code> — manual migrations only for raw SQL managed tables.
+- <code>db.transaction()</code> — atomic operations spanning both APIs.</p>
+<p><code>database.open(name, { key })</code> = encrypted named database via SQLCipher. Same combined API. Developer supplies the key (Capsule never derives or stores it). Key typically retrieved via biometrics or secure preferences API.</p>
+<p>See <code>../reference/core-api.md</code> § db (planned additions) for the full TypeScript interface.</p>
+<hr />
+<h2 id="phase-8-ecosystem">Phase 8 — Ecosystem<a class="headerlink" href="#phase-8-ecosystem" title="Permanent link">&para;</a></h2>
+<h3 id="d5-differential-update-algorithm">D5: Differential update algorithm<a class="headerlink" href="#d5-differential-update-algorithm" title="Permanent link">&para;</a></h3>
+<p><strong>Context</strong>: The roadmap mentions "80% size reduction via delta bundles" but the algorithm is unspecified. The CodeSync server architecture depends on this choice.</p>
+<p><strong>Options</strong>:
+- <strong>A — bsdiff/bspatch</strong> — Binary diff at the bundle level. Industry standard (Chrome, Android OTA). ~80% reduction for incremental web changes. Mature implementations exist. Server generates the diff; client applies it. Complexity: medium (server must store previous bundle to diff against).
+- <strong>B — File-level content-addressed storage</strong> — Bundle is a ZIP. Server only transfers files with changed hashes. Simple to implement, no diff algorithm. Works well for many small changed files. Less effective for large minified bundles with small logical changes.
+- <strong>C — No differential (Phase 6 MVP)</strong> — Full bundle always. Decide delta strategy in Phase 6 after measuring real bundle sizes. Don't over-engineer before data exists. <em>(Pragmatic choice for the initial OTA cloud)</em></p>
+<p><strong>Needed before</strong>: Designing the CodeSync server storage model (Phase 6).</p>
+<p><strong>Status</strong>: ✅ <strong>DECIDED — Option B (file-level, content-addressed)</strong>
+CodeSync is a service pack / hotfix mechanism — not a full app update channel. A typical hotfix changes 1–3 Vite output chunks out of a 2MB bundle. Vite's content-hashed output (e.g. <code>chunk-abc123.js</code>) means unchanged files have identical hashes. Server stores all bundle files by content hash. Devices request only files they don't already have. In practice this transfers 10–50KB for a hotfix instead of 2MB. bsdiff (A) offers marginal additional gains (~5–10KB) at major complexity cost — not justified for this use case.</p>
+<hr />
+<h2 id="cross-phase">Cross-phase<a class="headerlink" href="#cross-phase" title="Permanent link">&para;</a></h2>
+<h3 id="d6-safe-area-insets-timing-contract">D6: Safe area insets — timing contract<a class="headerlink" href="#d6-safe-area-insets-timing-contract" title="Permanent link">&para;</a></h3>
+<p><strong>Context</strong>: Q6 above specifies that the shell injects <code>--sai-*</code> CSS custom properties. The timing relative to WebView loading is not defined. App CSS that reads <code>--sai-*</code> before injection = wrong layout on first paint.</p>
+<p><strong>Options</strong>:
+- <strong>A — Inject before navigation</strong> — Shell writes <code>--sai-*</code> via a <code>&lt;style&gt;</code> tag injected into the WebView configuration before the URL loads. Guaranteed available before any app CSS runs. Zero race condition.
+- <strong>B — Inject via <code>evaluateJavascript</code> + <code>capsule.ready()</code> promise</strong> — Shell fires the injection after <code>onPageFinished</code>. <code>@capsule/core</code> exposes <code>capsule.ready()</code> that resolves after insets are set. App code awaits <code>capsule.ready()</code> before reading <code>--sai-*</code>. Explicit contract.
+- <strong>C — Both</strong> — Inject known safe defaults (0px) before navigation, then update to real values after <code>onPageFinished</code>. No race condition, no <code>capsule.ready()</code> needed. First paint uses 0px; correct values arrive before any user interaction.</p>
+<p><strong>Needed before</strong>: Implementing safe area support in the shell (Phase 3 shell; iOS in Phase 4).</p>
+<p><strong>Status</strong>: ⬜ Undecided</p>
+<hr />
+<h1 id="part-3-embedded-runtime-decisions">Part 3 — Embedded Runtime Decisions<a class="headerlink" href="#part-3-embedded-runtime-decisions" title="Permanent link">&para;</a></h1>
+<p>These were decided together in <strong><a href="../0001-embedded-runtime/"><code>0001-embedded-runtime.md</code></a></strong>,
+which is the authoritative source — read it there. (This section previously restated those
+decisions inline as R1–R14; removed to avoid drift per <a href="../../_core/conventions/"><code>../_core/conventions.md</code></a>.)</p>
+<p>adr-001 covers: embedded server as router/SSR (not static serving) · <code>/capsule</code> vs <code>/api</code>
+namespace split · TypeScript + QuickJS route language · HTTP = data, bridge = events ·
+the QuickJSBridge (4th Bridge impl) · splash + timeout readiness · deterministic port hash from
+<code>appId</code> · two-process / one-command dev mode · file-based routing · server is optional ·
+two bundles deployed atomically · invisible infrastructure · the <code>CapsuleRuntime</code> coordinator ·
+interfaces + fakes as a mandatory pattern.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024-2026 Capsule Framework Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.highlight", "search.share", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,5 @@
+/* Page status (front matter `status:`, see docs/_core/conventions.md#doc-metadata).
+   Material marks every page that sets a status; most pages are `current`, so that one stays unmarked. */
+.md-status--current {
+  display: none;
+}

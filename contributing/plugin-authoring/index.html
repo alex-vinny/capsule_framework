@@ -1,0 +1,4843 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alex-vinny.github.io/capsule_framework/contributing/plugin-authoring/">
+      
+      
+        <link rel="prev" href="../codesync-internals/">
+      
+      
+        <link rel="next" href="../template-authoring/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Plugin authoring - Capsule Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#capsule-framework-community-integration-authoring-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Capsule Framework" class="md-header__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Capsule Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Plugin authoring
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guide/installation/" class="md-tabs__link">
+          
+  
+  
+  Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/cli/" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/architecture/" class="md-tabs__link">
+          
+  
+  
+  Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../decisions/" class="md-tabs__link">
+          
+  
+  
+  Decisions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../project/roadmap/" class="md-tabs__link">
+          
+  
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Capsule Framework" class="md-nav__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Capsule Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/hello-world/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hello World
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/push-notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Push Notifications
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/alerts-styling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alerts Styling
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/mobile-css-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile CSS Reset
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/publishing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publishing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ota-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Over-the-air Updates
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/core-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/lockfile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lockfile
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generated
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generated
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/docs-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Principles
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/capsule-vs-ionic-capacitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    vs Ionic/Capacitor
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/extensibility-and-positioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extensibility & Positioning
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/ionic-framework7-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ionic Framework 7 Migration
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Primers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/kotlin-for-csharp-devs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kotlin for C# Devs
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/jni-and-cpp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JNI & C
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/civetweb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CivetWeb
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/quickjs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QuickJS
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decisions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0001-embedded-runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0001 Embedded Runtime
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0002-capsule-ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0002 Capsule UI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0003-ai-and-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0003 AI & Agents
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0004-web-serving-transport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0004 Web Serving Transport
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../codesync-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CodeSync Internals
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start-your-first-integration-in-5-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Start — Your First Integration in 5 Minutes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plugin-minsdk-conflict-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin minSdk Conflict Behavior
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capsule-pluginjson-plugin-manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        capsule-plugin.json — Plugin Manifest
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="capsule-plugin.json — Plugin Manifest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#all-manifest-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        All manifest fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gradle-cocoapods-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gradle / CocoaPods Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#android-capsuleplugin-base-class-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Android — CapsulePlugin Base Class API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Android — CapsulePlugin Base Class API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#capsuleplugin-helpers-inherited" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CapsulePlugin helpers (inherited)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#android-bridgecall-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Android — BridgeCall API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Android — BridgeCall API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reading-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sending-responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sending responses
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ios-capsuleplugin-base-class-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iOS — CapsulePlugin Base Class API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iOS — CapsulePlugin Base Class API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#capsuleplugin-helpers-inherited_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CapsulePlugin helpers (inherited)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ios-bridgecall-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iOS — BridgeCall API
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#typescript-web-bridge-webindexts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TypeScript — Web Bridge (web/index.ts)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TypeScript — Web Bridge (web/index.ts)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#capsulecore-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @capsule/core API
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#app-developer-usage-end-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        App Developer Usage (end result)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-generating-typescript-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-generating TypeScript Types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platform-conditional-code-in-the-web-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Platform-Conditional Code in the Web Bridge
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plugin-development-loop-hot-reload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Development Loop &amp; Hot Reload
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plugin Development Loop &amp; Hot Reload">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#web-layer-changes-typescript-webindexts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Web layer changes (TypeScript / web/index.ts)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#native-layer-changes-kt-swift-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Native layer changes (.kt / .swift / .c)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plugin-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plugin Testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plugin Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-a-method-directly-on-a-running-emulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test a method directly on a running emulator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-check-the-web-bridge-against-native-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Type-check the web bridge against native annotations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publishing-a-plugin-to-npm-mode-1-binary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publishing a Plugin to npm (Mode 1 Binary)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complete-worked-example-capsulestorage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complete Worked Example — @capsule/storage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Complete Worked Example — @capsule/storage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#capsule-pluginjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        capsule-plugin.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#androidstoragekt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        android/Storage.kt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iosstorageswift" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ios/Storage.swift
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webindexts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        web/index.ts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-reference-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Reference Card
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../template-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Template Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ios-bring-up/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iOS Bring-up
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../platform-parity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android/iOS Parity
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upkeep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_14" id="__nav_6_14_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Workflows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/add-native-api/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add Native API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/author-plugin/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Author Plugin
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/upkeep-sweep/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep Sweep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/known-issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known Issues
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_6" id="__nav_7_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Incidents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Incidents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/incidents/2026-10-embedded-server-startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-10 Embedded Server Startup
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_7" id="__nav_7_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/2026-06-24-planning-brainstorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-24 Planning Brainstorm
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/chatgpt-first-impressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT First Impressions
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/chatgpt-plugin-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT Plugin Compatibility
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_8" id="__nav_7_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Business
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/business-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Model
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/pricing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pricing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/ota-policy-and-liability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Policy & Liability
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_9" id="__nav_7_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Server Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Server Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/file-storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Storage
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/workers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workers
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="capsule-framework-community-integration-authoring-guide">Capsule Framework — Community Integration Authoring Guide<a class="headerlink" href="#capsule-framework-community-integration-authoring-guide" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>For authors building third-party SDK wrappers or custom integrations. Core platform capabilities (camera, GPS, push, NFC, Bluetooth, haptics, biometrics, filesystem, etc.) are already part of <code>@capsule/core</code> — you do not need to build plugins for OS APIs that ship with the platform.</p>
+<p>Use this guide when wrapping: Google Maps, Stripe, Braintree, Firebase, Facebook Auth, or any SDK that requires a third-party dependency. For bridge internals and language feasibility see <code>plugins.md</code>.</p>
+</blockquote>
+<hr />
+<h2 id="quick-start-your-first-integration-in-5-minutes">Quick Start — Your First Integration in 5 Minutes<a class="headerlink" href="#quick-start-your-first-integration-in-5-minutes" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Scaffold a new community integration</span>
+capsule<span class="w"> </span>plugin<span class="w"> </span>create<span class="w"> </span>google-maps
+
+<span class="c1"># Result:</span>
+<span class="c1"># capsule-plugins/</span>
+<span class="c1">#   google-maps/</span>
+<span class="c1">#     capsule-plugin.json</span>
+<span class="c1">#     android/GoogleMapsIntegration.kt</span>
+<span class="c1">#     ios/GoogleMapsIntegration.swift</span>
+<span class="c1">#     web/index.ts</span>
+</code></pre></div>
+<p>Declare it in <code>capsule.config.ts</code>:
+<div class="highlight"><pre><span></span><code><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">'./capsule-plugins/google-maps'</span><span class="p">]</span>
+</code></pre></div></p>
+<p>Run <code>capsule build android</code> — your integration compiles alongside the app. Done.</p>
+<hr />
+<h2 id="file-structure">File Structure<a class="headerlink" href="#file-structure" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>capsule-plugins/
+  barcode/
+    capsule-plugin.json      ← required: metadata, permissions, dependencies, platform declarations
+    proguard.rules           ← optional: R8 keep rules (merged by CLI into proguard-rules.pro)
+    android/
+      BarcodeScanner.kt      ← Kotlin implementation (or .java)
+    ios/
+      BarcodeScanner.swift   ← Swift implementation
+    web/
+      index.ts               ← TypeScript bridge (web-facing API)
+      index.d.ts             ← auto-generated types (from `capsule generate types`)
+</code></pre></div>
+<p>All files are optional per platform. A web-only plugin needs only <code>web/index.ts</code>. An Android-only plugin needs only <code>android/</code> + <code>web/index.ts</code>.</p>
+<hr />
+<h2 id="plugin-minsdk-conflict-behavior">Plugin minSdk Conflict Behavior<a class="headerlink" href="#plugin-minsdk-conflict-behavior" title="Permanent link">&para;</a></h2>
+<p>When a source plugin's <code>capsule-plugin.json</code> declares a higher <code>minSdk</code> than the app's <code>capsule.config.ts</code>:</p>
+<div class="highlight"><pre><span></span><code>App:    android.minSdk: 26
+Plugin: android.minSdk: 30
+</code></pre></div>
+<p><strong>CLI behavior at <code>capsule sync</code> / <code>capsule build</code></strong>:</p>
+<div class="highlight"><pre><span></span><code>⚠ Warning: Plugin "barcode" requires minSdk 30 (Android 11).
+  The app targets minSdk 26 (Android 8.0).
+  Devices on Android 8.0–10.x will not load this plugin.
+  Plugin methods will return error 3001 (PLUGIN_UNAVAILABLE) on unsupported devices.
+
+  Options:
+  → Raise app minSdk to 30:  set android.minSdk: 30 in capsule.config.ts
+  → Accept the limitation:   the plugin loads silently only on Android 11+
+</code></pre></div>
+<p>The plugin is <strong>not removed</strong> and the build does not fail — it compiles and ships with the app. On devices below the plugin's <code>minSdk</code>, the Capsule bridge returns a typed error:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Web layer should handle this</span>
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">barcode</span><span class="p">.</span><span class="nx">scan</span><span class="p">()</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">code</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">3001</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Plugin unavailable on this device/OS version</span>
+<span class="w">    </span><span class="nx">showFallbackUI</span><span class="p">()</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>When a plugin genuinely cannot support older Android</strong> (the warning is accurate):
+- Uses <code>CameraX</code> 1.3+ (requires API 28)
+- Uses <code>BiometricPrompt</code> (API 28)
+- Uses Foreground Service types (API 29)
+- Uses exact <code>AlarmManager</code> scheduling (API 31)
+- Uses Bluetooth LE with new permission model (API 31)
+- Uses <code>UsbManager</code> new APIs (API 31)</p>
+<p>In these cases, raise the app's <code>minSdk</code> or document the device requirement clearly.</p>
+<hr />
+<h2 id="capsule-pluginjson-plugin-manifest"><code>capsule-plugin.json</code> — Plugin Manifest<a class="headerlink" href="#capsule-pluginjson-plugin-manifest" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"barcode"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Barcode and QR code scanner"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"platforms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"android"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ios"</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"sourceRepo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/you/capsule-plugin-barcode"</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nt">"android"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"CAMERA"</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"minSdk"</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">"com.google.zxing:core:3.5.0"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"androidx.camera:camera-core:1.3.0"</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">"ios"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"infoPlist"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"NSCameraUsageDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Used to scan barcodes"</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">    </span><span class="nt">"podDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="all-manifest-fields">All manifest fields<a class="headerlink" href="#all-manifest-fields" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Yes</td>
+<td>Plugin identifier — used as the bridge prefix (<code>barcode.scan</code>)</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>Yes</td>
+<td>Semver</td>
+</tr>
+<tr>
+<td><code>platforms</code></td>
+<td>Yes</td>
+<td><code>["android"]</code>, <code>["ios"]</code>, or <code>["android", "ios"]</code></td>
+</tr>
+<tr>
+<td><code>android.permissions</code></td>
+<td>No</td>
+<td>Android manifest permissions (no <code>android.permission.</code> prefix)</td>
+</tr>
+<tr>
+<td><code>android.minSdk</code></td>
+<td>No</td>
+<td>Override app minSdk for this plugin</td>
+</tr>
+<tr>
+<td><code>android.dependencies</code></td>
+<td>No</td>
+<td>Maven coordinates — CLI merges into generated <code>build.gradle</code> (see below)</td>
+</tr>
+<tr>
+<td><code>ios.infoPlist</code></td>
+<td>No</td>
+<td>Keys injected into <code>Info.plist</code></td>
+</tr>
+<tr>
+<td><code>ios.capabilities</code></td>
+<td>No</td>
+<td>Xcode capabilities (<code>push-notifications</code>, <code>nfc</code>, etc.)</td>
+</tr>
+<tr>
+<td><code>ios.podDependencies</code></td>
+<td>No</td>
+<td>CocoaPods dependencies — <code>[{ "name": "ZXingObjC", "version": "~&gt; 3.6" }]</code></td>
+</tr>
+<tr>
+<td><code>sourceRepo</code></td>
+<td><strong>Required for <code>@capsule-community/*</code></strong></td>
+<td>Git URL — enables <code>capsule eject</code>. Without this field, <code>capsule plugin publish</code> rejects publishing under the community scope.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="gradle-cocoapods-dependencies">Gradle / CocoaPods Dependencies<a class="headerlink" href="#gradle-cocoapods-dependencies" title="Permanent link">&para;</a></h2>
+<p>Declare third-party dependencies your plugin needs. The CLI collects these at <code>capsule sync</code> time, resolves conflicts across all installed plugins, and injects into the generated build files — no Gradle knowledge required.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">"android"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">"com.google.zxing:core:3.5.0"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"androidx.camera:camera-core:1.3.0"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"androidx.camera:camera-lifecycle:1.3.0"</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Conflict resolution:</strong> If two plugins require the same <code>groupId:artifactId</code> at different versions, the CLI applies "highest compatible version wins" (mirrors Gradle default) and prints a summary at <code>capsule sync</code>. Hard errors only when versions are in different majors — CLI names exactly which plugins conflict. Developers can use <code>android.gradleOverrides</code> as a last resort.</p>
+<p><strong>ProGuard / R8:</strong> If your plugin uses reflection, ship a <code>proguard.rules</code> file at the plugin root:
+<div class="highlight"><pre><span></span><code># proguard.rules
+-keep class com.example.myplugin.** { *; }
+</code></pre></div>
+The CLI merges this into the generated <code>proguard-rules.pro</code>. Without a <code>proguard.rules</code> file, the CLI adds a conservative blanket <code>-keep</code> for your plugin's package — safe but less optimized. R8 is enabled by default on release builds.</p>
+<hr />
+<h2 id="android-capsuleplugin-base-class-api">Android — <code>CapsulePlugin</code> Base Class API<a class="headerlink" href="#android-capsuleplugin-base-class-api" title="Permanent link">&para;</a></h2>
+<p>Every Android plugin extends <code>CapsulePlugin</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">dev.capsule.bridge.CapsulePlugin</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">dev.capsule.bridge.CapsuleBridge</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">dev.capsule.bridge.BridgeCall</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">dev.capsule.bridge.BridgeMethod</span>
+
+<span class="nd">@CapsulePlugin</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"barcode"</span><span class="p">)</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">BarcodeScanner</span><span class="p">(</span><span class="n">bridge</span><span class="p">:</span><span class="w"> </span><span class="n">CapsuleBridge</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">CapsulePlugin</span><span class="p">(</span><span class="n">bridge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// ─── Called once when the app starts ──────────────────────────────────────</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">load</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// initialize resources, open connections</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// ─── Called when app goes to background ───────────────────────────────────</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">pause</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* release camera */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// ─── Called when app returns to foreground ────────────────────────────────</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">resume</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* reacquire */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// ─── Called when app is destroyed ─────────────────────────────────────────</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">destroy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* close DB, free memory */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// ─── Plugin methods — exposed to JS via @BridgeMethod ─────────────────────</span>
+<span class="w">    </span><span class="nd">@BridgeMethod</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">scan</span><span class="p">(</span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">quality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">getFloat</span><span class="p">(</span><span class="s">"quality"</span><span class="p">,</span><span class="w"> </span><span class="m">0.8f</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">facing</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">"facing"</span><span class="p">,</span><span class="w"> </span><span class="s">"back"</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">onMain</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// UI work must run on main thread</span>
+<span class="w">            </span><span class="n">startCameraIntent</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">                </span><span class="n">call</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">mapOf</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">"value"</span><span class="w">  </span><span class="n">to</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">rawValue</span><span class="p">,</span>
+<span class="w">                    </span><span class="s">"format"</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">format</span>
+<span class="w">                </span><span class="p">))</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@BridgeMethod</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">getFlash</span><span class="p">(</span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">call</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">mapOf</span><span class="p">(</span><span class="s">"enabled"</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">isFlashOn</span><span class="p">()))</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@BridgeMethod</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">setFlash</span><span class="p">(</span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">getBoolean</span><span class="p">(</span><span class="s">"enable"</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<span class="w">        </span><span class="n">setFlashEnabled</span><span class="p">(</span><span class="n">enable</span><span class="p">)</span>
+<span class="w">        </span><span class="n">call</span><span class="p">.</span><span class="na">resolve</span><span class="p">()</span><span class="w">           </span><span class="c1">// resolve with no data</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="capsuleplugin-helpers-inherited"><code>CapsulePlugin</code> helpers (inherited)<a class="headerlink" href="#capsuleplugin-helpers-inherited" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Thread dispatchers</span>
+<span class="n">onMain</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* run on UI thread */</span><span class="w"> </span><span class="p">}</span>
+<span class="n">onIO</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="cm">/* run on IO thread (suspend) */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// Access to Android context</span>
+<span class="n">bridge</span><span class="p">.</span><span class="na">context</span><span class="w">        </span><span class="c1">// Application context</span>
+<span class="n">bridge</span><span class="p">.</span><span class="na">activity</span><span class="w">       </span><span class="c1">// Current Activity</span>
+<span class="n">bridge</span><span class="p">.</span><span class="na">webView</span><span class="w">        </span><span class="c1">// The WebView instance</span>
+
+<span class="c1">// Emit an event to the web layer (no active JS call needed)</span>
+<span class="n">emit</span><span class="p">(</span><span class="s">"barcode.onScanResult"</span><span class="p">,</span><span class="w"> </span><span class="n">mapOf</span><span class="p">(</span><span class="s">"value"</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="s">"123"</span><span class="p">,</span><span class="w"> </span><span class="s">"format"</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="s">"QR"</span><span class="p">))</span>
+</code></pre></div>
+<hr />
+<h2 id="android-bridgecall-api">Android — <code>BridgeCall</code> API<a class="headerlink" href="#android-bridgecall-api" title="Permanent link">&para;</a></h2>
+<p>The <code>call</code> object is your window into the JS request and your way to respond.</p>
+<h3 id="reading-parameters">Reading parameters<a class="headerlink" href="#reading-parameters" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Strings</span>
+<span class="n">call</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">"key"</span><span class="p">)</span><span class="w">                  </span><span class="c1">// String? — null if missing</span>
+<span class="n">call</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">"key"</span><span class="p">,</span><span class="w"> </span><span class="s">"default"</span><span class="p">)</span><span class="w">       </span><span class="c1">// String  — with default</span>
+
+<span class="c1">// Numbers</span>
+<span class="n">call</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="s">"key"</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w">                  </span><span class="c1">// Int</span>
+<span class="n">call</span><span class="p">.</span><span class="na">getLong</span><span class="p">(</span><span class="s">"key"</span><span class="p">,</span><span class="w"> </span><span class="m">0L</span><span class="p">)</span><span class="w">                </span><span class="c1">// Long</span>
+<span class="n">call</span><span class="p">.</span><span class="na">getFloat</span><span class="p">(</span><span class="s">"key"</span><span class="p">,</span><span class="w"> </span><span class="m">0f</span><span class="p">)</span><span class="w">              </span><span class="c1">// Float</span>
+<span class="n">call</span><span class="p">.</span><span class="na">getDouble</span><span class="p">(</span><span class="s">"key"</span><span class="p">,</span><span class="w"> </span><span class="m">0.0</span><span class="p">)</span><span class="w">            </span><span class="c1">// Double</span>
+
+<span class="c1">// Boolean</span>
+<span class="n">call</span><span class="p">.</span><span class="na">getBoolean</span><span class="p">(</span><span class="s">"key"</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w">          </span><span class="c1">// Boolean</span>
+
+<span class="c1">// Nested object (as Map)</span>
+<span class="n">call</span><span class="p">.</span><span class="na">getObject</span><span class="p">(</span><span class="s">"options"</span><span class="p">)</span><span class="w">              </span><span class="c1">// Map&lt;String, Any&gt;?</span>
+
+<span class="c1">// Array</span>
+<span class="n">call</span><span class="p">.</span><span class="na">getArray</span><span class="p">(</span><span class="s">"items"</span><span class="p">)</span><span class="w">                 </span><span class="c1">// List&lt;Any&gt;?</span>
+
+<span class="c1">// Check presence</span>
+<span class="n">call</span><span class="p">.</span><span class="na">has</span><span class="p">(</span><span class="s">"key"</span><span class="p">)</span><span class="w">                        </span><span class="c1">// Boolean</span>
+
+<span class="c1">// Raw JSON string of all params</span>
+<span class="n">call</span><span class="p">.</span><span class="na">paramsJson</span><span class="w">                        </span><span class="c1">// String</span>
+</code></pre></div>
+<h3 id="sending-responses">Sending responses<a class="headerlink" href="#sending-responses" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Resolve with data</span>
+<span class="n">call</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">mapOf</span><span class="p">(</span><span class="s">"value"</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="s">"hello"</span><span class="p">,</span><span class="w"> </span><span class="s">"count"</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="m">42</span><span class="p">))</span>
+
+<span class="c1">// Resolve with no data (void method)</span>
+<span class="n">call</span><span class="p">.</span><span class="na">resolve</span><span class="p">()</span>
+
+<span class="c1">// Reject with an error code and message</span>
+<span class="n">call</span><span class="p">.</span><span class="na">reject</span><span class="p">(</span><span class="m">2001</span><span class="p">,</span><span class="w"> </span><span class="s">"Camera permission denied"</span><span class="p">)</span>
+
+<span class="c1">// Capsule standard error codes (matches known-issues.md bridge spec):</span>
+<span class="c1">// 1xxx — framework/bridge errors (reserved for framework)</span>
+<span class="c1">// 2xxx — permission errors</span>
+<span class="c1">// 3xxx — hardware/resource errors (camera unavailable, not found)</span>
+<span class="c1">// 4xxx — plugin-specific logic errors</span>
+<span class="c1">// 5xxx — user cancellation</span>
+</code></pre></div>
+<hr />
+<h2 id="ios-capsuleplugin-base-class-api">iOS — <code>CapsulePlugin</code> Base Class API<a class="headerlink" href="#ios-capsuleplugin-base-class-api" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kd">import</span><span class="w"> </span><span class="nc">CapsuleBridge</span>
+
+<span class="p">@</span><span class="n">CapsulePlugin</span><span class="p">(</span><span class="s">"barcode"</span><span class="p">)</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">BarcodeScanner</span><span class="p">:</span><span class="w"> </span><span class="n">CapsulePlugin</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// ─── Called once when the app starts ──────────────────────────────────────</span>
+<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">load</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">pause</span><span class="p">()</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">resume</span><span class="p">()</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">destroy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// ─── Plugin methods ────────────────────────────────────────────────────────</span>
+<span class="w">    </span><span class="p">@</span><span class="n">BridgeMethod</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">scan</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">quality</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="n">getFloat</span><span class="p">(</span><span class="s">"quality"</span><span class="p">)</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="mf">0.8</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">facing</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="s">"facing"</span><span class="p">)</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="s">"back"</span>
+
+<span class="w">        </span><span class="c1">// WKScriptMessageHandler delivers on main thread — safe to do UI work directly</span>
+<span class="w">        </span><span class="n">startCamera</span><span class="p">(</span><span class="n">quality</span><span class="p">:</span><span class="w"> </span><span class="n">quality</span><span class="p">,</span><span class="w"> </span><span class="n">facing</span><span class="p">:</span><span class="w"> </span><span class="n">facing</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="k">in</span>
+<span class="w">            </span><span class="n">call</span><span class="p">.</span><span class="n">resolve</span><span class="p">([</span>
+<span class="w">                </span><span class="s">"value"</span><span class="p">:</span><span class="w">  </span><span class="n">result</span><span class="p">.</span><span class="n">rawValue</span><span class="p">,</span>
+<span class="w">                </span><span class="s">"format"</span><span class="p">:</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">format</span>
+<span class="w">            </span><span class="p">])</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="p">@</span><span class="n">BridgeMethod</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">getFlash</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">call</span><span class="p">.</span><span class="n">resolve</span><span class="p">([</span><span class="s">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="n">isFlashOn</span><span class="p">()])</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="p">@</span><span class="n">BridgeMethod</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">setFlash</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">enable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="n">getBool</span><span class="p">(</span><span class="s">"enable"</span><span class="p">)</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="n">setFlashEnabled</span><span class="p">(</span><span class="n">enable</span><span class="p">)</span>
+<span class="w">        </span><span class="n">call</span><span class="p">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="capsuleplugin-helpers-inherited_1"><code>CapsulePlugin</code> helpers (inherited)<a class="headerlink" href="#capsuleplugin-helpers-inherited_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Access</span>
+<span class="n">bridge</span><span class="p">.</span><span class="n">viewController</span><span class="w">     </span><span class="c1">// UIViewController</span>
+<span class="n">bridge</span><span class="p">.</span><span class="n">webView</span><span class="w">            </span><span class="c1">// WKWebView</span>
+
+<span class="c1">// Emit an event to the web layer</span>
+<span class="n">emit</span><span class="p">(</span><span class="s">"barcode.onScanResult"</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s">"value"</span><span class="p">:</span><span class="w"> </span><span class="s">"123"</span><span class="p">,</span><span class="w"> </span><span class="s">"format"</span><span class="p">:</span><span class="w"> </span><span class="s">"QR"</span><span class="p">])</span>
+
+<span class="c1">// Dispatch to a background queue for heavy work</span>
+<span class="n">DispatchQueue</span><span class="p">.</span><span class="n">global</span><span class="p">(</span><span class="n">qos</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">userInitiated</span><span class="p">).</span><span class="k">async</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">self</span><span class="p">.</span><span class="n">heavyComputation</span><span class="p">()</span>
+<span class="w">    </span><span class="n">call</span><span class="p">.</span><span class="n">resolve</span><span class="p">([</span><span class="s">"result"</span><span class="p">:</span><span class="w"> </span><span class="n">result</span><span class="p">])</span><span class="w">   </span><span class="c1">// resolve is thread-safe</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="ios-bridgecall-api">iOS — <code>BridgeCall</code> API<a class="headerlink" href="#ios-bridgecall-api" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Strings</span>
+<span class="n">call</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="s">"key"</span><span class="p">)</span><span class="w">                  </span><span class="c1">// String?</span>
+<span class="n">call</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="s">"key"</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="s">"val"</span><span class="p">)</span><span class="w">  </span><span class="c1">// String</span>
+
+<span class="c1">// Numbers</span>
+<span class="n">call</span><span class="p">.</span><span class="n">getInt</span><span class="p">(</span><span class="s">"key"</span><span class="p">)</span><span class="w">                     </span><span class="c1">// Int?</span>
+<span class="n">call</span><span class="p">.</span><span class="n">getFloat</span><span class="p">(</span><span class="s">"key"</span><span class="p">)</span><span class="w">                   </span><span class="c1">// Float?</span>
+<span class="n">call</span><span class="p">.</span><span class="n">getDouble</span><span class="p">(</span><span class="s">"key"</span><span class="p">)</span><span class="w">                  </span><span class="c1">// Double?</span>
+
+<span class="c1">// Boolean</span>
+<span class="n">call</span><span class="p">.</span><span class="n">getBool</span><span class="p">(</span><span class="s">"key"</span><span class="p">)</span><span class="w">                    </span><span class="c1">// Bool?</span>
+
+<span class="c1">// Nested</span>
+<span class="n">call</span><span class="p">.</span><span class="n">getObject</span><span class="p">(</span><span class="s">"options"</span><span class="p">)</span><span class="w">             </span><span class="c1">// [String: Any]?</span>
+<span class="n">call</span><span class="p">.</span><span class="n">getArray</span><span class="p">(</span><span class="s">"items"</span><span class="p">)</span><span class="w">                </span><span class="c1">// [Any]?</span>
+
+<span class="c1">// Presence</span>
+<span class="n">call</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="s">"key"</span><span class="p">)</span><span class="w">                       </span><span class="c1">// Bool</span>
+
+<span class="c1">// Respond</span>
+<span class="n">call</span><span class="p">.</span><span class="n">resolve</span><span class="p">([</span><span class="s">"key"</span><span class="p">:</span><span class="w"> </span><span class="n">value</span><span class="p">])</span><span class="w">          </span><span class="c1">// with data</span>
+<span class="n">call</span><span class="p">.</span><span class="n">resolve</span><span class="p">()</span><span class="w">                        </span><span class="c1">// no data</span>
+<span class="n">call</span><span class="p">.</span><span class="n">reject</span><span class="p">(</span><span class="mi">2001</span><span class="p">,</span><span class="w"> </span><span class="s">"Permission denied"</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="typescript-web-bridge-webindexts">TypeScript — Web Bridge (<code>web/index.ts</code>)<a class="headerlink" href="#typescript-web-bridge-webindexts" title="Permanent link">&para;</a></h2>
+<p>The web layer is what app developers import. Write it against <code>@capsule/core</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// capsule-plugins/barcode/web/index.ts</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">bridge</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@capsule/core'</span>
+
+<span class="c1">// ─── Types ────────────────────────────────────────────────────────────────────</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">ScanResult</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="nx">format</span><span class="o">:</span><span class="w"> </span><span class="s1">'QR'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'EAN13'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'CODE128'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'DATAMATRIX'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">ScanOptions</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">quality?</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w">          </span><span class="c1">// 0.0–1.0, default 0.8</span>
+<span class="w">  </span><span class="nx">facing</span><span class="o">?:</span><span class="w"> </span><span class="s1">'front'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'back'</span><span class="w"> </span><span class="c1">// default 'back'</span>
+<span class="p">}</span>
+
+<span class="c1">// ─── Plugin API ───────────────────────────────────────────────────────────────</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">barcode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * Open the camera and scan a barcode or QR code.</span>
+<span class="cm">   * Resolves when a code is detected or the user cancels.</span>
+<span class="cm">   */</span>
+<span class="w">  </span><span class="nx">scan</span><span class="p">(</span><span class="nx">options?</span><span class="o">:</span><span class="w"> </span><span class="kt">ScanOptions</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">ScanResult</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">bridge</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">'barcode.scan'</span><span class="p">,</span><span class="w"> </span><span class="nx">options</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">{})</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * Get current flash state.</span>
+<span class="cm">   */</span>
+<span class="w">  </span><span class="nx">getFlash</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="p">{</span><span class="w"> </span><span class="nx">enabled</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="p">}</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">bridge</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">'barcode.getFlash'</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * Enable or disable the camera flash.</span>
+<span class="cm">   */</span>
+<span class="w">  </span><span class="nx">setFlash</span><span class="p">(</span><span class="nx">enable</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">bridge</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">'barcode.setFlash'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">enable</span><span class="w"> </span><span class="p">})</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * Subscribe to continuous scan results.</span>
+<span class="cm">   * Returns an unsubscribe function.</span>
+<span class="cm">   */</span>
+<span class="w">  </span><span class="nx">onScanResult</span><span class="p">(</span><span class="nx">handler</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kt">ScanResult</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">bridge</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'barcode.onScanResult'</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="capsulecore-api"><code>@capsule/core</code> API<a class="headerlink" href="#capsulecore-api" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">bridge</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@capsule/core'</span>
+
+<span class="c1">// Single call → Promise</span>
+<span class="nx">bridge</span><span class="p">.</span><span class="nx">call</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">params</span><span class="o">:</span><span class="w"> </span><span class="kt">object</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span>
+
+<span class="c1">// Subscribe to native events</span>
+<span class="nx">bridge</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">event</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kt">unknown</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span>
+<span class="c1">// Returns unsubscribe function — call it to stop listening</span>
+
+<span class="c1">// Unsubscribe manually (alternative to returned function)</span>
+<span class="nx">bridge</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="nx">event</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="o">:</span><span class="w"> </span><span class="kt">Function</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span>
+</code></pre></div>
+<hr />
+<h2 id="app-developer-usage-end-result">App Developer Usage (end result)<a class="headerlink" href="#app-developer-usage-end-result" title="Permanent link">&para;</a></h2>
+<p>After the plugin is built, the app developer uses:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Any component — React, Vue, Svelte, or Vanilla</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">barcode</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'./capsule-plugins/barcode/web'</span>
+<span class="c1">// or, if published to npm:</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">barcode</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@capsule/barcode'</span>
+
+<span class="c1">// Single scan</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">barcode</span><span class="p">.</span><span class="nx">scan</span><span class="p">({</span><span class="w"> </span><span class="nx">facing</span><span class="o">:</span><span class="w"> </span><span class="s1">'back'</span><span class="w"> </span><span class="p">})</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">format</span><span class="p">)</span>
+
+<span class="c1">// Event listener (for continuous mode)</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">unsubscribe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">barcode</span><span class="p">.</span><span class="nx">onScanResult</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Scanned:'</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// Later: cleanup</span>
+<span class="nx">unsubscribe</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<h2 id="auto-generating-typescript-types">Auto-generating TypeScript Types<a class="headerlink" href="#auto-generating-typescript-types" title="Permanent link">&para;</a></h2>
+<p>Instead of writing <code>web/index.ts</code> by hand, annotate the Kotlin class and generate:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@CapsulePlugin</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"barcode"</span><span class="p">)</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">BarcodeScanner</span><span class="p">(</span><span class="n">bridge</span><span class="p">:</span><span class="w"> </span><span class="n">CapsuleBridge</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">CapsulePlugin</span><span class="p">(</span><span class="n">bridge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@BridgeMethod</span>
+<span class="w">    </span><span class="nd">@Returns</span><span class="p">(</span><span class="n">ScanResult</span><span class="o">::</span><span class="n">class</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">scan</span><span class="p">(</span>
+<span class="w">        </span><span class="nd">@BridgeParam</span><span class="p">(</span><span class="s">"quality"</span><span class="p">,</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"0.8"</span><span class="p">)</span><span class="w"> </span><span class="n">quality</span><span class="p">:</span><span class="w"> </span><span class="kt">Float</span><span class="p">,</span>
+<span class="w">        </span><span class="nd">@BridgeParam</span><span class="p">(</span><span class="s">"facing"</span><span class="p">,</span><span class="w">  </span><span class="n">optional</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"back"</span><span class="p">)</span><span class="w"> </span><span class="n">facing</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<span class="w">    </span><span class="p">):</span><span class="w"> </span><span class="kt">Unit</span>
+
+<span class="w">    </span><span class="nd">@BridgeEvent</span>
+<span class="w">    </span><span class="nd">@Emits</span><span class="p">(</span><span class="n">ScanResult</span><span class="o">::</span><span class="n">class</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onScanResult</span><span class="p">():</span><span class="w"> </span><span class="kt">Unit</span>
+<span class="p">}</span>
+
+<span class="nd">@BridgeType</span>
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ScanResult</span><span class="p">(</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">value</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">format</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>capsule<span class="w"> </span>generate<span class="w"> </span>types<span class="w"> </span>--plugin<span class="w"> </span>barcode
+<span class="c1"># writes capsule-plugins/barcode/web/index.d.ts and index.ts</span>
+</code></pre></div>
+<hr />
+<h2 id="platform-conditional-code-in-the-web-bridge">Platform-Conditional Code in the Web Bridge<a class="headerlink" href="#platform-conditional-code-in-the-web-bridge" title="Permanent link">&para;</a></h2>
+<p>Some plugins work on one platform only. The web layer handles this gracefully:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">bridge</span><span class="p">,</span><span class="w"> </span><span class="nx">getPlatform</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@capsule/core'</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">haptics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">impact</span><span class="p">(</span><span class="nx">style</span><span class="o">:</span><span class="w"> </span><span class="s1">'light'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'medium'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'heavy'</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Web platform has no haptics — silently no-op</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">getPlatform</span><span class="p">()</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'web'</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">()</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">bridge</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">'haptics.impact'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">style</span><span class="w"> </span><span class="p">})</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>getPlatform()</code> returns <code>'android' | 'ios' | 'web'</code>.</p>
+<hr />
+<h2 id="plugin-development-loop-hot-reload">Plugin Development Loop &amp; Hot Reload<a class="headerlink" href="#plugin-development-loop-hot-reload" title="Permanent link">&para;</a></h2>
+<h3 id="web-layer-changes-typescript-webindexts">Web layer changes (TypeScript / <code>web/index.ts</code>)<a class="headerlink" href="#web-layer-changes-typescript-webindexts" title="Permanent link">&para;</a></h3>
+<p>Vite HMR applies instantly — no rebuild needed. Changes to the TypeScript bridge are live in under 50ms.</p>
+<h3 id="native-layer-changes-kt-swift-c">Native layer changes (<code>.kt</code> / <code>.swift</code> / <code>.c</code>)<a class="headerlink" href="#native-layer-changes-kt-swift-c" title="Permanent link">&para;</a></h3>
+<p>Native code requires a full recompile. <code>capsule dev</code> watches for <code>.kt</code> and <code>.swift</code> file changes and prints a reminder:</p>
+<div class="highlight"><pre><span></span><code>⚠ Native source changed: capsule-plugins/barcode/android/BarcodeScanner.kt
+  Hot reload does not apply to native code changes.
+  Run: capsule build android  (then re-deploy to emulator)
+</code></pre></div>
+<p>The Vite dev server keeps running — only the native layer needs rebuilding. Typical incremental Kotlin rebuild via Gradle build cache: 5–15 seconds (not a full rebuild).</p>
+<p><strong>Practical workflow</strong>:
+1. Edit <code>.kt</code> file
+2. See the warning in the <code>capsule dev</code> terminal
+3. In a second terminal: <code>capsule build android &amp;&amp; capsule run android</code>
+4. Continue editing web code — Vite HMR resumes immediately</p>
+<hr />
+<h2 id="plugin-testing">Plugin Testing<a class="headerlink" href="#plugin-testing" title="Permanent link">&para;</a></h2>
+<h3 id="test-a-method-directly-on-a-running-emulator">Test a method directly on a running emulator<a class="headerlink" href="#test-a-method-directly-on-a-running-emulator" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Call a plugin method from the CLI without writing any JS</span>
+capsule<span class="w"> </span>plugin<span class="w"> </span>call<span class="w"> </span>barcode<span class="w"> </span>scan<span class="w"> </span><span class="s1">'{"quality": 0.9, "facing": "back"}'</span>
+
+<span class="c1"># Output:</span>
+<span class="c1"># → {"value": "https://example.com", "format": "QR"}</span>
+</code></pre></div>
+<h3 id="type-check-the-web-bridge-against-native-annotations">Type-check the web bridge against native annotations<a class="headerlink" href="#type-check-the-web-bridge-against-native-annotations" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>capsule<span class="w"> </span>plugin<span class="w"> </span>check<span class="w"> </span>barcode
+<span class="c1"># Validates that every @BridgeMethod has a matching export in web/index.ts</span>
+<span class="c1"># Validates that all parameter types match</span>
+</code></pre></div>
+<hr />
+<h2 id="publishing-a-plugin-to-npm-mode-1-binary">Publishing a Plugin to npm (Mode 1 Binary)<a class="headerlink" href="#publishing-a-plugin-to-npm-mode-1-binary" title="Permanent link">&para;</a></h2>
+<p>When your source plugin is ready to share:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Package + publish</span>
+capsule<span class="w"> </span>plugin<span class="w"> </span>publish<span class="w"> </span>./capsule-plugins/barcode
+
+<span class="c1"># What this does:</span>
+<span class="c1"># 1. Runs capsule build android + ios to produce AAR and XCFramework</span>
+<span class="c1"># 2. Packages AAR, XCFramework, and web/index.ts into an npm tarball</span>
+<span class="c1"># 3. Publishes to npm as the configured package name</span>
+<span class="c1"># 4. Optionally publishes AAR to GitHub Packages (Maven) and XCFramework via SPM</span>
+</code></pre></div>
+<p>After publishing, other developers install it with:
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>@yourscope/barcode
+<span class="c1"># Then add '@yourscope/barcode' to capsule.config.ts plugins array</span>
+</code></pre></div></p>
+<p>To let them fork the plugin source:
+<div class="highlight"><pre><span></span><code><span class="c1">// capsule-plugin.json</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">"sourceRepo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/you/capsule-plugin-barcode"</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p>They can then <code>capsule eject @yourscope/barcode</code> to get full source access.</p>
+<hr />
+<h2 id="complete-worked-example-capsulestorage">Complete Worked Example — <code>@capsule/storage</code><a class="headerlink" href="#complete-worked-example-capsulestorage" title="Permanent link">&para;</a></h2>
+<p>A localStorage-on-steroids plugin: web-compatible API, native backend (SQLite on device, localStorage on browser).</p>
+<h3 id="capsule-pluginjson"><code>capsule-plugin.json</code><a class="headerlink" href="#capsule-pluginjson" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"storage"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"platforms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"android"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ios"</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"android"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"ios"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="androidstoragekt"><code>android/Storage.kt</code><a class="headerlink" href="#androidstoragekt" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nd">@CapsulePlugin</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"storage"</span><span class="p">)</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">Storage</span><span class="p">(</span><span class="n">bridge</span><span class="p">:</span><span class="w"> </span><span class="n">CapsuleBridge</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">CapsulePlugin</span><span class="p">(</span><span class="n">bridge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">lateinit</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">db</span><span class="p">:</span><span class="w"> </span><span class="n">StorageDatabase</span><span class="w">   </span><span class="c1">// Room or SQLite</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">load</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StorageDatabase</span><span class="p">.</span><span class="na">open</span><span class="p">(</span><span class="n">bridge</span><span class="p">.</span><span class="na">context</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@BridgeMethod</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">"key"</span><span class="p">)</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">reject</span><span class="p">(</span><span class="m">4001</span><span class="p">,</span><span class="w"> </span><span class="s">"key is required"</span><span class="p">)</span>
+<span class="w">        </span><span class="n">onIO</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="w">            </span><span class="n">call</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">mapOf</span><span class="p">(</span><span class="s">"value"</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">value</span><span class="p">))</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@BridgeMethod</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">key</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">"key"</span><span class="p">)</span><span class="w">   </span><span class="o">?:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">reject</span><span class="p">(</span><span class="m">4001</span><span class="p">,</span><span class="w"> </span><span class="s">"key is required"</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">"value"</span><span class="p">)</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">reject</span><span class="p">(</span><span class="m">4001</span><span class="p">,</span><span class="w"> </span><span class="s">"value is required"</span><span class="p">)</span>
+<span class="w">        </span><span class="n">onIO</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">db</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<span class="w">            </span><span class="n">call</span><span class="p">.</span><span class="na">resolve</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@BridgeMethod</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">"key"</span><span class="p">)</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">reject</span><span class="p">(</span><span class="m">4001</span><span class="p">,</span><span class="w"> </span><span class="s">"key is required"</span><span class="p">)</span>
+<span class="w">        </span><span class="n">onIO</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">db</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="w">            </span><span class="n">call</span><span class="p">.</span><span class="na">resolve</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@BridgeMethod</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">clear</span><span class="p">(</span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">onIO</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">db</span><span class="p">.</span><span class="na">clear</span><span class="p">()</span>
+<span class="w">            </span><span class="n">call</span><span class="p">.</span><span class="na">resolve</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">destroy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">db</span><span class="p">.</span><span class="na">close</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="iosstorageswift"><code>ios/Storage.swift</code><a class="headerlink" href="#iosstorageswift" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="n">CapsulePlugin</span><span class="p">(</span><span class="s">"storage"</span><span class="p">)</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">Storage</span><span class="p">:</span><span class="w"> </span><span class="n">CapsulePlugin</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">db</span><span class="p">:</span><span class="w"> </span><span class="n">StorageDatabase</span><span class="p">!</span>
+
+<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">load</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">db</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">StorageDatabase</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="p">@</span><span class="n">BridgeMethod</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">guard</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">key</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="s">"key"</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="n">reject</span><span class="p">(</span><span class="mi">4001</span><span class="p">,</span><span class="w"> </span><span class="s">"key is required"</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">DispatchQueue</span><span class="p">.</span><span class="n">global</span><span class="p">(</span><span class="n">qos</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">userInitiated</span><span class="p">).</span><span class="k">async</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nv">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="w">            </span><span class="n">call</span><span class="p">.</span><span class="n">resolve</span><span class="p">([</span><span class="s">"value"</span><span class="p">:</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">Any</span><span class="p">])</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="p">@</span><span class="n">BridgeMethod</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">guard</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">key</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="s">"key"</span><span class="p">),</span>
+<span class="w">              </span><span class="kd">let</span><span class="w"> </span><span class="nv">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="s">"value"</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="n">reject</span><span class="p">(</span><span class="mi">4001</span><span class="p">,</span><span class="w"> </span><span class="s">"key and value are required"</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">DispatchQueue</span><span class="p">.</span><span class="n">global</span><span class="p">(</span><span class="n">qos</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">userInitiated</span><span class="p">).</span><span class="k">async</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kc">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<span class="w">            </span><span class="n">call</span><span class="p">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="p">@</span><span class="n">BridgeMethod</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">guard</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">key</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="s">"key"</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="n">reject</span><span class="p">(</span><span class="mi">4001</span><span class="p">,</span><span class="w"> </span><span class="s">"key is required"</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">DispatchQueue</span><span class="p">.</span><span class="n">global</span><span class="p">(</span><span class="n">qos</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">userInitiated</span><span class="p">).</span><span class="k">async</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kc">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="w">            </span><span class="n">call</span><span class="p">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="p">@</span><span class="n">BridgeMethod</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">clear</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">DispatchQueue</span><span class="p">.</span><span class="n">global</span><span class="p">(</span><span class="n">qos</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">userInitiated</span><span class="p">).</span><span class="k">async</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kc">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="w">            </span><span class="n">call</span><span class="p">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="webindexts"><code>web/index.ts</code><a class="headerlink" href="#webindexts" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">bridge</span><span class="p">,</span><span class="w"> </span><span class="nx">getPlatform</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@capsule/core'</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">storage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">getPlatform</span><span class="p">()</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'web'</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">bridge</span><span class="p">.</span><span class="nx">call</span><span class="o">&lt;</span><span class="p">{</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">}</span><span class="o">&gt;</span><span class="p">(</span><span class="s1">'storage.get'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="p">})</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">value</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">set</span><span class="p">(</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">getPlatform</span><span class="p">()</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'web'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">);</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">bridge</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">'storage.set'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="p">})</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">getPlatform</span><span class="p">()</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'web'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">bridge</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">'storage.remove'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="p">})</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">clear</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">getPlatform</span><span class="p">()</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'web'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">bridge</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">'storage.clear'</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="quick-reference-card">Quick Reference Card<a class="headerlink" href="#quick-reference-card" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>capsule plugin create &lt;name&gt;           scaffold new source plugin
+capsule plugin call &lt;name&gt; &lt;method&gt;    test a method on the emulator
+capsule plugin check &lt;name&gt;            validate TS bridge vs native annotations
+capsule generate types --plugin &lt;name&gt; generate TS from Kotlin/Swift annotations
+capsule plugin publish ./path          build + publish to npm
+capsule eject @scope/plugin            fork npm plugin to local source
+capsule override &lt;capability&gt;          patch a built-in core capability (camera, gps, push, etc.)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>@CapsulePlugin(name = "foo")           mark class as a plugin
+@BridgeMethod                          expose a method to JS
+@BridgeParam("key")                    annotate a parameter (for type gen)
+@BridgeEvent / @Emits(T::class)        mark an event emitter (for type gen)
+@BridgeType                            mark a data class for TS generation
+</code></pre></div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024-2026 Capsule Framework Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.highlight", "search.share", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

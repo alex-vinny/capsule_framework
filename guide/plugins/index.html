@@ -1,0 +1,5070 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alex-vinny.github.io/capsule_framework/guide/plugins/">
+      
+      
+        <link rel="prev" href="../ai/">
+      
+      
+        <link rel="next" href="../alerts-styling/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Plugin system - Capsule Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#capsule-framework-community-integration-system-deep-technical-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Capsule Framework" class="md-header__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Capsule Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Plugin system
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../installation/" class="md-tabs__link">
+          
+  
+  
+  Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/cli/" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/architecture/" class="md-tabs__link">
+          
+  
+  
+  Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../decisions/" class="md-tabs__link">
+          
+  
+  
+  Decisions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../contributing/" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../project/roadmap/" class="md-tabs__link">
+          
+  
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Capsule Framework" class="md-nav__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Capsule Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hello-world/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hello World
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../push-notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Push Notifications
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#scope-community-integrations-vs-core-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scope: Community Integrations vs. Core SDK
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-integration-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two Integration Modes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-1-the-bridge-how-js-calls-reach-native-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 1 — The Bridge: How JS Calls Reach Native Code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 1 — The Bridge: How JS Calls Reach Native Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#android-addjavascriptinterface-vs-addwebmessagelistener" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Android: addJavascriptInterface vs addWebMessageListener
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#android-native-js-calling-back-into-the-webview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Android: Native → JS (calling back into the WebView)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ios-wkscriptmessagehandler-vs-wkscriptmessagehandlerwithreply" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iOS: WKScriptMessageHandler vs WKScriptMessageHandlerWithReply
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ios-native-js" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iOS: Native → JS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#js-side-bridge-runtime-capsulecore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JS-Side Bridge Runtime (@capsule/core)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-plugin-dispatch-how-bridge-calls-reach-plugin-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 2 — Plugin Dispatch: How Bridge Calls Reach Plugin Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 2 — Plugin Dispatch: How Bridge Calls Reach Plugin Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#approach-a-reflection-simple-slight-perf-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach A — Reflection (simple, slight perf cost)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#approach-b-generated-dispatch-table-no-reflection-faster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approach B — Generated Dispatch Table (no reflection, faster)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-3-language-feasibility-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 3 — Language Feasibility Analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 3 — Language Feasibility Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kotlin-java-fully-feasible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kotlin / Java — FULLY FEASIBLE ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swift-objective-c-fully-feasible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Swift / Objective-C — FULLY FEASIBLE ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-c-android-ndk-feasible-significant-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C / C++ (Android NDK) — FEASIBLE, SIGNIFICANT COMPLEXITY ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-c-ios-fully-feasible-simpler-than-android" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C / C++ (iOS) — FULLY FEASIBLE, SIMPLER THAN ANDROID ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lua-partially-feasible-platform-split" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lua — PARTIALLY FEASIBLE, PLATFORM SPLIT ⚠️
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lua — PARTIALLY FEASIBLE, PLATFORM SPLIT ⚠️">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lua-on-android-fully-feasible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lua on Android — FULLY FEASIBLE ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lua-on-ios-bundled-only-no-ota-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lua on iOS — BUNDLED ONLY, NO OTA UPDATES ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-4-code-generation-typescript-types-from-native-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 4 — Code Generation: TypeScript Types from Native Annotations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 4 — Code Generation: TypeScript Types from Native Annotations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#android-ksp-processor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Android: KSP Processor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ios-swift-macros-swift-59" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iOS: Swift Macros (Swift 5.9+)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-5-plugin-threading-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 5 — Plugin Threading Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 5 — Plugin Threading Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#android-threading-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Android Threading Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ios-threading-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iOS Threading Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-6-error-boundaries-and-plugin-crashes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 6 — Error Boundaries and Plugin Crashes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 6 — Error Boundaries and Plugin Crashes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#android" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Android
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iOS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-7-the-capsule-eject-command-forking-an-npm-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 7 — The capsule eject Command (Forking an npm Plugin)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 7 — The capsule eject Command (Forking an npm Plugin)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-eject-actually-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What "eject" actually means
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-8-what-already-exists-to-reuse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 8 — What Already Exists to Reuse
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-9-plugin-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 9 — Plugin Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-10-full-plugin-project-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 10 — Full Plugin Project Layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-feasibility-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary: Feasibility Matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alerts-styling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alerts Styling
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mobile-css-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile CSS Reset
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../publishing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publishing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ota-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Over-the-air Updates
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/core-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/lockfile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lockfile
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generated
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generated
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/docs-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Principles
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/capsule-vs-ionic-capacitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    vs Ionic/Capacitor
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/extensibility-and-positioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extensibility & Positioning
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/ionic-framework7-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ionic Framework 7 Migration
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Primers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/kotlin-for-csharp-devs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kotlin for C# Devs
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/jni-and-cpp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JNI & C
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/civetweb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CivetWeb
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/quickjs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QuickJS
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decisions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0001-embedded-runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0001 Embedded Runtime
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0002-capsule-ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0002 Capsule UI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0003-ai-and-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0003 AI & Agents
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0004-web-serving-transport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0004 Web Serving Transport
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/codesync-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CodeSync Internals
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/plugin-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/template-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Template Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/ios-bring-up/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iOS Bring-up
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/platform-parity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android/iOS Parity
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/upkeep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_14" id="__nav_6_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Workflows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/add-native-api/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add Native API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/author-plugin/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Author Plugin
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/upkeep-sweep/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep Sweep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/known-issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known Issues
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_6" id="__nav_7_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Incidents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Incidents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/incidents/2026-10-embedded-server-startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-10 Embedded Server Startup
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_7" id="__nav_7_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/2026-06-24-planning-brainstorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-24 Planning Brainstorm
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/chatgpt-first-impressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT First Impressions
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/chatgpt-plugin-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT Plugin Compatibility
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_8" id="__nav_7_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Business
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/business-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Model
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/pricing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pricing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/ota-policy-and-liability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Policy & Liability
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_9" id="__nav_7_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Server Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Server Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/file-storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Storage
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/workers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workers
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="capsule-framework-community-integration-system-deep-technical-reference">Capsule Framework — Community Integration System (Deep Technical Reference)<a class="headerlink" href="#capsule-framework-community-integration-system-deep-technical-reference" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>How community integrations (third-party SDK wrappers) work at every layer: bridge wire protocol, native dispatch, code generation, threading, language feasibility, and what already exists to reuse.</p>
+</blockquote>
+<hr />
+<h2 id="scope-community-integrations-vs-core-sdk">Scope: Community Integrations vs. Core SDK<a class="headerlink" href="#scope-community-integrations-vs-core-sdk" title="Permanent link">&para;</a></h2>
+<p><strong>Core platform capabilities</strong> (camera, GPS, push, NFC, Bluetooth, haptics, biometrics, filesystem, barcode, etc.) are built into <code>@capsule/core</code>. They are not plugins — they ship with the framework and are tree-shaken if unused. Developers import them directly, no installation required.</p>
+<p><strong>Community integrations</strong> are what this document covers: third-party SDK wrappers (<code>@capsule-community/google-maps</code>, <code>@capsule-community/stripe</code>, etc.) and custom local integrations that require SDKs the Capsule team does not own or control.</p>
+<p>The same bridge protocol, dispatch system, and language support documented here applies to both layers. The distinction is ownership and distribution, not technical architecture.</p>
+<hr />
+<h2 id="two-integration-modes">Two Integration Modes<a class="headerlink" href="#two-integration-modes" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>Mode 1 — Binary (npm)                    Mode 2 — Source (inline)
+──────────────────────────────────────   ──────────────────────────────────────
+npm install @capsule-community/maps      capsule-plugins/
+                                           my-integration/
+Pre-compiled AAR + XCFramework             android/MyIntegration.kt
+Distributed via npm + Maven/SPM            ios/MyIntegration.swift
+No modification                            web/index.ts
+                                           image-processor/
+                                             android/proc.c    ← NDK
+                                             game-logic.lua    ← scripting VM
+</code></pre></div>
+<p>Both modes register through the same JSON-RPC 2.0 bridge. From the web layer they are identical.</p>
+<hr />
+<h2 id="part-1-the-bridge-how-js-calls-reach-native-code">Part 1 — The Bridge: How JS Calls Reach Native Code<a class="headerlink" href="#part-1-the-bridge-how-js-calls-reach-native-code" title="Permanent link">&para;</a></h2>
+<p>This is the core mechanism everything else builds on. Understanding it precisely is required before designing plugins.</p>
+<h3 id="android-addjavascriptinterface-vs-addwebmessagelistener">Android: <code>addJavascriptInterface</code> vs <code>addWebMessageListener</code><a class="headerlink" href="#android-addjavascriptinterface-vs-addwebmessagelistener" title="Permanent link">&para;</a></h3>
+<p><strong>Option A — <code>addJavascriptInterface</code> (API 1+, minSdk 26 safe)</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// CapsuleBridge.kt</span>
+<span class="c1">// Name "__capsule_host" to avoid colliding with the JS-side runtime object "__capsule"</span>
+<span class="n">webView</span><span class="p">.</span><span class="na">addJavascriptInterface</span><span class="p">(</span><span class="n">BridgeHost</span><span class="p">(</span><span class="k">this</span><span class="p">),</span><span class="w"> </span><span class="s">"__capsule_host"</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nf">BridgeHost</span><span class="p">(</span><span class="kd">private</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="n">bridge</span><span class="p">:</span><span class="w"> </span><span class="n">CapsuleBridge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@JavascriptInterface</span><span class="w">                </span><span class="c1">// required annotation — exposes method to JS</span>
+<span class="w">    </span><span class="n">fun</span><span class="w"> </span><span class="nf">postMessage</span><span class="p">(</span><span class="n">json</span><span class="p">:</span><span class="w"> </span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bridge</span><span class="p">.</span><span class="na">handleCall</span><span class="p">(</span><span class="n">json</span><span class="p">)</span><span class="w">         </span><span class="c1">// runs on a WebView background thread, NOT main thread</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>JavaScript side:
+<div class="highlight"><pre><span></span><code><span class="c1">// window.__capsule_host is the native Java object (Android only)</span>
+<span class="c1">// window.__capsule is the JS runtime object (defined by @capsule/core)</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">__capsule_host</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">jsonrpc</span><span class="o">:</span><span class="w"> </span><span class="s1">'2.0'</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s1">'uuid-abc'</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">'barcode.scan'</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">params</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">quality</span><span class="o">:</span><span class="w"> </span><span class="mf">0.8</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}))</span>
+</code></pre></div></p>
+<blockquote>
+<p><strong>Naming convention</strong>: <code>__capsule_host</code> is the raw native interface exposed by <code>addJavascriptInterface</code>. <code>__capsule</code> is the high-level JS runtime object defined by <code>@capsule/core</code> that manages Promises and events. They are distinct objects. Using the same name for both would cause <code>addJavascriptInterface</code> to overwrite the JS runtime object during WebView initialization.</p>
+</blockquote>
+<p><strong>Critical threading fact</strong>: <code>@JavascriptInterface</code> methods execute on an <strong>arbitrary WebView background thread</strong>, never the main thread. Plugins must dispatch to the right thread explicitly if they need UI access (<code>bridge.activity.runOnUiThread { ... }</code>).</p>
+<p><strong>Option B — <code>addWebMessageListener</code> (API 24+, Chromium WebView only)</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">webView</span><span class="p">.</span><span class="na">addWebMessageListener</span><span class="p">(</span>
+<span class="w">    </span><span class="s">"__capsule_msg"</span><span class="p">,</span>
+<span class="w">    </span><span class="n">setOf</span><span class="p">(</span><span class="s">"https://localhost"</span><span class="p">),</span><span class="w">   </span><span class="c1">// allowed origins</span>
+<span class="w">    </span><span class="k">object</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">WebViewCompat</span><span class="p">.</span><span class="na">WebMessageListener</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onPostMessage</span><span class="p">(</span><span class="n">view</span><span class="p">:</span><span class="w"> </span><span class="n">WebView</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="n">WebMessageCompat</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">bridge</span><span class="p">.</span><span class="na">handleCall</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">data</span><span class="o">!!</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>JavaScript side:
+<div class="highlight"><pre><span></span><code><span class="nb">window</span><span class="p">.</span><span class="nx">__capsule_msg</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}))</span>
+</code></pre></div></p>
+<p><strong>Comparison</strong>:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>addJavascriptInterface</code></th>
+<th><code>addWebMessageListener</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API level</td>
+<td>1+</td>
+<td>24+ (Android 7)</td>
+</tr>
+<tr>
+<td>WebView type</td>
+<td>Any</td>
+<td>Chromium WebView only</td>
+</tr>
+<tr>
+<td>Origin restriction</td>
+<td>No (security risk in mixed content)</td>
+<td>Yes (set of allowed origins)</td>
+</tr>
+<tr>
+<td>Object exposure</td>
+<td>Full JS object with methods</td>
+<td>Single <code>postMessage</code> only</td>
+</tr>
+<tr>
+<td>Used by Capacitor</td>
+<td>Yes (primary)</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Recommendation</td>
+<td>Use — minSdk 26 removes legacy risks</td>
+<td>Future-proof but not necessary now</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Decision for Capsule</strong>: Use <code>addJavascriptInterface</code>. It is what Capacitor, Cordova, and every production WebView bridge uses. minSdk 26 eliminates the pre-4.2 vulnerability. <code>addWebMessageListener</code> offers no meaningful advantage for this use case.</p>
+<hr />
+<h3 id="android-native-js-calling-back-into-the-webview">Android: Native → JS (calling back into the WebView)<a class="headerlink" href="#android-native-js-calling-back-into-the-webview" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Runs on main thread (evaluateJavascript REQUIRES main thread)</span>
+<span class="c1">// Calls into the JS-side runtime object __capsule (managed by @capsule/core)</span>
+<span class="n">activity</span><span class="p">.</span><span class="na">runOnUiThread</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">webView</span><span class="p">.</span><span class="na">evaluateJavascript</span><span class="p">(</span>
+<span class="w">        </span><span class="s">"window.__capsule._resolve('</span><span class="si">${</span><span class="n">callId</span><span class="si">}</span><span class="s">', </span><span class="si">${</span><span class="n">resultJson</span><span class="si">}</span><span class="s">)"</span><span class="p">,</span>
+<span class="w">        </span><span class="kc">null</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This is how <code>call.resolve(data)</code> works internally. Every plugin response follows this path.
+<code>window.__capsule</code> here is the <strong>JS-side runtime</strong> (defined by <code>@capsule/core</code>), NOT the native host object <code>__capsule_host</code>.</p>
+<p><strong>For events</strong> (native pushes to web unprompted):
+<div class="highlight"><pre><span></span><code><span class="n">activity</span><span class="p">.</span><span class="na">runOnUiThread</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">webView</span><span class="p">.</span><span class="na">evaluateJavascript</span><span class="p">(</span>
+<span class="w">        </span><span class="s">"window.__capsule._event('push.messageReceived', </span><span class="si">${</span><span class="n">dataJson</span><span class="si">}</span><span class="s">)"</span><span class="p">,</span>
+<span class="w">        </span><span class="kc">null</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<h3 id="ios-wkscriptmessagehandler-vs-wkscriptmessagehandlerwithreply">iOS: <code>WKScriptMessageHandler</code> vs <code>WKScriptMessageHandlerWithReply</code><a class="headerlink" href="#ios-wkscriptmessagehandler-vs-wkscriptmessagehandlerwithreply" title="Permanent link">&para;</a></h3>
+<p><strong>Option A — <code>WKScriptMessageHandler</code> (iOS 8+, universal)</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Register in WKWebViewConfiguration</span>
+<span class="n">config</span><span class="p">.</span><span class="n">userContentController</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">bridge</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s">"capsule"</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Called on main thread — guaranteed</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">userContentController</span><span class="p">(</span>
+<span class="w">    </span><span class="kc">_</span><span class="w"> </span><span class="n">userContentController</span><span class="p">:</span><span class="w"> </span><span class="bp">WKUserContentController</span><span class="p">,</span>
+<span class="w">    </span><span class="n">didReceive</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="bp">WKScriptMessage</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">guard</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">body</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="n">body</span><span class="w"> </span><span class="k">as</span><span class="p">?</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="n">bridge</span><span class="p">.</span><span class="n">handleCall</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>JavaScript side:
+<div class="highlight"><pre><span></span><code><span class="nb">window</span><span class="p">.</span><span class="nx">webkit</span><span class="p">.</span><span class="nx">messageHandlers</span><span class="p">.</span><span class="nx">capsule</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}))</span>
+</code></pre></div></p>
+<p><strong>Limitation</strong>: No return value — response must be sent back via <code>evaluateJavaScript</code>. This means managing a callId-to-Promise mapping in JS.</p>
+<p><strong>Option B — <code>WKScriptMessageHandlerWithReply</code> (iOS 14+)</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">config</span><span class="p">.</span><span class="n">userContentController</span><span class="p">.</span><span class="n">addScriptMessageHandler</span><span class="p">(</span><span class="n">bridge</span><span class="p">,</span><span class="w"> </span><span class="n">contentWorld</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">page</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s">"capsule"</span><span class="p">)</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">userContentController</span><span class="p">(</span>
+<span class="w">    </span><span class="kc">_</span><span class="w"> </span><span class="n">userContentController</span><span class="p">:</span><span class="w"> </span><span class="bp">WKUserContentController</span><span class="p">,</span>
+<span class="w">    </span><span class="n">didReceive</span><span class="w"> </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="bp">WKScriptMessage</span><span class="p">,</span>
+<span class="w">    </span><span class="n">replyHandler</span><span class="p">:</span><span class="w"> </span><span class="p">@</span><span class="n">escaping</span><span class="w"> </span><span class="p">(</span><span class="nb">Any</span><span class="p">?,</span><span class="w"> </span><span class="nb">String</span><span class="p">?)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Void</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// message.body received on main thread</span>
+<span class="w">    </span><span class="c1">// but replyHandler can be called from any thread</span>
+<span class="w">    </span><span class="n">bridge</span><span class="p">.</span><span class="n">handleCall</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">body</span><span class="w"> </span><span class="k">as</span><span class="p">!</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span><span class="n">replyHandler</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>JavaScript side uses <code>await</code>:
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">webkit</span><span class="p">.</span><span class="nx">messageHandlers</span><span class="p">.</span><span class="nx">capsule</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nx">payload</span><span class="p">)</span>
+</code></pre></div></p>
+<p><strong>Threading hazard with Option B</strong>: The <code>replyHandler</code> closure captures WebKit internal state. It must be called exactly once — never twice, never dropped. Calling it from a background thread is allowed, but accessing <code>message.body</code> after the handler's scope is not. Swift's strict concurrency (<code>@MainActor</code>) conflicts with the protocol's non-isolated signature — use <code>MainActor.assumeIsolated(_:)</code> to assert main thread access.</p>
+<p><strong>Decision for Capsule</strong>:
+- <strong>Primary</strong>: <code>WKScriptMessageHandler</code> (Option A) — iOS 8+, simpler threading model, proven in production (Capacitor, Cordova, Ionic all use this)
+- <strong>Enhancement</strong>: Adopt <code>WKScriptMessageHandlerWithReply</code> for iOS 14+ as a progressive enhancement that eliminates the JS-side callId bookkeeping</p>
+<hr />
+<h3 id="ios-native-js">iOS: Native → JS<a class="headerlink" href="#ios-native-js" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Called on main thread</span>
+<span class="n">webView</span><span class="p">.</span><span class="n">evaluateJavaScript</span><span class="p">(</span>
+<span class="w">    </span><span class="s">"window.__capsule._resolve('</span><span class="si">\(</span><span class="n">callId</span><span class="si">)</span><span class="s">', </span><span class="si">\(</span><span class="n">resultJson</span><span class="si">)</span><span class="s">)"</span><span class="p">,</span>
+<span class="w">    </span><span class="n">completionHandler</span><span class="p">:</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>For modern WKWebView, prefer the async variant:
+<div class="highlight"><pre><span></span><code><span class="n">Task</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">@</span><span class="n">MainActor</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span><span class="k">try</span><span class="p">?</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">webView</span><span class="p">.</span><span class="n">evaluateJavaScript</span><span class="p">(</span>
+<span class="w">        </span><span class="s">"window.__capsule._resolve('</span><span class="si">\(</span><span class="n">callId</span><span class="si">)</span><span class="s">', </span><span class="si">\(</span><span class="n">resultJson</span><span class="si">)</span><span class="s">)"</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<h3 id="js-side-bridge-runtime-capsulecore">JS-Side Bridge Runtime (<code>@capsule/core</code>)<a class="headerlink" href="#js-side-bridge-runtime-capsulecore" title="Permanent link">&para;</a></h3>
+<p>The web layer manages the Promise lifecycle:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// packages/core/src/bridge.ts</span>
+
+<span class="kr">type</span><span class="w"> </span><span class="nx">PendingCall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">resolve</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kt">unknown</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span>
+<span class="w">  </span><span class="nx">reject</span><span class="o">:</span><span class="w">  </span><span class="p">(</span><span class="nx">err</span><span class="o">:</span><span class="w"> </span><span class="kt">CapsuleError</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">pending</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">PendingCall</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="c1">// Called by Capsule to receive responses from native</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">__capsule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">_resolve</span><span class="p">(</span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kt">unknown</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">pending</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="o">?</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">pending</span><span class="p">.</span><span class="ow">delete</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">_reject</span><span class="p">(</span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">,</span><span class="w"> </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">pending</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="o">?</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">CapsuleError</span><span class="p">(</span><span class="nx">code</span><span class="p">,</span><span class="w"> </span><span class="nx">message</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">pending</span><span class="p">.</span><span class="ow">delete</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">_event</span><span class="p">(</span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kt">unknown</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">eventBus</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">method</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">call</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">params</span><span class="o">:</span><span class="w"> </span><span class="kt">unknown</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">crypto</span><span class="p">.</span><span class="nx">randomUUID</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">pending</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">resolve</span><span class="o">:</span><span class="w"> </span><span class="kt">resolve</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">any</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="w"> </span><span class="p">})</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="w"> </span><span class="nx">jsonrpc</span><span class="o">:</span><span class="w"> </span><span class="s1">'2.0'</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">method</span><span class="p">,</span><span class="w"> </span><span class="nx">params</span><span class="w"> </span><span class="p">})</span>
+
+<span class="w">    </span><span class="c1">// Android path — __capsule_host is the Java object from addJavascriptInterface</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="nb">window</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">any</span><span class="p">).</span><span class="nx">__capsule_host</span><span class="o">?</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="p">(</span><span class="nb">window</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">any</span><span class="p">).</span><span class="nx">__capsule_host</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+<span class="w">      </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// iOS path — webkit.messageHandlers.capsule is from WKScriptMessageHandler</span>
+<span class="w">    </span><span class="p">;(</span><span class="nb">window</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">any</span><span class="p">).</span><span class="nx">webkit</span><span class="o">?</span><span class="p">.</span><span class="nx">messageHandlers</span><span class="o">?</span><span class="p">.</span><span class="nx">capsule</span><span class="o">?</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>What already exists</strong>: Capacitor's <code>@capacitor/core</code> package (<code>packages/core/src/bridge.ts</code> in the Capacitor monorepo) is MIT-licensed and solves exactly this. Study it rather than reinventing. The Capsule bridge will differ only in the JSON-RPC envelope format.</p>
+<hr />
+<h2 id="part-2-plugin-dispatch-how-bridge-calls-reach-plugin-methods">Part 2 — Plugin Dispatch: How Bridge Calls Reach Plugin Methods<a class="headerlink" href="#part-2-plugin-dispatch-how-bridge-calls-reach-plugin-methods" title="Permanent link">&para;</a></h2>
+<p>Once the native layer receives a JSON-RPC call, it needs to route <code>barcode.scan</code> to the <code>scan</code> method on <code>BarcodeScanner</code>. There are two approaches.</p>
+<h3 id="approach-a-reflection-simple-slight-perf-cost">Approach A — Reflection (simple, slight perf cost)<a class="headerlink" href="#approach-a-reflection-simple-slight-perf-cost" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// BridgeRouter.kt</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">BridgeRouter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">registry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mutableMapOf</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">CapsulePlugin</span><span class="o">&gt;</span><span class="p">()</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">plugin</span><span class="p">:</span><span class="w"> </span><span class="n">CapsulePlugin</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">registry</span><span class="o">[</span><span class="n">name</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plugin</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">route</span><span class="p">(</span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">parts</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">method</span><span class="p">.</span><span class="na">split</span><span class="p">(</span><span class="s">"."</span><span class="p">)</span><span class="w">          </span><span class="c1">// "barcode.scan" → ["barcode", "scan"]</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">pluginName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parts</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w">                        </span><span class="c1">// "barcode"</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">methodName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parts</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w">                        </span><span class="c1">// "scan"</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">plugin</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">registry</span><span class="o">[</span><span class="n">pluginName</span><span class="o">]</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">reject</span><span class="p">(</span><span class="m">1001</span><span class="p">,</span><span class="w"> </span><span class="s">"Plugin not found"</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c1">// Reflection: find method by name on the plugin class</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plugin</span><span class="p">.</span><span class="na">javaClass</span><span class="p">.</span><span class="na">methods</span>
+<span class="w">            </span><span class="p">.</span><span class="na">firstOrNull</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">methodName</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">isAnnotationPresent</span><span class="p">(</span><span class="n">BridgeMethod</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">            </span><span class="o">?:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">reject</span><span class="p">(</span><span class="m">1002</span><span class="p">,</span><span class="w"> </span><span class="s">"Method not found"</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">method</span><span class="p">.</span><span class="na">invoke</span><span class="p">(</span><span class="n">plugin</span><span class="p">,</span><span class="w"> </span><span class="n">call</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="n">InvocationTargetException</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">call</span><span class="p">.</span><span class="na">reject</span><span class="p">(</span><span class="m">1003</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">cause</span><span class="o">?.</span><span class="na">message</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s">"Plugin error"</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>What Capacitor does</strong>: Reflection with a small cache layer. Fully production-proven.</p>
+<h3 id="approach-b-generated-dispatch-table-no-reflection-faster">Approach B — Generated Dispatch Table (no reflection, faster)<a class="headerlink" href="#approach-b-generated-dispatch-table-no-reflection-faster" title="Permanent link">&para;</a></h3>
+<p>At <code>capsule sync</code> time, the CLI generates:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// .capsule/android/src/.../CapsulePluginRegistry.kt  (AUTO-GENERATED)</span>
+<span class="kd">object</span><span class="w"> </span><span class="nc">CapsulePluginRegistry</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span><span class="n">bridge</span><span class="p">:</span><span class="w"> </span><span class="n">CapsuleBridge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bridge</span><span class="p">.</span><span class="na">registerDispatch</span><span class="p">(</span><span class="s">"barcode"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">call</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BarcodeScanner</span><span class="p">(</span><span class="n">bridge</span><span class="p">)</span>
+<span class="w">            </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">call</span><span class="p">.</span><span class="na">method</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s">"scan"</span><span class="w">          </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">plugin</span><span class="p">.</span><span class="na">scan</span><span class="p">(</span><span class="n">call</span><span class="p">)</span>
+<span class="w">                </span><span class="s">"onScanResult"</span><span class="w">  </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">plugin</span><span class="p">.</span><span class="na">onScanResult</span><span class="p">(</span><span class="n">call</span><span class="p">)</span>
+<span class="w">                </span><span class="k">else</span><span class="w">            </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">reject</span><span class="p">(</span><span class="m">1002</span><span class="p">,</span><span class="w"> </span><span class="s">"Method not found: </span><span class="si">${</span><span class="n">call</span><span class="p">.</span><span class="na">method</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">bridge</span><span class="p">.</span><span class="na">registerDispatch</span><span class="p">(</span><span class="s">"imageProcessor"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">call</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ImageProcessor</span><span class="p">(</span><span class="n">bridge</span><span class="p">)</span>
+<span class="w">            </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">call</span><span class="p">.</span><span class="na">method</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="s">"grayscale"</span><span class="w">  </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">plugin</span><span class="p">.</span><span class="na">grayscale</span><span class="p">(</span><span class="n">call</span><span class="p">)</span>
+<span class="w">                </span><span class="k">else</span><span class="w">         </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">reject</span><span class="p">(</span><span class="m">1002</span><span class="p">,</span><span class="w"> </span><span class="s">"Method not found: </span><span class="si">${</span><span class="n">call</span><span class="p">.</span><span class="na">method</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>No reflection at runtime. Generated from annotations at build time.</strong></p>
+<p><strong>How the CLI generates this</strong> — two feasible approaches:</p>
+<ol>
+<li>
+<p><strong>KSP (Kotlin Symbol Processing)</strong>: Processes <code>@CapsulePlugin</code> and <code>@BridgeMethod</code> annotations at compile time. Google uses KSP for Hilt, Room, Dagger. Fast, correct, integrates with Gradle naturally. Requires writing a KSP processor as a separate module.</p>
+</li>
+<li>
+<p><strong>CLI pre-scan</strong> (simpler): The Capsule CLI reads and parses the Kotlin source files with a TypeScript regex/AST parser before the Gradle build, then writes the registry file. Slower to implement correctly but requires no Gradle plugin.</p>
+</li>
+</ol>
+<p><strong>Recommendation</strong>: Start with <strong>Approach A (reflection)</strong> — it is what Capacitor uses and it works fine. Graduate to <strong>Approach B with KSP</strong> when performance profiling shows it matters (it usually won't for plugin dispatch — plugin method execution time dominates).</p>
+<p><strong>What already exists</strong>: The KSP processor infrastructure exists in Capacitor's <code>android/annotation-processor</code> module. It is MIT-licensed and can be studied directly.</p>
+<hr />
+<h2 id="part-3-language-feasibility-analysis">Part 3 — Language Feasibility Analysis<a class="headerlink" href="#part-3-language-feasibility-analysis" title="Permanent link">&para;</a></h2>
+<h3 id="kotlin-java-fully-feasible">Kotlin / Java — FULLY FEASIBLE ✅<a class="headerlink" href="#kotlin-java-fully-feasible" title="Permanent link">&para;</a></h3>
+<p><strong>How it works</strong>: Source files added to <code>android { sourceSets { main { java.srcDirs += [...] } } }</code> in the generated <code>build.gradle</code>. They compile as part of the same Gradle build as the capsule shell. Full access to Android SDK.</p>
+<p><strong>What exists</strong>: This is standard Android development. Capacitor plugins written in Kotlin/Java follow exactly this model. Zero novel engineering required.</p>
+<p><strong>Gotchas</strong>:
+- Package name collisions — the CLI must enforce that plugin packages don't clash with <code>dev.capsule.*</code>
+- ProGuard/R8 rules — plugins that use reflection need <code>-keep</code> rules in the generated <code>proguard-rules.pro</code></p>
+<hr />
+<h3 id="swift-objective-c-fully-feasible">Swift / Objective-C — FULLY FEASIBLE ✅<a class="headerlink" href="#swift-objective-c-fully-feasible" title="Permanent link">&para;</a></h3>
+<p><strong>How it works</strong>: Swift/ObjC files are added to the Xcode project target's <code>sources</code> list in the generated <code>.xcodeproj</code> or via Swift Package Manager's <code>sources:</code> array. They compile into the same app binary as the capsule shell.</p>
+<p><strong>What exists</strong>: Standard iOS development. Capacitor iOS plugins follow this model exactly.</p>
+<p><strong>Gotchas</strong>:
+- Swift plugins need access to the capsule's bridge types — the <code>CapsuleBridge</code> module must be importable
+- If mixing Swift and ObjC in the same plugin, a bridging header is needed — the CLI must generate it
+- Swift 5.9+ strict concurrency warnings in <code>WKScriptMessageHandlerWithReply</code> implementations (see Part 1)</p>
+<hr />
+<h3 id="c-c-android-ndk-feasible-significant-complexity">C / C++ (Android NDK) — FEASIBLE, SIGNIFICANT COMPLEXITY ⚠️<a class="headerlink" href="#c-c-android-ndk-feasible-significant-complexity" title="Permanent link">&para;</a></h3>
+<p><strong>How it works</strong>:</p>
+<div class="highlight"><pre><span></span><code>C source file → NDK (clang cross-compiler) → libmyplugin.so
+                                                    ↓
+            Java/Kotlin calls via JNI → System.loadLibrary("myplugin")
+</code></pre></div>
+<p>The JNI boundary requires a specific function signature:
+<div class="highlight"><pre><span></span><code><span class="c1">// Android NDK: function name must match Java package + class + method</span>
+<span class="c1">// Package: com.yourapp.plugins  Class: ImageProcessor  Method: grayscale</span>
+<span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span>
+<span class="n">Java_com_yourapp_plugins_ImageProcessor_grayscale</span><span class="p">(</span>
+<span class="w">    </span><span class="n">JNIEnv</span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span>
+<span class="w">    </span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">,</span>
+<span class="w">    </span><span class="n">jstring</span><span class="w"> </span><span class="n">paramsJson</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// process and return result JSON</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetStringUTFChars</span><span class="p">(</span><span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="n">paramsJson</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// ... do work ...</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="n">resultJson</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>OR</strong> use a Kotlin wrapper that calls into a pure-C shared library (cleaner):</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ImageProcessor.kt — thin Kotlin wrapper</span>
+<span class="nd">@CapsulePlugin</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"imageProcessor"</span><span class="p">)</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">ImageProcessor</span><span class="p">(</span><span class="n">bridge</span><span class="p">:</span><span class="w"> </span><span class="n">CapsuleBridge</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">CapsulePluginBase</span><span class="p">(</span><span class="n">bridge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">init</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">loadLibrary</span><span class="p">(</span><span class="s">"image_processor"</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@BridgeMethod</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">grayscale</span><span class="p">(</span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nativeGrayscale</span><span class="p">(</span><span class="n">call</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">"path"</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">))</span>
+<span class="w">        </span><span class="n">call</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">mapOf</span><span class="p">(</span><span class="s">"path"</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">result</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">external</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">nativeGrayscale</span><span class="p">(</span><span class="n">path</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="kt">String</span><span class="w">  </span><span class="c1">// JNI call</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// image_processor.c — pure C implementation</span>
+<span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span>
+<span class="n">Java_com_yourapp_plugins_ImageProcessor_nativeGrayscale</span><span class="p">(</span><span class="n">JNIEnv</span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">,</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// actual image processing</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The CLI generates <code>CMakeLists.txt</code> and the <code>externalNativeBuild</code> block in <code>build.gradle</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c"># .capsule/android/src/main/cpp/CMakeLists.txt  (auto-generated)</span>
+<span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.22.1</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s2">"capsule_plugins"</span><span class="p">)</span>
+
+<span class="nb">add_library</span><span class="p">(</span><span class="s">image_processor</span><span class="w"> </span><span class="s">SHARED</span>
+<span class="w">    </span><span class="s">../../../../capsule-plugins/image-processor/android/image_processor.c</span>
+<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">image_processor</span><span class="w"> </span><span class="s">android</span><span class="w"> </span><span class="s">log</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>What already exists</strong>: Android NDK is mature and production-ready. The CMakeLists.txt generation is not difficult — about 20 lines of CLI code per C plugin.</p>
+<p><strong>Real complexity</strong>: The JNI layer is error-prone. Memory management (<code>GetStringUTFChars</code> must be matched with <code>ReleaseStringUTFChars</code>), exception handling, and thread safety are all developer responsibilities. The CLI cannot protect against these.</p>
+<p><strong>Recommendation</strong>: Support C/C++ plugins but document the JNI complexity clearly. Provide a Kotlin wrapper template that hides the raw JNI. Most developers should prefer Kotlin.</p>
+<hr />
+<h3 id="c-c-ios-fully-feasible-simpler-than-android">C / C++ (iOS) — FULLY FEASIBLE, SIMPLER THAN ANDROID ✅<a class="headerlink" href="#c-c-ios-fully-feasible-simpler-than-android" title="Permanent link">&para;</a></h3>
+<p>On iOS, C/C++ is a first-class citizen — Xcode projects have always mixed Objective-C, C, C++, and Swift. No JNI layer. A C function callable from Swift via a bridging header:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// capsule-plugins/my-plugin/ios/fast_hash.c</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"fast_hash.h"</span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="nf">compute_hash</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// xxHash or similar</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// MyPlugin.swift — calls C directly after importing header</span>
+<span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+<span class="kd">import</span><span class="w"> </span><span class="nc">CapsuleBridge</span>
+
+<span class="kr">@objc</span><span class="p">(</span><span class="n">MyPlugin</span><span class="p">)</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">MyPlugin</span><span class="p">:</span><span class="w"> </span><span class="n">CapsulePlugin</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">@objc</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">hash</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">CapsuleBridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">input</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="n">getString</span><span class="p">(</span><span class="s">"input"</span><span class="p">)</span><span class="w"> </span><span class="p">??</span><span class="w"> </span><span class="s">""</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="n">cString</span><span class="p">:</span><span class="w"> </span><span class="n">compute_hash</span><span class="p">(</span><span class="n">input</span><span class="p">))</span><span class="w">   </span><span class="c1">// direct C call</span>
+<span class="w">        </span><span class="n">call</span><span class="p">.</span><span class="n">resolve</span><span class="p">([</span><span class="s">"hash"</span><span class="p">:</span><span class="w"> </span><span class="n">result</span><span class="p">])</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The CLI adds the <code>.c</code> file to the Xcode target and generates the bridging header.</p>
+<hr />
+<h3 id="lua-partially-feasible-platform-split">Lua — PARTIALLY FEASIBLE, PLATFORM SPLIT ⚠️<a class="headerlink" href="#lua-partially-feasible-platform-split" title="Permanent link">&para;</a></h3>
+<p>This is the most nuanced case. The feasibility differs significantly between platforms.</p>
+<h4 id="lua-on-android-fully-feasible">Lua on Android — FULLY FEASIBLE ✅<a class="headerlink" href="#lua-on-android-fully-feasible" title="Permanent link">&para;</a></h4>
+<p><strong>Option 1 — LuaJ (pure Java, recommended)</strong></p>
+<p>LuaJ is a Lua 5.2 interpreter written in pure Java. No NDK, no native compilation, no <code>.so</code> files. Just a Maven dependency.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// build.gradle (auto-added by CLI when a .lua plugin is detected)</span>
+<span class="n">implementation</span><span class="w"> </span><span class="s1">'org.luaj:luaj-jse:3.0.1'</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// LuaPluginHost.kt — hosts all .lua plugins</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">LuaPluginHost</span><span class="p">(</span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">bridge</span><span class="p">:</span><span class="w"> </span><span class="n">CapsuleBridge</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">CapsulePluginBase</span><span class="p">(</span><span class="n">bridge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">globals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JsePlatform</span><span class="p">.</span><span class="na">standardGlobals</span><span class="p">()</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">loadScript</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">assetPath</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bridge</span><span class="p">.</span><span class="na">context</span><span class="p">.</span><span class="na">assets</span><span class="p">.</span><span class="na">open</span><span class="p">(</span><span class="n">assetPath</span><span class="p">).</span><span class="na">bufferedReader</span><span class="p">().</span><span class="na">readText</span><span class="p">()</span>
+<span class="w">        </span><span class="n">globals</span><span class="p">.</span><span class="na">load</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">).</span><span class="na">call</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">call</span><span class="p">(</span><span class="n">pluginName</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">:</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kt">Any</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">onCall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">globals</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">"onCall"</span><span class="p">)</span><span class="w"> </span><span class="k">as?</span><span class="w"> </span><span class="n">LuaFunction</span>
+<span class="w">            </span><span class="o">?:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="na">reject</span><span class="p">(</span><span class="m">4001</span><span class="p">,</span><span class="w"> </span><span class="s">"Lua plugin missing onCall function"</span><span class="p">)</span>
+
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">luaParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LuaTable</span><span class="p">()</span>
+<span class="w">        </span><span class="n">params</span><span class="p">.</span><span class="na">forEach</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">luaParams</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">CoerceJavaToLua</span><span class="p">.</span><span class="na">coerce</span><span class="p">(</span><span class="n">v</span><span class="p">))</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">resolveFn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">object</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">TwoArgFunction</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">call</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="n">LuaValue</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="n">LuaValue</span><span class="p">):</span><span class="w"> </span><span class="n">LuaValue</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">call</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">CoerceLuaToJava</span><span class="p">.</span><span class="na">coerce</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">Map</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kt">Any</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">LuaValue</span><span class="p">.</span><span class="na">NIL</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">rejectFn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">object</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">TwoArgFunction</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">call</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="n">LuaValue</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="n">LuaValue</span><span class="p">):</span><span class="w"> </span><span class="n">LuaValue</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">call</span><span class="p">.</span><span class="na">reject</span><span class="p">(</span><span class="m">4002</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="na">tojstring</span><span class="p">())</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">LuaValue</span><span class="p">.</span><span class="na">NIL</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">onCall</span><span class="p">.</span><span class="na">call</span><span class="p">(</span>
+<span class="w">            </span><span class="n">LuaValue</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">method</span><span class="p">),</span>
+<span class="w">            </span><span class="n">luaParams</span><span class="p">,</span>
+<span class="w">            </span><span class="n">resolveFn</span><span class="p">,</span>
+<span class="w">            </span><span class="n">rejectFn</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Option 2 — LuaJIT NDK (higher performance)</strong></p>
+<p>LuaJIT compiles Lua to native machine code (JIT compilation). Faster for CPU-intensive scripts. Requires NDK build for each ABI (arm64-v8a, x86_64). Pre-built NDK binaries exist in the open-source community but are not official.</p>
+<p><strong>Decision</strong>: Start with LuaJ (pure Java). Offer LuaJIT as an opt-in for performance-critical plugins.</p>
+<hr />
+<h4 id="lua-on-ios-bundled-only-no-ota-updates">Lua on iOS — BUNDLED ONLY, NO OTA UPDATES ⚠️<a class="headerlink" href="#lua-on-ios-bundled-only-no-ota-updates" title="Permanent link">&para;</a></h4>
+<p><strong>The App Store 2.5.2 rule</strong> directly restricts this:</p>
+<blockquote>
+<p><em>"Apps may not download, install, or execute code which introduces or changes features or functionality of the app, including other apps."</em>
+— Apple App Store Review Guidelines 2.5.2</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Allowed on iOS?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.lua</code> files bundled inside the app binary</td>
+<td>✅ Yes — interpreted at runtime but bundled at build time</td>
+</tr>
+<tr>
+<td>Downloading new <code>.lua</code> scripts from a server</td>
+<td>❌ No — violates 2.5.2</td>
+</tr>
+<tr>
+<td>Updating <code>.lua</code> via CodeSync OTA</td>
+<td>❌ No — same violation</td>
+</tr>
+<tr>
+<td>Using JavaScript in <code>WKWebView</code> (the web bundle)</td>
+<td>✅ Yes — explicit WebKit exemption</td>
+</tr>
+</tbody>
+</table>
+<p><strong>This means</strong>: On iOS, Lua plugins are <strong>static</strong>. They ship with the app binary and can only change with a new app store release. There is no OTA update path for Lua on iOS.</p>
+<p><strong>On Android</strong>: No such restriction exists. Lua scripts can be included in the CodeSync bundle and updated OTA freely.</p>
+<p><strong>Implementation</strong>:
+- On iOS, use the C Lua 5.4 interpreter compiled into the Xcode project (Lua is a C library, ~300KB)
+- Scripts are read from <code>Bundle.main</code> (bundled assets) only — the host explicitly refuses to load scripts from external paths
+- The <code>LuaPluginHost.swift</code> enforces this at runtime</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">LuaPluginHost</span><span class="p">:</span><span class="w"> </span><span class="n">CapsulePlugin</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">luaState</span><span class="p">:</span><span class="w"> </span><span class="n">OpaquePointer</span><span class="p">?</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">loadBundledScript</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ONLY loads from app bundle — never from Documents or network paths</span>
+<span class="w">        </span><span class="k">guard</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">url</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Bundle</span><span class="p">.</span><span class="n">main</span><span class="p">.</span><span class="n">url</span><span class="p">(</span><span class="n">forResource</span><span class="p">:</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">withExtension</span><span class="p">:</span><span class="w"> </span><span class="s">"lua"</span><span class="p">),</span>
+<span class="w">              </span><span class="kd">let</span><span class="w"> </span><span class="nv">source</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="p">?</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span><span class="w"> </span><span class="n">url</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="n">luaL_dostring</span><span class="p">(</span><span class="n">luaState</span><span class="p">,</span><span class="w"> </span><span class="n">source</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Summary for Lua</strong>:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Android</th>
+<th>iOS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bundled scripts</td>
+<td>✅ LuaJ (pure Java)</td>
+<td>✅ Lua 5.4 C library</td>
+</tr>
+<tr>
+<td>OTA script updates</td>
+<td>✅ Via CodeSync</td>
+<td>❌ App Store violation</td>
+</tr>
+<tr>
+<td>JIT performance</td>
+<td>✅ Optional LuaJIT NDK</td>
+<td>❌ No JIT (Apple forbids writable+executable memory)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Correction to previous doc</strong>: The claim that "Lua plugins can be updated via CodeSync OTA on iOS" was <strong>incorrect</strong>. OTA Lua updates on iOS violate App Store guidelines. This capability is Android-only.</p>
+</blockquote>
+<hr />
+<h2 id="part-4-code-generation-typescript-types-from-native-annotations">Part 4 — Code Generation: TypeScript Types from Native Annotations<a class="headerlink" href="#part-4-code-generation-typescript-types-from-native-annotations" title="Permanent link">&para;</a></h2>
+<p>This eliminates handwritten TypeScript bridges. The developer annotates Kotlin/Swift; the CLI generates the <code>.ts</code> file.</p>
+<h3 id="android-ksp-processor">Android: KSP Processor<a class="headerlink" href="#android-ksp-processor" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// @BridgeMethod and @BridgeParam are processed by the Capsule KSP processor</span>
+
+<span class="nd">@CapsulePlugin</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"barcode"</span><span class="p">)</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">BarcodeScanner</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@BridgeMethod</span>
+<span class="w">    </span><span class="nd">@Returns</span><span class="p">(</span><span class="n">BarcodeResult</span><span class="o">::</span><span class="n">class</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">scan</span><span class="p">(</span>
+<span class="w">        </span><span class="nd">@BridgeParam</span><span class="p">(</span><span class="s">"quality"</span><span class="p">)</span><span class="w"> </span><span class="n">quality</span><span class="p">:</span><span class="w"> </span><span class="kt">Float</span><span class="p">,</span>
+<span class="w">        </span><span class="nd">@BridgeParam</span><span class="p">(</span><span class="s">"facing"</span><span class="p">)</span><span class="w">  </span><span class="n">facing</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<span class="w">    </span><span class="p">):</span><span class="w"> </span><span class="kt">Unit</span>
+
+<span class="w">    </span><span class="nd">@BridgeEvent</span>
+<span class="w">    </span><span class="nd">@Emits</span><span class="p">(</span><span class="n">BarcodeResult</span><span class="o">::</span><span class="n">class</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onScanResult</span><span class="p">():</span><span class="w"> </span><span class="kt">Unit</span>
+<span class="p">}</span>
+
+<span class="nd">@BridgeType</span>
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">BarcodeResult</span><span class="p">(</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">value</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">format</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<span class="p">)</span>
+</code></pre></div>
+<p><strong>KSP processor output</strong>:
+<div class="highlight"><pre><span></span><code><span class="c1">// AUTO-GENERATED — do not edit. Run `capsule generate types` to regenerate.</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">BarcodeResult</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="nx">format</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">barcode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">scan</span><span class="p">(</span><span class="nx">params</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">quality?</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span><span class="w"> </span><span class="nx">facing</span><span class="o">?:</span><span class="w"> </span><span class="s1">'front'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">'back'</span><span class="w"> </span><span class="p">})</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">BarcodeResult</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">capsuleBridge</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s1">'barcode.scan'</span><span class="p">,</span><span class="w"> </span><span class="nx">params</span><span class="p">)</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">onScanResult</span><span class="p">(</span><span class="nx">handler</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kt">BarcodeResult</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">capsuleBridge</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">'barcode.onScanResult'</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>What exists</strong>: Writing a KSP processor is ~300 lines of Kotlin. Google's KSP documentation is comprehensive, and Capacitor's existing annotation processor (KAPT-based) is a direct reference to port to KSP.</p>
+<h3 id="ios-swift-macros-swift-59">iOS: Swift Macros (Swift 5.9+)<a class="headerlink" href="#ios-swift-macros-swift-59" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="n">CapsulePlugin</span><span class="p">(</span><span class="s">"barcode"</span><span class="p">)</span><span class="w">      </span><span class="c1">// Swift attached macro</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">BarcodeScanner</span><span class="p">:</span><span class="w"> </span><span class="n">CapsulePlugin</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">@</span><span class="n">BridgeMethod</span><span class="w">               </span><span class="c1">// macro marks this for TS generation + dispatch registration</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">scan</span><span class="p">(</span><span class="n">quality</span><span class="p">:</span><span class="w"> </span><span class="nb">Float</span><span class="p">,</span><span class="w"> </span><span class="n">facing</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">BarcodeResult</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The Swift macro generates:
+1. The Objective-C <code>@objc</code> exposure needed for the runtime bridge
+2. A <code>.d.ts</code> snapshot file that <code>capsule generate types</code> collects into the final TypeScript output</p>
+<p><strong>What exists</strong>: Swift macros are new (Xcode 15+, Swift 5.9). No existing framework does this yet. Sourcery is the mature alternative — it uses SwiftSyntax to parse Swift files and generate code from templates. Sourcery is used in 40,000+ projects (Airbnb, Bumble, NYT). Either approach works; Swift macros are more elegant but require Xcode 15.</p>
+<hr />
+<h2 id="part-5-plugin-threading-model">Part 5 — Plugin Threading Model<a class="headerlink" href="#part-5-plugin-threading-model" title="Permanent link">&para;</a></h2>
+<p>Getting threading wrong causes random crashes and ANR (Application Not Responding) errors. This must be defined as an explicit contract.</p>
+<h3 id="android-threading-rules">Android Threading Rules<a class="headerlink" href="#android-threading-rules" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Thread</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@JavascriptInterface</code> method (entry point)</td>
+<td>WebView background thread</td>
+<td>Never do UI work here</td>
+</tr>
+<tr>
+<td><code>call.resolve()</code> / <code>call.reject()</code></td>
+<td>Any thread</td>
+<td>Safe — internally dispatches to main for <code>evaluateJavascript</code></td>
+</tr>
+<tr>
+<td>UI operations (launch camera, show dialog)</td>
+<td>Must be main thread</td>
+<td>Use <code>bridge.activity.runOnUiThread { }</code></td>
+</tr>
+<tr>
+<td>Long-running work (file I/O, network)</td>
+<td>Background thread</td>
+<td>Use <code>CoroutineScope(Dispatchers.IO)</code> or <code>bridge.async { }</code></td>
+</tr>
+</tbody>
+</table>
+<p>The <code>CapsulePluginBase</code> provides helpers:
+<div class="highlight"><pre><span></span><code><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">CapsulePluginBase</span><span class="p">(</span><span class="kd">protected</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">bridge</span><span class="p">:</span><span class="w"> </span><span class="n">CapsuleBridge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onMain</span><span class="p">(</span><span class="n">block</span><span class="p">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">Unit</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bridge</span><span class="p">.</span><span class="na">activity</span><span class="p">.</span><span class="na">runOnUiThread</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onIO</span><span class="p">(</span><span class="n">block</span><span class="p">:</span><span class="w"> </span><span class="n">suspend</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">Unit</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bridge</span><span class="p">.</span><span class="na">coroutineScope</span><span class="p">.</span><span class="na">launch</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="na">IO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">block</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="ios-threading-rules">iOS Threading Rules<a class="headerlink" href="#ios-threading-rules" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Thread</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WKScriptMessageHandler.didReceive</code></td>
+<td>Main thread</td>
+<td>Safe for UI; dispatch off main for heavy work</td>
+</tr>
+<tr>
+<td><code>call.resolve()</code> / <code>call.reject()</code></td>
+<td>Any thread</td>
+<td>Safe</td>
+</tr>
+<tr>
+<td>Heavy computation</td>
+<td>Background</td>
+<td><code>DispatchQueue.global(qos: .userInitiated).async { }</code></td>
+</tr>
+<tr>
+<td>Camera / permissions</td>
+<td>Main thread required</td>
+<td>Must dispatch back</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="part-6-error-boundaries-and-plugin-crashes">Part 6 — Error Boundaries and Plugin Crashes<a class="headerlink" href="#part-6-error-boundaries-and-plugin-crashes" title="Permanent link">&para;</a></h2>
+<p>An uncaught exception inside a plugin method must not crash the entire app.</p>
+<h3 id="android">Android<a class="headerlink" href="#android" title="Permanent link">&para;</a></h3>
+<p>The <code>BridgeRouter</code> wraps every plugin invocation:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">fun</span><span class="w"> </span><span class="nf">route</span><span class="p">(</span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">BridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">dispatch</span><span class="p">(</span><span class="n">call</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="n">Exception</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Plugin threw — reject the call, log, do not rethrow</span>
+<span class="w">        </span><span class="n">Log</span><span class="p">.</span><span class="na">e</span><span class="p">(</span><span class="s">"CapsuleBridge"</span><span class="p">,</span><span class="w"> </span><span class="s">"Plugin error in </span><span class="si">${</span><span class="n">call</span><span class="p">.</span><span class="na">method</span><span class="si">}</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+<span class="w">        </span><span class="n">call</span><span class="p">.</span><span class="na">reject</span><span class="p">(</span><span class="m">4999</span><span class="p">,</span><span class="w"> </span><span class="s">"Plugin error: </span><span class="si">${</span><span class="n">e</span><span class="p">.</span><span class="na">message</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Additionally, Kotlin coroutine exceptions need a <code>CoroutineExceptionHandler</code>:
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">exceptionHandler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CoroutineExceptionHandler</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">throwable</span><span class="w"> </span><span class="o">-&gt;</span>
+<span class="w">    </span><span class="n">Log</span><span class="p">.</span><span class="na">e</span><span class="p">(</span><span class="s">"CapsuleBridge"</span><span class="p">,</span><span class="w"> </span><span class="s">"Unhandled plugin coroutine error"</span><span class="p">,</span><span class="w"> </span><span class="n">throwable</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// notify developer in debug mode; silence in production</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="ios">iOS<a class="headerlink" href="#ios" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nf">route</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">call</span><span class="p">:</span><span class="w"> </span><span class="n">CapsuleBridgeCall</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="n">dispatch</span><span class="p">(</span><span class="n">call</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">NSLog</span><span class="p">(</span><span class="s">"CapsuleBridge: Plugin error in </span><span class="si">\(</span><span class="n">call</span><span class="p">.</span><span class="n">method</span><span class="si">)</span><span class="s">: </span><span class="si">\(</span><span class="n">error</span><span class="si">)</span><span class="s">"</span><span class="p">)</span>
+<span class="w">        </span><span class="n">call</span><span class="p">.</span><span class="n">reject</span><span class="p">(.</span><span class="n">pluginError</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Objective-C exceptions (from legacy ObjC plugins) require a separate <code>@try/@catch</code> wrapper since Swift does not catch ObjC exceptions by default.</p>
+<hr />
+<h2 id="part-7-the-capsule-eject-command-forking-an-npm-plugin">Part 7 — The <code>capsule eject</code> Command (Forking an npm Plugin)<a class="headerlink" href="#part-7-the-capsule-eject-command-forking-an-npm-plugin" title="Permanent link">&para;</a></h2>
+<h3 id="what-eject-actually-means">What "eject" actually means<a class="headerlink" href="#what-eject-actually-means" title="Permanent link">&para;</a></h3>
+<p>An npm binary plugin ships an AAR (which is just a zip file of compiled <code>.class</code> files, resources, and a manifest). Decompiling it with tools like <code>jadx</code> produces readable Java — but that's a workaround, not a first-class path.</p>
+<p><strong>The correct approach</strong>: Require all official and community plugins to publish source code. The <code>capsule-plugin.json</code> manifest includes a <code>sourceRepo</code> field:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@capsule/camera"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"sourceRepo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/capsule-framework/plugin-camera"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"sourceBranch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"main"</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>capsule eject @capsule/camera</code> then:
+<div class="highlight"><pre><span></span><code>1. Read capsule-plugin.json from node_modules/@capsule/camera/
+2. Read sourceRepo field
+3. git clone --depth=1 {sourceRepo} capsule-plugins/camera
+4. Remove @capsule/camera from capsule.config.ts plugins array
+5. Add ./capsule-plugins/camera to plugins array
+6. Run capsule sync to rebuild registry
+</code></pre></div></p>
+<p>The developer now owns the full source. Modifications compile from source at every <code>capsule build</code>.</p>
+<p><strong>For closed-source third-party plugins</strong> with no <code>sourceRepo</code>: eject is not available. The CLI should say so explicitly rather than attempting decompilation.</p>
+<hr />
+<h2 id="part-8-what-already-exists-to-reuse">Part 8 — What Already Exists to Reuse<a class="headerlink" href="#part-8-what-already-exists-to-reuse" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Project</th>
+<th>License</th>
+<th>Reuse approach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Android bridge core</td>
+<td>Capacitor <code>android/capacitor</code></td>
+<td>MIT</td>
+<td>Study implementation; do not fork (different bridge protocol)</td>
+</tr>
+<tr>
+<td>iOS bridge core</td>
+<td>Capacitor <code>ios/Capacitor</code></td>
+<td>MIT</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>JS bridge runtime</td>
+<td>Capacitor <code>core/src/bridge.ts</code></td>
+<td>MIT</td>
+<td>Fork and adapt for JSON-RPC 2.0 envelope</td>
+</tr>
+<tr>
+<td>Lua on Android</td>
+<td>LuaJ (<code>luaj/luaj</code>)</td>
+<td>MIT</td>
+<td>Add as Maven dependency directly</td>
+</tr>
+<tr>
+<td>Lua on iOS</td>
+<td>Lua 5.4 C source</td>
+<td>MIT</td>
+<td>Include C source directly in Xcode target</td>
+</tr>
+<tr>
+<td>Android KSP</td>
+<td>Google KSP (<code>google/ksp</code>)</td>
+<td>Apache 2.0</td>
+<td>Write Capsule's own processor using KSP API</td>
+</tr>
+<tr>
+<td>iOS code generation</td>
+<td>Sourcery (<code>krzysztofzablocki/Sourcery</code>)</td>
+<td>MIT</td>
+<td>Use as a build phase tool</td>
+</tr>
+<tr>
+<td>NDK CMake integration</td>
+<td>Standard Android NDK</td>
+<td>—</td>
+<td>CLI generates CMakeLists.txt (20 lines)</td>
+</tr>
+<tr>
+<td>Swift macros</td>
+<td>Swift standard library 5.9+</td>
+<td>—</td>
+<td>Write Capsule's own attached macros</td>
+</tr>
+<tr>
+<td>TypeScript bridge types</td>
+<td>N/A</td>
+<td>—</td>
+<td>Generated by CLI from annotations; novel</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="part-9-plugin-lifecycle">Part 9 — Plugin Lifecycle<a class="headerlink" href="#part-9-plugin-lifecycle" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>App cold start
+     │
+     ▼
+CapsuleShell.onCreate()
+     │
+     ├─ Load all plugin instances (eager, synchronous)
+     │    Plugin.load() called — reserve resources, open DB connections
+     │
+     ├─ WebView created and configured
+     │    addJavascriptInterface / WKScriptMessageHandler registered
+     │
+     ├─ Web bundle loaded
+     │    Phase 1: file:///android_asset/www/ (dev server in debug mode)
+     │    Phase 2+: CapsuleRuntime starts the server, navigates WebView to
+     │              http://127.0.0.1:{port}/ after server is ready
+     │    DOMContentLoaded fires
+     │    Web code imports plugins from @capsule/core
+     │
+     └─ App is live — bridge calls can now flow
+
+
+App goes to background
+     │
+     └─ Plugin.pause() called — release camera, pause sensors
+
+App returns to foreground
+     │
+     └─ Plugin.resume() called — reacquire resources, re-check permissions
+
+App destroyed
+     │
+     └─ Plugin.destroy() called — close DB, release memory
+</code></pre></div>
+<p>Plugins that do not override <code>pause()</code>/<code>resume()</code>/<code>destroy()</code> get no-op defaults.</p>
+<hr />
+<h2 id="part-10-full-plugin-project-layout">Part 10 — Full Plugin Project Layout<a class="headerlink" href="#part-10-full-plugin-project-layout" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>my-app/
+  capsule-plugins/
+    barcode/
+      capsule-plugin.json       # permissions, platform declarations
+      android/
+        BarcodeScanner.kt       # Kotlin implementation
+        BarcodeScanner.java     # OR Java (not both)
+        native/
+          barcode_fast.c        # optional C acceleration
+          barcode_fast.h
+      ios/
+        BarcodeScanner.swift    # Swift implementation
+        barcode_fast.c          # C available directly on iOS too
+      lua/
+        logic.lua               # scripting layer (Android OTA; iOS bundled-only)
+      web/
+        index.ts                # TypeScript bridge (manual or auto-generated)
+        index.d.ts              # types (auto-generated)
+
+  capsule.config.ts             # plugins listed here or auto-discovered
+  package.json
+</code></pre></div>
+<hr />
+<h2 id="summary-feasibility-matrix">Summary: Feasibility Matrix<a class="headerlink" href="#summary-feasibility-matrix" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Language</th>
+<th>Android</th>
+<th>iOS</th>
+<th>OTA updatable</th>
+<th>Complexity</th>
+<th>What exists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kotlin</td>
+<td>✅ Full</td>
+<td>N/A</td>
+<td>❌ Native</td>
+<td>Low</td>
+<td>Capacitor pattern (proven)</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>✅ Full</td>
+<td>N/A</td>
+<td>❌ Native</td>
+<td>Low</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Swift</td>
+<td>N/A</td>
+<td>✅ Full</td>
+<td>❌ Native</td>
+<td>Low</td>
+<td>Capacitor pattern (proven)</td>
+</tr>
+<tr>
+<td>Objective-C</td>
+<td>N/A</td>
+<td>✅ Full</td>
+<td>❌ Native</td>
+<td>Medium</td>
+<td>Proven, legacy</td>
+</tr>
+<tr>
+<td>C/C++ (NDK)</td>
+<td>✅ Full</td>
+<td>✅ Full</td>
+<td>❌ Native</td>
+<td>High (JNI)</td>
+<td>NDK mature; JNI is error-prone</td>
+</tr>
+<tr>
+<td>Lua</td>
+<td>✅ LuaJ (pure Java)</td>
+<td>✅ Lua 5.4 C lib</td>
+<td>Android ✅ / iOS ❌</td>
+<td>Medium</td>
+<td>LuaJ MIT licensed</td>
+</tr>
+<tr>
+<td>LuaJIT</td>
+<td>✅ NDK build</td>
+<td>❌ Apple forbids W+X memory</td>
+<td>Android ✅ / iOS ❌</td>
+<td>High</td>
+<td>Community NDK builds</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024-2026 Capsule Framework Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.highlight", "search.share", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

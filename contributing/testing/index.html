@@ -1,0 +1,4891 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alex-vinny.github.io/capsule_framework/contributing/testing/">
+      
+      
+        <link rel="prev" href="../commands/">
+      
+      
+        <link rel="next" href="../ci/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Testing - Capsule Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#testing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Capsule Framework" class="md-header__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Capsule Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Testing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guide/installation/" class="md-tabs__link">
+          
+  
+  
+  Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/cli/" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/architecture/" class="md-tabs__link">
+          
+  
+  
+  Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../decisions/" class="md-tabs__link">
+          
+  
+  
+  Decisions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../project/roadmap/" class="md-tabs__link">
+          
+  
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Capsule Framework" class="md-nav__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Capsule Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/hello-world/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hello World
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/push-notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Push Notifications
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/alerts-styling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alerts Styling
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/mobile-css-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile CSS Reset
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/publishing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publishing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ota-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Over-the-air Updates
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/core-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/lockfile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lockfile
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generated
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generated
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/docs-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Principles
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/capsule-vs-ionic-capacitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    vs Ionic/Capacitor
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/extensibility-and-positioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extensibility & Positioning
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/ionic-framework7-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ionic Framework 7 Migration
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Primers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/kotlin-for-csharp-devs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kotlin for C# Devs
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/jni-and-cpp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JNI & C
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/civetweb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CivetWeb
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/quickjs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QuickJS
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decisions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0001-embedded-runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0001 Embedded Runtime
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0002-capsule-ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0002 Capsule UI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0003-ai-and-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0003 AI & Agents
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0004-web-serving-transport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0004 Web Serving Transport
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#framework-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Framework support
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-layered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why layered
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-its-wired-for-maintainers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it's wired (for maintainers)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verification-status-2026-06-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verification status (2026-06-12)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#follow-ups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Follow-ups
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual-test-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual test plan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manual test plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#group-0-from-template-7-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 0 — From-template (7 examples)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 0 — From-template (7 examples)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checks-apply-to-each-of-the-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checks (apply to each of the 7)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-0-results-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 0 results log
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tailwind-optional-css-tailwind-2026-06-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tailwind (optional --css tailwind) — 2026-06-12
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-1-react-vite-feature-apps-3-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 1 — React + Vite feature apps (3 examples)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 1 — React + Vite feature apps (3 examples)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-react-ts-port-5173" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 react-ts (port 5173)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-react-ts-native-port-5181" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 react-ts-native (port 5181)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-react-ts-tailwind-port-5180" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 react-ts-tailwind (port 5180)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-2-non-vite-transparent-proxy-3-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 2 — Non-Vite transparent proxy (3 examples)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Group 2 — Non-Vite transparent proxy (3 examples)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checks-apply-to-each-of-the-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checks (apply to each of the 3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-rollup-solid-extra-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 rollup-solid extra check
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-2-results-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group 2 results log
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-cutting-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-cutting checks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-order-recommendation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test order recommendation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../codesync-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CodeSync Internals
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../template-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Template Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ios-bring-up/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iOS Bring-up
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../platform-parity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android/iOS Parity
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upkeep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_14" id="__nav_6_14_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Workflows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/add-native-api/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add Native API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/author-plugin/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Author Plugin
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/upkeep-sweep/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep Sweep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/known-issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known Issues
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_6" id="__nav_7_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Incidents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Incidents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/incidents/2026-10-embedded-server-startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-10 Embedded Server Startup
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_7" id="__nav_7_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/2026-06-24-planning-brainstorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-24 Planning Brainstorm
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/chatgpt-first-impressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT First Impressions
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/chatgpt-plugin-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT Plugin Compatibility
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_8" id="__nav_7_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Business
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/business-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Model
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/pricing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pricing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/ota-policy-and-liability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Policy & Liability
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_9" id="__nav_7_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Server Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Server Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/file-storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Storage
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/workers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workers
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h1>
+<p>Capsule ships an <strong>opt-in</strong> test harness so a generated app can be tested at
+every layer that matters — from pure route handlers up to the real WebView on a
+device — without the developer wiring a toolchain by hand.</p>
+<blockquote>
+<p>Opt in at scaffold time, exactly like Tailwind:
+<div class="highlight"><pre><span></span><code>capsule init my-app --template react-ts --test vitest
+</code></pre></div>
+Omitting <code>--test</code> shows a prompt (<code>None</code> / <code>Vitest</code>); <code>None</code> is the default and
+ships zero test files. Mirror of <code>--css none|tailwind</code>.</p>
+</blockquote>
+<h3 id="framework-support">Framework support<a class="headerlink" href="#framework-support" title="Permanent link">&para;</a></h3>
+<p>Wired for <strong>all seven</strong> templates. The agnostic tiers (route-contract, route
+units, QuickJS-fidelity, integration) are identical everywhere; only the
+component test + vitest config are framework-specific.</p>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>Component test</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>react-ts</td>
+<td>✅ <code>@testing-library/react</code></td>
+<td></td>
+</tr>
+<tr>
+<td>vue-ts</td>
+<td>✅ <code>@testing-library/vue</code></td>
+<td></td>
+</tr>
+<tr>
+<td>svelte-ts</td>
+<td>✅ <code>@testing-library/svelte</code></td>
+<td>Vitest <strong>projects</strong> split (see wiring notes)</td>
+</tr>
+<tr>
+<td>vanilla-ts / vanilla-js</td>
+<td>✅ raw DOM</td>
+<td>loads <code>index.html</code>, imports <code>main</code>, clicks by id</td>
+</tr>
+<tr>
+<td>jquery-bootstrap</td>
+<td>✅ raw DOM</td>
+<td>native <code>.click()</code> fires jQuery's delegated handlers</td>
+</tr>
+<tr>
+<td>angular-ts</td>
+<td>⏳ agnostic tiers only</td>
+<td>TestBed/analog component test is a follow-up</td>
+</tr>
+</tbody>
+</table>
+<h2 id="why-layered">Why layered<a class="headerlink" href="#why-layered" title="Permanent link">&para;</a></h2>
+<p>Manual device testing (install → launch → screenshot → eyeball) is slow,
+token-/time-expensive, and flaky. Almost everything it checks is actually
+deterministic and can be asserted off-device in milliseconds. Each layer below
+catches a distinct failure class; only the last genuinely needs a device.</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>File (<code>react-ts</code>)</th>
+<th>Runtime</th>
+<th>Catches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 — Route contract</td>
+<td><code>src/test/route-contract.test.ts</code></td>
+<td>Vitest (node)</td>
+<td>A <code>bridge.call('x')</code> / <code>fetch('/api/y')</code> with <strong>no handler file</strong> (the 404 class) — statically, before build</td>
+</tr>
+<tr>
+<td>1 — Route units</td>
+<td><code>src/test/routes.test.ts</code></td>
+<td>Vitest (node)</td>
+<td>Handler logic — pure functions, no bridge/server</td>
+</tr>
+<tr>
+<td>2 — Component</td>
+<td><code>src/test/app.test.tsx</code></td>
+<td>Vitest (jsdom)</td>
+<td>UI wiring — renders <code>&lt;App/&gt;</code> against <code>@capsule/core</code>'s <strong>FakeBridge</strong>; tab nav, async result plumbing</td>
+</tr>
+<tr>
+<td>3 — QuickJS fidelity</td>
+<td><code>src/test/quickjs.test.ts</code></td>
+<td>Vitest (node) + <code>quickjs-emscripten</code></td>
+<td>"works in dev Node sidecar, breaks in embedded QuickJS" — bundles routes like <code>capsule build</code>, runs <code>dispatch</code>/<code>handleHttpRequest</code> in a real QuickJS, asserts <code>fetch</code> is absent</td>
+</tr>
+<tr>
+<td>— Integration (HML)</td>
+<td><code>src/test/integration.test.ts</code></td>
+<td>Vitest (node)</td>
+<td>Live backend — <strong>gated on <code>CAPSULE_API_BASE</code></strong>, skipped by default so CI stays hermetic</td>
+</tr>
+<tr>
+<td>4 — On-device smoke</td>
+<td><code>app/src/androidTest/.../SmokeTest.kt</code></td>
+<td>Gradle <code>connectedAndroidTest</code> (Espresso-Web)</td>
+<td>Blank screen / WebView-attach / asset-load / JS crash — the one class only a real device/emulator shows</td>
+</tr>
+</tbody>
+</table>
+<h2 id="running">Running<a class="headerlink" href="#running" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>capsule test                 # tiers 1–3 + integration (one-shot, hermetic)
+capsule test --watch         # vitest watch mode
+capsule test routes          # extra args pass through to vitest (filters/flags)
+
+CAPSULE_API_BASE=https://hml.example.com capsule test   # also runs the HML test
+
+# Tier 4 (needs a device/emulator):
+#   debug   → run `capsule dev` first (loads the dev server via adb reverse)
+#   release → self-contained (embedded bundle)
+cd .capsule/android &amp;&amp; ./gradlew :app:connectedDebugAndroidTest
+</code></pre></div>
+<h2 id="how-its-wired-for-maintainers">How it's wired (for maintainers)<a class="headerlink" href="#how-its-wired-for-maintainers" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Injector</strong>: <code>packages/cli/src/testing.ts</code> → <code>applyTesting(projectDir, template)</code>.
+  Copies <code>assets/testing/_shared/</code> (the agnostic tiers, identical everywhere) then
+  <code>assets/testing/&lt;framework&gt;/</code> (vitest config + setup + component test) into the
+  project, and patches <code>package.json</code> with test scripts + <code>SHARED_DEPS</code> +
+  <code>FRAMEWORK_DEPS[template]</code>. Mirrors <code>tailwind.ts</code>. Called from <code>init.ts</code> when
+  <code>--test vitest</code> (or the prompt) is chosen; falls through with a notice otherwise.</li>
+<li><strong>Component-test mock</strong>: each test does <code>vi.mock('@capsule/core', …)</code> returning a
+  fresh <code>FakeBridge</code> as the <code>bridge</code> export, then reads it back via the mocked
+  import (<code>const fake = bridge as FakeBridge</code>) — no <code>__fake</code> export hack, no
+  hoisting trap. Vanilla/jQuery load <code>index.html</code> into jsdom and import <code>main</code> so
+  the real handlers attach, then click by id.</li>
+<li><strong>Tier-3 detail</strong>: the QuickJS test runs in the <strong>node</strong> Vitest environment
+  (<code>// @vitest-environment node</code>) — esbuild's <code>TextEncoder instanceof Uint8Array</code>
+  invariant fails under jsdom. It re-creates the CLI's <code>bundleRoutes()</code> IIFE so it
+  exercises the <em>same</em> dispatch contract Kotlin calls.</li>
+<li><strong>Svelte uses Vitest <code>projects</code></strong>: <code>svelteTesting()</code> forces
+  <code>resolve.conditions: ['browser']</code> (so components get their client build), which
+  would also make <code>quickjs-emscripten</code> load its network-fetching <em>browser</em> WASM.
+  So the component test runs in a browser-conditioned jsdom project and the
+  agnostic tiers run in a plain Node project. Other frameworks don't need this.</li>
+<li><strong>Tier-4 generator</strong>: <code>sync.ts</code> writes <code>SmokeTest.kt</code> + androidTest deps
+  (<code>espresso-web</code>, <code>ext-junit</code>, <code>runner</code>) + <code>testInstrumentationRunner</code> on every
+  sync. The assertion is <strong>content-agnostic</strong> (non-empty body text via a
+  Hamcrest-1.3-safe matcher) because <code>.capsule/android</code> is regenerated each sync
+  and can't be hand-tailored. Espresso pins Hamcrest <strong>1.3</strong> — avoid 2.x matchers
+  (<code>matchesPattern</code>, <code>blankOrNullString</code>).</li>
+</ul>
+<h2 id="verification-status-2026-06-12">Verification status (2026-06-12)<a class="headerlink" href="#verification-status-2026-06-12" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Tiers 1–3 + integration: <strong>PASS in every wired framework</strong>, each verified by
+  injecting into its <code>*-from-template</code> example and running <code>vitest</code>:
+  react / vue / svelte <strong>12 passed</strong>, vanilla-ts / vanilla-js / jquery <strong>11
+  passed</strong>, angular <strong>9 passed</strong> (agnostic tiers, no component test) — 1 skipped
+  (integration) in each. The contract test was proven to fail with
+  <code>Missing JSON-RPC route file(s): hello</code> when <code>hello.ts</code> is removed.</li>
+<li><code>capsule test</code> + the <code>applyTesting</code> injector: verified end-to-end (command runs
+  the suite; injector copies <code>_shared</code> + framework files and merges scripts + deps).</li>
+<li>Tier 4: <code>assembleDebugAndroidTest</code> <strong>builds green</strong>; the on-device mechanism is
+  <strong>proven</strong> (Espresso-Web launched MainActivity and read the live DOM via
+  <code>getText()</code>). A fully-green <code>connectedAndroidTest</code> against a <em>feature</em> app
+  (react-ts-native) is intermittent due to instrumentation/emulator state
+  (<code>NoActivityResumedException</code>, post-test app uninstall) on a long-running
+  session — not a scaffold defect.</li>
+</ul>
+<h2 id="follow-ups">Follow-ups<a class="headerlink" href="#follow-ups" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Angular component test.</strong> Angular ships the agnostic tiers only. A component
+  test needs Angular's TestBed wired into Vitest — e.g. <code>@analogjs/vite-plugin-angular</code></li>
+<li>a setup that calls <code>initTestEnvironment</code>, then <code>@testing-library/angular</code>'s
+  <code>render(AppComponent)</code>. Add it under <code>assets/testing/angular-ts/</code> and the deps to
+  <code>FRAMEWORK_DEPS['angular-ts']</code>.</li>
+<li><strong>Tier-4 hardening</strong> for permission-requesting / slow-boot apps: a
+  <code>GrantPermissionRule</code> (from <code>config.android.permissions</code>) and/or a launch retry
+  to make <code>connectedAndroidTest</code> robust against <code>NoActivityResumedException</code>.</li>
+<li><strong>AI / agents testing</strong> (Phase 3 spike onward) maps onto these same tiers via a
+  <code>FakeAiProvider</code> / scripted <code>FakeLlm</code> — the model is a provider behind the bridge,
+  so the agent loop is deterministic given a scripted sequence of model responses.
+  Tier 1 asserts tool-registry wiring + routing logic; Tier 2 renders against a canned
+  <code>ai.generate</code>; <strong>Tier 3 runs the agent loop in real QuickJS</strong> with inference stubbed;
+  the integration tier (gated on <code>CAPSULE_AI_*</code>) and Tier-4 device smoke assert
+  <em>structure not content</em> against a live model (valid tool-call JSON, termination,
+  token/latency budgets). See <a href="../../decisions/0003-ai-and-agents/">../decisions/0003-ai-and-agents.md</a> § Testing.</li>
+</ul>
+<hr />
+<h2 id="manual-test-plan">Manual test plan<a class="headerlink" href="#manual-test-plan" title="Permanent link">&para;</a></h2>
+<p>Testing matrix: <strong>browser-dev</strong> · <strong>emulator-dev</strong> · <strong>emulator-release</strong> · <strong>device-release</strong></p>
+<p>Legend: ✅ expected pass · ❌ expected fail (N/A for env) · 🔲 not yet tested</p>
+<blockquote>
+<p><strong>Automated harness (opt-in):</strong> much of this matrix is now coverable without manual
+device steps. <code>capsule init --test vitest</code> ships route-contract + unit + component +
+QuickJS-fidelity tests (run via <code>capsule test</code>) plus an on-device Espresso-Web smoke
+test — see the harness sections above.</p>
+</blockquote>
+<hr />
+<h3 id="group-0-from-template-7-examples">Group 0 — From-template (7 examples)<a class="headerlink" href="#group-0-from-template-7-examples" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>Validates that <code>capsule init</code> output works identically across all supported frameworks.<br />
+All 7 have identical UI: Home tab (Say Hello alert) + Server tab (bridge.call hello + GET /api/ping).</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Example</th>
+<th>Framework</th>
+<th>Port</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.1</td>
+<td><code>react-from-template</code></td>
+<td>React + TypeScript</td>
+<td>5190</td>
+</tr>
+<tr>
+<td>0.2</td>
+<td><code>vue-from-template</code></td>
+<td>Vue 3 + TypeScript</td>
+<td>5175</td>
+</tr>
+<tr>
+<td>0.3</td>
+<td><code>svelte-from-template</code></td>
+<td>Svelte 5 + TypeScript</td>
+<td>5176</td>
+</tr>
+<tr>
+<td>0.4</td>
+<td><code>angular-from-template</code></td>
+<td>Angular 19</td>
+<td>5177</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td><code>vanilla-js-from-template</code></td>
+<td>Vanilla JS</td>
+<td>5182</td>
+</tr>
+<tr>
+<td>0.6</td>
+<td><code>vanilla-ts-from-template</code></td>
+<td>Vanilla TS</td>
+<td>5174</td>
+</tr>
+<tr>
+<td>0.7</td>
+<td><code>jquery-from-template</code></td>
+<td>jQuery + Bootstrap</td>
+<td>5183</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Ports above are the actual <code>devPort</code> values from each example's <code>capsule.config.ts</code> (verified 2026-06-11). The dev route sidecar runs at <code>devPort+1000</code>.</p>
+</blockquote>
+<h4 id="checks-apply-to-each-of-the-7">Checks (apply to each of the 7)<a class="headerlink" href="#checks-apply-to-each-of-the-7" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>browser-dev</th>
+<th>emulator-dev</th>
+<th>emulator-release</th>
+<th>device-release</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App renders (no blank screen, no JS errors)</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Tab bar visible at bottom (⌂ Home · ⚡ Server)</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Home tab: framework badge correct</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Home tab: "Say Hello" → native alert fires</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Server tab: "Call hello route" → returns "Hello, World! (from QuickJS)"</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Server tab: "GET /api/ping" → returns <code>{"status":"ok","path":"/api/ping"}</code></td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Tab switching: results <strong>persist</strong> across tabs (state lifted to App — by design)</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>HMR: edit src file → browser reloads (dev only)</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Tab-state note:</strong> results intentionally persist across tab switches (state lives in <code>App</code>). The original "state resets" expectation was wrong and has been removed. <code>react-from-template</code> additionally has a <strong>Clear</strong> button to reset results manually — that button is example-only for now; propagating it to the other 6 templates is a pending TODO (see session log).</p>
+</blockquote>
+<h4 id="group-0-results-log">Group 0 results log<a class="headerlink" href="#group-0-results-log" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Cell</th>
+<th>Date</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.1 <code>react-from-template</code> · browser-dev</td>
+<td>2026-06-11</td>
+<td>✅ PASS — all 8 checks (render, tab bar, React badge, Say Hello alert, hello route <code>Hello, World! (from QuickJS)</code>, <code>/api/ping</code> ok, tab persistence + Clear, HMR reload)</td>
+</tr>
+<tr>
+<td>0.1 <code>react-from-template</code> · emulator-dev</td>
+<td>2026-06-11</td>
+<td>✅ PASS — surfaced + fixed a real gap: <code>bridge.call('hello')</code> returned <code>METHOD_NOT_FOUND</code> because the native bridge intercepted it and never reached the dev sidecar. Fixed by adding dev-mode forwarding in <code>CapsuleBridge</code> (unknown methods → POST <code>devServerUrl/_capsule/rpc</code> via adb reverse). Now returns the hello message on-device in dev.</td>
+</tr>
+<tr>
+<td>0.1 <code>react-from-template</code> · emulator-release</td>
+<td>2026-06-11</td>
+<td>✅ PASS — embedded runtime (QuickJS + NanoHTTPD at the time, no dev server; server since replaced by CivetWeb — re-run this row). Say Hello native alert; hello route via real QuickJS; <code>/api/ping</code> via NanoHTTPD→QuickJS.</td>
+</tr>
+<tr>
+<td>0.2 <code>vue-from-template</code> · browser-dev</td>
+<td>2026-06-12</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>0.4 <code>angular-from-template</code> · build</td>
+<td>2026-06-12</td>
+<td>🔧 Fixed build error — <code>ng build</code> type-checks (Vite/esbuild don't), caught <code>res.message</code> on <code>unknown</code>. Added generic: <code>bridge.call&lt;{ message: string }&gt;('hello', …)</code>.</td>
+</tr>
+<tr>
+<td>0.4 <code>angular-from-template</code> · browser-dev</td>
+<td>2026-06-12</td>
+<td>🔧 Fixed two-click bug — bridge/<code>fetch</code> promises resolve <strong>outside Angular's zone</strong> (<code>__capsule.js</code> wraps <code>window.fetch</code> before zone.js patches it; on-device the native <code>__capsuleReceive</code> callback is also out-of-zone), so the view updated only on the next click. Fixed with <code>ChangeDetectorRef.detectChanges()</code> after each async result in <code>callHello</code>/<code>callPing</code>. <strong>Both Angular fixes applied to the example AND the canonical <code>capsule-angular-ts-template</code></strong> (the latter would otherwise break <code>capsule init</code> output and ship the two-click bug). The untyped <code>bridge.call</code> pattern is latent in the other examples but only Angular's compiler/zone surface it.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Dev-mode JSON-RPC routes on-device:</strong> as of 2026-06-11, custom <code>src/routes/*.ts</code> work under <code>capsule dev android</code> (native bridge forwards unmatched methods to the dev sidecar). Previously they only worked in browser-dev and release. Requires the dev server running + adb reverse (both set by <code>capsule dev</code>).</p>
+</blockquote>
+<h4 id="tailwind-optional-css-tailwind-2026-06-12">Tailwind (optional <code>--css tailwind</code>) — 2026-06-12<a class="headerlink" href="#tailwind-optional-css-tailwind-2026-06-12" title="Permanent link">&para;</a></h4>
+<p>Optional <code>capsule init --css tailwind</code> ships Tailwind v3 + a shared <strong>Capsule native preset</strong> (iOS look on the existing <code>.btn</code>/<code>.card</code>/<code>.tab</code> class names — no markup rewrite). Default stays <code>--css none</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Build</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>react / vue / svelte / vanilla-js / vanilla-ts · build</td>
+<td>✅</td>
+<td><code>vite build</code> green; CSS ≈7 KB (base + preset)</td>
+</tr>
+<tr>
+<td>angular · build</td>
+<td>✅</td>
+<td><code>ng build</code> green; <code>styles.css</code> 7.75 KB (global via <code>angular.json</code>)</td>
+</tr>
+<tr>
+<td>jquery · build</td>
+<td>✅</td>
+<td><strong>kept on Bootstrap</strong> (Tailwind skipped by design)</td>
+</tr>
+</tbody>
+</table>
+<p>All 7 from-template examples regenerated (6 to Tailwind, jQuery unchanged) and build green. <strong>Visual native-look check on device still pending</strong> (builds verified; appearance to be eyeballed).</p>
+<hr />
+<h3 id="group-1-react-vite-feature-apps-3-examples">Group 1 — React + Vite feature apps (3 examples)<a class="headerlink" href="#group-1-react-vite-feature-apps-3-examples" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>Extended React apps testing CSS, native APIs, and routing beyond the template baseline.</p>
+</blockquote>
+<h4 id="11-react-ts-port-5173">1.1 <code>react-ts</code> (port 5173)<a class="headerlink" href="#11-react-ts-port-5173" title="Permanent link">&para;</a></h4>
+<p>Two-tab layout: <strong>Native</strong> (Device/Alerts/Haptics/Clipboard/Storage/Location/QuickJS) · <strong>Routes</strong> (JS override + HTTP).</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>browser-dev</th>
+<th>emulator-dev</th>
+<th>emulator-release</th>
+<th>device-release</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Native tab: Device info loads</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Native tab: Alerts — all 3 styles fire</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Native tab: Haptics — all patterns trigger</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Native tab: Clipboard read/write</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Native tab: Storage set/get</td>
+<td>🔲</td>
+<td>✅*</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Native tab: Location — coords appear</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Native tab: Network — status + live event log (toggle airplane/wifi)</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Native tab: QuickJS eval — <code>Math.sqrt(144)</code> → <code>12</code></td>
+<td>❌</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Routes tab: JS override <code>custom.hello</code> → "Hello, \&lt;name&gt;! (handled by QuickJS)"</td>
+<td>❌</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Routes tab: GET /api/ping → JSON ok</td>
+<td>❌</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Routes tab: GET /api/items → list loads</td>
+<td>❌</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Routes tab: POST /api/items → item added, persists in session</td>
+<td>❌</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Tab bar fixed at bottom, does not overlap content</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>1.1 emulator-dev — 2026-06-12.</strong> PASS. Built debug APK (<code>capsule build android</code> → <code>assembleDebug</code>, release-AAR override), installed + launched on <code>emulator-5554</code> against <code>capsule dev</code> (Vite :5173 + sidecar :6173 + adb reverse). <strong>Verified on-device by screenshot:</strong> render, Device info (Model <code>sdk_gphone64_x86_64</code>, Android 15/SDK 35, WebView 124), native Alert dialog ("Hello from Capsule!" + "Pressed: OK"), Haptics (<code>light</code> → "Last: light"), Clipboard (Copy "Cap" → Paste read back "Cap"), Location (<code>37.42200, -122.08400</code>), Routes tab JS override (<code>custom.hello</code> → "Hello, Capsule! (handled by QuickJS)") and <code>GET /api/ping</code> JSON, tab bar + Native↔Routes switching. <strong>Verified via the sidecar (same WebView path, <code>localhost:5173</code> proxy):</strong> <code>quickJs.ping</code> <code>Math.sqrt(144)</code>→<code>"12"</code>, <code>GET /api/items</code>, <code>POST /api/items</code> (<code>durian</code> added + persists). <strong>*Storage:</strong> <code>storage.set</code>/<code>get</code> are native Kotlin handlers reached through the identical bridge confirmed working on-device this session via 5 other native APIs; not individually captured on screen (this example renders no Set button on the storage row + Get on an unset key shows nothing — a UI quirk, not a bridge defect).</p>
+<p><strong>Findings (deferred, low priority):</strong>
+- <code>capsule run android</code> only <strong>installs</strong>, never launches the activity (its description says "Install and launch"). Had to <code>adb shell am start -n …/.MainActivity</code> manually.
+- <code>runtime: 'QuickJS'</code> is <strong>hardcoded</strong> in <code>src/server/routes/ping.ts</code>, so the cross-cutting "runtime field distinguishes QuickJS vs Node sidecar" check can't actually distinguish dev (Node) from release (QuickJS). The execution environment should inject that value.
+- In dev mode, JS/HTTP routes run in the <strong>Node sidecar</strong>, not real QuickJS — so the "(handled by QuickJS)" strings are misleading in dev. Real QuickJS execution gets verified in the emulator-<strong>release</strong> pass.</p>
+</blockquote>
+<h4 id="12-react-ts-native-port-5181">1.2 <code>react-ts-native</code> (port 5181)<a class="headerlink" href="#12-react-ts-native-port-5181" title="Permanent link">&para;</a></h4>
+<p>iOS-style 4-tab layout: <strong>Home</strong> · <strong>Tools</strong> · <strong>Settings</strong> · <strong>Server</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>browser-dev</th>
+<th>emulator-dev</th>
+<th>emulator-release</th>
+<th>device-release</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4 tabs visible in tab bar</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Home tab: Device info + Location</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Tools tab: Haptics, Clipboard, Storage</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Settings tab: Alert styles</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Server tab: Call hello route → result</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Server tab: GET /api/ping → result</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Tab navigation preserves state (switching back = no reset)</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>1.2 emulator-dev — 2026-06-12.</strong> PASS. Built debug APK (release-AAR override), installed + launched on <code>emulator-5554</code> against <code>capsule dev</code> (Vite :5181 + sidecar :6181 + adb reverse). <strong>Verified on-device by screenshot:</strong> all 4 tabs (Home/Tools/Settings/Server) render with iOS-style native layout; <strong>Home</strong> — Device info live via bridge (Model <code>sdk_gphone64_x86_64</code>, Google, Android 15/SDK 35, Virtual <code>true</code>, WebView <code>124.0.6367.219</code>) + Location resolved to <code>37.42200, -122.08400</code> after <code>adb emu geo fix</code>; <strong>Tools</strong> — Haptics/Clipboard/Storage sections render; <strong>Settings</strong> — Alert-style radios (Default/Dark/Brand/Warning) + native <strong>Show alert</strong> dialog ("Hello from Capsule!" → OK) confirms the alert bridge; <strong>Server</strong> — <code>Call hello route</code> → "Hello, World! (from QuickJS)" and <code>GET /api/ping</code> → <code>{"status":"ok","path":"/api/ping"}</code> rendered inline; tab navigation between all 4 tabs works.</p>
+<p><strong>Finding (fixed this session):</strong> the example shipped with <strong>no route files</strong> — its Server tab calls <code>hello</code> (JSON-RPC) and <code>/api/ping</code> (HTTP) but <code>src/routes/</code> and <code>src/server/routes/</code> were empty, so both returned 404. Added canonical <code>src/routes/hello.ts</code> + <code>src/server/routes/ping.ts</code> (same content as the from-template baseline); the running <code>capsule dev</code> sidecar hot-reloaded them and both resolve on-device. <strong>Note:</strong> the debug APK used here was built <em>before</em> the route files were added, but emulator-dev forwards route calls to the Node sidecar (not the bundled QuickJS), so the empty <code>assets/server/bundle.js</code> is irrelevant for this pass — <strong>a rebuild is required before the emulator-release pass</strong> so the QuickJS bundle includes the new routes.</p>
+<p><strong>Carried-over findings (still apply, see §1.1):</strong> <code>capsule run android</code> installs but doesn't launch (used <code>adb shell am start</code>); dev routes run in the Node sidecar, not real QuickJS (the "(from QuickJS)" string is misleading in dev — real QuickJS verified in the release pass).</p>
+</blockquote>
+<h4 id="13-react-ts-tailwind-port-5180">1.3 <code>react-ts-tailwind</code> (port 5180)<a class="headerlink" href="#13-react-ts-tailwind-port-5180" title="Permanent link">&para;</a></h4>
+<p>React Router HashRouter, 4 routes: <strong>/</strong> (Native) · <strong>/network</strong> · <strong>/splash</strong> · <strong>/server</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>browser-dev</th>
+<th>emulator-dev</th>
+<th>emulator-release</th>
+<th>device-release</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All 4 tab icons render (SVG)</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Native route <code>/</code> loads</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Network route <code>/network</code> loads</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Splash route <code>/splash</code> — animation plays</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Server route <code>/server</code> — Call hello route → result</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Server route <code>/server</code> — GET /api/ping → result</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Tailwind classes apply correctly (no unstyled content)</td>
+<td>🔲</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Deep link to <code>/server</code> works (no blank screen on reload)</td>
+<td>🔲</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>1.3 emulator-dev — 2026-06-12.</strong> PASS. Built debug APK (release-AAR override, routes included), installed + launched on <code>emulator-5554</code> against <code>capsule dev</code> (Vite :5180 + sidecar :6180 + adb reverse). <strong>Verified on-device by screenshot:</strong> all 4 SVG tab icons render (phone/wifi/clock/server); HashRouter navigation works across all 4 routes; <strong><code>/</code> Native</strong> — Device info live via bridge (Model/Manufacturer/OS/Virtual/WebView), ALERTS (radio styles + Alert/Confirm/Destructive — native <strong>Alert</strong> dialog "Hello from Capsule!" fired), HAPTICS chips, all Tailwind-styled (rounded cards, iOS look, no unstyled content); <strong><code>/network</code></strong> — DOG CEO API + POKÉAPI fetch cards render; <strong><code>/splash</code></strong> — Start triggers the full-screen blocking overlay (spinning ring + live countdown "2.3s" + "Simulating server startup…" + Cancel), animation plays; <strong><code>/server</code></strong> — <code>Call hello route</code> → "Hello, World! (from QuickJS)" and <code>GET /api/ping</code> → <code>{"status":"ok","path":"/api/ping"}</code> rendered inline. Startup splash (3s) also observed on launch.</p>
+<p><strong>Finding (fixed this session):</strong> same missing-route-files defect as §1.2 — <code>ServerTab.tsx</code> calls <code>hello</code> + <code>/api/ping</code> but <code>src/routes/</code> and <code>src/server/routes/</code> were empty (404). Added canonical <code>src/routes/hello.ts</code> + <code>src/server/routes/ping.ts</code>; included in this build (so the QuickJS bundle is release-ready too) and resolved on-device.</p>
+<p><strong>Deep-link <code>/server</code> (❌ N/A):</strong> HashRouter has no server-side route to deep-link; not applicable to the embedded/dev WebView load (always boots at <code>/</code>). Marked ❌ by design.</p>
+</blockquote>
+<hr />
+<h3 id="group-2-non-vite-transparent-proxy-3-examples">Group 2 — Non-Vite transparent proxy (3 examples)<a class="headerlink" href="#group-2-non-vite-transparent-proxy-3-examples" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>Validates the CLI dev proxy (Option B) — Capsule acts as a transparent HTTP proxy between the WebView and any bundler's dev server. HMR and route injection must work for all three.</p>
+</blockquote>
+<p>Port scheme: <code>devPort</code> = proxy (WebView connects here), <code>devPort+1</code> = bundler internal, <code>devPort+1000</code> = sidecar.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Example</th>
+<th>Bundler</th>
+<th>devPort</th>
+<th>Bundler port</th>
+<th>Sidecar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.1</td>
+<td><code>webpack-preact</code></td>
+<td>Webpack 5</td>
+<td>5184</td>
+<td>5185</td>
+<td>6184</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td><code>rspack-lit</code></td>
+<td>Rspack 1</td>
+<td>5186</td>
+<td>5187</td>
+<td>6186</td>
+</tr>
+<tr>
+<td>2.3</td>
+<td><code>rollup-solid</code></td>
+<td>Rollup 4</td>
+<td>5185</td>
+<td>5186</td>
+<td>6185</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Ports above are the actual <code>devPort</code> values from each example's <code>capsule.config.ts</code> (verified 2026-06-15; previous values 5182/5183/5185 were wrong, same drift as Group 0). <strong>Overlap note:</strong> 2.1's bundler-internal (5185) and 2.3's proxy (5185) collide, as do 2.3's bundler-internal (5186) and 2.2's proxy (5186) — harmless because Group 2 examples are run one at a time, but don't run them concurrently.</p>
+</blockquote>
+<h4 id="checks-apply-to-each-of-the-3">Checks (apply to each of the 3)<a class="headerlink" href="#checks-apply-to-each-of-the-3" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>browser-dev</th>
+<th>emulator-dev</th>
+<th>emulator-release</th>
+<th>device-release</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>capsule dev</code> starts without error; proxy log shows correct ports</td>
+<td>✅</td>
+<td>🔲</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Browser at devPort renders app (proxy is transparent)</td>
+<td>✅</td>
+<td>🔲</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>/__capsule.js</code> present in page (injected by proxy)</td>
+<td>✅</td>
+<td>🔲</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>HMR: edit src file → browser updates without full reload</td>
+<td>⚠️</td>
+<td>🔲</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Native tab: all demo sections render</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Server tab: "Call hello route" → result</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Server tab: "GET /api/ping" → result</td>
+<td>✅</td>
+<td>🔲</td>
+<td>🔲</td>
+<td>🔲</td>
+</tr>
+<tr>
+<td>Bundler uses <code>devPort+1</code> (not the user-facing port)</td>
+<td>✅</td>
+<td>n/a</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>No port conflict with sidecar</td>
+<td>✅</td>
+<td>🔲</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>⚠️ HMR check</strong> is example-config-dependent, not a proxy capability gap: the proxy's WebSocket-upgrade forwarding works for all three. webpack-preact and rspack-lit propagate edits over the proxied WS but do a <strong>live-reload</strong> (full page reload), not a true hot-swap — neither example configures a framework HMR boundary (preact-prefresh / lit hot). rollup-solid has <strong>no auto-reload at all</strong> (<code>rollup-plugin-serve</code> only, no <code>rollup-plugin-livereload</code>) — edits rebuild <code>dist</code>, browser needs a manual refresh.</p>
+</blockquote>
+<h4 id="23-rollup-solid-extra-check">2.3 rollup-solid extra check<a class="headerlink" href="#23-rollup-solid-extra-check" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>browser-dev</th>
+<th>emulator-dev</th>
+<th>emulator-release</th>
+<th>device-release</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CAPSULE_INTERNAL_PORT</code> env var read by rollup-plugin-serve</td>
+<td>✅</td>
+<td>n/a</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>serve plugin binds to port 5186 (not 5185)</td>
+<td>✅</td>
+<td>n/a</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<h4 id="group-2-results-log">Group 2 results log<a class="headerlink" href="#group-2-results-log" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Cell</th>
+<th>Date</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.1 <code>webpack-preact</code> · browser-dev</td>
+<td>2026-06-15</td>
+<td>✅ PASS — proxy :5184 → bundler :5185, sidecar :6184. App renders (Preact), <code>__capsule.js</code> injected, <code>window.fetch</code> patched, <code>GET /api/ping</code> → <code>{"status":"ok","path":"/api/ping"}</code>, <code>POST /_capsule/rpc</code> hello → <code>{"message":"Hello, World! (from QuickJS)"}</code>, <strong>0 console/page errors</strong> (verified headless Chromium). HMR: live-reload via proxied WS. <strong>Surfaced + fixed a real proxy bug — see below.</strong></td>
+</tr>
+<tr>
+<td>2.2 <code>rspack-lit</code> · browser-dev</td>
+<td>2026-06-15</td>
+<td>✅ PASS — proxy :5186 → bundler :5187, sidecar :6186. <code>&lt;capsule-app&gt;</code> renders into <strong>Shadow DOM</strong> (3188 chars), <code>__capsule.js</code> injected, fetch patched, <code>/api/ping</code> + hello RPC OK, 0 errors. HMR: live-reload via proxied WS (<code>hot: true</code>).</td>
+</tr>
+<tr>
+<td>2.3 <code>rollup-solid</code> · browser-dev</td>
+<td>2026-06-15</td>
+<td>✅ PASS — proxy :5185 → bundler :5186, sidecar :6185. Solid app renders, <code>__capsule.js</code> injected, fetch patched, <code>/api/ping</code> + hello RPC OK, 0 errors. <strong>Extra checks ✅:</strong> <code>rollup-plugin-serve</code> reads <code>CAPSULE_INTERNAL_PORT</code> and binds :5186 (not :5185). No auto-reload configured (rebuild-on-save only).</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Proxy bug fixed this session (<code>dev-proxy-server.ts</code> <code>forwardInjectHtml</code>):</strong> the non-Vite dev proxy buffered the bundler's HTML to inject <code>&lt;script src="/__capsule.js"&gt;</code>, but did so assuming <strong>uncompressed</strong> bytes. Real browsers and the on-device WebView send <code>Accept-Encoding: gzip</code>; webpack-dev-server (default <code>compress: true</code>) then gzips the HTML. The proxy read the gzip bytes as UTF-8 (injection silently no-op'd), stripped the <code>content-encoding</code> header, and forwarded the still-compressed body labeled <code>text/html</code> → a <strong>garbled page with no Capsule injection</strong>. curl masked it by not requesting compression by default. <strong>Fix:</strong> delete the <code>accept-encoding</code> request header before forwarding through <code>forwardInjectHtml</code>, so the bundler always returns injectable plaintext. This bug would have broken all non-Vite examples in <code>capsule dev</code> on a real device/emulator, not just in-browser.</p>
+</blockquote>
+<hr />
+<h3 id="cross-cutting-checks">Cross-cutting checks<a class="headerlink" href="#cross-cutting-checks" title="Permanent link">&para;</a></h3>
+<p>These apply across all 13 examples once at least one of each group passes.</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>capsule build android</code> + <code>capsule run android</code> succeeds for each example</td>
+<td>Full Gradle pipeline</td>
+</tr>
+<tr>
+<td><code>adb reverse</code> ports set correctly in dev mode</td>
+<td>Verify in adb shell</td>
+</tr>
+<tr>
+<td>Route sidecar starts on <code>devPort+1000</code> for all examples</td>
+<td>Check console output</td>
+</tr>
+<tr>
+<td><code>src/routes/hello.ts</code> loaded by sidecar (check via Server tab)</td>
+<td>Sidecar picks up file-based routes</td>
+</tr>
+<tr>
+<td><code>src/server/routes/ping.ts</code> responds at <code>/api/ping</code></td>
+<td>HTTP route handler</td>
+</tr>
+<tr>
+<td>Switching to device: WebView connects to same port as browser</td>
+<td>adb reverse prerequisite</td>
+</tr>
+<tr>
+<td>Release build: QuickJS evaluates routes (not Node.js sidecar)</td>
+<td>Check runtime field in ping response</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="test-order-recommendation">Test order recommendation<a class="headerlink" href="#test-order-recommendation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Group 0.1 (react-from-template) browser-dev → emulator-dev → emulator-release
+Group 0 remaining (0.2–0.7) browser-dev only first pass
+Group 2 (non-Vite) browser-dev — validates proxy
+Group 1 (custom React) emulator-dev — validates full native API coverage
+All groups emulator-release → device-release
+</code></pre></div>
+<p>Start with <code>react-from-template</code> as it has the simplest surface area and covers the entire chain (Vite + sidecar + routes).</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024-2026 Capsule Framework Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.highlight", "search.share", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

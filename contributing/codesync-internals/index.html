@@ -1,0 +1,5251 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alex-vinny.github.io/capsule_framework/contributing/codesync-internals/">
+      
+      
+        <link rel="prev" href="../docker/">
+      
+      
+        <link rel="next" href="../plugin-authoring/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>CodeSync internals - Capsule Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#codesync-internals" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Capsule Framework" class="md-header__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Capsule Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CodeSync internals
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guide/installation/" class="md-tabs__link">
+          
+  
+  
+  Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/cli/" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/architecture/" class="md-tabs__link">
+          
+  
+  
+  Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../decisions/" class="md-tabs__link">
+          
+  
+  
+  Decisions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../project/roadmap/" class="md-tabs__link">
+          
+  
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Capsule Framework" class="md-nav__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Capsule Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/hello-world/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hello World
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/push-notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Push Notifications
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/alerts-styling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alerts Styling
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/mobile-css-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile CSS Reset
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/publishing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publishing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ota-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Over-the-air Updates
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/core-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/lockfile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lockfile
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generated
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generated
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/docs-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Principles
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/capsule-vs-ionic-capacitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    vs Ionic/Capacitor
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/extensibility-and-positioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extensibility & Positioning
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/ionic-framework7-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ionic Framework 7 Migration
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Primers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/kotlin-for-csharp-devs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kotlin for C# Devs
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/jni-and-cpp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JNI & C
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/civetweb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CivetWeb
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/quickjs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QuickJS
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decisions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0001-embedded-runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0001 Embedded Runtime
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0002-capsule-ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0002 Capsule UI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0003-ai-and-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0003 AI & Agents
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0004-web-serving-transport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0004 Web Serving Transport
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CodeSync Internals
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CodeSync Internals
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#status-at-a-glance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status at a glance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bundle-zip-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bundle ZIP format
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publish-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publish flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#self-hosted-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self-hosted server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#device-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Device client
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Device client">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opt-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opt-in
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-check-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update check endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rollout-decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rollout decision
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#download-and-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Download and install
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bundle-store" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bundle store
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crash-loop-rollback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crash-loop rollback
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bridge-surface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bridge surface
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known gaps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#planned-cloud-control-plane-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planned: cloud control plane (design)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Planned: cloud control plane (design)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prior-art-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prior Art Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#system-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        System Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Schema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backend API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#check-endpoint-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check endpoint at scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#device-check-in-background-fire-and-forget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Device Check-in (background, fire-and-forget)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bundle-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bundle Upload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rollout-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rollout Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rollback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rollback
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend Dashboard
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Frontend Dashboard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Views
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Views">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-releases-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Releases View
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-device-fleet-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Device Fleet View
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-release-detail-update-funnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Release Detail — Update Funnel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-gradual-rollout-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Gradual Rollout Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scalability-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scalability Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scalability Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-it-handles-millions-of-devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it handles millions of devices
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-numbering-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version Numbering Convention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#device-metadata-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Device Metadata API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#channel-promotion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Channel Promotion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planned-cli-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planned CLI commands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-of-the-full-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment of the full service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-key-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Key Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Considerations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phased-delivery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phased Delivery
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-ios-shell-build-with-xtool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Appendix: iOS shell build with xtool
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Appendix: iOS shell build with xtool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-built-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using the Built Framework
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-the-swift-side-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing the Swift Side (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugin-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../template-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Template Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ios-bring-up/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iOS Bring-up
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../platform-parity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android/iOS Parity
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upkeep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_14" id="__nav_6_14_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Workflows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/add-native-api/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add Native API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/author-plugin/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Author Plugin
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows/upkeep-sweep/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep Sweep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/known-issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known Issues
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_6" id="__nav_7_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Incidents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Incidents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/incidents/2026-10-embedded-server-startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-10 Embedded Server Startup
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_7" id="__nav_7_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/2026-06-24-planning-brainstorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-24 Planning Brainstorm
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/chatgpt-first-impressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT First Impressions
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/chatgpt-plugin-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT Plugin Compatibility
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_8" id="__nav_7_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Business
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/business-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Model
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/pricing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pricing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/ota-policy-and-liability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Policy & Liability
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_9" id="__nav_7_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Server Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Server Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/file-storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Storage
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/workers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workers
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="codesync-internals">CodeSync internals<a class="headerlink" href="#codesync-internals" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>How over-the-air (OTA) updates work under the hood: the bundle format, the publish flow, the
+self-hosted server, the wire protocol and the on-device client. For using CodeSync in an app,
+read <a href="../../guide/ota-updates/">ota-updates.md</a> first.</p>
+<p><strong>OTA hub.</strong> The topic spans several docs; this one owns the mechanism.
+- Why the bundle can be replaced at all (embedded runtime) → <a href="../../decisions/0001-embedded-runtime/">0001-embedded-runtime.md</a>
+- App developer how-to → <a href="../../guide/ota-updates/">ota-updates.md</a>
+- Cloud control plane (portal, database, workers) → <a href="../../project/server-design/overview/">server-design/overview.md</a>, <a href="../../project/server-design/database/">server-design/database.md</a> <em>(Phase 6)</em>
+- Bundle storage (content-addressed, differential) → <a href="../../project/server-design/file-storage/">server-design/file-storage.md</a>
+- Store release plus OTA, the two release layers → <a href="../../guide/publishing/">publishing.md</a>
+- Bandwidth economics → <a href="../../project/infrastructure/">infrastructure.md</a>
+- Store policy, capability gating, liability → <a href="../../project/business/ota-policy-and-liability/">ota-policy-and-liability.md</a>
+- OTA cloud as the funding engine → <a href="../../project/business/business-model/">business-model.md</a>
+- Status and sequencing (on-device done; delivery and cloud in Phase 6) → <a href="../../project/roadmap/">roadmap.md</a></p>
+</blockquote>
+<hr />
+<h2 id="status-at-a-glance">Status at a glance<a class="headerlink" href="#status-at-a-glance" title="Permanent link">&para;</a></h2>
+<p>CodeSync is the Capsule equivalent of Microsoft CodePush (retired) and Expo Updates. It is built in
+layers, and each layer below is tested on its own. The parts are <strong>not connected end to end yet</strong>
+(see <a href="#known-gaps">Known gaps</a>).</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Code</th>
+<th>State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Config block</td>
+<td><code>packages/cli/src/config.ts</code> (<code>codeSync</code>)</td>
+<td>Built. Only <code>enabled</code>, <code>url</code>, <code>apiKey</code> are read.</td>
+</tr>
+<tr>
+<td>Publish CLI</td>
+<td><code>packages/cli/src/commands/codesync.ts</code></td>
+<td>Built: <code>capsule codesync publish [--channel] [--notes]</code>.</td>
+</tr>
+<tr>
+<td>Self-hosted server</td>
+<td><code>packages/codesync-api/src/index.ts</code>, <code>api-spec.yaml</code></td>
+<td>Built: single-process, file-based, one shared API key. AGPL-3.0.</td>
+</tr>
+<tr>
+<td>Android client</td>
+<td><code>packages/capsule-android/capsule/src/main/kotlin/dev/capsule/codesync/</code>, <code>runtime/FileBundleStore.kt</code>, <code>runtime/CrashLoopGuard.kt</code></td>
+<td>Built and unit-tested on the JVM.</td>
+</tr>
+<tr>
+<td>iOS client</td>
+<td><code>packages/capsule-ios/Sources/dev/capsule/codesync/</code>, <code>runtime/</code></td>
+<td>Client core built and tested on Linux (<code>swift test</code>); constructed in <code>CapsuleViewController</code> but not on the bridge yet (Phase 4).</td>
+</tr>
+<tr>
+<td>JS module</td>
+<td><code>packages/core/src/codesync.ts</code></td>
+<td>Built: <code>checkForUpdate</code>, <code>getStatus</code>, <code>applyUpdate</code>.</td>
+</tr>
+<tr>
+<td>Cloud control plane, dashboard, staged rollout CLI, targeting, differential updates, signing</td>
+<td>—</td>
+<td>Planned, see <a href="#planned-cloud-control-plane-design">Planned: cloud control plane</a>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What can be updated:</strong> the whole web bundle (<code>www/</code>) and the QuickJS route bundle
+(<code>server/bundle.js</code>), always together as one ZIP. <strong>What cannot:</strong> the native shell, permissions,
+plugins. Those need a store release.</p>
+<p>The update client ships in the Capsule AAR (and the Swift package) whether or not an app uses it.
+When the shell config has no <code>codeSync</code>, no <code>codesync.*</code> bridge handlers are registered, so the
+feature is absent from the bridge surface. It is not compiled out.</p>
+<hr />
+<h2 id="bundle-zip-format">Bundle ZIP format<a class="headerlink" href="#bundle-zip-format" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>bundle.zip
+  www/                         ← client bundle (Vite / ng build output)
+    index.html                 ← required: the shell rejects a bundle without it
+    assets/…
+  server/                      ← only when the app has src/server/routes/
+    bundle.js                  ← esbuild output: the QuickJS route bundle
+  capsule-bundle.json          ← bundle manifest
+</code></pre></div>
+<p><code>capsule-bundle.json</code>, written by the CLI from <code>capsule.config.ts</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.4.2"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"buildNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">47</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-10-15T14:32:00Z"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"capsuleSchemaVersion"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The manifest is for Capsule only; the stores never see it. <code>capsuleSchemaVersion</code> lets the format
+change later without breaking older clients. The device client today validates a bundle by the
+presence of <code>www/index.html</code>; it does not read the manifest yet.</p>
+<p>The ZIP is written in-process with <code>archiver</code> (DEFLATE, level 9) by <code>packages/cli/src/lib/zip.ts</code>,
+so publishing behaves the same on Windows, macOS and Linux.</p>
+<p>The whole <code>dist/</code> folder is copied into <code>www/</code>. <strong>Planned, not built:</strong> stripping source maps
+(<code>--source-maps</code> to keep them) and a <code>.capsuleignore</code> file.</p>
+<hr />
+<h2 id="publish-flow">Publish flow<a class="headerlink" href="#publish-flow" title="Permanent link">&para;</a></h2>
+<p><code>capsule codesync publish</code> (<code>packages/cli/src/commands/codesync.ts</code>):</p>
+<ol>
+<li>Requires <code>codeSync.enabled</code>, <code>codeSync.url</code> and <code>codeSync.apiKey</code>; exits with an error otherwise.</li>
+<li>Builds the web app: <code>web.buildCommand</code> when set, else <code>pnpm exec vite build</code>. Output is <code>dist/</code>.</li>
+<li>When <code>src/server/routes/</code> exists, bundles the routes with esbuild into <code>server/bundle.js</code>. The
+   bundle registers JSON-RPC overrides from <code>src/routes/*.ts</code> and HTTP routes from
+   <code>src/server/routes/**/*.ts</code>, the same scheme <code>capsule build</code> uses.</li>
+<li>Assembles <code>www/</code>, <code>server/</code> and <code>capsule-bundle.json</code> in a unique OS temp directory, which is
+   removed in a <code>finally</code> block.</li>
+<li>Zips it and computes its SHA-256.</li>
+<li>POSTs <code>multipart/form-data</code> to <code>&lt;codeSync.url&gt;/publish</code> with <code>bundle</code>, <code>version</code>,
+   <code>buildNumber</code>, <code>channel</code> (from <code>--channel</code>, default <code>production</code>) and optional <code>notes</code>, and an
+   <code>Authorization: Bearer &lt;apiKey&gt;</code> header.</li>
+</ol>
+<hr />
+<h2 id="self-hosted-server">Self-hosted server<a class="headerlink" href="#self-hosted-server" title="Permanent link">&para;</a></h2>
+<p><code>@capsule/codesync-api</code> (<code>packages/codesync-api/</code>) is the minimal self-hostable delivery server:
+Fastify 5 (multipart uploads via @fastify/multipart 10), one process, a JSON manifest on disk. The contract is
+<a href="https://github.com/alex-vinny/capsule_framework/blob/main/packages/codesync-api/api-spec.yaml"><code>api-spec.yaml</code></a> (OpenAPI 3).</p>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Auth</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /health</code></td>
+<td>—</td>
+<td>Liveness: <code>{ status, timestamp }</code>.</td>
+</tr>
+<tr>
+<td><code>GET /bundles/:version[?channel=]</code></td>
+<td>—</td>
+<td>Returns a stored bundle; <code>latest</code> resolves the channel's current version. Sends an <code>ETag</code> (SHA-256).</td>
+</tr>
+<tr>
+<td><code>GET /manifest[?channel=]</code></td>
+<td>—</td>
+<td>The current version per channel.</td>
+</tr>
+<tr>
+<td><code>GET /releases[?channel=]</code></td>
+<td>—</td>
+<td>Release history, newest first.</td>
+</tr>
+<tr>
+<td><code>POST /publish</code></td>
+<td><code>x-api-key</code></td>
+<td>Stores an uploaded bundle (multipart: <code>bundle</code>, <code>version</code>, <code>buildNumber</code>, <code>channel</code>, <code>notes</code>). 409 if the version exists.</td>
+</tr>
+<tr>
+<td><code>POST /rollback</code></td>
+<td><code>x-api-key</code></td>
+<td>Points a channel back at its previous release.</td>
+</tr>
+<tr>
+<td><code>POST /pause</code>, <code>POST /resume</code></td>
+<td><code>x-api-key</code></td>
+<td>Sets or clears a channel's <code>paused</code> flag.</td>
+</tr>
+<tr>
+<td><code>GET /devices</code></td>
+<td><code>x-api-key</code></td>
+<td>Stub, returns 204.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Auth:</strong> one shared key, <code>CODESYNC_API_KEY</code>, compared with the <code>x-api-key</code> header.</li>
+<li><strong>Storage:</strong> <code>storage/</code> next to the package, or <code>CODESYNC_STORAGE_DIR</code>. It holds <code>manifest.json</code>
+  and <code>bundles/&lt;version&gt;.js</code> (the uploaded file is stored under that name whatever it contains).</li>
+<li><strong>Limits:</strong> uploads up to 10 MB. Listens on <code>0.0.0.0:3000</code>.</li>
+<li><strong>Tests:</strong> <code>packages/codesync-api/tests/smoke.test.ts</code> drives the routes with <code>server.inject()</code>.</li>
+</ul>
+<p><strong>License.</strong> <code>packages/codesync-api</code> is AGPL-3.0; the rest of Capsule is Apache-2.0 (see the
+repository <code>NOTICE</code>). Anyone may run and modify the server. If you offer a modified version to
+others over a network, you must publish your changes under the same license.</p>
+<hr />
+<h2 id="device-client">Device client<a class="headerlink" href="#device-client" title="Permanent link">&para;</a></h2>
+<p>The update check runs in the native layer, not in JS, so it still works when the web bundle is
+broken. Android is described here; the iOS client mirrors it type for type
+(<code>CodeSyncManager.swift</code>, <code>CodeSyncModels.swift</code>, <code>Rollout.swift</code>, <code>FileBundleStore.swift</code>).</p>
+<h3 id="opt-in">Opt-in<a class="headerlink" href="#opt-in" title="Permanent link">&para;</a></h3>
+<p><code>CapsuleShellConfig.codeSync</code> (<code>CodeSyncConfig</code>: <code>url</code>, <code>appId</code>, <code>channel</code>, <code>nativeVersion</code>). When it
+is set, <code>CapsuleActivity</code> builds a <code>CodeSyncManager</code> and registers the three <code>codesync.*</code> handlers
+(<code>codesync/CodeSyncHandlers.kt</code>). When it is <code>null</code>, neither exists.</p>
+<h3 id="update-check-endpoint">Update check endpoint<a class="headerlink" href="#update-check-endpoint" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>GET {url}/v1/check/{appId}/{channel}/{nativeVersion}
+</code></pre></div>
+<p>The URL carries everything that varies, so a CDN can cache one response for every device on the
+same app, channel and native version. Device identity is deliberately kept out of this request:
+custom headers such as a device id would make every request unique and destroy the cache hit rate.</p>
+<p>Response (the shape <code>CodeSyncModels.kt</code> and <code>CodeSyncModels.swift</code> decode; this exact example is
+pinned by <code>CodeSyncModelsTest</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"latestBuildNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">47</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"bundle"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6f1c2a7e-0b4d-4c1a-9e2f-3a5b6c7d8e9f"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.4.2"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"buildNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">47</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"rolloutPercent"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cdn.capsule.dev/bundles/6f1c2a7e.zip"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:abc123def456"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"sizeBytes"</span><span class="p">:</span><span class="w"> </span><span class="mi">284000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"mandatory"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>rolloutPercent</code> defaults to 100 and <code>mandatory</code> to <code>false</code> when absent. The <code>sha256:</code> prefix on
+<code>hash</code> is optional.</p>
+<h3 id="rollout-decision">Rollout decision<a class="headerlink" href="#rollout-decision" title="Permanent link">&para;</a></h3>
+<p>Gradual rollout is decided on the device, with no extra round trip (<code>codesync/Rollout.kt</code>):
+MurmurHash3 x86 32-bit over the <strong>UTF-8 bytes</strong> of the device id, seed 0, bucketed by the
+<strong>unsigned</strong> hash modulo 100. The device is in the rollout when <code>bucket &lt; rolloutPercent</code>.</p>
+<p>Any server-side implementation must compute the same bucket, i.e. <code>murmurhash3js-revisited</code>
+<code>x86.hash32(bytes, 0)</code>. The repo has no TypeScript implementation yet; the vectors in Kotlin's
+<code>RolloutTest</code> and Swift's <code>Murmur3Tests</code> were generated with that library and pin the contract.
+The trap is the sign: Kotlin's <code>Int</code> is signed, and <code>Math.abs(hash) % 100</code> puts roughly half of
+all ids in the wrong bucket. The device id is a random UUID created on first use and kept
+in <code>SharedPreferences</code> (<code>PrefsCodeSyncStore</code>).</p>
+<h3 id="download-and-install">Download and install<a class="headerlink" href="#download-and-install" title="Permanent link">&para;</a></h3>
+<p>When the device is in the rollout and <code>bundle.buildNumber</code> is higher than the installed build
+(<code>CodeSyncManager.checkForUpdate</code>):</p>
+<ol>
+<li>Download the ZIP from <code>bundle.url</code>.</li>
+<li>Compute its SHA-256 and compare it with <code>bundle.hash</code>. On mismatch, delete it and report an error.</li>
+<li>Unzip into <code>filesDir/bundles/&lt;bundle.id&gt;/</code> (<code>CodeSyncUnzipper</code>).</li>
+<li>Reject the bundle if <code>www/index.html</code> is missing.</li>
+<li>Install it with <code>BundleStore.install</code>.</li>
+</ol>
+<p>Every failure returns <code>UpdateResult.Error</code> and cleans up the staged directory; the manager never
+throws. After the check, the manager posts a fire-and-forget check-in (failures ignored):</p>
+<div class="highlight"><pre><span></span><code>POST {url}/v1/devices/checkin
+{ "deviceId", "appId", "platform": "android", "nativeVersion", "bundleId", "channel" }
+</code></pre></div>
+<h3 id="bundle-store">Bundle store<a class="headerlink" href="#bundle-store" title="Permanent link">&para;</a></h3>
+<p><code>FileBundleStore</code> keeps two slots under <code>filesDir/bundles/</code>:</p>
+<div class="highlight"><pre><span></span><code>active/     ← the bundle to serve
+previous/   ← the last known-good bundle, the rollback target
+</code></pre></div>
+<p><code>install()</code> demotes a valid <code>active/</code> to <code>previous/</code>, then moves the staged bundle to <code>active/</code>.
+Each <code>File.renameTo</code> is atomic, with a recursive-copy fallback across filesystems. A directory
+counts as a bundle only if it contains <code>www/index.html</code>, so a broken bundle is never promoted to
+the rollback slot. The interface uses <code>String</code> paths so the same contract exists on iOS.</p>
+<h3 id="crash-loop-rollback">Crash-loop rollback<a class="headerlink" href="#crash-loop-rollback" title="Permanent link">&para;</a></h3>
+<p><code>CrashLoopGuard</code> (<code>runtime/CrashLoopGuard.kt</code>) records a timestamp for each launch. The record is
+cleared when the WebView reports the page finished loading (<code>CapsuleRuntime.notifyAppReady</code>). At
+the start of each launch, <code>CapsuleRuntime.start()</code> checks: if <strong>3</strong> unconfirmed launches fall inside
+the last <strong>60 s</strong> and a previous bundle exists, it calls <code>BundleStore.rollback()</code>, clears the guard
+and calls <code>onRollback()</code>. The guard's clock and log are injected, so it is tested on the plain JVM.</p>
+<h3 id="bridge-surface">Bridge surface<a class="headerlink" href="#bridge-surface" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>codesync.checkForUpdate</code></td>
+<td><code>{ status, update? }</code>: runs a check, <code>status</code> is <code>"download ready"</code> when a bundle was installed</td>
+</tr>
+<tr>
+<td><code>codesync.getStatus</code></td>
+<td><code>{ status }</code>: the manager's last status</td>
+</tr>
+<tr>
+<td><code>codesync.applyUpdate</code></td>
+<td><code>{ status }</code>: <code>"update applied"</code> when an update is pending, else <code>"idle"</code></td>
+</tr>
+</tbody>
+</table>
+<p>Status strings must match the JS <code>CodeSyncStatus</code> union exactly, spaces included (<code>"download
+ready"</code>). <code>@capsule/core</code>'s <code>CodeSyncModule</code> maps them: <code>checkForUpdate()</code> returns the <code>update</code>
+object only for <code>"download ready"</code>.</p>
+<hr />
+<h2 id="known-gaps">Known gaps<a class="headerlink" href="#known-gaps" title="Permanent link">&para;</a></h2>
+<p>What still blocks an end-to-end update, found by reading the code on 2026-10-24. Each item names
+the code to change.</p>
+<ol>
+<li><strong>No server speaks the device protocol.</strong> Devices call <code>GET /v1/check/…</code> and
+   <code>POST /v1/devices/checkin</code>; <code>@capsule/codesync-api</code> serves <code>/manifest</code> and <code>/bundles/:version</code>
+   instead. One side has to adopt the other's shape.</li>
+<li><strong>CLI and server disagree on auth.</strong> <code>capsule codesync publish</code> sends
+   <code>Authorization: Bearer &lt;key&gt;</code>; the server reads <code>x-api-key</code>. Publishing to the bundled server
+   gets 401.</li>
+<li><strong>The server ignores the bundle checksum.</strong> <code>codesync publish</code> sends the ZIP (<code>bundle</code>, file
+   name <code>bundle.zip</code>) plus a <code>sha256</code> field, but <code>codesync-api</code> neither verifies nor stores it, so
+   the manifest it serves carries no hash for the device's integrity gate.</li>
+<li><strong>The OTA route bundle exposes the wrong global.</strong> <code>codesync.ts</code> aliases
+   <code>capsuleRouter.handleHttpRoute</code>; <code>build.ts</code> uses <code>capsuleRouter.handleHttpRequest</code>. HTTP routes
+   in an OTA bundle would have no <code>handleHttpRequest</code>. Routes are also bundled only when
+   <code>src/server/routes/</code> exists, which drops JSON-RPC overrides in <code>src/routes/</code> when there are no
+   HTTP routes.</li>
+<li><strong>The server stores the ZIP as <code>bundles/&lt;version&gt;.js</code></strong> and serves it as
+   <code>application/javascript</code>. That is left over from an earlier JS-only design; <code>api-spec.yaml</code>
+   still describes a gzipped JS bundle.</li>
+<li><strong>Generated apps never enable OTA.</strong> The <code>MainActivity</code> that <code>capsule sync</code> writes sets only
+   <code>devServerUrl</code>. The <code>codeSync</code> block in <code>capsule.config.ts</code> is not passed into
+   <code>CapsuleShellConfig</code>.</li>
+<li><strong>An installed bundle is not served.</strong> The embedded server reads static files from the APK
+   (<code>AssetManagerStaticAssets</code>), and <code>QuickJSBridgeImpl</code> loads <code>server/bundle.js</code> from the APK too,
+   not from <code>BundleStore.activeDir()</code>. A crash-loop rollback therefore swaps directories that
+   nothing serves.</li>
+<li><strong>One crash can trigger a rollback.</strong> <code>CapsuleActivity</code> and <code>CapsuleRuntime.start()</code> both call
+   <code>recordLaunchAttempt()</code>, so each launch adds two records and the 3-in-60-s threshold is reached
+   after the first crashing launch.</li>
+<li><strong><code>applyUpdateOnNextResume</code></strong> loads <code>file://&lt;path&gt;/index.html</code> — not <code>www/index.html</code>, and not
+   through the loopback server.</li>
+<li><strong>Config fields with no effect:</strong> <code>codeSync.channel</code>, <code>strategy</code>, <code>checkOnForeground</code>,
+    <code>mandatory</code>. <code>publish</code> takes the channel from <code>--channel</code> only.</li>
+<li><strong>iOS</strong> constructs its <code>CodeSyncManager</code> but does not register bridge handlers yet (Phase 4).</li>
+</ol>
+<hr />
+<h2 id="planned-cloud-control-plane-design">Planned: cloud control plane (design)<a class="headerlink" href="#planned-cloud-control-plane-design" title="Permanent link">&para;</a></h2>
+<p>Everything below is <strong>design, not built</strong>. It describes the managed, multi-tenant service
+(Phase 6) that the self-hosted server is a small subset of. Where it and the built code differ,
+the built sections above win.</p>
+<h3 id="prior-art-analysis">Prior Art Analysis<a class="headerlink" href="#prior-art-analysis" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Status</th>
+<th>Key Lesson</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Microsoft CodePush</strong> (<code>microsoft/code-push</code>)</td>
+<td>Archived 2023, merged into App Center then killed</td>
+<td>Proved the model. Don't depend on it.</td>
+</tr>
+<tr>
+<td><strong>Expo Updates</strong> (<code>expo/expo</code> — <code>packages/expo-updates</code>)</td>
+<td>Active, open source</td>
+<td>Best-in-class architecture. Study the differential update approach.</td>
+</tr>
+<tr>
+<td><strong>Shorebird</strong> (<code>shorebirdtech/shorebird</code>)</td>
+<td>Active, commercial</td>
+<td>Dart/Flutter-specific but excellent rollout/rollback UX</td>
+</tr>
+<tr>
+<td><strong>hot-updater</strong> (<code>gronxb/hot-updater</code>)</td>
+<td>Active GitHub project</td>
+<td>Self-hosted, React Native, clean architecture reference</td>
+</tr>
+<tr>
+<td><strong>AppFlow</strong> (Ionic)</td>
+<td>Commercial SaaS</td>
+<td>Reference for enterprise feature set</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation</strong>: Model the protocol and update flow after <strong>Expo Updates</strong> (open source, battle-tested at scale) but implement self-hosted from day one. Do not depend on third-party SaaS.</p>
+<hr />
+<h3 id="system-architecture">System Architecture<a class="headerlink" href="#system-architecture" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────────┐
+│                    Developer Machine                         │
+│  capsule codesync publish --channel production              │
+│       → packages dist/ → uploads bundle to API             │
+└───────────────────┬─────────────────────────────────────────┘
+                    │ HTTPS (multipart upload)
+┌───────────────────▼─────────────────────────────────────────┐
+│              CodeSync Backend (Node.js / TypeScript)         │
+│                                                              │
+│  POST /api/bundles/upload                                    │
+│  GET  /api/bundles/check    ← device checks for updates      │
+│  GET  /api/bundles/:id/download                              │
+│  POST /api/devices/checkin  ← device telemetry               │
+│                                                              │
+│  ┌─────────────┐   ┌──────────────────┐   ┌──────────────┐  │
+│  │  PostgreSQL  │   │  Redis (cache)   │   │ Object Store │  │
+│  │  (devices,  │   │  (hot version    │   │ (S3/R2/Minio)│  │
+│  │  releases,  │   │  lookup cache)   │   │ bundle ZIPs  │  │
+│  │  telemetry) │   └──────────────────┘   └──────────────┘  │
+│  └─────────────┘                                             │
+└─────────────────────────────────────────────────────────────┘
+                    │ CDN (CloudFront / Cloudflare R2)
+┌───────────────────▼─────────────────────────────────────────┐
+│                   Installed Apps (Devices)                   │
+│                                                              │
+│  Capsule runtime checks on app foreground                    │
+│  Downloads + applies update in background                    │
+│  Restarts web layer on next app resume                       │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│              CodeSync Dashboard (React)                      │
+│  - Release management    - Device fleet view                 │
+│  - Rollout controls      - OS/version breakdown              │
+│  - Rollback              - Error rate monitoring             │
+└─────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<hr />
+<h3 id="database-schema">Database Schema<a class="headerlink" href="#database-schema" title="Permanent link">&para;</a></h3>
+<p>Designed for millions of devices with proper partitioning strategy.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- ============================================================</span>
+<span class="c1">-- USERS (dashboard accounts / API key owners)</span>
+<span class="c1">-- ============================================================</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w">           </span><span class="n">UUID</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">email</span><span class="w">        </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w">   </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- ============================================================</span>
+<span class="c1">-- APPS</span>
+<span class="c1">-- ============================================================</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">apps</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w">           </span><span class="n">UUID</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">app_id</span><span class="w">       </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span><span class="w">        </span><span class="c1">-- 'com.yourcompany.app'</span>
+<span class="w">  </span><span class="n">name</span><span class="w">         </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">owner_id</span><span class="w">     </span><span class="n">UUID</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w">   </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- ============================================================</span>
+<span class="c1">-- CHANNELS</span>
+<span class="c1">-- Deployment targets: production, staging, beta, etc.</span>
+<span class="c1">-- ============================================================</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">channels</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w">           </span><span class="n">UUID</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">app_id</span><span class="w">       </span><span class="n">UUID</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">apps</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">name</span><span class="w">         </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">              </span><span class="c1">-- 'production', 'staging'</span>
+<span class="w">  </span><span class="k">UNIQUE</span><span class="p">(</span><span class="n">app_id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- ============================================================</span>
+<span class="c1">-- BUNDLES</span>
+<span class="c1">-- One row per published web bundle</span>
+<span class="c1">-- ============================================================</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">bundles</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w">                </span><span class="n">UUID</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">app_id</span><span class="w">            </span><span class="n">UUID</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">apps</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">channel_id</span><span class="w">        </span><span class="n">UUID</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">channels</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="k">version</span><span class="w">           </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">          </span><span class="c1">-- semver: '1.4.2'</span>
+<span class="w">  </span><span class="n">build_number</span><span class="w">      </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">        </span><span class="c1">-- monotonic, used for ordering</span>
+<span class="w">  </span><span class="n">storage_key</span><span class="w">       </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">          </span><span class="c1">-- S3/R2 object key</span>
+<span class="w">  </span><span class="n">storage_url</span><span class="w">       </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">          </span><span class="c1">-- CDN URL</span>
+<span class="w">  </span><span class="n">size_bytes</span><span class="w">        </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">hash_sha256</span><span class="w">       </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">          </span><span class="c1">-- integrity verification</span>
+<span class="w">  </span><span class="n">min_native_version</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w">                  </span><span class="c1">-- npm semver range e.g. '&gt;=1.4.0' (see ../reference/lockfile.md)</span>
+<span class="w">  </span><span class="n">max_native_version</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w">                  </span><span class="c1">-- npm semver range e.g. '&lt;2.0.0' (optional upper bound)</span>
+<span class="w">  </span><span class="n">metadata</span><span class="w">          </span><span class="n">JSONB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'{}'</span><span class="p">,</span>
+<span class="w">  </span><span class="n">status</span><span class="w">            </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'active'</span><span class="p">,</span>
+<span class="w">                    </span><span class="c1">-- active | paused | rolled_back | archived</span>
+<span class="w">  </span><span class="n">rollout_percent</span><span class="w">   </span><span class="nb">SMALLINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 0-100</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w">        </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">created_by</span><span class="w">        </span><span class="n">UUID</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+
+<span class="w">  </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">build_number_monotonic</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">app_id</span><span class="p">,</span><span class="w"> </span><span class="n">channel_id</span><span class="p">,</span><span class="w"> </span><span class="n">build_number</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_bundles_channel_status</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">bundles</span><span class="p">(</span><span class="n">channel_id</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">build_number</span><span class="w"> </span><span class="k">DESC</span><span class="p">);</span>
+
+<span class="c1">-- ============================================================</span>
+<span class="c1">-- DEVICES</span>
+<span class="c1">-- One row per installed app instance</span>
+<span class="c1">-- Partitioned by app_id for scale</span>
+<span class="c1">-- ============================================================</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w">                  </span><span class="n">UUID</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">app_id</span><span class="w">              </span><span class="n">UUID</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">apps</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">device_id</span><span class="w">           </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">           </span><span class="c1">-- UUID generated on first launch, stored in keychain/keystore</span>
+<span class="w">  </span><span class="n">platform</span><span class="w">            </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">           </span><span class="c1">-- 'android' | 'ios'</span>
+<span class="w">  </span><span class="n">platform_version</span><span class="w">    </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">           </span><span class="c1">-- '14', '17.2', etc.</span>
+<span class="w">  </span><span class="n">native_version</span><span class="w">      </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">           </span><span class="c1">-- capsule shell version: '1.4.0'</span>
+<span class="w">  </span><span class="n">app_version</span><span class="w">         </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">           </span><span class="c1">-- store app version: '2.1.0'</span>
+<span class="w">  </span><span class="n">bundle_id</span><span class="w">           </span><span class="n">UUID</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">bundles</span><span class="p">(</span><span class="n">id</span><span class="p">),</span><span class="w">   </span><span class="c1">-- currently running bundle</span>
+<span class="w">  </span><span class="n">channel</span><span class="w">             </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'production'</span><span class="p">,</span>
+<span class="w">  </span><span class="n">last_seen_at</span><span class="w">        </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">first_seen_at</span><span class="w">       </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">timezone</span><span class="w">            </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">  </span><span class="n">locale</span><span class="w">              </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">  </span><span class="n">device_model</span><span class="w">        </span><span class="nb">TEXT</span><span class="p">,</span><span class="w">                    </span><span class="c1">-- 'Pixel 8', 'iPhone 15'</span>
+<span class="w">  </span><span class="n">metadata</span><span class="w">            </span><span class="n">JSONB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'{}'</span><span class="p">,</span>
+
+<span class="w">  </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">app_id</span><span class="p">,</span><span class="w"> </span><span class="n">device_id</span><span class="p">)</span><span class="w">             </span><span class="c1">-- compound PK for partitioning</span>
+<span class="p">)</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="w"> </span><span class="p">(</span><span class="n">app_id</span><span class="p">);</span><span class="w">                 </span><span class="c1">-- hash-partition by app</span>
+
+<span class="c1">-- Create 16 partitions (adjust as scale grows)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">devices_p0</span><span class="w">  </span><span class="n">PARTITION</span><span class="w"> </span><span class="k">OF</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="n">MODULUS</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="n">REMAINDER</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">devices_p1</span><span class="w">  </span><span class="n">PARTITION</span><span class="w"> </span><span class="k">OF</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="n">MODULUS</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="n">REMAINDER</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="c1">-- ... p2 through p15</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_devices_last_seen</span><span class="w">   </span><span class="k">ON</span><span class="w"> </span><span class="n">devices</span><span class="p">(</span><span class="n">app_id</span><span class="p">,</span><span class="w"> </span><span class="n">last_seen_at</span><span class="w"> </span><span class="k">DESC</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_devices_channel</span><span class="w">     </span><span class="k">ON</span><span class="w"> </span><span class="n">devices</span><span class="p">(</span><span class="n">app_id</span><span class="p">,</span><span class="w"> </span><span class="n">channel</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_devices_bundle</span><span class="w">      </span><span class="k">ON</span><span class="w"> </span><span class="n">devices</span><span class="p">(</span><span class="n">bundle_id</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_devices_platform_v</span><span class="w">  </span><span class="k">ON</span><span class="w"> </span><span class="n">devices</span><span class="p">(</span><span class="n">app_id</span><span class="p">,</span><span class="w"> </span><span class="n">platform</span><span class="p">,</span><span class="w"> </span><span class="n">platform_version</span><span class="p">);</span>
+
+<span class="c1">-- ============================================================</span>
+<span class="c1">-- DEVICE EVENTS (timeseries — partition by month)</span>
+<span class="c1">-- Records update lifecycle: checked / downloaded / applied / error</span>
+<span class="c1">-- ============================================================</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">device_events</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w">          </span><span class="n">BIGSERIAL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">app_id</span><span class="w">      </span><span class="n">UUID</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">device_id</span><span class="w">   </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">bundle_id</span><span class="w">   </span><span class="n">UUID</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">bundles</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">event</span><span class="w">       </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">              </span><span class="c1">-- 'check' | 'download_start' | 'download_complete'</span>
+<span class="w">              </span><span class="c1">-- | 'apply' | 'rollback' | 'error'</span>
+<span class="w">  </span><span class="n">error_code</span><span class="w">  </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">  </span><span class="n">metadata</span><span class="w">    </span><span class="n">JSONB</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">'{}'</span><span class="p">,</span>
+<span class="w">  </span><span class="n">occurred_at</span><span class="w"> </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+
+<span class="w">  </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">occurred_at</span><span class="p">)</span>
+<span class="p">)</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">RANGE</span><span class="w"> </span><span class="p">(</span><span class="n">occurred_at</span><span class="p">);</span><span class="w">           </span><span class="c1">-- monthly partitions</span>
+
+<span class="c1">-- Auto-partition creation via pg_partman (recommended)</span>
+<span class="c1">-- Retain 12 months of granular events, then aggregate</span>
+
+<span class="c1">-- ============================================================</span>
+<span class="c1">-- AGGREGATED METRICS (pre-computed, avoid querying device_events at scale)</span>
+<span class="c1">-- ============================================================</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">bundle_stats</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">bundle_id</span><span class="w">       </span><span class="n">UUID</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">bundles</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">  </span><span class="n">hour</span><span class="w">            </span><span class="n">TIMESTAMPTZ</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">        </span><span class="c1">-- truncated to hour</span>
+<span class="w">  </span><span class="n">checks</span><span class="w">          </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="n">downloads</span><span class="w">       </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="n">installs</span><span class="w">        </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="n">errors</span><span class="w">          </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="n">active_devices</span><span class="w">  </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+
+<span class="w">  </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">bundle_id</span><span class="p">,</span><span class="w"> </span><span class="n">hour</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+<hr />
+<h3 id="backend-api">Backend API<a class="headerlink" href="#backend-api" title="Permanent link">&para;</a></h3>
+<p><strong>Stack</strong>: Node.js + TypeScript + Fastify (or Hono for edge). Stateless — scales horizontally behind a load balancer.</p>
+<h4 id="check-endpoint-at-scale">Check endpoint at scale<a class="headerlink" href="#check-endpoint-at-scale" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>GET /v1/check
+</code></pre></div>
+<p>Called by every device on app foreground (potentially millions of req/min).</p>
+<p><strong>Two-request design</strong> — separates the CDN-cacheable check from the device-specific parts:</p>
+<p><strong>Request 1 — Bundle check (CDN-cacheable GET):</strong>
+URL encodes the cache key so CDN can serve the same response to all devices sharing the same app/channel/native-version:
+<div class="highlight"><pre><span></span><code>GET /v1/check/{appId}/{channel}/{nativeVersion}
+
+# Example:
+GET /v1/check/com.yourcompany.app/production/1.4.0
+</code></pre></div></p>
+<p>The response is the <a href="#update-check-endpoint">check response</a> the device client already decodes. CDN-cached with a 30 s TTL, it is identical for every device on the same app, channel and native version; each device then applies the rollout decision locally (<a href="#rollout-decision">Rollout decision</a>).</p>
+<p><strong>Request 2 — Device check-in (background, fire-and-forget POST):</strong>
+This is where device identity, platform version, and current bundle are reported. Runs async, never blocks the UX. See Device Check-in section below.</p>
+<p><strong>Caching strategy</strong>:
+- CDN caches by URL path: <code>{appId}/{channel}/{nativeVersion}</code> — same response served to all matching devices
+- Redis key (origin cache): <code>check:{app_id}:{channel}:{native_version}</code> — TTL 30s
+- On bundle publish: invalidate affected Redis keys → CDN TTL expires naturally within 30s</p>
+<h4 id="device-check-in-background-fire-and-forget">Device Check-in (background, fire-and-forget)<a class="headerlink" href="#device-check-in-background-fire-and-forget" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>POST /v1/devices/checkin
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"deviceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuid"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"appId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.yourcompany.app"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"android"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"platformVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"nativeVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.4.0"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"bundleId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuid"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"deviceModel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pixel 8"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"user_tier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enterprise"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"experiment_group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout-v2"</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en-US"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/New_York"</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Upsert into <code>devices</code> table. Response: <code>202 Accepted</code>. Use a write queue (BullMQ / Redis queue) to absorb spikes and batch writes.</p>
+<h4 id="bundle-upload">Bundle Upload<a class="headerlink" href="#bundle-upload" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>POST /v1/bundles/upload   (multipart/form-data)
+Authorization: Bearer &lt;api-key&gt;
+</code></pre></div>
+<p>Fields:
+- <code>bundle</code> — ZIP file of the built <code>dist/</code>
+- <code>appId</code>
+- <code>channel</code>
+- <code>version</code> — <code>{appVersion}+{bundlePatch}</code> format (e.g. <code>1.0.0+3</code>). Bundle counter resets to <code>1</code> when <code>appVersion</code> changes.
+- <code>minNativeVersion</code> (optional) — npm semver range e.g. <code>&gt;=1.4.0</code>
+- <code>rolloutPercent</code> (default: 100)
+- <code>filter</code> (optional) — JSONB filter expression targeting device metadata: <code>"metadata.user_tier = 'enterprise'"</code>
+- <code>scheduledAt</code> (optional) — ISO 8601 timestamp; bundle is ready but delivery begins at this time</p>
+<p>Processing pipeline:
+1. Validate API key → app ownership
+2. Receive ZIP → stream to temp storage
+3. Compute SHA-256 hash
+4. Upload to S3/R2 (storage key: <code>bundles/{app_id}/{build_number}.zip</code>)
+5. Insert into <code>bundles</code> table
+6. Invalidate Redis cache for affected channel
+7. Return bundle record</p>
+<h4 id="rollout-control">Rollout Control<a class="headerlink" href="#rollout-control" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>PATCH /v1/bundles/:bundleId
+{
+  "rolloutPercent": 10,    // gradual rollout: start at 10%
+  "status": "paused"       // emergency stop
+}
+</code></pre></div>
+<p><strong>Gradual rollout</strong>: The update check endpoint uses <code>rolloutPercent</code> with a deterministic hash of <code>device_id</code> to assign devices consistently to a cohort. Same device always gets the same answer for a given percent.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// npm install murmurhash3js-revisited  (or any consistent hash — must match client)</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">x86</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'murmurhash3js-revisited'</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">isInRollout</span><span class="p">(</span><span class="nx">deviceId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">percent</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">percent</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">percent</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">x86</span><span class="p">.</span><span class="nx">hash32</span><span class="p">(</span><span class="nx">deviceId</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mf">100</span><span class="w">   </span><span class="c1">// deterministic: same device always same bucket</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">hash</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">percent</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="rollback">Rollback<a class="headerlink" href="#rollback" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>POST /v1/bundles/:bundleId/rollback
+</code></pre></div>
+<p>Sets <code>status = 'rolled_back'</code> on the bundle. The previous active bundle for that channel becomes active. All devices receive the previous bundle on next check.</p>
+<hr />
+<h3 id="frontend-dashboard">Frontend Dashboard<a class="headerlink" href="#frontend-dashboard" title="Permanent link">&para;</a></h3>
+<p><strong>Stack</strong>: React + TanStack Query + Recharts. Single-page app served by the backend.</p>
+<h4 id="key-views">Key Views<a class="headerlink" href="#key-views" title="Permanent link">&para;</a></h4>
+<h5 id="1-releases-view">1. Releases View<a class="headerlink" href="#1-releases-view" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>App: com.yourcompany.app  Channel: [production ▼]
+
+┌─────────────────────────────────────────────────────────────────┐
+│ v1.4.2  build #47   ● Active  100%    2.1M active devices       │
+│ Published 2h ago by alex@company.com                            │
+│ [Pause]  [Rollback]  [Adjust Rollout %]                         │
+├─────────────────────────────────────────────────────────────────┤
+│ v1.4.1  build #46   ◎ Previous  —     —                         │
+│ Published 2d ago                                                │
+├─────────────────────────────────────────────────────────────────┤
+│ v1.4.0  build #45   ✗ Rolled back                               │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h5 id="2-device-fleet-view">2. Device Fleet View<a class="headerlink" href="#2-device-fleet-view" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>Total active devices: 2,847,392   (active = seen in last 30 days)
+
+Platform         Devices      %
+─────────────────────────────────
+Android          1,923,440   67.5%
+  └─ Android 14    980,000   34.4%
+  └─ Android 13    612,000   21.5%
+  └─ Android 12    331,440   11.6%
+iOS                923,952   32.5%
+  └─ iOS 17.x      601,000   21.1%
+  └─ iOS 16.x      322,952   11.3%
+
+Native Shell Version
+─────────────────────────────────
+v1.4.x           2,613,000   91.8%  ← current
+v1.3.x             234,392    8.2%  ← upgrade pressure
+
+Bundle Coverage
+─────────────────────────────────
+v1.4.2 (latest)  2,100,000   73.8%
+v1.4.1            714,000    25.1%
+Older              33,392     1.1%
+</code></pre></div>
+<h5 id="3-release-detail-update-funnel">3. Release Detail — Update Funnel<a class="headerlink" href="#3-release-detail-update-funnel" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>Bundle v1.4.2  Last 24 hours
+
+Checks           4,832,000  ──────────────────────────── 100%
+Downloaded       2,214,000  ─────────────────           45.8%
+Applied          2,100,000  ────────────────            43.5%
+Errors               1,240  ▏                            0.026%
+
+Error breakdown:
+  DOWNLOAD_HASH_MISMATCH    812    (CDN issue — 3h ago, resolved)
+  STORAGE_WRITE_FAILED      428    (low-disk devices)
+</code></pre></div>
+<h5 id="4-gradual-rollout-control">4. Gradual Rollout Control<a class="headerlink" href="#4-gradual-rollout-control" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code>Current rollout: 10%
+
+[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━] 
+
+[  10%  ] [  25%  ] [  50%  ] [  100%  ]   [Custom: ___]
+
+Active on:   284,739 devices
+Error rate:  0.02%  ✓ Healthy  → Safe to increase
+</code></pre></div>
+<hr />
+<h3 id="scalability-design">Scalability Design<a class="headerlink" href="#scalability-design" title="Permanent link">&para;</a></h3>
+<h4 id="how-it-handles-millions-of-devices">How it handles millions of devices<a class="headerlink" href="#how-it-handles-millions-of-devices" title="Permanent link">&para;</a></h4>
+<p><strong>The hot path is the update check endpoint.</strong> This must handle spikes (everyone opens the app at 9am).</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Check endpoint</strong></td>
+<td>Stateless, horizontally scaled behind load balancer</td>
+</tr>
+<tr>
+<td><strong>Redis cache</strong></td>
+<td>Active bundle per channel cached 30s — 99% of requests never hit the DB</td>
+</tr>
+<tr>
+<td><strong>Database</strong></td>
+<td>Read replicas for all read queries; primary only for writes</td>
+</tr>
+<tr>
+<td><strong>Device writes</strong></td>
+<td>Write queue (BullMQ) — absorbs spikes, batches upserts</td>
+</tr>
+<tr>
+<td><strong>Bundle downloads</strong></td>
+<td>Served from CDN (CloudFront/Cloudflare R2) — backend not involved</td>
+</tr>
+<tr>
+<td><strong>Metrics</strong></td>
+<td>Pre-aggregated into <code>bundle_stats</code> hourly — dashboard never queries <code>device_events</code> directly</td>
+</tr>
+<tr>
+<td><strong>Partitioning</strong></td>
+<td><code>devices</code> table hash-partitioned by <code>app_id</code>; <code>device_events</code> range-partitioned by month</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Capacity rough math</strong>:
+- 10M devices, check every foreground = ~50M checks/day = ~580 req/sec average
+- Peak (morning rush, 10x): ~5,800 req/sec
+- With 30s Redis cache: cache hit rate ~95%+, effective DB load &lt; 300 req/sec
+- 3 backend instances handle this comfortably</p>
+<p><strong>Device storage</strong>: 10M devices × ~1KB per row = ~10GB. Trivial for PostgreSQL with proper partitioning.</p>
+<p><strong>Events storage</strong>: 50M events/day × 30 days = 1.5B rows/month. Partition by month, drop after 12 months, aggregate into <code>bundle_stats</code>.</p>
+<hr />
+<h3 id="version-numbering-convention">Version Numbering Convention<a class="headerlink" href="#version-numbering-convention" title="Permanent link">&para;</a></h3>
+<p>Bundle versions follow <code>{appVersion}+{bundlePatch}</code> — semver build metadata:</p>
+<div class="highlight"><pre><span></span><code>Store release: 1.0.0   → CodeSync bundles: 1.0.0+1, 1.0.0+2, 1.0.0+3 ...
+Store release: 1.1.0   → CodeSync bundles: 1.1.0+1, 1.1.0+2 ...
+</code></pre></div>
+<p><code>capsule codesync publish</code> auto-increments the bundle counter within the current <code>appVersion</code> and resets it to <code>+1</code> when <code>appVersion</code> changes. CLI and dashboard always display as two separate columns (<code>VERSION</code> + <code>BUNDLE</code>) — the <code>+</code> notation is never surfaced directly.</p>
+<hr />
+<h3 id="device-metadata-api">Device Metadata API<a class="headerlink" href="#device-metadata-api" title="Permanent link">&para;</a></h3>
+<p>The shell automatically sends standard metadata at every check-in: <code>os_version</code>, <code>locale</code>, <code>timezone</code>, <code>device_model</code>, <code>app_version</code>, <code>bundle_version</code>.</p>
+<p>For custom business metadata, the app registers it via the bridge:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">codesync</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@capsule/core'</span>
+
+<span class="c1">// Call after authentication — when business context is known</span>
+<span class="nx">codesync</span><span class="p">.</span><span class="nx">setDeviceMetadata</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">user_tier</span><span class="o">:</span><span class="w"> </span><span class="kt">user.subscriptionPlan</span><span class="p">,</span><span class="w">   </span><span class="c1">// 'free' | 'pro' | 'enterprise'</span>
+<span class="w">  </span><span class="nx">experiment_group</span><span class="o">:</span><span class="w"> </span><span class="kt">abTest.group</span><span class="p">,</span><span class="w">     </span><span class="c1">// 'control' | 'checkout-v2'</span>
+<span class="w">  </span><span class="nx">store_id</span><span class="o">:</span><span class="w"> </span><span class="kt">user.assignedStore</span><span class="w">        </span><span class="c1">// for retail/franchise use cases</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>Metadata is stored in <code>devices.metadata JSONB</code>, merged with standard metadata. No PII — use opaque identifiers, not email or name.</p>
+<p><strong>Targeting at publish time:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Geographic (automatic metadata — no app code needed)</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--filter<span class="w"> </span><span class="s2">"metadata.locale LIKE 'pt-%'"</span>
+
+<span class="c1"># Business segment (custom metadata)</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--channel<span class="w"> </span>staging<span class="w"> </span>--filter<span class="w"> </span><span class="s2">"metadata.user_tier = 'enterprise'"</span>
+
+<span class="c1"># Named group (saved filter expression in the dashboard)</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--group<span class="w"> </span><span class="s2">"brazil-enterprise"</span>
+</code></pre></div></p>
+<hr />
+<h3 id="channel-promotion">Channel Promotion<a class="headerlink" href="#channel-promotion" title="Permanent link">&para;</a></h3>
+<p>Channels are the approval mechanism. <code>capsule codesync promote</code> is the approval gesture.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Publish to staging (developers can do this)</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--channel<span class="w"> </span>staging
+
+<span class="c1"># After QA sign-off — promote to production (Releaser role required)</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>promote<span class="w"> </span>--from<span class="w"> </span>staging<span class="w"> </span>--to<span class="w"> </span>production<span class="w"> </span>--rollout<span class="w"> </span><span class="m">5</span>
+
+<span class="c1"># Increase rollout after monitoring</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>rollout<span class="w"> </span><span class="m">25</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>rollout<span class="w"> </span><span class="m">100</span>
+</code></pre></div>
+<p>Role-based access in the portal: <code>Developer</code> role can publish to non-production channels. <code>Releaser</code> role required to promote to production. The audit log records who ran each <code>promote</code>.</p>
+<hr />
+<h3 id="planned-cli-commands">Planned CLI commands<a class="headerlink" href="#planned-cli-commands" title="Permanent link">&para;</a></h3>
+<p>Only <code>capsule codesync publish --channel --notes</code> exists today (<a href="#publish-flow">Publish flow</a>). The rest of this list is the target surface.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Publish a new bundle</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--channel<span class="w"> </span>staging
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--channel<span class="w"> </span>production<span class="w"> </span>--rollout<span class="w"> </span><span class="m">10</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--filter<span class="w"> </span><span class="s2">"metadata.user_tier = 'enterprise'"</span><span class="w">   </span><span class="c1"># metadata targeting</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--group<span class="w"> </span><span class="s2">"beta-testers"</span><span class="w">                          </span><span class="c1"># named group</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--at<span class="w"> </span><span class="s2">"2026-06-01T09:00:00Z"</span><span class="w">                    </span><span class="c1"># scheduled release</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>publish<span class="w"> </span>--min-native-version<span class="w"> </span><span class="s2">"&gt;=1.4.0"</span><span class="w">                 </span><span class="c1"># native version gate</span>
+
+<span class="c1"># Promote between channels (approval gesture)</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>promote<span class="w"> </span>--from<span class="w"> </span>staging<span class="w"> </span>--to<span class="w"> </span>production
+capsule<span class="w"> </span>codesync<span class="w"> </span>promote<span class="w"> </span>--from<span class="w"> </span>staging<span class="w"> </span>--to<span class="w"> </span>production<span class="w"> </span>--rollout<span class="w"> </span><span class="m">5</span>
+
+<span class="c1"># Manage releases</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>releases<span class="w">                    </span><span class="c1"># list releases</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>rollback<span class="w">                    </span><span class="c1"># rollback latest on current channel</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>rollback<span class="w"> </span>--bundle<span class="w"> </span>v1.4.1<span class="w">    </span><span class="c1"># rollback to specific version</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>pause<span class="w">                       </span><span class="c1"># emergency stop</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>rollout<span class="w"> </span><span class="m">50</span><span class="w">                  </span><span class="c1"># increase to 50%</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>rollout<span class="w"> </span><span class="m">100</span><span class="w">                 </span><span class="c1"># full rollout</span>
+
+<span class="c1"># Device info</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>devices<span class="w">                     </span><span class="c1"># fleet summary</span>
+capsule<span class="w"> </span>codesync<span class="w"> </span>devices<span class="w"> </span>--platform<span class="w"> </span>android<span class="w">  </span><span class="c1"># filtered</span>
+</code></pre></div>
+<hr />
+<h3 id="deployment-of-the-full-service">Deployment of the full service<a class="headerlink" href="#deployment-of-the-full-service" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># docker-compose.yml for CodeSync service</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">codesync-api</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/capsule/codesync-api:latest</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">DATABASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres://...</span>
+<span class="w">      </span><span class="nt">REDIS_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis://redis:6379</span>
+<span class="w">      </span><span class="nt">STORAGE_BUCKET</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">capsule-bundles</span>
+<span class="w">      </span><span class="nt">STORAGE_ENDPOINT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://...</span><span class="w">   </span><span class="c1"># S3, R2, or MinIO</span>
+<span class="w">      </span><span class="nt">API_KEY_SECRET</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"3000:3000"</span>
+<span class="w">    </span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+
+<span class="w">  </span><span class="nt">codesync-dashboard</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/capsule/codesync-dashboard:latest</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"8080:80"</span>
+
+<span class="w">  </span><span class="nt">postgres</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:16-alpine</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">capsule</span>
+<span class="w">      </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">capsule</span>
+<span class="w">      </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">capsule</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres-data:/var/lib/postgresql/data</span>
+
+<span class="w">  </span><span class="nt">redis</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis:7-alpine</span>
+
+<span class="w">  </span><span class="nt">minio</span><span class="p">:</span><span class="w">                   </span><span class="c1"># local S3-compatible storage</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">minio/minio:RELEASE.2024-11-07T00-52-20Z</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server /data</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">minio-data:/data</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">postgres-data</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">minio-data</span><span class="p">:</span>
+</code></pre></div>
+<hr />
+<h3 id="api-key-setup">API Key Setup<a class="headerlink" href="#api-key-setup" title="Permanent link">&para;</a></h3>
+<p>CodeSync publish operations require an API key tied to your app registration in the Capsule portal (see <code>../project/server-design/overview.md</code>).</p>
+<p><strong>How to get an API key:</strong>
+1. Sign up at the Capsule portal (self-hosted or cloud)
+2. Create an organization and register your app with its <code>appId</code>
+3. Generate an API key under <strong>Settings → API Keys</strong>
+4. Add it to your environment:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># .env.local (never commit this file)</span>
+<span class="nv">CODESYNC_API_KEY</span><span class="o">=</span>csk_live_xxxxxxxxxxxxxxxxxxxx
+
+<span class="c1"># Or in CI secrets:</span>
+<span class="c1"># CODESYNC_API_KEY → GitHub/GitLab/Azure secret</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// capsule.config.ts</span>
+<span class="nx">codeSync</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">url</span><span class="o">:</span><span class="w">    </span><span class="kt">process.env.CODESYNC_URL</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">apiKey</span><span class="o">:</span><span class="w"> </span><span class="kt">process.env.CODESYNC_API_KEY</span><span class="p">,</span><span class="w">   </span><span class="c1">// ← portal-generated key</span>
+<span class="w">  </span><span class="nx">channel</span><span class="o">:</span><span class="w"> </span><span class="s1">'production'</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The API key is <strong>only used by the CLI for publishing</strong> — it is never embedded in the app binary. The app reads from the check endpoint (public, CDN-cached) and the check-in endpoint (unauthenticated, rate-limited by IP).</p>
+<hr />
+<h3 id="security-considerations">Security Considerations<a class="headerlink" href="#security-considerations" title="Permanent link">&para;</a></h3>
+<p>Built today: SHA-256 verification before install, and an API key that only the publish side uses. Everything else in this list is planned.</p>
+<ul>
+<li><strong>Bundle integrity</strong>: SHA-256 hash verified by the native client before applying. Reject and report if mismatch.</li>
+<li><strong>HTTPS only</strong>: All check and download endpoints require TLS. Native client pins the cert (configurable).</li>
+<li><strong>API keys</strong>: Publish endpoint requires API key (never embedded in app). Generated in the Capsule portal. Dashboard uses JWT auth (see <code>../project/server-design/overview.md</code>).</li>
+<li><strong>Bundle signing</strong> (future): Sign bundles with a private key; native client verifies with embedded public key. Prevents MITM even with compromised CDN.</li>
+<li><strong>No arbitrary code at capsule layer</strong>: CodeSync can only update the web bundle (<code>www/</code>) and the server bundle (<code>server/bundle.js</code>). It cannot update native code, permissions, or the capsule shell. This is enforced by the native runtime loading only from the designated bundle directory.</li>
+<li><strong><code>min_native_version</code></strong>: Uses npm semver ranges (e.g. <code>&gt;=1.4.0</code>). Evaluated client-side using an embedded semver library that matches npm's <code>semver</code> package behavior exactly.</li>
+</ul>
+<hr />
+<h3 id="phased-delivery">Phased Delivery<a class="headerlink" href="#phased-delivery" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Deliverable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CS-1</strong></td>
+<td>Backend API (check, upload, checkin) + PostgreSQL schema + S3 storage</td>
+</tr>
+<tr>
+<td><strong>CS-2</strong></td>
+<td>Android client runtime (check, download, apply)</td>
+</tr>
+<tr>
+<td><strong>CS-3</strong></td>
+<td>CLI commands (<code>publish</code>, <code>rollback</code>, <code>rollout</code>)</td>
+</tr>
+<tr>
+<td><strong>CS-4</strong></td>
+<td>Dashboard (releases, fleet view, funnel)</td>
+</tr>
+<tr>
+<td><strong>CS-5</strong></td>
+<td>iOS client runtime + gradual rollout + mandatory updates</td>
+</tr>
+<tr>
+<td><strong>CS-6</strong></td>
+<td>Differential updates — file-level content-addressed storage. CodeSync is a service pack / hotfix channel: a typical fix changes 1–3 Vite output chunks. Server stores files by content hash; devices download only what changed. Since Vite outputs content-hashed filenames, unchanged chunks are never retransferred. Expected reduction: 80–95% of full bundle size for a typical hotfix. No binary diff algorithm needed.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="appendix-ios-shell-build-with-xtool">Appendix: iOS shell build with xtool<a class="headerlink" href="#appendix-ios-shell-build-with-xtool" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>This section is about building the iOS shell, not OTA. It is kept here until it moves to <a href="../ios-bring-up/">ios-bring-up.md</a>; the steps are unverified on real hardware.</p>
+</blockquote>
+<p>The iOS capsule shell can now be built entirely on Linux/WSL/Windows using the <strong>xtool</strong> cross‑platform Xcode replacement. This eliminates the need for a macOS machine during development and CI.</p>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Install xtool</strong> – follow the official guide: https://xtool.sh/documentation/xtooldocs/installation-linux (Linux/WSL) or the Windows equivalent.</li>
+<li><strong>Authenticate with Apple Developer Services</strong> – required for code signing and SDK access:
+   <div class="highlight"><pre><span></span><code>xtool<span class="w"> </span>auth<span class="w"> </span>login<span class="w">   </span><span class="c1"># opens a browser flow or prompts for credentials + 2FA</span>
+xtool<span class="w"> </span>auth<span class="w"> </span>status<span class="w">  </span><span class="c1"># should show you are logged in</span>
+</code></pre></div></li>
+<li><strong>The iOS capsule package is a SwiftPM project</strong> – manifest at the capsule repo root, <code>Package.swift</code>
+   (sources stay in <code>packages/capsule-ios/</code>; deps: <code>swift-crypto</code> for bundle SHA-256,
+   <code>ZIPFoundation</code> for extraction — both Apple + Linux; the embedded server builds from the vendored
+   <code>packages/native/civetweb</code> as the <code>CCivetweb</code> target;
+   XKit stays optional until a device-management feature needs it). The CodeSync client core is
+   implemented and unit-tested on Linux (<code>swift test</code> in a <code>swift:6.4-jammy</code> container, 89 tests);
+   see <code>packages/capsule-ios/README.md</code>.
+   <strong>Wire-contract note:</strong> the rollout hash is MurmurHash3 x86 32-bit over the <strong>UTF-8 bytes</strong> of
+   the device id (<code>murmurhash3js-revisited</code> <code>x86.hash32(bytes, 0)</code>), bucketed by the <strong>unsigned</strong>
+   hash modulo 100 — the Swift/Kotlin/TS implementations are pinned to the same shared vectors.</li>
+</ol>
+<h3 id="build-steps">Build Steps<a class="headerlink" href="#build-steps" title="Permanent link">&para;</a></h3>
+<p>From the root of the capsule repo (where <code>Package.swift</code> is):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Resolve dependencies and fetch the Darwin Swift SDK</span>
+xtool<span class="w"> </span>sdk<span class="w"> </span>install<span class="w"> </span>iphoneos<span class="w">   </span><span class="c1"># installs the iOS device SDK</span>
+xtool<span class="w"> </span>sdk<span class="w"> </span>install<span class="w"> </span>iphonesimulator<span class="w"> </span><span class="c1"># installs the iOS simulator SDK</span>
+
+<span class="c1"># 2. Build the XCFramework for device and simulator</span>
+xtool<span class="w"> </span>build<span class="w"> </span>-c<span class="w"> </span>release<span class="w"> </span>--scheme<span class="w"> </span>Capsule<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-destination<span class="w"> </span><span class="s1">'generic/platform=iOS'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--archive-path<span class="w"> </span>./build/ios-arm64.xcarchive<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">SKIP_INSTALL</span><span class="o">=</span>NO<span class="w"> </span><span class="nv">BUILD_LIBRARIES_FOR_DISTRIBUTION</span><span class="o">=</span>YES
+
+xtool<span class="w"> </span>build<span class="w"> </span>-c<span class="w"> </span>release<span class="w"> </span>--scheme<span class="w"> </span>Capsule<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-destination<span class="w"> </span><span class="s1">'generic/platform=iOS Simulator'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--archive-path<span class="w"> </span>./build/ios-simulator.xcarchive<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">SKIP_INSTALL</span><span class="o">=</span>NO<span class="w"> </span><span class="nv">BUILD_LIBRARIES_FOR_DISTRIBUTION</span><span class="o">=</span>YES
+
+<span class="c1"># 3. Create the universal XCFramework</span>
+xtool<span class="w"> </span>create-xcframework<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-framework<span class="w"> </span>./build/ios-arm64.xcarchive/Products/Library/Frameworks/Capsule.framework<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-framework<span class="w"> </span>./build/ios-simulator.xcarchive/Products/Library/Frameworks/Capsule.framework<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-output<span class="w"> </span>./build/Capsule.xcframework
+</code></pre></div>
+<h3 id="using-the-built-framework">Using the Built Framework<a class="headerlink" href="#using-the-built-framework" title="Permanent link">&para;</a></h3>
+<p>The resulting <code>./build/Capsule.xcframework</code> can be consumed by the Capsule CLI exactly as before. Set the environment variable to point to your locally built override:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CAPSULE_SHELL_OVERRIDE_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/build/Capsule.xcframework
+</code></pre></div>
+<p>Then run the usual CLI commands (<code>capsule dev ios</code>, <code>capsule build ios</code>, etc.) – they will pick up the overridden shell.</p>
+<h3 id="testing-the-swift-side-optional">Testing the Swift Side (Optional)<a class="headerlink" href="#testing-the-swift-side-optional" title="Permanent link">&para;</a></h3>
+<p>Add Swift unit tests under <code>packages/capsule-ios/Tests/</code> and run them from the repo root with:</p>
+<div class="highlight"><pre><span></span><code>xtool<span class="w"> </span><span class="nb">test</span><span class="w">   </span><span class="c1"># builds and runs tests on the host using the iOS Simulator SDK</span>
+</code></pre></div>
+<p>or, with no Apple tooling at all, <code>swift test</code> in Docker — see <code>packages/capsule-ios/README.md</code>.</p>
+<h3 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The build process uses <code>xtool build</code>, which is a thin wrapper around <code>xcodebuild</code> that automatically selects the correct toolchain and SDKs provided by xtool.</li>
+<li>All code‑signing steps (if you intend to distribute the app) are handled by <code>xtool codesign</code> under the hood; you can also invoke it manually for ad‑hoc signing.</li>
+<li>For CI pipelines, simply install xtool, run <code>xtool auth login</code> (store the session token securely), and execute the build steps above.</li>
+</ul>
+<p>This approach keeps the iOS capsule shell lightweight, enables rapid iteration on non‑macOS workstations, and aligns the build process with the existing Android Gradle‑based workflow.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024-2026 Capsule Framework Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.highlight", "search.share", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

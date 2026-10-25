@@ -1,0 +1,4334 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alex-vinny.github.io/capsule_framework/project/roadmap/">
+      
+      
+        <link rel="prev" href="../../contributing/workflows/upkeep-sweep/CONTEXT/">
+      
+      
+        <link rel="next" href="../state/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Roadmap - Capsule Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#capsule-framework-implementation-overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Capsule Framework" class="md-header__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Capsule Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Roadmap
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guide/installation/" class="md-tabs__link">
+          
+  
+  
+  Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/cli/" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/architecture/" class="md-tabs__link">
+          
+  
+  
+  Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../decisions/" class="md-tabs__link">
+          
+  
+  
+  Decisions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../contributing/" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Capsule Framework" class="md-nav__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Capsule Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/hello-world/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hello World
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/push-notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Push Notifications
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/alerts-styling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alerts Styling
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/mobile-css-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile CSS Reset
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/publishing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publishing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ota-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Over-the-air Updates
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/core-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/lockfile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lockfile
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generated
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generated
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/docs-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Principles
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/capsule-vs-ionic-capacitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    vs Ionic/Capacitor
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/extensibility-and-positioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extensibility & Positioning
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/ionic-framework7-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ionic Framework 7 Migration
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Primers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/kotlin-for-csharp-devs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kotlin for C# Devs
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/jni-and-cpp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JNI & C
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/civetweb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CivetWeb
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/quickjs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QuickJS
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decisions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0001-embedded-runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0001 Embedded Runtime
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0002-capsule-ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0002 Capsule UI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0003-ai-and-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0003 AI & Agents
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0004-web-serving-transport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0004 Web Serving Transport
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/codesync-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CodeSync Internals
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/plugin-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/template-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Template Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/ios-bring-up/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iOS Bring-up
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/platform-parity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android/iOS Parity
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/upkeep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_14" id="__nav_6_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Workflows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/add-native-api/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add Native API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/author-plugin/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Author Plugin
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/upkeep-sweep/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep Sweep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-phases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Phases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monorepo-structure-current-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monorepo Structure (current state)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shell-version-registry-phase-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shell Version Registry (Phase 8)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-images-phase-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Images (Phase 8)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-1-done" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1 — Done ✅
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-2-entry-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2 — Entry Criteria ✅
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-2-embedded-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2 — Embedded Runtime
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#template-extensibility-phase-1-init-phase-8-ecosystem-2026-06-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Template extensibility (Phase 1 init + Phase 8 ecosystem) ✅ 2026-06-12
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-decisions-2026-06-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design decisions (2026-06-12)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Design decisions (2026-06-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compatibility-what-capsule-guarantees-and-for-how-long" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compatibility — what Capsule guarantees, and for how long
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-distribution-self-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI distribution &amp; self-update
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-capsule-to-an-existing-web-project-cli-assisted-planned" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding Capsule to an existing web project — CLI-assisted (planned)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps-re-sequenced-2026-06-15-revised" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next steps (re-sequenced 2026-06-15, revised)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../known-issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known Issues
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_6" id="__nav_7_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Incidents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Incidents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../incidents/2026-10-embedded-server-startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-10 Embedded Server Startup
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_7" id="__nav_7_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../research/2026-06-24-planning-brainstorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-24 Planning Brainstorm
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../research/chatgpt-first-impressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT First Impressions
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../research/chatgpt-plugin-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT Plugin Compatibility
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_8" id="__nav_7_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Business
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../business/business-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Model
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../business/pricing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pricing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../business/ota-policy-and-liability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Policy & Liability
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_9" id="__nav_7_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Server Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Server Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server-design/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server-design/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server-design/file-storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Storage
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server-design/workers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workers
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="capsule-framework-implementation-overview">Capsule Framework — Implementation Overview<a class="headerlink" href="#capsule-framework-implementation-overview" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>This folder contains the step-by-step implementation guide for building the Capsule Framework itself — the CLI, native shells, core SDK, and CodeSync infrastructure.</p>
+<p>Prerequisites: machine setup complete (<code>environment.md</code>). GitHub org and CI/CD are Phase 8 (Ecosystem).</p>
+</blockquote>
+<hr />
+<h2 id="implementation-phases">Implementation Phases<a class="headerlink" href="#implementation-phases" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Re-sequenced 2026-06-15</strong> (strategy session, revised). Capsule is a personal project — <strong>not racing
+for funding</strong>, so capability comes before monetization: <strong>native-API expansion stays Phase 3</strong>, then
+<strong>iOS</strong>, then <strong>Capsule UI</strong> (native-look layer, Phase 5 — slotted after iOS so its presets target a real
+iOS shell), then the <strong>Server Code Push / OTA cloud</strong> (the eventual funding engine, gated on iOS) and the
+migration on-ramp. The strategy/business docs (<a href="../business/business-model/">../Business/</a>)
+still hold — they're just sequenced later. The old phase <em>content</em> is preserved; only order changed.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Deliverable</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase 1 — Foundation</strong></td>
+<td>CLI (<code>capsule init/add/sync/dev/build/run</code>) + Android shell (Kotlin AAR) + 6 native APIs (geolocation, camera, haptics, push, biometrics, alerts) + templates + WebBridge (browser dev fallback)</td>
+<td>✅ Done</td>
+</tr>
+<tr>
+<td><strong>Phase 2 — Embedded Runtime (Android)</strong></td>
+<td>Embedded HTTP server (NanoHTTPD; replaced by CivetWeb 2026-10-24 — adr-004 amendment) + QuickJS on-device JS runtime + CapsuleRuntime coordinator + file-based route handlers + atomic CodeSync bundles + crash-loop rollback</td>
+<td>✅ Steps 1–7 complete · Group 0 + Group 2 browser-dev e2e tested (OTA <em>network delivery</em> deferred to Phase 6)</td>
+</tr>
+<tr>
+<td><strong>Phase 3 — Native APIs Expansion</strong></td>
+<td>Ordered (foundational → specialized): <strong>Camera ✅ → Filesystem ✅ → App lifecycle + deep links ✅ → Network status ✅ → Push (FCM/APNs) → Local notifications → Biometrics → Status bar / Keyboard / Share → SQLite <code>db</code> → <code>ai</code> inference (Tier-1 OS-native spike, see <a href="../../decisions/0003-ai-and-agents/">adr-003</a>) → NFC / Bluetooth → Background jobs → Telecom / SMS.</strong> Every API honours two OTA-driven constraints — persist user data <em>outside</em> the OTA-swappable bundle dirs, and carry a native-capability version (see "Phase 3 ordering" below).</td>
+<td>🔄 Camera + Filesystem + App lifecycle/deep links + Network status done · SQLite <code>db</code> + <code>ai</code> Tier-1 spike built out of order (2026-10-24, device tests pending) · rest ⬜</td>
+</tr>
+<tr>
+<td><strong>Phase 4 — iOS</strong> <em>(pulled forward, was Phase 6)</em></td>
+<td>CivetWeb — the same C server as Android, ✅ built + Linux-tested (embedded loopback HTTP server → <code>http://127.0.0.1:{port}/</code>, <strong>symmetric with Android</strong> — <code>WKURLSchemeHandler</code> rejected, see <a href="../../decisions/0004-web-serving-transport/">adr-004</a>) + QuickJS compiled for iOS + WKWebView shell — same <code>capsule.config.ts</code>, same TS route handlers. <strong>No Mac purchase needed for bring‑up</strong> — see <a href="../../contributing/ios-bring-up/">ios-bring-up.md</a>. <strong>Now using xtool / XKit</strong> for cross‑platform SwiftPM build and optional helpers (networking, crypto, device management). <strong>Contract‑readiness audit (2026‑06‑26): the Android interfaces are essentially iOS‑ready — seam is at the provider/controller boundary, only platform‑edge glue leaks <code>android.*</code>; QuickJS C lib compiles unchanged (only the JNI glue is re‑written). Tiered breakdown + the one <code>BundleStore</code>/<code>java.io.File</code> nit in <code>080</code>.</strong> In progress – SwiftPM conversion + tested CodeSync client core done (2026-10-15, Linux-tested via Docker); next: xtool container build + Apple auth</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Phase 5 — Capsule UI</strong> <em>(native-look component layer)</em></td>
+<td><code>capsule add-ui</code> (shadcn-style; shipped 2026-10-24 — copies ui-kit class builders) + shared iOS/Material Tailwind preset + per-framework behaviour — "Capsule's own Konsta". <strong>Slotted after iOS so the iOS/Material presets target a real WKWebView shell and the native <em>look</em> is proven on both platforms</strong> (the native <em>capabilities</em> already land in Phase 3). Pure frontend/CSS — touches no native APIs. See <a href="../../decisions/0002-capsule-ui/">adr-002</a>.</td>
+<td>🔄 Foundation done — framework-agnostic class builders + iOS/Material presets in <code>packages/ui-kit</code> (tsc strict clean, 15/15 tests green); <code>capsule add-ui</code> shipped (2026-10-24); per-framework adapters next</td>
+</tr>
+<tr>
+<td><strong>Phase 6 — Server Code Push / OTA Cloud</strong> <em>(the funding engine)</em></td>
+<td>OTA network delivery (<code>capsule codesync publish</code> + on-device fetch — the deferred half of Step 7) + Portal/control plane (<a href="../server-design/overview/">server design</a>) + <strong>canary + auto-rollback</strong> + multi-tenant + metrics/logs + billing. <strong>+ AI agent layer</strong> (native bridge as agent tool surface) + <strong>hybrid/on-device inference</strong> (Cactus/llama.cpp Tier 2) + <strong>cloud inference</strong> (metered, Tier 3) + <strong>OTA-updatable agent logic</strong> — see <a href="../../decisions/0003-ai-and-agents/">adr-003</a>.</td>
+<td>🔄 Server <em>design</em> done + <strong>local self-hosted server implemented &amp; E2E-verified</strong> (<code>packages/codesync-api</code>); <strong>CLI <code>codesync publish</code> done</strong> + <strong>on-device fetch client JS/API implemented</strong> + native implementation pending + portal + billing + AI/agents pending</td>
+</tr>
+<tr>
+<td><strong>Phase 7 — Migration On-Ramp</strong> <em>(go-to-market)</em></td>
+<td><code>capsule migrate ionic</code> + <code>@capsule/compat-capacitor</code> shim + plugin importer (Capacitor/Cordova → Capsule ABI). Acquisition funnel — can overlap Phase 6. See <a href="../../concepts/ionic-framework7-migration/">../concepts/ionic-framework7-migration.md</a> + <a href="../research/chatgpt-plugin-compatibility/">research/chatgpt-plugin-compatibility.md</a>.</td>
+<td>⬜ Not started</td>
+</tr>
+<tr>
+<td><strong>Phase 8 — Ecosystem</strong></td>
+<td>GitHub org, publishing pipeline, CI/CD, npm publish, Docker images, Shell registry via GitHub Releases, <strong>template registry</strong>, docs site. <strong>OSS/package release readiness — repo-target, docs split, license, de-Windows, npm+Maven publish — is captured as pending decisions + a pre-publish checklist in <a href="../../contributing/release/">release.md</a></strong> (the public-launch flip itself is gated at Phase 6, see D1/D6 there).</td>
+<td>🔄 Template extensibility ✅; publish pending (decisions logged: <code>release.md</code>)</td>
+</tr>
+<tr>
+<td><strong>Phase 9 — DX</strong></td>
+<td>VS Code extension, error overlays, device inspector, Fastlane signing automation</td>
+<td>⬜ Not started</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Start here</strong>: <a href="../../reference/cli/">cli.md</a> (CLI) → <a href="../../concepts/architecture/">architecture.md</a> (core + Android shell)
+<strong>Strategy &amp; business</strong>: <a href="../business/business-model/">business/business-model.md</a> · <a href="../business/pricing/">business/pricing.md</a> · <a href="../business/ota-policy-and-liability/">business/ota-policy-and-liability.md</a> · infra <a href="../infrastructure/">infrastructure.md</a></p>
+<p><strong>Recurring upkeep (cross-cutting, all phases)</strong>: a periodic dependency &amp; tooling audit —
+QuickJS-ng, CivetWeb, Android SDK / Play <code>targetSdk</code>, Gradle/AGP/Kotlin/NDK, CLI + core npm deps,
+and the templates — runs <strong>at every phase kick-off, before each release, and quarterly</strong>. Routine,
+baseline, and sweep log: <a href="../../contributing/upkeep/">upkeep.md</a>. (iOS toolchain added there in Phase 4.)</p>
+<p><strong>HTTP fidelity roadmap (embedded server, both platforms — <a href="../../decisions/0004-web-serving-transport/">adr-004</a>)</strong>:
+the on-device <code>/api</code> server delivers a <em>full web experience</em>, tiered so each step is realistic and works properly:</p>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Status / phase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Static serving + request/response <code>/api/*</code> (GET/POST/PUT/DELETE)</td>
+<td>✅ Android (Phase 2) · Phase 4 for iOS parity</td>
+</tr>
+<tr>
+<td><strong>Streaming responses</strong> (chunked)</td>
+<td>Phase 4 parity target</td>
+</tr>
+<tr>
+<td><strong>WebSockets</strong> (<code>ws://localhost</code>, on-device real-time)</td>
+<td>⬜ Future — needs a <strong>new core route model</strong> (<code>onOpen</code>/<code>onMessage</code>/<code>onClose</code>) + single-thread-engine frame pumping. <em>Designed, not excluded. Not promised in the first iOS cut.</em></td>
+</tr>
+<tr>
+<td><strong>Server-Sent Events (SSE)</strong></td>
+<td>⬜ Future — new core streaming-route model (pairs with WebSockets work)</td>
+</tr>
+<tr>
+<td><strong>Range requests</strong> (media seeking)</td>
+<td>⬜ Future — server-side <code>Range</code> handling</td>
+</tr>
+</tbody>
+</table>
+<p>These amend <a href="../../decisions/0001-embedded-runtime/">adr-001</a> #4 ("deliberately minimal, no WS/SSE"):
+HTTP fidelity is now <em>tiered</em>, not minimal-forever. The Bridge-vs-HTTP channel split still holds — WS/SSE
+are web-standard real-time <em>inside the on-device server</em>, distinct from the native-event Bridge.</p>
+<hr />
+<h2 id="monorepo-structure-current-state">Monorepo Structure (current state)<a class="headerlink" href="#monorepo-structure-current-state" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>capsule/                            ← local monorepo
+  packages/
+    cli/                            ← @capsule/cli    (TypeScript, Node) ✅ Done
+    core/                           ← @capsule/core   (TypeScript, web runtime) ✅ Done
+    capsule-android/                ← Kotlin AAR      (Android shell) ✅ Done
+      capsule/src/main/kotlin/dev/capsule/
+        CapsuleActivity.kt          ← thin shell (Phase 2: delegates to CapsuleRuntime)
+        CapsuleBridge.kt            ← JSON-RPC 2.0 dispatcher ✅
+        handlers/                   ← 6 native API handlers ✅
+        WebBridge.kt                ← browser dev fallback ✅
+        runtime/                    ← Phase 2: CapsuleRuntime + CivetwebServer + RequestRouter + QuickJS
+    capsule-ios/                    ← Swift XCFramework (Phase 4)
+    native/civetweb/                ← vendored CivetWeb, shared by Android + iOS
+    codesync-api/                   ← Fastify backend (Phase 6)
+    codesync-dashboard/             ← React dashboard (Phase 6)
+  examples/
+    react-ts/                       ← React TypeScript example app ✅
+    vue-ts/                         ← Vue TypeScript example app
+    svelte-ts/                      ← Svelte TypeScript example app
+    vanilla-ts/                     ← Vanilla TypeScript example app
+  pnpm-workspace.yaml
+  turbo.json
+  package.json
+  tsconfig.base.json
+
+  # Phase 8 — Ecosystem / Go Online (added after local MVP is green):
+  # docker/
+  #   dev.Dockerfile
+  #   build-android.Dockerfile
+  #   build-web.Dockerfile
+  # .devcontainer/
+  #   devcontainer.json
+  # .github/
+  #   workflows/
+  #     ci.yml
+  #     release.yml
+  #     docker.yml
+</code></pre></div>
+<hr />
+<h2 id="shell-version-registry-phase-8">Shell Version Registry <em>(Phase 8)</em><a class="headerlink" href="#shell-version-registry-phase-8" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>In Phase 8 (Ecosystem), the CLI will resolve shell versions via GitHub Releases API (see <code>../reference/lockfile.md</code>):
+- Every Capsule release creates a GitHub Release tagged <code>vX.Y.Z</code>
+- Each release attaches <code>release.json</code> with AAR URL + SHA-256</p>
+<p><strong>Phase 1</strong>: Use <code>CAPSULE_SHELL_OVERRIDE_PATH</code> to point the CLI at your locally built AAR — no registry needed.</p>
+</blockquote>
+<hr />
+<h2 id="docker-images-phase-8">Docker Images <em>(Phase 8)</em><a class="headerlink" href="#docker-images-phase-8" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Docker images (<code>ghcr.io/capsule/*</code>) are built and published in Phase 8 — Ecosystem / Go Online.
+See <code>docker.md</code> for planned images. Phase 1 builds run directly on Windows 11 + WSL2.</p>
+</blockquote>
+<hr />
+<h2 id="phase-1-done">Phase 1 — Done ✅<a class="headerlink" href="#phase-1-done" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>[x] capsule init my-app --template react-ts  →  scaffolds a valid project
+[x] capsule add android                       →  adds .capsule/android/ wrapper
+[x] capsule dev                               →  Vite starts, app loads in emulator
+[x] Edit src/App.tsx                          →  hot reload in &lt;50ms
+[x] capsule build android                     →  app-debug.apk exists
+[x] capsule run android                       →  APK installed on Samsung device
+[x] capsule build android --release           →  app-release.apk (signed with debug key)
+[x] @capsule/core geolocation API             →  GPS works on device/emulator
+[x] 6 native APIs (geolocation, camera, haptics, push, biometrics, alerts)
+[x] WebBridge — all 6 APIs work in browser dev mode
+[x] 36 TypeScript unit tests passing
+[x] 24 Kotlin unit tests passing
+</code></pre></div>
+<h2 id="phase-2-entry-criteria">Phase 2 — Entry Criteria ✅<a class="headerlink" href="#phase-2-entry-criteria" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>[x] All Phase 1 tests still green
+[x] capsule dev android works end-to-end on real device
+[x] capsule build android --release produces installable APK
+[x] WebBridge tested in browser (capsule dev without --android)
+</code></pre></div>
+<h2 id="phase-2-embedded-runtime">Phase 2 — Embedded Runtime<a class="headerlink" href="#phase-2-embedded-runtime" title="Permanent link">&para;</a></h2>
+<p>Key deliverables, in order:</p>
+<div class="highlight"><pre><span></span><code>Step 1: Interfaces + fakes ✅
+  [x] CapsuleServer interface + FakeCapsuleServer (neverStarts, startsAfter, crashesAfter)
+  [x] QuickJSEngine interface + FakeQuickJSEngine (evaluationFails, slowStart, callReturns)
+  [x] SplashController interface + FakeSplashController
+  [x] AppNavigator interface + FakeAppNavigator
+  [x] CapsuleRuntime wired with fakes — 15 unit tests passing (pure JVM, no device)
+
+Step 2: Embedded server for static assets ✅ (NanoHTTPD; CivetWeb since 2026-10-24)
+  [x] CivetwebServer implements CapsuleServer (originally NanoHttpdServer)
+  [x] Replaces file:///android_asset/www/index.html with http://127.0.0.1:{port}/
+  [x] Port = deterministic hash from appId, range 49152–65535, baked into MainActivity
+
+Step 3: Splash + readiness ✅
+  [x] WebViewSplashController implements SplashController
+  [x] CapsuleRuntime.start(): show splash → wait for server bind → navigate WebView
+  [x] Timeout (3s default) → error screen with retry button
+
+Step 4: QuickJS JNI embedding ✅
+  [x] QuickJS-ng v0.15.1 C library in AAR via JNI (CMakeLists.txt, single-thread dispatcher)
+  [x] QuickJSEngine.evaluate(bundle) and call(fn, args) working
+  [x] QuickJSException sealed class (EvaluateError, CallError)
+  [x] 4 instrumented tests passing
+
+Step 5: QuickJSBridge ✅
+  [x] QuickJSBridge interface + QuickJSBridgeImpl (AssetManager-backed) + FakeQuickJSBridge
+  [x] @capsule/core router runs inside QuickJS — dispatch() returns plain object (not string)
+  [x] routes.js bundled by esbuild IIFE into assets/www/ on capsule build
+  [x] CapsuleBridge tries JS dispatch first, falls through to Kotlin handlers if null
+  [x] 30 unit tests + 8 instrumented tests passing
+  [x] Validated end-to-end on emulator (release build): all Kotlin handlers working,
+      QuickJS bridge initialises cleanly, METHOD_NOT_FOUND for unregistered methods
+
+Step 6: File-based routing + embedded-server /api/* routing ✅
+  Sub-task A — JSON-RPC file discovery (bridge handler overrides):
+  [x] src/routes/&lt;method&gt;.ts → export default handler(params) → auto-registered via addRoute()
+  [x] CLI discovers files at build time, generates addRoute() calls bundled into server bundle
+  [x] Example: src/routes/device.getInfo.ts intercepts device.getInfo before Kotlin
+
+  Sub-task B — HTTP API routing (new /api/* endpoints):
+  [x] src/server/routes/*.ts → export GET/POST/PUT/DELETE(req: CapsuleHttpRequest)
+  [x] RequestRouter routes /api/* → QuickJSEngine.call("handleHttpRequest", ...) → response
+  [x] CLI discovers HTTP route files, generates addHttpRoute() calls in server bundle
+  [x] @capsule/core/routes exports CapsuleHttpRequest, CapsuleHttpResponse, addHttpRoute, handleHttpRequest
+  [ ] Dynamic segments: users/[id].ts → /api/users/:id (deferred — exact paths only for now)
+
+  Bundle path:
+  [x] assets/server/bundle.js (server code never served as a static asset)
+  [x] QuickJSBridgeImpl loads from assets/server/bundle.js; the server only serves assets/www/
+
+  Dev-mode routes (resolved during Group 0 testing, 2026-06-12):
+  [x] Release: routes run in QuickJS. Dev on-device: CapsuleBridge forwards unmatched
+      JSON-RPC methods to the dev sidecar (POST devServerUrl/_capsule/rpc via adb reverse),
+      so src/routes/*.ts work under `capsule dev android` too (previously METHOD_NOT_FOUND).
+
+Group 0 end-to-end testing ✅ (2026-06-12)
+  [x] All 7 from-template examples: browser-dev · emulator-dev · emulator-release
+  [ ] Group 1 (custom React) + Group 2 (non-Vite proxy) + device-release — pending
+
+Step 7: codeSync crash loop + rollback ✅ (2026-06-15)
+  [x] BundleStore (two-slot active/previous) + FileBundleStore — atomic install/swap of a bundle
+      dir (www/ + server/bundle.js), validates www/index.html; rollback restores previous
+  [x] CrashLoopGuard — "3 crashes in 60s" detection over a persistent CrashLog (PrefsCrashLog =
+      SharedPreferences, survives process death) + injectable Clock
+  [x] CapsuleRuntime: on start() rolls back to previous known-good bundle when crash-looping,
+      records each launch attempt, notifyAppReady() (WebView onPageFinished) confirms healthy boot
+  [x] Wired into CapsuleActivity (prod path): PrefsCrashLog + FileBundleStore(filesDir/bundles)
+  [x] 25 new pure-JVM unit tests (CrashLoopGuard 9 · FileBundleStore 10 · CapsuleRuntime rollback 6),
+      incl. the FakeCapsuleServer.CrashesAfter(0) "three crashes → fourth launch rolls back" path.
+      Full suite: 71 JVM unit tests green.
+  [ ] OTA download/install (capsule codesync publish + on-device fetch) — deferred to Phase 6 (the
+      crash-loop + rollback mechanism is in place; only the network delivery of bundles remains)
+</code></pre></div>
+<h2 id="template-extensibility-phase-1-init-phase-8-ecosystem-2026-06-12">Template extensibility (Phase 1 init + Phase 8 ecosystem) ✅ 2026-06-12<a class="headerlink" href="#template-extensibility-phase-1-init-phase-8-ecosystem-2026-06-12" title="Permanent link">&para;</a></h2>
+<p>The CLI's <code>init</code> resolves templates from a <strong>single templates repo</strong> (subdirs per template), driven by a <code>manifest.json</code> so adding a template needs no CLI release:</p>
+<div class="highlight"><pre><span></span><code>capsule init my-app --template react-ts                  # official (manifest → templates-repo subdir)
+capsule init my-app --template gh:acme/capsule-tpl#v2    # any giget source (GitHub/GitLab/Bitbucket/tarball)
+capsule init my-app --template ./my-local-template       # local path
+</code></pre></div>
+<ul>
+<li>Dev: reads local <code>templates/manifest.json</code> + copies the subdir.</li>
+<li>Prod: fetches the manifest from the templates repo (raw URL), giget pulls <code>gh:&lt;repo&gt;/&lt;dir&gt;#&lt;branch&gt;</code>; bundled list is the offline fallback.</li>
+<li>Custom templates: any source that isn't an official name is passed straight to giget (or copied if a local path). The CLI won't clobber a <code>capsule.config.ts</code> a custom template ships.</li>
+</ul>
+<p><strong>Pending (revisit at GitHub publish):</strong> confirm the published templates repo name/org (<code>TEMPLATES_REPO</code> in <code>init.ts</code>); company-registry config (<code>~/.capsulerc</code> adding internal templates to the picker); an "Authoring a template" doc + template contract.</p>
+<h2 id="design-decisions-2026-06-12">Design decisions (2026-06-12)<a class="headerlink" href="#design-decisions-2026-06-12" title="Permanent link">&para;</a></h2>
+<h3 id="compatibility-what-capsule-guarantees-and-for-how-long">Compatibility — what Capsule guarantees, and for how long<a class="headerlink" href="#compatibility-what-capsule-guarantees-and-for-how-long" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The <strong>frontend framework runs in the WebView</strong>, NOT in QuickJS. QuickJS only runs server routes
+  (<code>src/routes</code>, <code>src/server/routes</code>) + <code>@capsule/core</code>'s router. → <strong>Any frontend framework, any
+  version, is fine</strong>; the only ceiling is the WebView/browser baseline (tied to <code>minSdk</code> / OS).</li>
+<li>The <strong>one real compatibility surface is QuickJS</strong> — server-route code must stay within QuickJS-ng's
+  supported JS feature/API set (no Node/DOM globals).</li>
+<li><strong>The contract to freeze (not the framework):</strong> JSON-RPC bridge protocol + <code>@capsule/core</code> API +
+  pinned QuickJS-ng version. Semver + a protocol-version field.</li>
+<li><strong>Guarantees:</strong> <code>capsule.lock</code> pins the shell per project (reproducible); publish a compat matrix
+  (CLI ⇄ shell ⇄ core ⇄ QuickJS ⇄ min WebView); CI builds every template AND runs each route bundle
+  in real QuickJS per release. Framework version is documented as out-of-scope for Capsule compat.</li>
+</ul>
+<h3 id="cli-distribution-self-update">CLI distribution &amp; self-update<a class="headerlink" href="#cli-distribution-self-update" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Prefer project-local CLI</strong> (<code>@capsule/cli</code> devDependency, run via <code>pnpm capsule</code>) → version pinned
+  per project, reproducible. Global install stays for <code>capsule init</code>.</li>
+<li><strong>No silent auto-update.</strong> Add an <strong>update-notifier</strong> ("update available → npm i -g @capsule/cli@x").</li>
+<li><code>capsule upgrade</code> bumps <code>@capsule/core</code> + shell in a project and rewrites <code>capsule.lock</code> (explicit).
+  <code>capsule doctor</code> reports CLI/core/shell/QuickJS versions + compat.</li>
+</ul>
+<h3 id="adding-capsule-to-an-existing-web-project-cli-assisted-planned">Adding Capsule to an existing web project — CLI-assisted (planned)<a class="headerlink" href="#adding-capsule-to-an-existing-web-project-cli-assisted-planned" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>capsule dev/build</code> already wrap any bundler (<code>web.buildCommand</code>/<code>devCommand</code> + transparent proxy).</li>
+<li>A <code>capsule init</code> in an existing dir (or <code>capsule integrate</code>): detect bundler/framework, skip UI
+  scaffold, generate <code>capsule.config.ts</code> (+ build/dev commands), add <code>@capsule/core</code>, run
+  <code>capsule add android</code>. Developer only owns: static build output dir + dev/build commands.</li>
+</ul>
+<h2 id="next-steps-re-sequenced-2026-06-15-revised">Next steps (re-sequenced 2026-06-15, revised)<a class="headerlink" href="#next-steps-re-sequenced-2026-06-15-revised" title="Permanent link">&para;</a></h2>
+<p>Capability before monetization: <strong>native APIs → iOS → OTA cloud → migration on-ramp.</strong> The business
+strategy (<a href="../business/business-model/">business/business-model.md</a>) holds but is sequenced
+after the platform is capable and cross-platform.</p>
+<ol>
+<li><strong>Phase 3 — Native APIs Expansion</strong> (next). Each via the proven interface + provider + Fake pattern,
+   pure-JVM testable. (Realigns with <a href="../../decisions/log/">../decisions/log.md</a>
+   which already scopes camera/filesystem/push/db here.) <strong>Ordering — re-sequenced 2026-06-15 to
+   foundational-first</strong> (so the table-stakes APIs that later work leans on land before the specialized
+   ones):</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>API</th>
+<th>Why here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅</td>
+<td><strong>Camera</strong></td>
+<td>done — capturePhoto / pickImage</td>
+</tr>
+<tr>
+<td>✅</td>
+<td><strong>Filesystem</strong></td>
+<td>done — read/write/append/delete/mkdir/rmdir/readdir/stat/getUri/downloadFile; <code>data</code>/<code>cache</code>/<code>documents</code> roots kept outside <code>filesDir/bundles</code>; localStorage dev fallback; INTERNET auto-declared for downloads</td>
+</tr>
+<tr>
+<td>✅</td>
+<td><strong>App lifecycle + deep links</strong></td>
+<td>done — <code>app.getState</code>/<code>onStateChange</code>/<code>onResume</code>/<code>onPause</code> (ProcessLifecycleOwner — true app-level fg/bg, ignores in-app activity transitions) + <code>app.getLaunchUrl</code> (cold-start, consume-once) / <code>onUrlOpen</code> (warm, via <code>onNewIntent</code> + <code>launchMode=singleTask</code>); strict cold/warm split; CLI generates deep-link intent-filters from <code>deepLinks</code> config; introduced the <strong>CapabilityRegistry</strong> (<code>capsule.getCapabilities</code>, seeds app/camera/filesystem) for OTA gating; verified on device</td>
+</tr>
+<tr>
+<td>✅</td>
+<td><strong>Network status</strong></td>
+<td>done — <code>network.getStatus()</code> + <code>onStatusChange()</code> (no replay-on-subscribe, mirrors <code>app.onStateChange</code>); <code>ConnectionType = wifi\|cellular\|ethernet\|none\|unknown</code> with the invariant <code>none ⇔ !connected</code>; Android <code>ConnectivityManager.registerDefaultNetworkCallback</code> (NetworkRequest fallback &lt; API 24) behind a pure-JVM <code>NetworkProvider</code> seam + de-dup <code>NetworkStatusController</code>; WebBridge maps <code>navigator.onLine</code> + online/offline events; CLI auto-declares <code>ACCESS_NETWORK_STATE</code>; registered in CapabilityRegistry (<code>network</code>=1). Introduced the <strong>shared <code>BridgeEventEmitter</code></strong> (extracted from the app-lifecycle <code>AppEventEmitter</code>) reused by both event-driven controllers. OTA/push lean on it. <em>(device smoke + instrumented test pending — see below)</em></td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Push (FCM/APNs)</strong></td>
+<td>needs App lifecycle + deep links (✅) to route notification taps</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Local notifications</strong></td>
+<td>pairs with push (scheduled, no server)</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Biometrics</strong></td>
+<td>auth gate</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Status bar · Keyboard · Share</strong></td>
+<td>UI/UX table-stakes group</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>SQLite <code>db</code></strong> — ✅ built 2026-10-24 (<a href="../../guide/database/">database.md</a>)</td>
+<td>structured storage</td>
+</tr>
+<tr>
+<td>8.5</td>
+<td><strong><code>ai</code> inference (Tier-1 spike)</strong> — ✅ built 2026-10-24 (<a href="../../guide/ai/">ai.md</a>)</td>
+<td>OS-native wrap (Gemini Nano/AICore; Apple Foundation Models in Phase 4) via the same interface+provider+Fake pattern — proves the bridge surface cheaply. <strong>Tier-2 bundled (Cactus/llama.cpp) + Tier-3 cloud + the agent layer land in Phase 6.</strong> See <a href="../../decisions/0003-ai-and-agents/">adr-003</a>. Every Phase-3 API above is, by then, a free agent tool.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>NFC · Bluetooth</strong></td>
+<td>specialized hardware</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Background jobs</strong></td>
+<td>WorkManager / BGTaskScheduler</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>Telecom · SMS</strong></td>
+<td>call / messaging (later)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Two cross-cutting constraints on every Phase-3 API</strong> (driven by the Phase-5 OTA model, cheap now /
+   expensive to retrofit): (a) <strong>persist user data <em>outside</em> the OTA-swappable bundle dirs</strong> (<code>www/</code> +
+   <code>server/bundle.js</code>) so an OTA bundle swap never wipes it — camera already writes to
+   <code>cacheDir/capsule/camera</code>; (b) <strong>carry a native-capability version</strong> so the Phase-5 OTA server can
+   gate a JS update against the installed shell (avoid pushed JS calling a native API the shell predates).</p>
+<p><strong>Parked (revisit post-iOS):</strong> <em>install/manage other apps</em> (an "app store" capability — download
+   <code>.apk</code> + <code>PackageInstaller</code>, or device-owner for silent/kiosk installs). <strong>Deliberately not scheduled:
+   it's Android-only — iOS has no app-install API</strong>, so it breaks the cross-platform seam. If pursued, it
+   would be an explicit opt-in <strong>Android-only</strong> module built on Filesystem, kept off the core API surface.
+2. <strong>Phase 4 — iOS bring-up.</strong> Interface-first Swift/QuickJS port mirroring the Android runtime; build +
+   Simulator tests on GitHub Actions macOS (free — the repo is public; <code>ios-macos</code> job already runs <code>swift test</code>). No Mac purchase
+   required yet. Plan: <a href="../../contributing/ios-bring-up/">ios-bring-up.md</a>.
+3. <strong>Phase 5 — Capsule UI</strong> (native-look component layer). <code>capsule add-ui</code> (shipped) + shared
+   iOS/Material Tailwind preset + per-framework behaviour — Capsule's own "Konsta". Slotted <em>after</em> iOS so
+   its presets target a real WKWebView shell and native <em>look</em> is proven on both platforms; pure
+   frontend/CSS, touches no native APIs. See <a href="../../decisions/0002-capsule-ui/">adr-002</a>.
+4. <strong>Phase 6 — Server Code Push / OTA cloud.</strong> OTA network delivery (<code>capsule codesync publish</code> + the
+   deferred half of Step 7) + portal + canary/auto-rollback + multi-tenant + billing. Infra on
+   Hetzner + R2/CDN (<a href="../infrastructure/">infrastructure.md</a>). Launch → repos public → free macOS CI.
+   <strong>Pulled ahead 2026-09:</strong> the local file-based server half is done — <code>packages/codesync-api</code>
+   (Fastify, E2E-verified: publish/rollback/pause/resume, ETag, key auth); remaining: the CLI
+   <code>codesync publish</code> command and the on-device fetch client in <code>packages/core</code>.
+   <strong>Pairs with the AI/agents workstream</strong> (<a href="../../decisions/0003-ai-and-agents/">adr-003</a>): the
+   Tier-2 on-device engine (Cactus/llama.cpp), Tier-3 cloud inference (a metered billing surface), the
+   thin agent layer (<strong>native bridge methods = agent tools</strong>, MCP-style), and <strong>OTA-updatable agent
+   logic</strong> all land here — the agent definitions ride Server Code Push, protected by the canary +
+   auto-rollback built in Step 7. Differentiator Ionic can't match (theirs is an experimental OS-model
+   shim; see adr-003's device-coverage cliff).
+5. <strong>Phase 7 — Migration on-ramp</strong> (can overlap Phase 6 as GTM): <code>capsule migrate ionic</code> +
+   <code>@capsule/compat-capacitor</code> + plugin importer. Then Phase 8 ecosystem / Phase 9 DX.</p>
+<p><strong>Phase-2 regression — fix at the next code session (user-visible):</strong>
+<strong>S1 — embedded-server bind race — ✅ resolved 2026-10-24</strong> (found 2026-10-15): NanoHTTPD 2.3.1 returned
+from <code>start()</code> before <code>bind()</code>. Fixed by replacing the server with CivetWeb on both platforms —
+<code>mg_start2</code> returns only after bind + listen, so readiness holds by construction. Pinned by the
+instrumented <code>CivetwebServerTest</code> and the Swift <code>CivetwebServerTests</code>. Still to run: SR-4's manual
+cold-start check on emulator + device. See <a href="../incidents/2026-10-embedded-server-startup/">2026-10-embedded-server-startup.md</a> → Resolution.
+<strong>S2 — the embedded server serves only <code>assets/www/</code></strong> (still open with CivetWeb); OTA-installed bundles
+(<code>filesDir/bundles/active</code>) are never served — on-device CodeSync updates cannot apply until
+the server reads the active bundle through <code>BundleStore</code> (related finding in the same doc).</p>
+<p><strong>Carried-over small items</strong> (not blocking): <strong>Network status — instrumented <code>AndroidNetworkProviderTest</code> +
+device smoke (NetworkScreen live toggle) not yet run</strong> (offline tiers all green: core 112 vitest, CLI 9
+vitest, Kotlin JVM unit suite — incl. <code>NetworkStatusControllerTest</code> + <code>NetworkHandlerTest</code> + the migrated
+shared-emitter app tests); finish test matrix (Group 0/1 emulator-release + device-release, Group 2
+emulator/device); exclude <code>assets/testing/**</code> from CLI vitest sweep; Angular component test; <code>--css
+tailwind</code>; CLI update-notifier; confirm <code>TEMPLATES_REPO</code> at publish; <strong>soften <code>BundleStore</code>'s
+<code>java.io.File</code> signature (<code>activeDir(): File?</code>, <code>install(File)</code>) to a neutral path/URI type so it
+becomes a literal cross-platform contract — flagged by the 2026-06-26 iOS contract-readiness audit
+(<a href="../../contributing/ios-bring-up/">ios-bring-up.md</a>); every other interface is already platform-neutral;
+CI docs job installs plain <code>mkdocs</code> but <code>mkdocs.yml</code> requires the material theme
+(<code>pip install mkdocs mkdocs-material</code> in the workflow fixes it).</strong></p>
+<p><strong>First dependency/tooling sweep pending</strong> — run <a href="../../contributing/upkeep/">upkeep.md</a> once (baseline is
+captured, no live check done yet). Good to do at the Push #4 kick-off. Known reconciliations it
+flags: library catalog ↔ CLI <code>sync.ts</code> lockstep, <code>minSdk</code> 21 (lib) vs 26 (init default), and the
+template <code>@capsule/core</code> placeholder (fixed 2026-10-24: <code>^0.1.0</code>).</p>
+<p>See <code>0001-embedded-runtime.md</code> for the full architecture rationale.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024-2026 Capsule Framework Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.highlight", "search.share", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

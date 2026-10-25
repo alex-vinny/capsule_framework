@@ -1,0 +1,5306 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alex-vinny.github.io/capsule_framework/project/history/">
+      
+      
+        <link rel="prev" href="../state/">
+      
+      
+        <link rel="next" href="../known-issues/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Build history - Capsule Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#capsule-framework-build-history-append-only-log" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Capsule Framework" class="md-header__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Capsule Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Build history
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guide/installation/" class="md-tabs__link">
+          
+  
+  
+  Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/cli/" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/architecture/" class="md-tabs__link">
+          
+  
+  
+  Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../decisions/" class="md-tabs__link">
+          
+  
+  
+  Decisions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../contributing/" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../roadmap/" class="md-tabs__link">
+          
+  
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Capsule Framework" class="md-nav__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Capsule Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/hello-world/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hello World
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/push-notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Push Notifications
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/alerts-styling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alerts Styling
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/mobile-css-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile CSS Reset
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/publishing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publishing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/ota-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Over-the-air Updates
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/core-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/lockfile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lockfile
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generated
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generated
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/docs-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Principles
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/capsule-vs-ionic-capacitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    vs Ionic/Capacitor
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/extensibility-and-positioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extensibility & Positioning
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/ionic-framework7-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ionic Framework 7 Migration
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Primers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/kotlin-for-csharp-devs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kotlin for C# Devs
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/jni-and-cpp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JNI & C
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/civetweb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CivetWeb
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/quickjs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QuickJS
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decisions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0001-embedded-runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0001 Embedded Runtime
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0002-capsule-ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0002 Capsule UI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0003-ai-and-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0003 AI & Agents
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0004-web-serving-transport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0004 Web Serving Transport
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/codesync-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CodeSync Internals
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/plugin-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/template-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Template Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/ios-bring-up/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iOS Bring-up
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/platform-parity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android/iOS Parity
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/upkeep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_14" id="__nav_6_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Workflows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/add-native-api/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add Native API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/author-plugin/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Author Plugin
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/upkeep-sweep/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep Sweep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#powershell-profile-fixes-persisted-to-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PowerShell Profile fixes (persisted to $PROFILE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-variable-set-per-session-not-persisted-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment variable (set per session, not persisted yet)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monorepo-location" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monorepo location
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-was-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What was built
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What was built">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-foundation-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1 — Foundation ✅ Complete
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-embedded-runtime-android-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2 — Embedded Runtime (Android) ✅ Complete
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 2 — Embedded Runtime (Android) ✅ Complete">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-interfaces-fakes-capsuleruntime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1 — Interfaces + fakes + CapsuleRuntime ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-nanohttpd-static-asset-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2 — NanoHTTPD static asset server ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-splash-readiness-error-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — Splash + readiness + error screen ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-quickjs-jni-embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4 — QuickJS JNI embedding ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-quickjsbridge-capsulecore-routes-in-quickjs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5 — QuickJSBridge: @capsule/core routes in QuickJS ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-file-based-routing-nanohttpd-api-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6 — File-based routing + NanoHTTPD /api/* routing ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kotlin-unit-tests-current-count" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kotlin unit tests — current count
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current status
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Current status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#session-2026-06-16-phase-3-1-filesystem-api-android" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Session 2026-06-16 — Phase 3 #1: Filesystem API (Android)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#session-2026-06-15-group-2-browser-dev-phase-2-step-7-codesync-crash-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Session 2026-06-15 — Group 2 browser-dev + Phase 2 Step 7 (CodeSync crash-loop)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-testing-2026-06-11-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase — Testing (2026-06-11 session)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#working-as-of-last-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Working (as of last build)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#completion-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Completion checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#session-housekeeping-2026-06-06" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Session housekeeping (2026-06-06)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Session housekeeping (2026-06-06)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quickjs-ng-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        quickjs-ng maintenance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-patterns-in-capsule-android" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design patterns in capsule-android
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#browser-quickjs-testing-open-question" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Browser QuickJS testing — open question
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-implementation-2026-06-06" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B implementation (2026-06-06)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-phase-2-step-6-file-based-routing-nanohttpd-api-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next: Phase 2 Step 6 — File-based routing + NanoHTTPD /api/* routing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Next: Phase 2 Step 6 — File-based routing + NanoHTTPD /api/* routing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sub-task-a-json-rpc-file-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sub-task A — JSON-RPC file discovery
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sub-task-b-http-api-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sub-task B — HTTP API routing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bundle-path-correction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bundle path correction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dev-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dev mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automated-test-harness-delivered-2026-06-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automated test harness (delivered 2026-06-12)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#session-resume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Session resume
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2026-06-15-strategy-session-business-model-ios-sequencing-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026-06-15 — Strategy session (business model + iOS sequencing + migration)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2026-09-30-codesync-api-delivery-cli-cross-platform-public-repo-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026-09-30 — CodeSync API delivery + CLI cross-platform + public-repo cleanup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2026-09-30-earlier-session-log-unverified" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026-09-30 — earlier session log (unverified)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2026-09-30 — earlier session log (unverified)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2026-09-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026-09-30
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2026-09-30-continued" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026-09-30 (continued)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2026-09-30-continued_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026-09-30 (continued)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2026-09-30-continued_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026-09-30 (continued)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2026-09-30-continued_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026-09-30 (continued)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2026-10-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026-10-15
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2026-10-15-continued" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026-10-15 (continued)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2026-10-19-bundlestore-contract-fix-ios-tier-4-reference-drafts-capsule-ui-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026-10-19 — BundleStore contract fix · iOS Tier-4 reference drafts · Capsule UI foundation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2026-10-24-civetweb-server-sqlite-db-ai-tier-1-public-release-prep-docs-by-reader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026-10-24 — CivetWeb server · SQLite db · ai Tier 1 · public-release prep · docs by reader
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../known-issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known Issues
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_6" id="__nav_7_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Incidents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Incidents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../incidents/2026-10-embedded-server-startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-10 Embedded Server Startup
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_7" id="__nav_7_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../research/2026-06-24-planning-brainstorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-24 Planning Brainstorm
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../research/chatgpt-first-impressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT First Impressions
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../research/chatgpt-plugin-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT Plugin Compatibility
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_8" id="__nav_7_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Business
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../business/business-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Model
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../business/pricing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pricing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../business/ota-policy-and-liability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Policy & Liability
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_9" id="__nav_7_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Server Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Server Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server-design/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server-design/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server-design/file-storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Storage
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server-design/workers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workers
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="capsule-framework-build-history-append-only-log">Capsule Framework — Build History (append-only log)<a class="headerlink" href="#capsule-framework-build-history-append-only-log" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Chronological record of build sessions. <strong>This is history, not current state.</strong> For
+"where are we now / how to resume" see <code>STATE.md</code>; for authoritative status see
+<code>Build/000-Roadmap.md</code>. Resume snippets and tool paths in older entries are historical
+(some are stale) — resume via <code>STATE.md</code> / the <code>../scripts/</code> repo, not by copying them.
+Append new sessions at the end; don't rewrite past entries.</p>
+</blockquote>
+<hr />
+<h2 id="environment">Environment<a class="headerlink" href="#environment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Version</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS</td>
+<td>Windows 11 Pro</td>
+<td>Primary machine</td>
+</tr>
+<tr>
+<td>Shell</td>
+<td>PowerShell</td>
+<td>All commands run here</td>
+</tr>
+<tr>
+<td>WSL2</td>
+<td>Ubuntu 22.04</td>
+<td>Available, not used yet</td>
+</tr>
+<tr>
+<td>Node.js</td>
+<td>v22.22.3</td>
+<td>Managed via nvm-windows</td>
+</tr>
+<tr>
+<td>pnpm</td>
+<td>9.15.9</td>
+<td>Global install via npm</td>
+</tr>
+<tr>
+<td>git</td>
+<td>2.33.1 (Windows)</td>
+<td></td>
+</tr>
+<tr>
+<td>Java</td>
+<td>17.0.19 (Temurin)</td>
+<td>Managed via jabba</td>
+</tr>
+<tr>
+<td>Gradle</td>
+<td>8.0.2 (system)</td>
+<td>At <gradle-home>\</td>
+</tr>
+<tr>
+<td>Android SDK</td>
+<td>platforms 34+35, build-tools 35.0.0</td>
+<td>At <android-sdk>\</td>
+</tr>
+<tr>
+<td>adb</td>
+<td>1.0.41</td>
+<td><android-sdk>\platform-tools\</td>
+</tr>
+<tr>
+<td>sdkmanager</td>
+<td>20.0 (new cmdline-tools)</td>
+<td><android-sdk>\cmdline-tools\latest\bin\</td>
+</tr>
+<tr>
+<td>Physical device</td>
+<td>Samsung (USB)</td>
+<td>USB debugging enabled, authorized</td>
+</tr>
+</tbody>
+</table>
+<h3 id="powershell-profile-fixes-persisted-to-profile">PowerShell Profile fixes (persisted to $PROFILE)<a class="headerlink" href="#powershell-profile-fixes-persisted-to-profile" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Java — jabba symlink overridden by system PATH</span>
+<span class="nv">$env:JAVA_HOME</span> <span class="p">=</span> <span class="s2">"&lt;jdk-17&gt;"</span>
+<span class="nv">$env:PATH</span> <span class="p">=</span> <span class="s2">"$env:JAVA_HOME\bin;"</span> <span class="p">+</span> <span class="nv">$env:PATH</span>
+
+<span class="c"># Android cmdline-tools — new sdkmanager before old tools\bin</span>
+<span class="nv">$env:PATH</span> <span class="p">=</span> <span class="s2">"&lt;android-sdk&gt;\cmdline-tools\latest\bin;"</span> <span class="p">+</span> <span class="nv">$env:PATH</span>
+</code></pre></div>
+<h3 id="environment-variable-set-per-session-not-persisted-yet">Environment variable (set per session, not persisted yet)<a class="headerlink" href="#environment-variable-set-per-session-not-persisted-yet" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nv">$env:CAPSULE_SHELL_OVERRIDE_PATH</span> <span class="p">=</span> <span class="s2">"&lt;repo&gt;\packages\capsule-android\capsule\build\outputs\aar\capsule-debug.aar"</span>
+</code></pre></div>
+<blockquote>
+<p><strong>TODO</strong>: Add <code>CAPSULE_SHELL_OVERRIDE_PATH</code> to <code>$PROFILE</code> so it persists across sessions.</p>
+</blockquote>
+<hr />
+<h2 id="monorepo-location">Monorepo location<a class="headerlink" href="#monorepo-location" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>&lt;workspace&gt;\
+  capsule\          ← monorepo (git repo, the framework)
+  docs\             ← spec docs (Architecture/, Build/, Server/) — NOT inside the repo
+</code></pre></div>
+<hr />
+<h2 id="what-was-built">What was built<a class="headerlink" href="#what-was-built" title="Permanent link">&para;</a></h2>
+<h3 id="phase-1-foundation-complete">Phase 1 — Foundation ✅ Complete<a class="headerlink" href="#phase-1-foundation-complete" title="Permanent link">&para;</a></h3>
+<ul>
+<li>pnpm workspace + Turbo pipeline + tsconfig.base.json + ESLint + Prettier</li>
+<li><code>@capsule/core</code>: JSON-RPC 2.0 bridge, geolocation, device, haptics, clipboard, storage, alerts APIs — Bridge interface + module classes with injectable bridge + FakeBridge test double — 36 unit tests passing</li>
+<li><code>@capsule/cli</code>: all Phase 1 commands (<code>init</code>, <code>add</code>, <code>sync</code>, <code>dev</code>, <code>build</code>, <code>run</code>, <code>doctor</code>) + <code>capsule sync --frozen-lockfile</code> (SHA-256 lock file)</li>
+<li><code>capsule-android</code> Kotlin AAR — layered architecture, @Serializable models, BridgeError sealed class</li>
+<li>Handlers (all with pure JVM unit tests + fakes): geolocation, device.getInfo, haptics.vibrate, clipboard.read/write, storage.get/set/remove/clear/keys, alerts.show</li>
+<li><code>CapsuleBridge</code> takes <code>List&lt;BridgeHandler&gt;</code> — stable constructor, add handlers via <code>buildHandlers()</code> in Activity</li>
+<li><code>gradlew.bat</code> full-path fix in CLI — <code>capsule build android</code> works correctly on Windows</li>
+<li>7 templates at <code>/templates/</code> (vanilla-js, vanilla-ts, react-ts, vue-ts, svelte-ts, angular-ts, jquery-bootstrap)</li>
+<li><code>capsule init</code> with giget integration — auto-detects local templates in dev vs GitHub in production</li>
+<li>13 examples: react-ts, react-ts-native, react-ts-tailwind, rollup-solid, rspack-lit, webpack-preact, + 7 <code>*-from-template</code> examples — all tested on real Samsung device</li>
+<li>Module override pattern proven: <code>ClipboardModule</code> subclass with injected bridge</li>
+</ul>
+<p><strong>Tested on real Samsung device:</strong> GPS, device info, haptics, clipboard, storage, alerts all confirmed working across all 13 example apps.</p>
+<hr />
+<h3 id="phase-2-embedded-runtime-android-complete">Phase 2 — Embedded Runtime (Android) ✅ Complete<a class="headerlink" href="#phase-2-embedded-runtime-android-complete" title="Permanent link">&para;</a></h3>
+<p><strong>Architecture decision:</strong> Replace <code>file://</code> + <code>WebViewAssetLoader</code> with embedded NanoHTTPD (Android) + QuickJS runtime.
+Full ADR at <code>docs/Architecture/adr-001-embedded-runtime.md</code>.</p>
+<h4 id="step-1-interfaces-fakes-capsuleruntime">Step 1 — Interfaces + fakes + CapsuleRuntime ✅<a class="headerlink" href="#step-1-interfaces-fakes-capsuleruntime" title="Permanent link">&para;</a></h4>
+<p>Files in <code>capsule/src/main/kotlin/dev/capsule/runtime/</code>:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CapsuleServer.kt</code></td>
+<td>interface: <code>port</code>, <code>start()</code>, <code>stop()</code></td>
+</tr>
+<tr>
+<td><code>QuickJSEngine.kt</code></td>
+<td>interface: <code>evaluate(bundle)</code>, <code>call(fn, args)</code></td>
+</tr>
+<tr>
+<td><code>SplashController.kt</code></td>
+<td>interface: <code>show()</code>, <code>hide()</code></td>
+</tr>
+<tr>
+<td><code>AppNavigator.kt</code></td>
+<td>interface: <code>navigateTo(url)</code></td>
+</tr>
+<tr>
+<td><code>CapsuleRuntime.kt</code></td>
+<td>coordinator: splash → server.start() → navigate → splash.hide() + timeout</td>
+</tr>
+<tr>
+<td><code>PortUtils.kt</code></td>
+<td><code>portForAppId(appId)</code> — deterministic hash, range 49152–65535</td>
+</tr>
+</tbody>
+</table>
+<p>Fakes in <code>src/test/kotlin/dev/capsule/fakes/</code>:
+<code>FakeCapsuleServer</code> (behaviors: normal, NeverStarts, StartsAfter, CrashesAfter), <code>FakeQuickJSEngine</code>, <code>FakeSplashController</code>, <code>FakeAppNavigator</code></p>
+<p>13 unit tests in <code>CapsuleRuntimeTest</code>, 2 in <code>PortUtilsTest</code> — all pure JVM, no Android runtime.</p>
+<h4 id="step-2-nanohttpd-static-asset-server">Step 2 — NanoHTTPD static asset server ✅<a class="headerlink" href="#step-2-nanohttpd-static-asset-server" title="Permanent link">&para;</a></h4>
+<p><code>NanoHttpdServer.kt</code> — serves <code>assets/www/</code> at <code>http://127.0.0.1:{port}/</code>. MIME type via NanoHTTPD helper. 404 on missing paths.</p>
+<h4 id="step-3-splash-readiness-error-screen">Step 3 — Splash + readiness + error screen ✅<a class="headerlink" href="#step-3-splash-readiness-error-screen" title="Permanent link">&para;</a></h4>
+<p><code>WebViewSplashController.kt</code> — white overlay View on FrameLayout, show/hide.
+<code>WebViewNavigator.kt</code> — thin wrapper around <code>WebView.loadUrl()</code>.
+<code>NoOpQuickJSEngine.kt</code> — placeholder superseded by Step 4.</p>
+<p><code>CapsuleActivity</code> fully wired:</p>
+<ul>
+<li>Dev mode: loads <code>capsuleConfig.devServerUrl</code> directly</li>
+<li>Prod mode: <code>CapsuleRuntime(NanoHttpdServer, QuickJSEngineImpl, WebViewSplashController, WebViewNavigator)</code></li>
+<li>Timeout path: <code>showTimeoutError()</code> — white overlay with "App failed to start" + Retry button</li>
+</ul>
+<h4 id="step-4-quickjs-jni-embedding">Step 4 — QuickJS JNI embedding ✅<a class="headerlink" href="#step-4-quickjs-jni-embedding" title="Permanent link">&para;</a></h4>
+<p>Files in <code>capsule/src/main/cpp/</code>:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CMakeLists.txt</code></td>
+<td>Builds <code>quickjs</code> static lib + <code>capsule_quickjs_jni</code> shared lib</td>
+</tr>
+<tr>
+<td><code>quickjs_jni.c</code></td>
+<td>JNI wrapper: <code>nativeCreate/Destroy/Evaluate/Call</code></td>
+</tr>
+<tr>
+<td><code>quickjs/</code></td>
+<td>18 vendored quickjs-ng C/H source files</td>
+</tr>
+</tbody>
+</table>
+<p>Kotlin files in <code>runtime/</code>:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>QuickJSException.kt</code></td>
+<td>Sealed class: <code>EvaluateError</code>, <code>CallError</code></td>
+</tr>
+<tr>
+<td><code>QuickJSEngineImpl.kt</code></td>
+<td>JNI-backed engine — single-thread dispatcher (4 MB stack), runtime created on dispatcher thread to fix QuickJS stack-base check</td>
+</tr>
+</tbody>
+</table>
+<p>Key fix: <code>nativeCreate()</code> must run on the dispatcher thread (<code>runBlocking(dispatcher) { nativeCreate() }</code>) so QuickJS records the correct stack base for its overflow guard.</p>
+<p>Instrumented tests: 4 passing in <code>src/androidTest/…/QuickJSEngineImplTest.kt</code></p>
+<ul>
+<li><code>evaluateAndCall_add</code> — <code>add(1,2)</code> → <code>"3"</code> ✓</li>
+<li><code>call_returnsJsonObject</code> — <code>wrap(42)</code> → <code>{"value":42}</code> ✓</li>
+<li><code>evaluate_syntaxError_throwsEvaluateError</code> ✓</li>
+<li><code>call_unknownFunction_throwsCallError</code> ✓</li>
+</ul>
+<h4 id="step-5-quickjsbridge-capsulecore-routes-in-quickjs">Step 5 — QuickJSBridge: <code>@capsule/core</code> routes in QuickJS ✅<a class="headerlink" href="#step-5-quickjsbridge-capsulecore-routes-in-quickjs" title="Permanent link">&para;</a></h4>
+<p><strong>What was built:</strong></p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>packages/core/src/router.ts</code></td>
+<td><code>addRoute(method, handler)</code> + <code>dispatch(requestJson)</code> — returns <code>object \| null</code> (not string)</td>
+</tr>
+<tr>
+<td><code>packages/core/tsup.config.ts</code></td>
+<td>Added <code>src/router.ts</code> entry → produces <code>dist/router.{js,mjs,d.ts}</code></td>
+</tr>
+<tr>
+<td><code>packages/core/package.json</code></td>
+<td>Added <code>"./routes"</code> export pointing to <code>dist/router.*</code></td>
+</tr>
+<tr>
+<td><code>packages/cli/src/commands/build.ts</code></td>
+<td><code>bundleRoutes()</code> — esbuild IIFE bundle (<code>globalName: 'capsuleRouter'</code>) + appends <code>var dispatch = capsuleRouter.dispatch; var addRoute = capsuleRouter.addRoute;</code> to routes.js</td>
+</tr>
+<tr>
+<td><code>capsule-android/.../runtime/QuickJSBridge.kt</code></td>
+<td>Loads <code>assets/www/routes.js</code> into engine, routes JSON-RPC via <code>engine.call("dispatch", "[quoted]")</code></td>
+</tr>
+<tr>
+<td><code>capsule-android/.../CapsuleBridge.kt</code></td>
+<td>Tries QuickJS first (<code>quickJsBridge?.handleRequest(raw)</code>), falls through to Kotlin on null</td>
+</tr>
+<tr>
+<td><code>capsule-android/.../CapsuleActivity.kt</code></td>
+<td>Creates <code>QuickJSEngineImpl</code> + <code>QuickJSBridge</code>, wires both into <code>CapsuleRuntime</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Deleted:</strong> <code>handlers/quickjs/QuickJSPingHandler.kt</code> (superseded by real bridge)</p>
+<p><strong>Instrumented tests:</strong> 4 passing in <code>QuickJSBridgeTest.kt</code>
+- <code>handleRequest_unregisteredMethod_returnsNull</code> ✓
+- <code>handleRequest_registeredMethod_returnsJsonRpcResponse</code> ✓
+- <code>handleRequest_handlerThrows_returnsErrorResponse</code> ✓
+- <code>handleRequest_jsHandlerTakesPriorityOverKotlin</code> ✓</p>
+<p><strong>Critical QuickJS JNI constraints discovered (required for correctness):</strong></p>
+<ol>
+<li>
+<p><strong><code>globalThis</code> is the only reliable persistent namespace across <code>evaluate()</code> → <code>call()</code> boundaries.</strong> Top-level <code>var</code> bindings and function-object properties (e.g. <code>fn._routes = {}</code>) are NOT reliably visible inside functions called via <code>engine.call()</code>. The C helper uses <code>globalThis[fn]</code> — use <code>globalThis.__capsule_routes</code> for shared state.</p>
+</li>
+<li>
+<p><strong>JS functions called via <code>engine.call</code> must return plain objects, not JSON strings.</strong> The C <code>__capsule_call</code> helper wraps every return value in <code>JSON.stringify()</code>. If JS <code>dispatch()</code> returns a pre-serialised string (from <code>JSON.stringify({...})</code>), the result is double-encoded: <code>"{\"jsonrpc\":\"2.0\",...}"</code>. The correct pattern is to return the object directly: <code>return { jsonrpc: '2.0', id, result }</code>.</p>
+</li>
+<li>
+<p><code>router.ts</code>: <code>dispatch()</code> return type is <code>object | null</code> (was <code>string | null</code>)</p>
+</li>
+<li>Test <code>routerScript</code>: <code>return { jsonrpc: "2.0", id, result }</code> (not <code>JSON.stringify(...)</code>)</li>
+<li>Exception: production esbuild IIFE bundle is fine — all routes registered inside the IIFE before it returns, closures work correctly within a single <code>evaluate()</code> call.</li>
+</ol>
+<h4 id="step-6-file-based-routing-nanohttpd-api-routing">Step 6 — File-based routing + NanoHTTPD /api/* routing ✅<a class="headerlink" href="#step-6-file-based-routing-nanohttpd-api-routing" title="Permanent link">&para;</a></h4>
+<p><strong>What was built:</strong></p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>packages/core/src/router.ts</code></td>
+<td>Added <code>CapsuleHttpRequest</code>, <code>CapsuleHttpResponse</code>, <code>addHttpRoute(path, method, handler)</code>, <code>handleHttpRequest(method, path, body, headers)</code></td>
+</tr>
+<tr>
+<td><code>packages/cli/src/commands/build.ts</code></td>
+<td><code>bundleRoutes()</code> auto-discovers <code>src/routes/*.ts</code> (JSON-RPC) + <code>src/server/routes/**/*.ts</code> (HTTP); writes to <code>assets/server/bundle.js</code></td>
+</tr>
+<tr>
+<td><code>capsule-android/.../runtime/QuickJSBridge.kt</code></td>
+<td>Added <code>HttpRouteResponse</code> data class + <code>handleHttpRequest()</code> interface method</td>
+</tr>
+<tr>
+<td><code>capsule-android/.../runtime/QuickJSBridgeImpl.kt</code></td>
+<td>Implements <code>handleHttpRequest</code>; loads from <code>assets/server/bundle.js</code> (was <code>assets/www/routes.js</code>)</td>
+</tr>
+<tr>
+<td><code>capsule-android/.../runtime/NanoHttpdServer.kt</code></td>
+<td><code>/api/*</code> requests forwarded to <code>apiHandler</code> (suspend lambda → QuickJS); <code>assets/www/</code> serves client only; <code>assets/server/</code> never exposed</td>
+</tr>
+<tr>
+<td><code>capsule-android/.../CapsuleActivity.kt</code></td>
+<td>Passes <code>quickJsBridge::handleHttpRequest</code> as <code>NanoHttpdServer.apiHandler</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tests:</strong>
+- <code>packages/core/src/__tests__/router-http.test.ts</code> — 9 new TypeScript unit tests
+- <code>capsule-android/.../androidTest/.../QuickJSBridgeHttpTest.kt</code> — 5 new instrumented tests</p>
+<p><strong>Bundle path correction:</strong> <code>assets/www/routes.js</code> → <code>assets/server/bundle.js</code>. Server code is never served as a static file.</p>
+<p><strong><code>/* ... */</code> in KDoc bug:</strong> Kotlin's nested block comments mean <code>/api/*</code> inside a KDoc <code>/** */</code> block opens an unclosed nested comment. Fixed by using <code>//</code> line comments on the class instead.</p>
+<p><strong>Developer usage:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// src/server/routes/users.ts</span>
+<span class="k">import</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">CapsuleHttpRequest</span><span class="p">,</span><span class="w"> </span><span class="nx">CapsuleHttpResponse</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@capsule/core/routes'</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">GET</span><span class="p">(</span><span class="nx">req</span><span class="o">:</span><span class="w"> </span><span class="kt">CapsuleHttpRequest</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">CapsuleHttpResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="kt">200</span><span class="p">,</span><span class="w"> </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="kt">JSON.stringify</span><span class="p">({</span><span class="w"> </span><span class="nx">users</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="p">}),</span><span class="w"> </span><span class="nx">mimeType</span><span class="o">:</span><span class="w"> </span><span class="s1">'application/json'</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// src/routes/device.getInfo.ts  (JSON-RPC override)</span>
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">handler</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">platform</span><span class="o">:</span><span class="w"> </span><span class="s1">'android'</span><span class="p">,</span><span class="w"> </span><span class="nx">model</span><span class="o">:</span><span class="w"> </span><span class="s1">'Custom'</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<h2 id="kotlin-unit-tests-current-count">Kotlin unit tests — current count<a class="headerlink" href="#kotlin-unit-tests-current-count" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Suite</th>
+<th>Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GeolocationHandlerTest</td>
+<td>5</td>
+</tr>
+<tr>
+<td>DeviceInfoHandlerTest</td>
+<td>varies</td>
+</tr>
+<tr>
+<td>HapticsHandlerTest</td>
+<td>varies</td>
+</tr>
+<tr>
+<td>ClipboardHandlerTest</td>
+<td>varies</td>
+</tr>
+<tr>
+<td>StorageHandlerTest</td>
+<td>varies</td>
+</tr>
+<tr>
+<td>CapsuleWebViewClientTest</td>
+<td>varies</td>
+</tr>
+<tr>
+<td>CapsuleRuntimeTest</td>
+<td>21</td>
+</tr>
+<tr>
+<td>CrashLoopGuardTest</td>
+<td>9</td>
+</tr>
+<tr>
+<td>FileBundleStoreTest</td>
+<td>10</td>
+</tr>
+<tr>
+<td>PortUtilsTest</td>
+<td>2</td>
+</tr>
+<tr>
+<td>QuickJSEngineImplTest (instrumented)</td>
+<td>4</td>
+</tr>
+<tr>
+<td>QuickJSBridgeTest (instrumented)</td>
+<td>4</td>
+</tr>
+<tr>
+<td>QuickJSBridgeHttpTest (instrumented)</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>JVM unit total: 71 passing</strong> (<code>gradlew :capsule:testReleaseUnitTest</code>, 2026-06-15).
+TypeScript unit tests: <strong>60 passing</strong> (9 test files)</p>
+<hr />
+<h2 id="current-status">Current status<a class="headerlink" href="#current-status" title="Permanent link">&para;</a></h2>
+<h3 id="session-2026-06-16-phase-3-1-filesystem-api-android">Session 2026-06-16 — Phase 3 #1: Filesystem API (Android)<a class="headerlink" href="#session-2026-06-16-phase-3-1-filesystem-api-android" title="Permanent link">&para;</a></h3>
+<p><strong>Shipped the Filesystem native API</strong> (capsule <code>083b2cf</code>, examples <code>18103d8</code>) — the foundational
+Phase-3 capability, built with the proven interface + provider + Fake pattern across all three layers:</p>
+<ul>
+<li><strong><code>@capsule/core</code></strong> — <code>FilesystemModule</code>: <code>readFile / writeFile / appendFile / deleteFile / mkdir /
+  rmdir / readdir / stat / getUri / downloadFile</code>; <code>FilesystemDirectory</code> (<code>data</code>/<code>cache</code>/<code>documents</code>),
+  <code>FileEncoding</code> (<code>utf8</code>/<code>base64</code>), <code>FileEntry</code>/<code>FileStat</code>; <code>FilesystemMethods</code> shared with WebBridge.
+  New error codes 5xxx: <code>FILE_NOT_FOUND</code> / <code>FILE_IO_ERROR</code> / <code>PATH_NOT_ALLOWED</code>.</li>
+<li><strong>WebBridge dev fallback</strong> — localStorage-backed FS keyed by <code>(directory, path)</code>, base64-canonical
+  storage with unicode-safe utf8⇄base64, implicit-directory <code>readdir</code>, traversal guard. Methods are
+  <code>async</code> so the synchronous traversal check rejects (per the <code>Bridge.call</code> promise contract) rather
+  than throwing.</li>
+<li><strong><code>capsule-android</code></strong> — <code>FilesystemProvider</code> (iOS seam) + <code>AndroidFilesystemProvider</code> over
+  <code>java.io.File</code>, all I/O on <code>Dispatchers.IO</code>, canonical-path traversal guard, <code>downloadFile</code> via
+  <code>HttpURLConnection</code>; <code>filesystemHandlers(...)</code> wired into <code>CapsuleActivity</code>.</li>
+<li><strong><code>@capsule/cli</code></strong> — <code>sync.ts</code> now auto-declares <code>INTERNET</code> (normal permission, no dialog) for
+  <code>downloadFile</code>.</li>
+<li><strong>react-ts example</strong> — new <strong>Filesystem</strong> playground tab (directory toggle + write/append/read/stat/
+  delete + mkdir/readdir + download).</li>
+</ul>
+<p><strong>OTA-safety constraint (a) honored concretely:</strong> roots are <code>filesDir/capsule/fs/{data,documents}</code> and
+<code>cacheDir/capsule/fs/cache</code>, deliberately <em>not</em> under <code>filesDir/bundles</code> (the OTA swap target) — an
+instrumented test (<code>rootsLiveOutsideTheOtaBundleDir</code>) asserts the invariant.
+<strong>Constraint (b) native-capability version: deferred by design</strong> — no consumer until the Phase-5 OTA
+server exists; building the gate now would be speculative. Land it alongside Phase 5.</p>
+<p><strong>Full test sweep — all green (2026-06-16):</strong> TS unit <strong>91</strong> (<code>@capsule/core</code>; +12 filesystem module,
++9 web-bridge fs) · Kotlin JVM unit <strong>85</strong> (+14 <code>FilesystemHandlerTest</code>; <code>testReleaseUnitTest</code> BUILD
+SUCCESSFUL) · Android instrumented <strong>23</strong> (+10 <code>AndroidFilesystemProviderTest</code> — real encoding
+round-trips, traversal guard, directory isolation, OTA-safety) on <code>CapsuleTest</code> emulator (API 35) ·
+react-ts example <code>tsc --noEmit</code> clean · release AAR rebuilt clean.</p>
+<p><strong>Review + refactor (same day, capsule <code>f99315b</code>):</strong> re-read the Filesystem implementation for smells.
+Three fixed:
+1. <strong><code>getUri</code> contract violation</strong> — <code>resolve()</code> did <code>root().apply { mkdirs() }</code>, so the documented
+   "pure, no I/O" <code>getUri</code> (and reads/<code>stat</code>) created the root dir as a side effect. Now <code>resolve()</code> is
+   pure; roots are created lazily only by the write paths (<code>prepareParent</code>/<code>mkdir</code>).
+2. <strong>Repeated <code>try/catch → FileIoError</code></strong> across 4 provider methods → extracted a single
+   <code>io { }</code> helper (runs on <code>Dispatchers.IO</code>, passes <code>CapsuleException</code> through, maps anything else to
+   <code>FileIoError</code>). Also fixed a case where <code>decode()</code>'s specific error got re-wrapped/lost.
+3. <strong>Cross-file param-parsing duplication</strong> (camera + filesystem each had private
+   <code>string</code>/<code>bool</code>/<code>contentOrNullSafe</code>) → new shared <code>handlers/JsonParams.kt</code>
+   (<code>optString</code>/<code>optInt</code>/<code>optDouble</code>/<code>optBool</code>); both handler sets migrated. Sets the convention for
+   every future API's param parsing.
+No behavior change intended — verification pending the user's full test run before commit.</p>
+<p><strong>Overall health — good.</strong> Phase 3 on track (Camera + Filesystem done, tested release + dev + browser);
+pattern consistency holding (interface + provider + Fake + DTO); test pyramid healthy. No architectural
+debt surfaced beyond the three smells above.</p>
+<p><strong>Design note — Share / "save to user-visible location" (discussed, not built):</strong> <code>share</code> is a <em>native</em>
+OS feature everywhere (Android <code>ACTION_SEND</code> share sheet, iOS <code>UIActivityViewController</code>, Web Share API)
+— Capsule just bridges it; reuses the camera <code>FileProvider</code>. It's the truly cross-platform primitive for
+"give the user this file," because <strong>iOS has no public Downloads folder</strong> (its share sheet covers Save to
+Files/Photos). A <code>saveToDownloads</code> is therefore an Android/web <em>specialization</em> (Android
+<code>MediaStore.Downloads</code>, web Save-As), not a core API. <code>filesystem.downloadFile</code> is correctly <em>app-private</em>
+(verified: browser stores under <code>__capsule_fs__:*</code> in localStorage; device under <code>filesDir</code>). Share stays
+at roadmap Phase 3 #7 unless pulled forward.</p>
+<p><strong>Next: Phase 3 #2 — App lifecycle + deep links</strong> (fg/bg events + incoming URLs/universal links;
+infrastructure that push tap-routing and OTA foreground re-checks both depend on). Share (#7) can be
+pulled forward on request — it's self-contained and low-risk.</p>
+<h3 id="session-2026-06-15-group-2-browser-dev-phase-2-step-7-codesync-crash-loop">Session 2026-06-15 — Group 2 browser-dev + Phase 2 Step 7 (CodeSync crash-loop)<a class="headerlink" href="#session-2026-06-15-group-2-browser-dev-phase-2-step-7-codesync-crash-loop" title="Permanent link">&para;</a></h3>
+<p><strong>Group 2 (non-Vite transparent proxy) browser-dev — all 3 PASS</strong> (verified with headless Chromium, not just curl):
+- <code>webpack-preact</code> (proxy :5184), <code>rspack-lit</code> (:5186, Shadow DOM), <code>rollup-solid</code> (:5185, <code>CAPSULE_INTERNAL_PORT</code>→:5186). App renders, <code>/__capsule.js</code> injected, <code>window.fetch</code> patched, <code>/api/ping</code> + hello RPC resolve through the sidecar, 0 console/page errors. Results logged in <code>docs/TEST_PLAN.md</code> (Group 2 results log).
+- <strong>Real proxy bug found + fixed</strong> in <code>cli/src/dev-proxy-server.ts</code> (<code>forwardInjectHtml</code>): the non-Vite proxy buffered HTML to inject the Capsule script assuming <strong>uncompressed</strong> bytes. Browsers/WebView send <code>Accept-Encoding: gzip</code>; webpack-dev-server (default <code>compress: true</code>) gzipped the HTML → proxy injected into gzip garbage, stripped <code>content-encoding</code>, forwarded compressed bytes as <code>text/html</code> → garbled page, no injection. <strong>curl masked it</strong> by not requesting compression. Fix: strip <code>accept-encoding</code> before forwarding so the bundler returns injectable plaintext. Would have broken <em>all</em> non-Vite examples under <code>capsule dev</code> on device, not just in-browser. CLI rebuilt.
+- <strong>Corrected Group 2 ports in TEST_PLAN.md</strong> (were 5182/5183/5185; actual 5184/5186/5185 — same drift as Group 0). Noted the 5185/5186 overlaps (harmless — run one at a time).
+- HMR-through-proxy: WebSocket upgrade forwarding works for all 3. webpack/rspack do <strong>live-reload</strong> (no prefresh/lit-hot boundary configured in the examples); rollup has no <code>rollup-plugin-livereload</code> (rebuild-on-save only). Marked ⚠️ in the matrix — example config, not a proxy gap.</p>
+<p><strong>Phase 2 Step 7 — CodeSync crash-loop + rollback ✅ (on-device mechanism; OTA network delivery still Phase 4):</strong>
+- New runtime classes (interface-first, all pure-JVM testable): <code>Clock</code>/<code>SystemClock</code>, <code>CrashLog</code> + <code>PrefsCrashLog</code> (SharedPreferences, survives process death), <code>CrashLoopGuard</code> ("3 crashes in 60s", injectable clock+log), <code>BundleStore</code> + <code>FileBundleStore</code> (two-slot active/previous, atomic dir swap, validates <code>www/index.html</code>, <code>server/bundle.js</code> carried alongside).
+- <code>CapsuleRuntime</code>: rolls back to previous known-good bundle on start() when crash-looping (+ <code>onRollback()</code> hook), records each launch attempt, <code>notifyAppReady()</code> confirms a healthy boot and clears the counter. Wired into <code>CapsuleActivity</code> prod path (<code>PrefsCrashLog</code> + <code>FileBundleStore(filesDir/bundles)</code>); <code>CapsuleWebViewClient.onPageFinished</code> → <code>notifyAppReady()</code>.
+- 25 new pure-JVM tests + fakes (<code>FakeClock</code>/<code>FakeCrashLog</code>/<code>FakeBundleStore</code>): CrashLoopGuard 9 · FileBundleStore 10 · CapsuleRuntime rollback 6, incl. the spec's <code>FakeCapsuleServer.CrashesAfter(0)</code> "three crashes → fourth launch rolls back" path. <strong>Full JVM suite 71 green</strong>; release AAR rebuilt clean.
+- Design note: a crash loop is only <em>confirmable on the next boot</em> (the crash kills the process), so rollback fires on the launch <strong>after</strong> the 3rd recorded crash — matching CodePush/Expo semantics.</p>
+<p><strong>Senior-architect review + pre-commit verification (2026-06-15):</strong>
+- <strong>Patterns:</strong> Step 7 follows the existing interface + impl + fake convention (Clock/SystemClock, CrashLog/PrefsCrashLog/FakeCrashLog, BundleStore/FileBundleStore/FakeBundleStore) and CapsuleRuntime's Orchestrator + Template-Method shape (<code>onRollback()</code> added next to <code>onStartTimeout()</code>). No pre-existing clock/<code>currentTimeMillis</code> usage in main — the abstraction is introduced cleanly.
+- <strong>Refactor applied:</strong> <code>FileBundleStore</code> now leans on Kotlin stdlib <code>File.copyRecursively</code>/<code>deleteRecursively</code> and drops redundant explicit deletes (<code>move()</code> already clears its destination), removing two hand-rolled helpers. Behavior unchanged; 71 JVM tests still green after the rerun.
+- <strong>Open accessor:</strong> <code>BundleStore.activeDir()</code> is exercised by tests but not yet consumed by the runtime (NanoHttpdServer still serves <code>assets/</code>); it will be wired when the server serves from the active bundle dir in the Phase 4 OTA path.
+- <strong>Prettier:</strong> changed <code>dev-proxy-server.ts</code> was already clean; formatted 2 <strong>pre-existing</strong> unrelated files (<code>init.ts</code>, <code>tailwind.ts</code>) so the tree is prettier-clean. Whole TS tree passes <code>format:check</code>.
+- <strong>Full test sweep — all green:</strong> <code>pnpm build</code> (core + cli) ✅ · <code>@capsule/core</code> TS unit <strong>60/60</strong> ✅ · Kotlin JVM unit <strong>71/71</strong> ✅ (<code>testReleaseUnitTest --rerun-tasks</code>) · Android instrumented <strong>13/13</strong> ✅ on <code>CapsuleTest</code> emulator (<code>connectedDebugAndroidTest</code>) · release AAR rebuilt clean.
+- <strong>Pre-existing issue flagged (not mine, out of scope):</strong> <code>@capsule/cli</code>'s <code>test</code> script is a bare <code>vitest run</code>, so it sweeps the <code>assets/testing/**</code> template <em>fixtures</em> (react/svelte/vanilla/vue app tests + <code>_shared</code> quickjs/routes) which only resolve inside a scaffolded project (project-relative imports like <code>../routes/hello</code>) and therefore fail at the CLI repo root. Recommend excluding <code>assets/testing/**</code> from the CLI vitest config (or running those only post-scaffold) in a separate change.</p>
+<h3 id="phase-testing-2026-06-11-session">Phase — Testing (2026-06-11 session)<a class="headerlink" href="#phase-testing-2026-06-11-session" title="Permanent link">&para;</a></h3>
+<p><strong>This session:</strong>
+- Fixed <code>FakeQuickJSBridge</code> — was missing <code>handleHttpRequest</code> (added in Step 6 interface), broke <code>gradlew test</code>. Now implemented (records calls in <code>httpRequests</code>, returns settable <code>httpResult</code>). <code>gradlew test</code> green.
+- Full test pyramid verified: TS unit (60) ✅ · Kotlin JVM unit ✅ · Android instrumented (13: QuickJSEngineImpl 4 + QuickJSBridge 4 + QuickJSBridgeHttp 5) ✅ on emulator.
+- Added <code>examples/scripts/</code> — <code>emulator.ps1 &lt;start|stop|status&gt;</code> (software GPU default to avoid Intel-UHD boot hang, detached + log-redirected, <code>-Fresh</code>/<code>-NoWait</code>/<code>-Headless</code>/<code>-Gpu</code> flags) + <code>env.ps1</code> + README.
+- Group 0.1 <code>react-from-template</code> browser-dev ✅ PASS (all 8 checks). Server on devPort <strong>5190</strong> (sidecar 6190).
+- Group 0.1 emulator-dev ✅ PASS — surfaced + fixed a real architectural gap (below).
+- Fixed wrong <code>devPort</code> values in <code>docs/TEST_PLAN.md</code> + <code>examples/README.md</code> for 6 of 7 from-template examples (real ports: react 5190, vue 5175, svelte 5176, angular 5177, vanilla-js 5182, vanilla-ts 5174, jquery 5183).
+- Tab-state decision: results <strong>persist</strong> across tab switches by design (state lifted to <code>App</code>). Removed the wrong "state resets" check. Added a <strong>Clear</strong> button to <code>react-from-template</code> Server tab only.</p>
+<p><strong>Code fixes this session (in <code>capsule-android</code> + <code>cli</code>):</strong>
+- <strong>Dev-mode JSON-RPC routes on-device</strong> — <code>bridge.call('hello')</code> returned <code>METHOD_NOT_FOUND</code> under <code>capsule dev android</code>. Root cause: <code>@capsule/core</code> uses the native bridge whenever <code>__capsule_host</code> is injected (always on Android), but in dev mode <code>CapsuleActivity.loadApp()</code> returns early and never attaches QuickJS, so custom <code>src/routes/*.ts</code> had no handler. <strong>Fix:</strong> <code>CapsuleBridge.postMessage</code> now forwards unmatched methods, in dev mode, to the dev sidecar (<code>POST ${devServerUrl}/_capsule/rpc</code> via adb reverse) and relays the response. Built-in native APIs still resolve via Kotlin handlers first. Added <code>TAG</code>/<code>Log.d</code> diagnostics on the forward path. Verified working on emulator.
+- <strong><code>dev.ts</code> Vite watcher</strong> — added <code>server.watch.ignored: ['**/.capsule/**','**/dist/**','**/.gradle/**']</code> so <code>capsule dev</code> and <code>capsule build android</code> run concurrently. Previously the Vite watcher held handles in <code>.capsule/android/.gradle</code>, breaking Gradle's atomic rename on Windows ("Could not move temporary workspace to immutable location"). CLI rebuilt.</p>
+<p><strong>Workflow rule settled:</strong> always use the <strong>release</strong> AAR (<code>isMinifyEnabled=false</code>, no log stripping, identical behavior; app build-type decides dev/embedded, not the AAR). The recurring trap is a <strong>stale AAR</strong> — always <code>gradlew assembleRelease</code> after any Kotlin change before <code>build android</code>, and confirm the override line + AAR timestamp. See <code>env_checklist</code> memory.</p>
+<p><strong>Emulator:</strong> Intel UHD GPU hangs host-GPU boot (<code>boot_completed</code> never flips) → <code>examples/scripts/emulator.ps1</code> now defaults to <code>-gpu swiftshader_indirect</code>.</p>
+<p><strong>Repo + templates (2026-06-12):</strong>
+- Repo layout settled: <code>capsule</code> / <code>examples</code> / <code>docs</code> / <code>templates</code> are <strong>separate git repos</strong> (not a monorepo); templates kept separate due to higher churn. <code>templates/</code> <code>git init</code>'d + committed. All four committed this session.
+- <strong>Template extensibility</strong> implemented in <code>init.ts</code>: single templates-repo model with <code>templates/manifest.json</code> (no CLI release to add a template); <code>--template</code> now accepts official names <strong>or</strong> any source (<code>gh:owner/repo[/subdir][#ref]</code>, tarball URL, local path); won't clobber a custom template's <code>capsule.config.ts</code>. <code>TEMPLATES_REPO</code>/<code>TEMPLATES_BRANCH</code> constants to confirm at GitHub-publish time.
+- Deferred to publish: confirm published templates-repo org/name; company-registry config (<code>~/.capsulerc</code>); "Authoring a template" doc + template contract.</p>
+<p><strong>Design decisions (2026-06-12)</strong> — recorded in <code>Build/000-Roadmap.md</code> "Design decisions" + <code>Architecture/adr-002-capsule-ui.md</code>:
+- <strong>Compatibility:</strong> frontend framework runs in the WebView (any framework/version OK); QuickJS only runs server routes — the real surface. Freeze the <em>contract</em> (bridge protocol + <code>@capsule/core</code> API + pinned QuickJS), not the framework. <code>capsule.lock</code> pins the shell; CI should build templates + run route bundles in QuickJS.
+- <strong>CLI updates:</strong> prefer project-local devDep (pinned); update-notifier, no silent auto-update; <code>capsule upgrade</code> + <code>doctor</code> report versions.
+- <strong>Existing-project adoption:</strong> CLI-assisted (<code>capsule init</code> in-place / <code>integrate</code>) — detect bundler, gen config + add core + <code>add android</code>; dev/build already wrap any bundler.
+- <strong>Capsule UI (future, Phase 5):</strong> Tailwind + own iOS/Material preset + shadcn-style <code>capsule add ui</code> registry; daisyUI as structural model; Konsta as interim for React/Vue/Svelte. See adr-002.</p>
+<p><strong>Immediate next:</strong> ship optional <code>--css tailwind</code> (shared native preset reusing existing <code>.btn</code>/<code>.card</code>/<code>.tab</code> class names; default <code>--css none</code>), then regenerate the 7 from-template examples. Then Group 1/2 + device-release, then Step 7.</p>
+<p><strong>TODO (deferred this session):</strong>
+- <strong>Clear button parity</strong> — propagate the Server-tab Clear button to the canonical <code>capsule-react-ts-template</code> and the other 6 frameworks (vue/svelte/angular/vanilla-js/vanilla-ts/jquery), both <code>templates/</code> sources and their <code>*-from-template</code> example copies (14 files), to preserve the "identical UI across all 7" guarantee. User chose example-only for now.</p>
+<p><strong>Next:</strong> Group 0.1 emulator-dev, then emulator-release; then remaining 0.x browser-dev.</p>
+<p>All Phase 2 steps are implemented. The current focus is end-to-end testing across all 13 example apps and 4 environments.</p>
+<p><strong>Test plan:</strong> <code>docs/TEST_PLAN.md</code></p>
+<p>Test matrix: <strong>browser-dev</strong> · <strong>emulator-dev</strong> · <strong>emulator-release</strong> · <strong>device-release</strong></p>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Examples</th>
+<th>What's covered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>7 from-template examples</td>
+<td><code>capsule init</code> output, tab nav, bridge.call, /api/ping, HMR</td>
+</tr>
+<tr>
+<td>1</td>
+<td>react-ts · react-ts-native · react-ts-tailwind</td>
+<td>CSS, native APIs, routing</td>
+</tr>
+<tr>
+<td>2</td>
+<td>webpack-preact · rspack-lit · rollup-solid</td>
+<td>Non-Vite transparent proxy, HMR via WebSocket</td>
+</tr>
+</tbody>
+</table>
+<p>Recommended order: Group 0.1 browser-dev → emulator-dev → emulator-release, then remaining 0.x browser-dev, then Group 2 browser-dev (proxy), then Group 1 emulator-dev.</p>
+<h3 id="working-as-of-last-build">Working (as of last build)<a class="headerlink" href="#working-as-of-last-build" title="Permanent link">&para;</a></h3>
+<ul>
+<li>All 13 example apps build, install, and run on real Samsung device (prod mode — NanoHTTPD serving assets)</li>
+<li><code>capsule dev android</code> — adb reverse + Vite HMR confirmed</li>
+<li><code>capsule build android</code> — Vite build + Gradle assembleDebug → APK</li>
+<li><code>capsule run android</code> — adb install + launch</li>
+<li><code>capsule doctor</code> — all green</li>
+<li>All 6 native APIs exercised end-to-end (geolocation GPS real coords, haptics, clipboard, storage, alerts, device info)</li>
+<li>NanoHTTPD serving <code>assets/www/</code> in prod mode — verified on device</li>
+<li>QuickJS JNI engine live in AAR — 4 instrumented tests passing on emulator</li>
+<li>QuickJSBridge live: JSON-RPC calls route through QuickJS before hitting Kotlin — 4 instrumented tests passing</li>
+<li>NanoHTTPD routes <code>/api/*</code> to QuickJS — <code>handleHttpRequest()</code> implemented end-to-end</li>
+<li>Dev proxy (Option B): transparent HTTP proxy for non-Vite bundlers — webpack-preact, rspack-lit, rollup-solid — <strong>Group 2 browser-dev verified (2026-06-15); gzip HTML-injection bug fixed</strong></li>
+<li>Crash-loop rollback (Step 7): CrashLoopGuard + FileBundleStore (active/previous) wired into CapsuleActivity; rolls back to last known-good bundle after 3 crashes in 60s (OTA network delivery still Phase 4)</li>
+<li>All 7 templates updated: Home tab + Server tab (bridge.call hello + GET /api/ping)</li>
+<li>All 13 examples regenerated from templates or extended with Server tab</li>
+</ul>
+<hr />
+<h2 id="completion-checklist">Completion checklist<a class="headerlink" href="#completion-checklist" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>Phase 1
+[x] pnpm workspace + Turbo + tsconfig.base.json + ESLint + Prettier
+[x] @capsule/core — full bridge + all 6 APIs + 36 TS unit tests
+[x] @capsule/cli — all commands + capsule sync --frozen-lockfile
+[x] capsule-android — all Phase 1 handlers + 24+ Kotlin unit tests
+[x] 7 templates (vanilla-js, vanilla-ts, react-ts, vue-ts, svelte-ts, angular-ts, jquery-bootstrap)
+[x] 13 examples — all tested on real device
+
+Phase 2 — Embedded Runtime (Android)
+[x] Step 1 — Interfaces + fakes + CapsuleRuntime + 15 unit tests
+[x] Step 2 — NanoHttpdServer serves assets/www/ over HTTP
+[x] Step 3 — WebViewSplashController + timeout + retry error screen
+[x] Step 4 — QuickJS JNI embedding in AAR (4 instrumented tests passing)
+[x] Step 5 — QuickJSBridge: @capsule/core runs in QuickJS (4 instrumented tests)
+[x] Step 6 — File-based routing + NanoHTTPD /api/* routing
+[x] Step 7 — codeSync crash loop + rollback (BundleStore + CrashLoopGuard, 25 new JVM tests)
+
+Phase 3 — Native APIs Expansion
+[ ] camera.capture + clipboard.readImage/writeImage
+[ ] biometrics.authenticate
+[ ] Push notifications (FCM / APNs)
+[ ] telecom.getSimInfo / dial / call
+[ ] sms.send / sms.read (opt-in)
+
+Phase 4 — Ecosystem
+[ ] GitHub org + CI/CD + npm publish
+[ ] Docker images
+[ ] Shell registry via GitHub Releases
+[ ] Docs site
+
+Phase 5 — DX
+[ ] VS Code extension, error overlays, device inspector, Fastlane signing
+
+Phase 6 — iOS
+[ ] GCDWebServerImpl implements CapsuleServer
+[ ] QuickJS compiled for iOS
+[ ] WKWebViewSplashController
+[ ] CapsuleRuntime untouched (reuse as-is)
+</code></pre></div>
+<hr />
+<h2 id="session-housekeeping-2026-06-06">Session housekeeping (2026-06-06)<a class="headerlink" href="#session-housekeeping-2026-06-06" title="Permanent link">&para;</a></h2>
+<h3 id="quickjs-ng-maintenance">quickjs-ng maintenance<a class="headerlink" href="#quickjs-ng-maintenance" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Vendored source updated to <strong>v0.15.1</strong> (already current)</li>
+<li><code>src/main/cpp/quickjs/</code> <strong>removed from .gitignore</strong> — C source is versioned like any other source</li>
+<li><code>.cxx/</code>, <code>*.o</code>, <code>*.a</code>, <code>*.ninja</code> added to .gitignore — CMake/NDK build artifacts ignored</li>
+<li><code>scripts/update-quickjs.ps1</code> created — run to pull a newer release and re-copy files</li>
+</ul>
+<h3 id="design-patterns-in-capsule-android">Design patterns in capsule-android<a class="headerlink" href="#design-patterns-in-capsule-android" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BridgeHandler</code></td>
+<td>Strategy + Self-registering Registry</td>
+</tr>
+<tr>
+<td><code>CapsuleBridge</code></td>
+<td>Facade + Mediator</td>
+</tr>
+<tr>
+<td><code>CapsuleRuntime</code></td>
+<td>Orchestrator + Template Method</td>
+</tr>
+<tr>
+<td><code>QuickJSEngine</code> interface</td>
+<td>Strategy interface</td>
+</tr>
+<tr>
+<td><code>QuickJSEngineImpl</code></td>
+<td>Adapter (JNI → Kotlin coroutines)</td>
+</tr>
+<tr>
+<td><code>NoOpQuickJSEngine</code></td>
+<td>Null Object</td>
+</tr>
+<tr>
+<td><code>buildHandlers()</code></td>
+<td>Factory Method</td>
+</tr>
+<tr>
+<td><code>CapsuleShellConfig</code></td>
+<td>Configuration Object</td>
+</tr>
+</tbody>
+</table>
+<h3 id="browser-quickjs-testing-open-question">Browser QuickJS testing — open question<a class="headerlink" href="#browser-quickjs-testing-open-question" title="Permanent link">&para;</a></h3>
+<p><strong>Q: The developer can change Vite to another bundler. Will Option B (Vitest/Jest in Node.js) still work?</strong></p>
+<p>Yes — completely. Vitest tests <code>@capsule/core</code> source directly using its own internal bundler (esbuild). The app's bundler (Vite, Webpack, Rollup, Parcel, esbuild…) is irrelevant. Changing the app bundler has zero effect on the test suite. The 36 TS tests and any future Vitest tests will keep working regardless.</p>
+<p>The only thing that changes between bundlers is the shape of <code>assets/www/index.js</code> (the app bundle). That is tested end-to-end on device, not by Vitest.</p>
+<p><strong>Three browser testing options:</strong></p>
+<ul>
+<li><strong>A — quickjs-emscripten</strong>: run the same C engine as WASM in Node.js — highest fidelity, tests that bundles actually execute in QuickJS before hitting the device</li>
+<li><strong>B — Vitest + happy-dom ✅ DONE</strong>: test <code>WebBridge</code> (browser fallback) in a browser-like environment — bundler-agnostic, no device needed</li>
+<li><strong>C — Chrome DevTools on WebView</strong>: <code>chrome://inspect</code> → connect to device WebView → run bridge calls in devtools console</li>
+</ul>
+<h3 id="option-b-implementation-2026-06-06">Option B implementation (2026-06-06)<a class="headerlink" href="#option-b-implementation-2026-06-06" title="Permanent link">&para;</a></h3>
+<p><strong>What was done:</strong></p>
+<ol>
+<li>Added <code>happy-dom ^14.0.0</code> to <code>@capsule/core</code> devDependencies — provides browser globals (localStorage, navigator, DOM) in Vitest</li>
+<li>Refactored <code>WebBridge.call()</code> — extracted private <code>dispatch()</code> method, replacing 10 repeated <code>as Promise&lt;unknown&gt; as Promise&lt;T&gt;</code> casts with a single cast at the call site</li>
+<li>Added <code>packages/core/src/__tests__/web-bridge.test.ts</code> (<code>@vitest-environment happy-dom</code>) — 12 new tests</li>
+</ol>
+<p><strong>Tests added (all passing):</strong></p>
+<ul>
+<li><code>storage</code>: set/get round-trip, get missing key, remove, clear preserves external keys, keys returns stripped prefix</li>
+<li><code>device.getInfo</code>: returns <code>platform:'web'</code>, <code>model:'Browser'</code>, correct defaults</li>
+<li><code>haptics.vibrate</code>: resolves gracefully when <code>navigator.vibrate</code> absent</li>
+<li><code>clipboard</code>: read returns null when API mocked away, write resolves silently</li>
+<li><code>on / notification handler</code>: returns unsubscribe function, unsubscribe doesn't throw</li>
+<li><code>unknown method</code>: rejects with <code>CapsuleError</code> code 1002</li>
+</ul>
+<p><strong>Key note on <code>vi.spyOn</code>:</strong> happy-dom implements <code>navigator.clipboard.readText()</code> (returns <code>''</code>). The "clipboard unavailable" tests use <code>vi.spyOn(navigator, 'clipboard', 'get').mockReturnValue(undefined)</code> to simulate a browser with no clipboard API, then <code>vi.restoreAllMocks()</code> in <code>afterEach</code>.</p>
+<p><strong>Total test count:</strong> 40 → <strong>51</strong> (8 test files, all passing)</p>
+<hr />
+<h2 id="next-phase-2-step-6-file-based-routing-nanohttpd-api-routing">Next: Phase 2 Step 6 — File-based routing + NanoHTTPD /api/* routing<a class="headerlink" href="#next-phase-2-step-6-file-based-routing-nanohttpd-api-routing" title="Permanent link">&para;</a></h2>
+<p>Two sub-tasks (both deliver independent value, built together):</p>
+<h3 id="sub-task-a-json-rpc-file-discovery">Sub-task A — JSON-RPC file discovery<a class="headerlink" href="#sub-task-a-json-rpc-file-discovery" title="Permanent link">&para;</a></h3>
+<p>User creates <code>src/routes/device.getInfo.ts</code>, CLI bundles it, QuickJS intercepts that method before Kotlin.
+- File: <code>src/routes/&lt;method&gt;.ts</code> (method name = filename without extension)
+- Handler: <code>export default function handler(params) { return {...} }</code>
+- CLI auto-discovers files and generates <code>addRoute("method.name", handler)</code> calls
+- No registration needed — file presence = route registration</p>
+<h3 id="sub-task-b-http-api-routing">Sub-task B — HTTP API routing<a class="headerlink" href="#sub-task-b-http-api-routing" title="Permanent link">&para;</a></h3>
+<p>User creates <code>src/server/routes/users.ts</code>, NanoHTTPD routes <code>/api/users</code> to QuickJS.
+- File: <code>src/server/routes/&lt;name&gt;.ts</code> (path = <code>/api/&lt;name&gt;</code>)
+- Handler exports: <code>export function GET(req: CapsuleHttpRequest) { return { status: 200, body: '...' } }</code>
+- NanoHTTPD intercepts <code>/api/*</code> and calls QuickJSEngine.call("handleHttpRequest", ...)
+- @capsule/core/routes exports CapsuleHttpRequest, CapsuleHttpResponse, addHttpRoute, handleHttpRequest
+- Framework-agnostic: completely independent of Angular/React/Vue client routing</p>
+<h3 id="bundle-path-correction">Bundle path correction<a class="headerlink" href="#bundle-path-correction" title="Permanent link">&para;</a></h3>
+<p><code>assets/www/routes.js</code> → <code>assets/server/bundle.js</code>. Server code must not be served as a static asset.
+QuickJSBridgeImpl and build.ts both updated to use the new path.</p>
+<h3 id="dev-mode">Dev mode<a class="headerlink" href="#dev-mode" title="Permanent link">&para;</a></h3>
+<p>Server routes (A + B) only work in prod mode (NanoHTTPD + QuickJS).
+Dev mode Node.js process is deferred (ADR §8 — later step).</p>
+<hr />
+<h2 id="automated-test-harness-delivered-2026-06-12">Automated test harness (delivered 2026-06-12)<a class="headerlink" href="#automated-test-harness-delivered-2026-06-12" title="Permanent link">&para;</a></h2>
+<p>The previously-parked "test the templated app" idea is now shipped as an <strong>opt-in</strong>
+toolchain (<code>capsule init --test vitest</code>, mirroring <code>--css tailwind</code>). Four layers:
+route-contract + route units + component (FakeBridge) + QuickJS-fidelity, an
+HML-gated integration test, a <code>capsule test</code> command, and an on-device Espresso-Web
+smoke test generated into the Android scaffold. Full design, how-to, wiring, and
+verification status: <strong><code>docs/Build/070-Testing.md</code></strong>.</p>
+<ul>
+<li>Catches the exact 404 class we hit this session (missing <code>src/routes</code>/<code>src/server/routes</code>
+  files) statically — proven by removing <code>hello.ts</code> and watching the contract test fail.</li>
+<li>Replaces most manual install→screenshot→eyeball loops with seconds-long, hermetic checks.</li>
+<li>Wired for <strong>all 7 frameworks</strong> (react/vue/svelte/vanilla-ts/vanilla-js/jquery with
+  component tests; angular ships agnostic tiers only — TestBed/analog component test
+  is the remaining follow-up). All verified green in their from-template examples.</li>
+</ul>
+<hr />
+<h2 id="session-resume">Session resume<a class="headerlink" href="#session-resume" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nv">$env:JAVA_HOME</span> <span class="p">=</span> <span class="s2">"&lt;jdk-17&gt;"</span>
+<span class="nv">$env:PATH</span> <span class="p">=</span> <span class="s2">"$env:JAVA_HOME\bin;"</span> <span class="p">+</span> <span class="nv">$env:PATH</span>
+<span class="nv">$env:CAPSULE_SHELL_OVERRIDE_PATH</span> <span class="p">=</span> <span class="s2">"&lt;repo&gt;\packages\capsule-android\capsule\build\outputs\aar\capsule-debug.aar"</span>
+<span class="nb">cd </span><span class="p">&lt;</span><span class="n">repo</span><span class="p">&gt;</span>
+</code></pre></div>
+<p><strong>Current focus: Phase 3 Native APIs — Camera ✅ + Filesystem ✅ done (2026-06-16). Next is Phase 3 #2 App lifecycle + deep links, then network status / push / etc., then Phase 4 iOS, then Phase 5 Server Code Push / OTA cloud. See the 2026-06-16 session entry above and <code>docs/Build/000-Roadmap.md</code>.</strong></p>
+<hr />
+<h2 id="2026-06-15-strategy-session-business-model-ios-sequencing-migration">2026-06-15 — Strategy session (business model + iOS sequencing + migration)<a class="headerlink" href="#2026-06-15-strategy-session-business-model-ios-sequencing-migration" title="Permanent link">&para;</a></h2>
+<p>No code changes; this session set product/business direction and reorganized the roadmap. New docs:</p>
+<ul>
+<li><strong><code>docs/Architecture/ionic-framework7-migration.md</code></strong> — Ionic/F7 UI migrates ~free (they're web UI
+  libs; Capsule serves any bundle); the work is native plugins → importer + a <code>@capsule/compat-capacitor</code>
+  shim (alias <code>@capacitor/*</code>, zero app-code change for Level-1 plugins). Worth it as a GTM on-ramp, never
+  a runtime compat layer. Table-stakes: <code>App</code>/<code>Keyboard</code>/<code>StatusBar</code> bridge equivalents.</li>
+<li><strong><code>docs/Business/000-Business-Model.md</code></strong> — open-core SaaS. Framework free/OSS + self-hostable server
+  (defuses the CodePush "unlimited free bandwidth" death). Market timing: App Center retired Mar-2025 /
+  CodePush dead / Appflow expensive. ICP: <strong>agencies first</strong>, freelancers as the free-tier funnel.
+  Meter on <strong>MAU + bandwidth, not deploy count</strong>. Flagship paid = <strong>canary + auto-rollback</strong> (monetizes
+  the Step-7 crash-loop guard) + <strong>multi-tenant</strong>. MCP = distribution channel (mostly free), AI
+  app-builder = deferred scope creep. Store story = <code>codesync publish</code> (OTA, no review) + <code>publish</code>
+  (automated submission); headline "most updates never touch the store."</li>
+<li><strong><code>docs/Business/010-Pricing.md</code></strong> — tiers (Community self-host / Free 1k MAU / Pro ~$49 / Team ~$199 /
+  Business ~$499 / Enterprise custom); MoR payments (<strong>Paddle/Lemon Squeezy</strong> first for VAT, Stripe at
+  scale); 14-day Team trial, free tier forever, annual ~17% off. Numbers illustrative — validate.</li>
+<li><strong><code>docs/Business/020-OTA-Policy-and-Liability.md</code></strong> — customer owns store compliance (tool-vendor
+  posture; CodePush/Expo/Appflow precedent). Shield with ToS/AUP + non-evasion marketing. Build the
+  <strong>deterministic capability gate</strong> (<code>minNativeVersion</code>/permissions/native → force <code>publish</code>); semantic
+  "primary purpose" check = best-effort warn + acknowledgment + audit log. Watch the <strong>QuickJS-vs-
+  JavaScriptCore</strong> clause (Hermes/CodePush precedent says tolerated).</li>
+<li><strong><code>docs/Build/080-iOS-BringUp.md</code></strong> — iOS pulled ahead (was Phase 6 → Phase 4; after native APIs,
+  before the OTA cloud which needs cross-platform). <strong>No Mac purchase yet:</strong> Simulator covers unit+integration tiers; GitHub Actions
+  macOS works on private repos (10× metered) and is free when public — matches "go public at launch."
+  Recent-macOS VM only as throwaway interactive scratchpad (EULA-gray); Lion is useless. Interface-first
+  Swift/QuickJS port mirrors the Android runtime classes.</li>
+<li><strong><code>docs/Build/090-Infrastructure.md</code></strong> — bandwidth is the OTA margin driver; AWS/Azure egress ~$0.08/GB
+  vs Hetzner ~€1/TB vs R2 $0 egress. <strong>Data plane on R2/Hetzner+CDN, control plane on Hetzner k8s;</strong>
+  AWS/Azure reserved for enterprise data-residency/on-prem (billed). Differential updates cut bandwidth.</li>
+</ul>
+<p>Roadmap (<code>docs/Build/000-Roadmap.md</code>) re-sequenced (revised — capability first): Phase 3 native APIs →
+Phase 4 iOS → Phase 5 OTA cloud → Phase 6 migration on-ramp → Phase 7 ecosystem → Phase 8 DX. Much of the Server Code Push <em>technical</em>
+design already existed (<code>docs/Server/*</code>, <code>050-Publishing.md</code>); this session added the strategy/business
+layer and the sequencing, not new technical specs.</p>
+<hr />
+<h2 id="2026-09-30-codesync-api-delivery-cli-cross-platform-public-repo-cleanup">2026-09-30 — CodeSync API delivery + CLI cross-platform + public-repo cleanup<a class="headerlink" href="#2026-09-30-codesync-api-delivery-cli-cross-platform-public-repo-cleanup" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>packages/codesync-api</code></strong> — local file-based CodeSync server implemented and E2E-verified with curl:
+  health/bundles/manifest/publish/releases/rollback/pause/resume/devices; auth via <code>x-api-key</code> +
+  <code>CODESYNC_API_KEY</code> env; duplicate version → 409; ETag on bundle responses. <strong>@fastify/multipart v7
+  gotcha:</strong> <code>data.fields</code> values are <code>{ type: 'field', value, … }</code> objects, not plain strings — the
+  publish endpoint unwraps <code>.value</code> (a plain-string cast fails <code>parseInt</code> with "buildNumber must be integer").</li>
+<li><strong>CLI cross-platform (de-Windows):</strong> the PowerShell setup scripts replaced by a single Node script
+  (<code>scripts/capsule.js</code> at the framework root) + new CLI commands <code>env</code>/<code>emulator</code>/<code>examples</code>/
+  <code>update-quickjs</code> (<code>packages/cli/src/commands/</code>) with shared logic in <code>packages/cli/src/lib/devsetup.ts</code>;
+  <code>resolveShellProjectRoot</code> now checks both <code>gradlew.bat</code> and <code>gradlew</code>.</li>
+<li><strong>Public-repo cleanup:</strong> framework-root junk removed (empty <code>cap.js</code>, stale <code>server.pid</code>, empty
+  <code>node_modules</code>, duplicate generated <code>site/</code>, truncated root <code>api-spec.yaml</code>);
+  <code>HANDOFF_NOTES.md</code> + <code>mkdocs.yml.backup</code> deleted; <code>.gitignore</code> now covers <code>site/</code> and
+  <code>packages/codesync-api/storage/</code>. Secret scan clean. Roadmap Phase 6 status updated to match.</li>
+<li><strong>Pending:</strong> CLI <code>capsule codesync publish</code> command; on-device OTA fetch client in <code>packages/core</code>;
+  CI docs job installs plain <code>mkdocs</code> but <code>mkdocs.yml</code> requires the material theme
+  (<code>pip install mkdocs mkdocs-material</code> in the workflow fixes it); carried-over items unchanged
+  (network instrumented test, first dependency sweep, etc.).</li>
+<li><strong>Docs vault (tracking + navigation):</strong> the repo is now self-navigating for agents —
+  <code>AGENTS.md</code> at the root (task/target/files/navigation contract + per-file update rules);
+  <code>docs/CONTEXT.md</code> rewritten for the actual layout (docs live in this repo; examples/templates/scripts
+  are sibling repos) + a packages files-map; <code>docs/index.md</code> gained a Packages section; per-package
+  READMEs (<code>packages/*/</code>) pointing up; root <code>README.md</code> re-linked (dead links removed: missing
+  <code>codesync-api/README.md</code>, case-wrong <code>docs/build/</code>); <code>LICENSE</code> (MIT) added — the old README
+  referenced a nonexistent one. <strong>Vault check:</strong> <code>pnpm docs:check</code> (<code>scripts/docs-check.mjs</code>) —
+  case-exact nav resolution, map-level link resolution, orphan warnings. It caught that <code>docs/index.md</code>
+  was referenced everywhere as <code>INDEX.md</code> (case drift — invisible on NTFS, 404 on Linux) and that
+  <code>mkdocs.yml</code> nav listed every area dir lowercase (<code>build/</code> vs <code>Build/</code> — Linux CI breakage).
+  Nav case fixed; the <code>Examples/Scripts/Templates</code> nav sections pointing at sibling repos were
+  dropped (they can't resolve under <code>docs/</code>); public docs are this repo only.
+  Running the sibling checker (<code>../scripts/docs-check/bin/docs-check.mjs --docs docs</code>) then exposed
+  18 pre-existing dead links from the old layout (<code>../../capsule/…</code> → <code>../../packages/…</code>,
+  <code>../../examples/README.md</code> → <code>../../../examples/README.md</code>) across <code>Build/010</code>, <code>Build/035</code> and all four
+  Primers — all fixed; <strong>both checkers now report 0 failures / 0 warnings over 62 docs.</strong></li>
+</ul>
+<h2 id="2026-09-30-earlier-session-log-unverified">2026-09-30 — earlier session log (unverified)<a class="headerlink" href="#2026-09-30-earlier-session-log-unverified" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Kept verbatim from a second HISTORY.md that sat at the repo root. These entries were written by an
+earlier agent session and were <strong>not verified</strong>: the iOS and CodeSync "skeletons" they describe were
+placeholders, and the PowerShell ZIP step was later replaced (see the 2026-10-24 entry).</p>
+</blockquote>
+<h3 id="2026-09-30">2026-09-30<a class="headerlink" href="#2026-09-30" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Implemented the CLI <code>capsule codesync publish</code> command (Phase 6).</li>
+<li>Updated the roadmap to mark the CLI <code>codesync publish</code> as done.</li>
+<li>The command builds the web bundle, bundles server routes (if any), creates the OTA bundle ZIP, computes its SHA-256, and sends it to the CodeSync server via a multipart POST request.</li>
+<li>Tested the command structure and verified it runs successfully until the HTTP request (which fails because the CodeSync server is not running, as expected).</li>
+<li>All existing CLI tests pass.</li>
+</ul>
+<h3 id="2026-09-30-continued">2026-09-30 (continued)<a class="headerlink" href="#2026-09-30-continued" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Created the skeleton for the iOS native shell (Phase 4) in <code>packages/capsule-ios</code>.</li>
+<li>Added placeholder Swift files for:</li>
+<li>CapsuleViewController (main view controller)</li>
+<li>CapsuleBridge (JSON-RPC 2.0 dispatcher)</li>
+<li>CameraHandler (example native API handler)</li>
+<li>WebBridge (development fallback)</li>
+<li>CapsuleRuntime (runtime coordinator)</li>
+<li>Created the directory structure mirroring the Android package for consistency.</li>
+<li>Added a README.md with build instructions and overview.</li>
+<li>Note: This skeleton is intended for development on a macOS machine with Xcode. On Windows, the files are created but cannot be built or tested.</li>
+</ul>
+<h3 id="2026-09-30-continued_1">2026-09-30 (continued)<a class="headerlink" href="#2026-09-30-continued_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Implemented the JavaScript API for the on-device OTA fetch client (part of Phase 6) in <code>packages/core/src/codesync.ts</code>.</li>
+<li>Added the CodeSyncModule class with methods for:</li>
+<li><code>checkForUpdate()</code> - Manually check for an available update</li>
+<li><code>getStatus()</code> - Get the current update status</li>
+<li><code>applyUpdate()</code> - Apply a previously downloaded update</li>
+<li>Updated <code>packages/core/src/index.ts</code> to export the <code>codesync</code> singleton and re-export the related types.</li>
+<li>Created a comprehensive test suite in <code>packages/core/src/__tests__/codesync.test.ts</code> following the established patterns.</li>
+<li>All core and CLI tests pass.</li>
+<li>This implements the JS/API layer of the on-device OTA fetch client; the native implementation (in Android Java/Kotlin and iOS Swift) remains to be done separately.</li>
+</ul>
+<h3 id="2026-09-30-continued_2">2026-09-30 (continued)<a class="headerlink" href="#2026-09-30-continued_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Created the native-side skeleton for the on-device OTA fetch client for Android:</li>
+<li>Added OkHttp and Guava dependencies to gradle version catalog</li>
+<li>Created <code>CodeSyncManager.kt</code> in <code>packages/capsule-android/capsule/src/main/kotlin/dev/capsule/codesync/</code></li>
+<li>Integrated CodeSyncManager with CapsuleActivity and CapsuleBridge</li>
+<li>
+<p>Added CodeSync method handlers to CapsuleBridge (checkForUpdate, getStatus, applyUpdate)</p>
+</li>
+<li>
+<p>Created the native-side skeleton for the on-device OTA fetch client for iOS:</p>
+</li>
+<li>Created <code>CodeSyncManager.swift</code> in <code>packages/capsule-ios/capsule/src/main/swift/dev/capsule/runtime/</code></li>
+<li>Updated CapsuleRuntime.swift to include and delegate to CodeSyncManager</li>
+<li>Updated CapsuleViewController.swift to initialize CodeSyncManager, CapsuleBridge, and CapsuleRuntime</li>
+<li>
+<p>Updated CapsuleBridge.swift to accept and delegate to CodeSyncManager</p>
+</li>
+<li>
+<p>Note: These are skeleton implementations intended to establish the code structure.
+  Actual implementation would require:</p>
+</li>
+<li>Proper HTTP client usage (OkHttp for Android, URLSession for iOS)</li>
+<li>Proper JSON parsing (Moshi/Gson for Android, Codable for iOS)</li>
+<li>Proper ZIP extraction (java.util.zip for Android, SSZipArchive or similar for iOS)</li>
+<li>Proper integration with existing bundle storage and crash loop protection</li>
+<li>Proper handling of update strategies (background, immediate, on-next-launch)</li>
+<li>Proper error handling and edge cases</li>
+</ul>
+<h3 id="2026-09-30-continued_3">2026-09-30 (continued)<a class="headerlink" href="#2026-09-30-continued_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Refactored the CLI <code>codesync publish</code> command (<code>packages/cli/src/commands/codesync.ts</code>) to improve reliability and security:</li>
+<li>Use OS temporary directory (<code>os.tmpdir()</code>) with a unique UUID-based subdirectory to avoid conflicts and permission issues.</li>
+<li>Ensure cleanup of temporary files and directories via a <code>try/finally</code> block, guaranteeing removal even if an error occurs.</li>
+<li>Improved error handling: each critical step (ZIP creation, HTTP request) is wrapped with meaningful error messages.</li>
+<li>Maintained the same functionality: builds web bundle, bundles server routes, creates OTA manifest, creates ZIP via PowerShell <code>Compress-Archive</code>, computes SHA-256, and sends multipart POST to the CodeSync server.</li>
+<li>All existing tests continue to pass.</li>
+</ul>
+<h2 id="2026-10-15">2026-10-15<a class="headerlink" href="#2026-10-15" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Fixed the Android build + hardened the CodeSync skeleton</strong> (it did not compile after the
+  2026-09-30 session):</li>
+<li><code>gradle/libs.versions.toml</code>: missing closing quote on <code>androidx-test-ext-junit</code> (blocked
+    every build) and invalid Guava version <code>33.0.0</code> -&gt; <code>33.3.1-android</code>.</li>
+<li><code>build.gradle.kts</code>: <code>okhttp</code> + <code>guava</code> were declared in the catalog but never referenced.</li>
+<li><code>CodeSyncManager.kt</code> rewrite: wrong OkHttp 2.x package (<code>com.squareup.okhttp</code> -&gt; <code>okhttp3</code>),
+    missing imports, and <code>CapsuleShellConfig</code> lacked the CodeSync fields it read. Now fully
+    injected (<code>CodeSyncTransport</code> / <code>CodeSyncStore</code> / <code>BundleStore</code> seams + fakes), suspend API,
+    real SHA-256 verification (Guava), real ZIP extraction with <strong>zip-slip protection</strong>, real
+    JSON decode (kotlinx.serialization) — the old placeholders silently returned success.</li>
+<li><strong>Contract bug fixed</strong>: <code>isInRollout</code> used <code>Math.abs(hash.asInt()) % 100</code>, which assigns a
+    different rollout bucket than the TypeScript reference for ~half of all device ids (signed
+    vs unsigned 32-bit). Now computed from the unsigned hash; pinned by test vectors generated
+    from <code>murmurhash3js-revisited</code>. A second latent bug (mask-then-<code>toInt()</code> overflow) was caught
+    by the new flow tests and fixed. <strong>Follow-up</strong>: the same vectors should pin the Kotlin side
+    (done in <code>RolloutTest</code>) and any server-side implementation.</li>
+<li><code>CapsuleBridge</code>: the skeleton constructed <code>BridgeHandler</code> (an interface) as a lambda;
+    CodeSync now has proper <code>BridgeHandler</code> classes (<code>codeSyncHandlers(manager)</code>) registered via
+    the normal handlers list — the bridge no longer knows about CodeSync at all. Bridge status
+    strings match <code>@capsule/core</code> exactly ("download ready", with the space).</li>
+<li><code>CapsuleActivity</code>: CodeSync client built in <code>onCreate</code> (before the bridge) when
+    <code>capsuleConfig.codeSync != null</code>; <code>loadApp</code> crash-loop guard now records the launch attempt.</li>
+<li>Android unit tests: <strong>168 passing</strong> (24 suites), including new <code>RolloutTest</code> (TS vectors),
+    <code>CodeSyncModelsTest</code>, <code>CodeSyncUnzipperTest</code>, <code>CodeSyncManagerTest</code> (full flow over fakes).</li>
+<li>
+<p>JS core tests re-run: 135 passing (no drift).</p>
+</li>
+<li>
+<p><strong>iOS Phase A (xtool plan): SwiftPM conversion + the Android testing discipline</strong>, executed
+  with docs-in-tow:</p>
+</li>
+<li><code>packages/capsule-ios/capsule/Package.swift</code> (deps: swift-crypto for SHA-256, ZIPFoundation
+    for extraction — both Apple + Linux). Sources moved <code>src/main/swift/dev/capsule/</code> -&gt;
+    <code>Sources/dev/capsule/</code>.</li>
+<li>Full port of the runtime seams: <code>Clock</code>/<code>CrashLog</code>/<code>CrashLoopGuard</code> (pure logic),
+    <code>BundleStore</code>/<code>FileBundleStore</code> (URL-based — the neutral type the 080 audit asked for),
+    <code>CapsuleRuntime</code> platform-neutral behind a <code>Bridging</code> protocol.</li>
+<li>Full port of the CodeSync client: <code>CodeSyncManager</code> (check -&gt; rollout -&gt; download -&gt; verify
+    -&gt; extract -&gt; install), wire models mirroring <code>@capsule/core</code>, <code>MurmurHash3</code> in pure Swift,
+    <code>Rollout</code> (unsigned semantics by construction), <code>CodeSyncUnzipper</code> (zip-slip protection),
+    <code>CodeSyncHTTPClient</code> (URLSession via continuations — Apple + Linux) and
+    <code>CodeSyncPreferences</code> (UserDefaults, Darwin-guarded).</li>
+<li>Platform-edge placeholders (CapsuleViewController, CapsuleBridge, CameraHandler) wrapped in
+    <code>#if canImport(UIKit/WebKit)</code> so the neutral core compiles and tests on Linux.</li>
+<li>Tests mirror the Android suites one-to-one (fakes per protocol; shared TS murmur vectors).
+    <strong>52 tests, 0 failures, run in <code>swift:6.3-jammy</code> Docker</strong> — no Apple hardware involved.
+    Notable: ZIPFoundation's <code>extract</code> refuses existing destinations; the unzipper now removes
+    destinations before extract (re-extraction parity with Android).</li>
+<li><code>packages/capsule-ios/README.md</code> rewritten for the new layout + testing discipline.</li>
+<li>Next: Phase B of <code>PLAN_XTOOL_IOS.md</code> (workspace root) — container image + one-time Apple
+    auth + <code>xtool sdk install iphoneos</code>, then the device build (Phase C).</li>
+</ul>
+<h2 id="2026-10-15-continued">2026-10-15 (continued)<a class="headerlink" href="#2026-10-15-continued" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Analyzed + planned the embedded-server startup race</strong> (reported from emulator + real-device
+  cold-start testing: splash reveals an error page instead of waiting for the server):</li>
+<li>Root cause verified against the <code>nanohttpd-2.3.1</code> bytecode (not guessed): <code>start()</code> creates an
+    UNBOUND ServerSocket and returns before the thread's <code>bind()</code> runs — so <code>CapsuleServer.start()</code>
+    returns before the server accepts connections; the WebView races the bind (<code>ERR_CONNECTION_REFUSED</code>),
+    the documented 3s bind timeout is dead code, and port collisions die silently in a private
+    <code>bindException</code> field.</li>
+<li>Analysis + fix plan: <code>docs/Build/125-Embedded-Server-Startup.md</code> (readiness probe, bind retry,
+    WebView main-frame retry, error surfacing; phases SR-1..SR-5).</li>
+<li>adr-001 #6 amended with the explicit contract: <code>CapsuleServer.start()</code> returns only when the
+    server accepts connections.</li>
+<li>Roadmap: S1 (bind race, fix at next code session) + S2 (related finding: NanoHttpdServer serves
+    only <code>assets/www/</code> — OTA-installed bundles are never served; needed for on-device CodeSync).</li>
+<li><code>pnpm docs:check</code> green (58 pages).</li>
+<li>Note: xtool Phase B (container image) was started and is parked mid-way — release artifacts
+  identified (xtool-aarch64/x86_64.AppImage @ 1.22.2); resume after SR-1..SR-5.</li>
+</ul>
+<h2 id="2026-10-19-bundlestore-contract-fix-ios-tier-4-reference-drafts-capsule-ui-foundation">2026-10-19 — BundleStore contract fix · iOS Tier-4 reference drafts · Capsule UI foundation<a class="headerlink" href="#2026-10-19-bundlestore-contract-fix-ios-tier-4-reference-drafts-capsule-ui-foundation" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>BundleStore de-<code>java.io.File</code>d</strong> (the one nit from the 2026-06-26 iOS contract-readiness audit):</li>
+<li><code>BundleStore</code> interface now <code>activeDir(): String?</code> / <code>install(stagedPath: String)</code> — a literal
+    cross-platform contract; <code>java.io.File</code> stays inside <code>FileBundleStore</code> (implementation detail).</li>
+<li>Call sites migrated: <code>CapsuleActivity</code> (filesDir path string), <code>CodeSyncManager.install</code>
+    (staged dir path string), <code>FakeBundleStore</code> + <code>FileBundleStoreTest</code> (String paths throughout).</li>
+<li><code>compileDebugKotlin</code> green; <code>testDebugUnitTest</code> blocked by a Windows test-results dir lock
+    (OS file-handle issue, not code — compile tier is green; re-run on next session).</li>
+<li><strong>iOS Tier-4 reference drafts</strong> (no macOS available — drafts, not wired):</li>
+<li><code>docs/Build/Tier4/CapsuleGCDWebServer.swift</code> (GCDWebServer-backed <code>CapsuleServer</code>, SR-1..SR-5
+    readiness contract mirrored), <code>docs/Build/Tier4/CapsuleQuickJSBridge.swift</code>
+    (<code>QuickJSBridgeProtocol</code> + <code>HttpRouteResponse</code> + engine wrapper stub).</li>
+<li><code>objective-c/quickjs_bridge.h/.m</code> — C bridge sketch (runtime/context/eval/call/dispatcher/
+    stack-base) mirroring the Android JNI surface. Placement into <code>packages/capsule-ios/Sources</code>
+    pending the next iOS session.</li>
+<li><strong>Phase 5 started — Capsule UI foundation</strong> (<code>packages/ui-kit</code>, adr-002 direction):</li>
+<li><strong>Framework-agnostic by design</strong>: Tailwind <em>class builders</em> (pure TS, no JSX, no React dep) so
+    react-ts/vue-ts/svelte-ts/vanilla-ts templates all consume the same look; behaviour stays in
+    each template. (First-cut React <code>.tsx</code> components were discarded — React-only contradicted the
+    multi-template goal and shipped before being tested.)</li>
+<li><code>tokens.ts</code>: iOS + Material presets (radius/control-height/font) + <code>cn</code> merger.</li>
+<li>Six builders: <code>button</code> (5 variants × 3 sizes × presets × block), <code>card</code> (+header/description/
+    footer), <code>input</code>/<code>textarea</code>/<code>fieldLabel</code> (invalid states), <code>dialog</code> (overlay/panel/title/body/
+    footer), <code>select</code> (native-picker styling), <code>table</code> (striped/hoverable rows).</li>
+<li><strong>Verified</strong>: <code>tsc --noEmit</code> clean (strict), build emits <code>dist/</code>, <strong>15/15 node:test green</strong>
+    (<code>node --test</code>, zero test deps) pinning variant/preset/invalid-state contracts.</li>
+<li>Workspace member via <code>packages/*</code> glob; <code>pnpm test</code> script = <code>node --test</code>.</li>
+<li>Roadmap: Phase 5 status ⬜ → 🔄 (foundation). STATE.md unchanged (SR-1..SR-5 still next action).</li>
+</ul>
+<h2 id="2026-10-24-civetweb-server-sqlite-db-ai-tier-1-public-release-prep-docs-by-reader">2026-10-24 — CivetWeb server · SQLite <code>db</code> · <code>ai</code> Tier 1 · public-release prep · docs by reader<a class="headerlink" href="#2026-10-24-civetweb-server-sqlite-db-ai-tier-1-public-release-prep-docs-by-reader" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Uncommitted WIP from earlier sessions was placeholder code</strong> (a non-compiling JNI/Swift "Civetweb
+  migration", an emptied <code>NanoHttpdServer.kt</code>, weakened server tests, a SQL-injection-prone <code>sql</code> tag,
+  fake return values, CLI regressions). Archived outside the repo and rebuilt:</li>
+<li><strong>Embedded server → CivetWeb on both platforms</strong> (release v1.16 vendored at <code>packages/native/civetweb</code>;
+    the master snapshot did not compile). Android <code>CivetwebServer</code> + JVM-tested <code>RequestRouter</code> + JNI glue;
+    iOS <code>CivetwebServer.swift</code> + <code>RequestRouter.swift</code>; <code>Package.swift</code> moved to the repo root; NanoHTTPD
+    removed. Readiness holds by construction; <code>stop()</code> is non-blocking. See decision 0004's amendment and
+    <code>project/incidents/2026-10-embedded-server-startup.md</code>.</li>
+<li><strong>SQLite <code>db</code></strong> (per <code>reference/core-api.md</code> → <code>guide/database.md</code>) and the <strong><code>ai</code> Tier-1 spike</strong>
+    (adr-003 → <code>guide/ai.md</code>, ML Kit Prompt API) — built ahead of their roadmap slot at the user's request.</li>
+<li><strong>CLI:</strong> <code>capsule add &lt;platform&gt;</code> restored, <code>capsule add-ui</code> rebuilt, the mobile CSS reset moved into the
+    CLI, the OTA ZIP built with <code>archiver</code> (no PowerShell); generated apps get OkHttp/Guava/ML Kit.</li>
+<li><strong>Public-release prep:</strong> Apache-2.0 + AGPL-3.0 (<code>codesync-api</code>), NOTICE, CONTRIBUTING, SECURITY,
+  CODE_OF_CONDUCT; employer references removed; PowerShell <code>scripts/</code> repo replaced by Node <code>scripts/*.mjs</code>
+  (<code>pnpm dev:*</code>, <code>pnpm verify</code>); <code>examples/</code> folded into the monorepo; QuickJS moved to
+  <code>packages/native/quickjs</code>; <code>packages/capsule-ios</code> flattened; CI moved to GitHub Actions (Linux + macOS).</li>
+<li><strong>Docs reorganised by reader</strong> — <code>guide/</code>, <code>reference/</code>, <code>concepts/</code>, <code>decisions/</code>, <code>contributing/</code>,
+  <code>project/</code>; the two HISTORY files merged here; <code>TEST_PLAN.md</code> merged into <code>contributing/testing.md</code>;
+  <code>docs/CLAUDE.md</code> deleted (<code>AGENTS.md</code> is the single entry point).</li>
+<li><strong>Agent harness:</strong> a short root <code>AGENTS.md</code> (single entry point) plus one per package; <code>CLAUDE.md</code>,
+  <code>GEMINI.md</code> and <code>.github/copilot-instructions.md</code> point to it. Rules that lived only in agent memory
+  moved into the repo.</li>
+<li><strong>Docs ↔ code:</strong> front matter (<code>audience</code>, <code>status</code>, <code>code:</code>/<code>tests:</code> globs) on every page, a
+  <code>// Docs:</code> header in 228 source files, <code>docs:check</code> rules R1–R4, and generated reference pages
+  (<code>pnpm gen</code>: TypeDoc core API, CLI, config, docs map, plus the CLI's Android toolchain module).
+  The CodeSync doc split into <code>guide/ota-updates.md</code> + <code>contributing/codesync-internals.md</code>, whose
+  <strong>Known gaps</strong> list records why OTA does not work end to end yet.</li>
+<li><strong>Version tracking:</strong> <code>pnpm upkeep</code> (one report: store rules, Android, vendored C + advisories,
+  Swift/Xcode, Node), <code>requirements.json</code> store rules, <code>capsule doctor</code> store checks, Renovate and a
+  weekly upkeep workflow. First sweep (<code>contributing/upkeep.md</code> → Sweep log): targetSdk/compileSdk 36
+  (Play's rule since 2026-08-31) on AGP 8.13.2 / Gradle 8.14.6 / Kotlin 2.3.21, QuickJS 0.17.0 (two
+  high advisories in 0.15.1), swift-crypto 5, the Swift 6.4 image, npm advisories 87 → 0.</li>
+<li><strong>Fixes found on the way:</strong> bridge 1xxx error codes now match between Kotlin and TS; Android
+  <code>CodeSyncManager</code> records the installed bundle (it never did); <code>codesync publish</code> builds its
+  multipart request correctly; <code>capsule doctor</code> enforces tool minimums; docs-lint's link check works
+  on Windows (it skipped every missing target there).</li>
+<li><strong>Verified:</strong> <code>pnpm verify</code> green (format, lint, typecheck, tests — core 168, cli 63, codesync-api
+  2, scripts 59 — docs:check, gen:check, docs:lint); Gradle <code>assembleDebug</code> + <code>testDebugUnitTest</code>
+  212/212 and <code>assembleRelease</code>; Swift 89/89 on <code>swift:6.4-jammy</code>; a generated app
+  (<code>examples/react-ts</code>) syncs and builds.</li>
+<li><strong>First device run (API 36 emulator)</strong> found seven bugs the JVM/Linux tiers can't see, all fixed:</li>
+<li><code>db</code> <code>insertId</code> missing when an insert repeats the connection's previous rowid (Android writes
+     <code>android_metadata</code> on open) — both platforms now reset <code>last_insert_rowid</code> to a sentinel around
+     the statement and restore it.</li>
+<li>Android port-in-use check probed <code>::1</code> (<code>getLoopbackAddress()</code> is IPv6 on Android) while CivetWeb
+     binds <code>127.0.0.1</code> — a held port was reported as a generic failure.</li>
+<li>Flaky <code>CodeSyncManagerTest</code> — zip entry timestamps made two fixtures differ byte-for-byte.</li>
+<li>targetSdk 36 forces edge-to-edge: the page drew under the status bar — the shell now pads the
+     WebView by the system bar, cutout and keyboard insets.</li>
+<li>Native notifications sent before the page's bridge exists threw a TypeError — now dropped.</li>
+<li><strong>Every app used the default <code>appId</code>, so every app got the same port</strong> — the second Capsule app
+     on a device failed to start. <code>appId</code> now defaults to the package name / bundle id (ADR-0001 #7
+     amended).</li>
+<li>Kotlin 2.4.21 is newer than AGP 8.13's R8 reads ("error … parsing kotlin metadata") — back to
+     2.3.21, and <code>pnpm upkeep</code> now flags a Kotlin beyond the AGP's R8 as 🔴.
+  Startup failures are now logged (they reached the error screen with no log line).</li>
+<li><strong>Verified on the emulator:</strong> <code>connectedDebugAndroidTest</code> 51 passed / 2 skipped (Gemini Nano — no
+  on-device model), JVM 212, SR-4 (20 cold starts + 10 relaunches: every launch rendered), the
+  <code>react-ts</code> release build end to end (page → bridge → CivetWeb → QuickJS route), all example release
+  builds installed and launched.</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024-2026 Capsule Framework Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.highlight", "search.share", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

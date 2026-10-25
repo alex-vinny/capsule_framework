@@ -1,0 +1,4635 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alex-vinny.github.io/capsule_framework/guide/publishing/">
+      
+      
+        <link rel="prev" href="../mobile-css-reset/">
+      
+      
+        <link rel="next" href="../ota-updates/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Store publishing - Capsule Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#capsule-framework-store-publishing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Capsule Framework" class="md-header__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Capsule Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Store publishing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../installation/" class="md-tabs__link">
+          
+  
+  
+  Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/cli/" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/architecture/" class="md-tabs__link">
+          
+  
+  
+  Concepts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../decisions/" class="md-tabs__link">
+          
+  
+  
+  Decisions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../contributing/" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../project/roadmap/" class="md-tabs__link">
+          
+  
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Capsule Framework" class="md-nav__button md-logo" aria-label="Capsule Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Capsule Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/alex-vinny/capsule_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    alex-vinny/capsule_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hello-world/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hello World
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../push-notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Push Notifications
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alerts-styling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alerts Styling
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mobile-css-reset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mobile CSS Reset
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publishing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publishing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#two-release-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two Release Layers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#google-play-store" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Google Play Store
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Google Play Store">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-the-api-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the API Works
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-play-store-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting Up Play Store Access
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tracks-and-staged-rollouts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracks and Staged Rollouts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aab-vs-apk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AAB vs APK
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apple-app-store" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apple App Store
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Apple App Store">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-the-api-works_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the API Works
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#three-key-pieces-of-ios-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three Key Pieces of iOS Identity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-app-store-connect-api-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting Up App Store Connect API Access
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testflight-vs-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TestFlight vs Production
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fastlane-as-the-integration-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fastlane as the Integration Layer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fastlane as the Integration Layer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-fastlane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Fastlane
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-capsule-publish-android-does-internally" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What capsule publish android Does Internally
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-capsule-publish-ios-does-internally" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What capsule publish ios Does Internally
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capsuleconfigts-full-publishing-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        capsule.config.ts — Full Publishing Config
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli-publishing-commands-in-full" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI Publishing Commands in Full
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-code-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version Code Management
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cicd-pipeline-full-end-to-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI/CD Pipeline — Full End-to-End
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#staged-rollout-coordination-store-codesync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Staged Rollout Coordination: Store + CodeSync
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#direct-apk-distribution-no-store" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Direct APK Distribution (No Store)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secrets-management-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secrets Management Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-fastlane-actually-calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Fastlane Actually Calls
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What Fastlane Actually Calls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#play-store-upload-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Play Store upload flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#app-store-connect-upload-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        App Store Connect upload flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ota-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Over-the-air Updates
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/core-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/lockfile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lockfile
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generated
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generated
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/generated/docs-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Principles
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/capsule-vs-ionic-capacitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    vs Ionic/Capacitor
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/extensibility-and-positioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extensibility & Positioning
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/ionic-framework7-migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ionic Framework 7 Migration
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Primers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/kotlin-for-csharp-devs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kotlin for C# Devs
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/jni-and-cpp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JNI & C
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/civetweb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CivetWeb
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/primers/quickjs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QuickJS
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decisions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0001-embedded-runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0001 Embedded Runtime
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0002-capsule-ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0002 Capsule UI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0003-ai-and-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0003 AI & Agents
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/0004-web-serving-transport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0004 Web Serving Transport
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decisions/log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/codesync-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CodeSync Internals
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/plugin-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/template-authoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Template Authoring
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/ios-bring-up/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iOS Bring-up
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/platform-parity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android/iOS Parity
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/upkeep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Release
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_14" id="__nav_6_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Workflows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/add-native-api/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Add Native API
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/author-plugin/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Author Plugin
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/workflows/upkeep-sweep/CONTEXT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upkeep Sweep
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    History
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/known-issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known Issues
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_6" id="__nav_7_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Incidents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Incidents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/incidents/2026-10-embedded-server-startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-10 Embedded Server Startup
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_7" id="__nav_7_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Research
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/2026-06-24-planning-brainstorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026-06-24 Planning Brainstorm
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/chatgpt-first-impressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT First Impressions
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/research/chatgpt-plugin-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChatGPT Plugin Compatibility
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--record" title="Record — kept as written">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_8" id="__nav_7_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Business
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/business-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business Model
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/pricing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pricing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft" title="Draft — exploratory, not settled">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/business/ota-policy-and-liability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Policy & Liability
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--current"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_9" id="__nav_7_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Server Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Server Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/file-storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Storage
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/server-design/workers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workers
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--planned" title="Planned — designed, not built yet">
+    </span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="capsule-framework-store-publishing">Capsule Framework — Store Publishing<a class="headerlink" href="#capsule-framework-store-publishing" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Automated pipeline from <code>capsule build</code> to live in the Play Store and App Store. How the APIs work, what credentials are needed, and how Fastlane bridges the gap.</p>
+<p><strong>Different "publish":</strong> this doc is about shipping <em>apps built with Capsule</em> to the app stores.
+For publishing <em>the framework itself</em> (git repos + npm/Maven packages, de-Windows, license, docs
+split) see <a href="../../contributing/release/"><code>release.md</code></a>.</p>
+</blockquote>
+<hr />
+<h2 id="two-release-layers">Two Release Layers<a class="headerlink" href="#two-release-layers" title="Permanent link">&para;</a></h2>
+<p>Before diving in, the distinction matters:</p>
+<div class="highlight"><pre><span></span><code>Layer 1 — Store Release (this document)
+  Full APK/IPA → Play Store / App Store review
+  Required when: native shell update, new permissions, new native plugins
+  Time: hours to days (review)
+  Controlled by: capsule publish android|ios
+
+Layer 2 — CodeSync OTA (ota-updates.md)
+  JS bundle only → direct to devices, no review
+  Required when: web code changes (JS, CSS, HTML, assets)
+  Time: seconds
+  Controlled by: capsule codesync publish
+</code></pre></div>
+<p>These are complementary, not competing. A typical release cycle:
+- Ship a new store version to add a native feature (Layer 1)
+- Then iterate the UI weekly via CodeSync (Layer 2) without touching the store</p>
+<hr />
+<h2 id="google-play-store">Google Play Store<a class="headerlink" href="#google-play-store" title="Permanent link">&para;</a></h2>
+<h3 id="how-the-api-works">How the API Works<a class="headerlink" href="#how-the-api-works" title="Permanent link">&para;</a></h3>
+<p>Google exposes the <strong>Google Play Developer API</strong> (REST + gRPC). It manages:
+- Uploading APK / AAB (Android App Bundle)
+- Assigning builds to tracks (internal → alpha → beta → production)
+- Staged rollouts (0–100% of production users)
+- Release notes per language
+- Listing current live versions</p>
+<p><strong>Authentication</strong>: A <strong>service account</strong> with a JSON key file. The service account is granted access to your app in the Play Console. It uses OAuth 2.0 with JWT assertion — no browser login required, fully automated.</p>
+<h3 id="setting-up-play-store-access">Setting Up Play Store Access<a class="headerlink" href="#setting-up-play-store-access" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1 — Create a service account in Google Cloud Console</strong>:
+<div class="highlight"><pre><span></span><code>Google Cloud Console → IAM &amp; Admin → Service Accounts
+→ Create Service Account
+→ Role: not needed here (Play grants its own permissions)
+→ Create Key → JSON → download to secure location
+</code></pre></div></p>
+<p><strong>Step 2 — Grant the service account access in Play Console</strong>:
+<div class="highlight"><pre><span></span><code>Play Console → Setup → API access
+→ Link to Google Cloud project
+→ Grant access to service account
+→ Permissions: Release manager (or App manager for full control)
+</code></pre></div></p>
+<p><strong>Step 3 — Store the key securely</strong>:
+<div class="highlight"><pre><span></span><code><span class="c1"># Never commit the JSON key. Use environment variables or a secrets manager.</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PLAY_STORE_JSON_KEY</span><span class="o">=</span>/path/to/service-account.json
+<span class="c1"># Or base64-encode it for CI:</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PLAY_STORE_JSON_KEY_DATA</span><span class="o">=</span><span class="k">$(</span>base64<span class="w"> </span>-w0<span class="w"> </span>service-account.json<span class="k">)</span>
+</code></pre></div></p>
+<h3 id="tracks-and-staged-rollouts">Tracks and Staged Rollouts<a class="headerlink" href="#tracks-and-staged-rollouts" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>internal   →   alpha   →   beta   →   production
+  (team)    (invited)   (opt-in)    (all users)
+
+Production supports staged rollout: 10% → 50% → 100%
+</code></pre></div>
+<p>The API call to promote a build to production at 10%:
+<div class="highlight"><pre><span></span><code><span class="err">PUT</span><span class="w"> </span><span class="err">/a</span><span class="kc">n</span><span class="err">droidpublisher/v</span><span class="mi">3</span><span class="err">/applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">ns</span><span class="err">/</span><span class="p">{</span><span class="err">packageName</span><span class="p">}</span><span class="err">/edi</span><span class="kc">ts</span><span class="err">/</span><span class="p">{</span><span class="err">edi</span><span class="kc">t</span><span class="err">Id</span><span class="p">}</span><span class="err">/</span><span class="kc">tra</span><span class="err">cks/produc</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">"releases"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">    </span><span class="nt">"versionCodes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"42"</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inProgress"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"userFraction"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.10</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"releaseNotes"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en-US"</span><span class="p">,</span><span class="w"> </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bug fixes"</span><span class="w"> </span><span class="p">}]</span>
+<span class="w">  </span><span class="p">}]</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="aab-vs-apk">AAB vs APK<a class="headerlink" href="#aab-vs-apk" title="Permanent link">&para;</a></h3>
+<p><strong>Always use AAB (Android App Bundle)</strong> for Play Store uploads:
+- Google generates optimized APKs per device configuration
+- ~20-30% smaller downloads vs universal APK
+- Required for new apps since Aug 2021</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># In capsule build pipeline:</span>
+./gradlew<span class="w"> </span>bundleRelease<span class="w">    </span><span class="c1"># produces .aab</span>
+<span class="c1"># vs</span>
+./gradlew<span class="w"> </span>assembleRelease<span class="w">  </span><span class="c1"># produces .apk (for sideloading / direct install only)</span>
+</code></pre></div>
+<hr />
+<h2 id="apple-app-store">Apple App Store<a class="headerlink" href="#apple-app-store" title="Permanent link">&para;</a></h2>
+<h3 id="how-the-api-works_1">How the API Works<a class="headerlink" href="#how-the-api-works_1" title="Permanent link">&para;</a></h3>
+<p>Apple provides the <strong>App Store Connect API</strong> (REST). It manages:
+- Uploading IPA builds
+- Submitting for TestFlight beta testing
+- Submitting for App Store review
+- Managing phased releases
+- App metadata, screenshots, pricing</p>
+<p><strong>Authentication</strong>: An <strong>API key</strong> (<code>.p8</code> private key file) combined with a Key ID and Issuer ID. Generates a short-lived JWT for each API request. No Apple ID login required, fully headless.</p>
+<h3 id="three-key-pieces-of-ios-identity">Three Key Pieces of iOS Identity<a class="headerlink" href="#three-key-pieces-of-ios-identity" title="Permanent link">&para;</a></h3>
+<p>Understanding this is critical before any automation:</p>
+<div class="highlight"><pre><span></span><code>1. Distribution Certificate (.p12)
+   → Proves the binary was built by your team
+   → Issued by Apple, stored in macOS Keychain or encrypted file
+   → Expires every year — must be renewed
+
+2. Provisioning Profile (.mobileprovision)
+   → Ties: app ID + certificate + allowed devices (for dev) or "any" (for distribution)
+   → App Store distribution profile: no device restriction
+   → Expires, must be regenerated when cert changes
+
+3. App Store Connect API Key (.p8)
+   → Used only for API calls (upload, submit, metadata)
+   → Does NOT replace certificate or provisioning profile
+   → Never expires, but can be revoked
+</code></pre></div>
+<h3 id="setting-up-app-store-connect-api-access">Setting Up App Store Connect API Access<a class="headerlink" href="#setting-up-app-store-connect-api-access" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1 — Generate API Key</strong>:
+<div class="highlight"><pre><span></span><code>App Store Connect → Users and Access → Keys
+→ Generate API Key
+→ Select role: Admin (for full publishing) or App Manager
+→ Download .p8 file (ONE TIME — cannot re-download)
+→ Note: Key ID (10-char string) and Issuer ID (UUID)
+</code></pre></div></p>
+<p><strong>Step 2 — Store securely</strong>:
+<div class="highlight"><pre><span></span><code><span class="c1"># The .p8 file is a private key — treat like a password</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">APP_STORE_CONNECT_KEY_ID</span><span class="o">=</span>XXXXXXXXXX
+<span class="nb">export</span><span class="w"> </span><span class="nv">APP_STORE_CONNECT_ISSUER_ID</span><span class="o">=</span>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+<span class="nb">export</span><span class="w"> </span><span class="nv">APP_STORE_CONNECT_KEY_CONTENT</span><span class="o">=</span><span class="k">$(</span>cat<span class="w"> </span>AuthKey_XXXXXXXXXX.p8<span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="k">)</span>
+</code></pre></div></p>
+<p><strong>Step 3 — Certificate + Profile management via Fastlane Match</strong>:</p>
+<p>Fastlane Match solves the multi-developer certificate problem by storing encrypted certificates in a private git repo or S3 bucket. Every developer and CI machine fetches from the same source:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># First time setup</span>
+fastlane<span class="w"> </span>match<span class="w"> </span>init
+<span class="c1"># → Choose storage (git / s3 / google_cloud)</span>
+<span class="c1"># → Enter git repo URL (private repo)</span>
+
+<span class="c1"># Generate and store distribution cert + profile</span>
+fastlane<span class="w"> </span>match<span class="w"> </span>appstore
+
+<span class="c1"># On CI: read-only mode (never regenerate, just fetch)</span>
+fastlane<span class="w"> </span>match<span class="w"> </span>appstore<span class="w"> </span>--readonly
+</code></pre></div>
+<p>Match encrypts with a passphrase (<code>MATCH_PASSWORD</code> env var). The private key never leaves the machine unencrypted.</p>
+<h3 id="testflight-vs-production">TestFlight vs Production<a class="headerlink" href="#testflight-vs-production" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>TestFlight (beta)
+  → Upload IPA → automatic processing (~10 min)
+  → Internal testers: instant, no review
+  → External testers: one-time beta review (1-2 days)
+  → CLI: capsule publish ios --track testflight
+
+App Store (production)
+  → Upload IPA → App Store review (24-48 hrs typical, can be longer)
+  → Phased release: roll out to 1%→2%→5%→10%→20%→50%→100% over 7 days
+  → Manual override to pause or accelerate
+  → CLI: capsule publish ios --track production
+</code></pre></div>
+<hr />
+<h2 id="fastlane-as-the-integration-layer">Fastlane as the Integration Layer<a class="headerlink" href="#fastlane-as-the-integration-layer" title="Permanent link">&para;</a></h2>
+<p>Capsule wraps Fastlane. Developers never write a <code>Fastfile</code>. The CLI generates it from <code>capsule.config.ts</code> and then invokes it.</p>
+<h3 id="why-fastlane">Why Fastlane<a class="headerlink" href="#why-fastlane" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Battle-tested (used by Airbnb, Twitter, Google, etc.)</li>
+<li>Handles the gnarly parts: signing, build number increment, upload retry on network error, screenshot upload</li>
+<li>MIT licensed, active maintenance</li>
+<li>Supports both Play Store (<code>supply</code> action) and App Store (<code>deliver</code> + <code>pilot</code> actions)</li>
+</ul>
+<h3 id="what-capsule-publish-android-does-internally">What <code>capsule publish android</code> Does Internally<a class="headerlink" href="#what-capsule-publish-android-does-internally" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>capsule publish android --track production --rollout 10
+
+1. capsule build android --release
+   └─ Vite build → dist/
+   └─ gradlew bundleRelease → app-release.aab
+
+2. CLI generates Fastfile in .capsule/fastlane/
+   └─ lane :publish_android do
+        supply(
+          track: 'production',
+          rollout: '0.1',
+          aab: '.capsule/android/app-release.aab',
+          json_key: ENV['PLAY_STORE_JSON_KEY'],
+          package_name: 'com.yourcompany.app',
+          skip_upload_apk: true,
+          release_status: 'inProgress'
+        )
+      end
+
+3. fastlane publish_android
+   └─ Authenticates with service account JSON
+   └─ Creates Play edit (transaction)
+   └─ Uploads AAB
+   └─ Assigns to production track at 10% rollout
+   └─ Commits the edit → goes live
+</code></pre></div>
+<h3 id="what-capsule-publish-ios-does-internally">What <code>capsule publish ios</code> Does Internally<a class="headerlink" href="#what-capsule-publish-ios-does-internally" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>capsule publish ios --track testflight
+
+1. capsule build ios --release
+   └─ Vite build → dist/
+   └─ xcodebuild archive → .xcarchive
+   └─ xcodebuild exportArchive → .ipa
+
+2. CLI generates Fastfile in .capsule/fastlane/
+   └─ lane :publish_ios do
+        pilot(
+          ipa: '.capsule/ios/MyApp.ipa',
+          api_key_path: '.capsule/fastlane/app_store_connect_key.json',
+          skip_waiting_for_build_processing: true,
+          changelog: ENV['RELEASE_NOTES'] || 'New build'
+        )
+      end
+
+3. fastlane publish_ios
+   └─ Authenticates with App Store Connect API key
+   └─ Uploads IPA via Transporter protocol
+   └─ Triggers TestFlight distribution (or production submission)
+</code></pre></div>
+<p>The <code>app_store_connect_key.json</code> is a temp file the CLI writes from env vars — never persisted to disk after the session.</p>
+<hr />
+<h2 id="capsuleconfigts-full-publishing-config"><code>capsule.config.ts</code> — Full Publishing Config<a class="headerlink" href="#capsuleconfigts-full-publishing-config" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">defineConfig</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">appId</span><span class="o">:</span><span class="w"> </span><span class="s1">'com.yourcompany.app'</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">appName</span><span class="o">:</span><span class="w"> </span><span class="s1">'My App'</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nx">android</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">minSdk</span><span class="o">:</span><span class="w"> </span><span class="kt">26</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">targetSdk</span><span class="o">:</span><span class="w"> </span><span class="kt">35</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">compileSdk</span><span class="o">:</span><span class="w"> </span><span class="kt">35</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">permissions</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">'CAMERA'</span><span class="p">,</span><span class="w"> </span><span class="s1">'NOTIFICATIONS'</span><span class="p">],</span>
+
+<span class="w">    </span><span class="nx">signing</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">storeFile</span><span class="o">:</span><span class="w">     </span><span class="kt">process.env.CAPSULE_KEYSTORE_PATH</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">storePassword</span><span class="o">:</span><span class="w"> </span><span class="kt">process.env.CAPSULE_KEYSTORE_PASS</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">keyAlias</span><span class="o">:</span><span class="w">      </span><span class="kt">process.env.CAPSULE_KEY_ALIAS</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">keyPassword</span><span class="o">:</span><span class="w">   </span><span class="kt">process.env.CAPSULE_KEY_PASS</span>
+<span class="w">    </span><span class="p">},</span>
+
+<span class="w">    </span><span class="nx">publish</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">serviceAccountKey</span><span class="o">:</span><span class="w"> </span><span class="kt">process.env.PLAY_STORE_JSON_KEY</span><span class="p">,</span><span class="w">   </span><span class="c1">// path to .json file</span>
+<span class="w">      </span><span class="c1">// OR:</span>
+<span class="w">      </span><span class="nx">serviceAccountKeyData</span><span class="o">:</span><span class="w"> </span><span class="kt">process.env.PLAY_STORE_JSON_KEY_DATA</span><span class="p">,</span><span class="w">  </span><span class="c1">// base64-encoded</span>
+<span class="w">      </span><span class="nx">defaultTrack</span><span class="o">:</span><span class="w"> </span><span class="s1">'internal'</span><span class="p">,</span><span class="w">   </span><span class="c1">// where new builds land by default</span>
+<span class="w">      </span><span class="nx">packageName</span><span class="o">:</span><span class="w"> </span><span class="s1">'com.yourcompany.app'</span><span class="w">  </span><span class="c1">// if different from appId</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nx">ios</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">deployment</span><span class="o">:</span><span class="w"> </span><span class="s1">'16.0'</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">capabilities</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">'push-notifications'</span><span class="p">,</span><span class="w"> </span><span class="s1">'camera'</span><span class="p">],</span>
+<span class="w">    </span><span class="nx">bundleId</span><span class="o">:</span><span class="w"> </span><span class="s1">'com.yourcompany.app'</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">signing</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">matchGitUrl</span><span class="o">:</span><span class="w">     </span><span class="kt">process.env.MATCH_GIT_URL</span><span class="p">,</span><span class="w">           </span><span class="c1">// private repo with certs</span>
+<span class="w">      </span><span class="nx">matchPassword</span><span class="o">:</span><span class="w">   </span><span class="kt">process.env.MATCH_PASSWORD</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">teamId</span><span class="o">:</span><span class="w">          </span><span class="kt">process.env.APPLE_TEAM_ID</span>
+<span class="w">    </span><span class="p">},</span>
+
+<span class="w">    </span><span class="nx">publish</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">apiKeyId</span><span class="o">:</span><span class="w">       </span><span class="kt">process.env.APP_STORE_CONNECT_KEY_ID</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">apiIssuerId</span><span class="o">:</span><span class="w">    </span><span class="kt">process.env.APP_STORE_CONNECT_ISSUER_ID</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">apiKeyContent</span><span class="o">:</span><span class="w">  </span><span class="kt">process.env.APP_STORE_CONNECT_KEY_CONTENT</span><span class="p">,</span><span class="w">  </span><span class="c1">// base64 .p8</span>
+<span class="w">      </span><span class="nx">defaultTrack</span><span class="o">:</span><span class="w">   </span><span class="s1">'testflight'</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+<hr />
+<h2 id="cli-publishing-commands-in-full">CLI Publishing Commands in Full<a class="headerlink" href="#cli-publishing-commands-in-full" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Android</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>android<span class="w">                          </span><span class="c1"># upload to defaultTrack (internal)</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>android<span class="w"> </span>--track<span class="w"> </span>alpha<span class="w">            </span><span class="c1"># upload to alpha</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>android<span class="w"> </span>--track<span class="w"> </span>production<span class="w">       </span><span class="c1"># submit to production</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>android<span class="w"> </span>--track<span class="w"> </span>production<span class="w"> </span>--rollout<span class="w"> </span><span class="m">10</span><span class="w">   </span><span class="c1"># 10% staged rollout</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>android<span class="w"> </span>--rollout<span class="w"> </span><span class="m">50</span><span class="w">             </span><span class="c1"># increase existing rollout to 50%</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>android<span class="w"> </span>--rollout<span class="w"> </span><span class="m">100</span><span class="w">            </span><span class="c1"># full rollout (complete staged release)</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>android<span class="w"> </span>--pause<span class="w">                  </span><span class="c1"># halt staged rollout</span>
+
+<span class="c1"># iOS</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>ios<span class="w">                              </span><span class="c1"># upload to TestFlight (defaultTrack)</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>ios<span class="w"> </span>--track<span class="w"> </span>testflight<span class="w">           </span><span class="c1"># TestFlight internal testing</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>ios<span class="w"> </span>--track<span class="w"> </span>testflight-external<span class="w">  </span><span class="c1"># TestFlight external (needs beta review)</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>ios<span class="w"> </span>--track<span class="w"> </span>production<span class="w">           </span><span class="c1"># submit for App Store review</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>ios<span class="w"> </span>--track<span class="w"> </span>production<span class="w"> </span>--phased<span class="w">  </span><span class="c1"># enable 7-day phased release</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>ios<span class="w"> </span>--pause-phased<span class="w">               </span><span class="c1"># pause phased release</span>
+capsule<span class="w"> </span>publish<span class="w"> </span>ios<span class="w"> </span>--resume-phased<span class="w">              </span><span class="c1"># resume paused phased release</span>
+
+<span class="c1"># Version management</span>
+capsule<span class="w"> </span>version<span class="w">                                  </span><span class="c1"># show current version codes</span>
+capsule<span class="w"> </span>version<span class="w"> </span>bump<span class="w"> </span>patch<span class="w">                       </span><span class="c1"># 1.4.2 → 1.4.3</span>
+capsule<span class="w"> </span>version<span class="w"> </span>bump<span class="w"> </span>minor<span class="w">                       </span><span class="c1"># 1.4.2 → 1.5.0</span>
+capsule<span class="w"> </span>version<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">2</span>.0.0<span class="w">                        </span><span class="c1"># explicit version</span>
+</code></pre></div>
+<hr />
+<h2 id="version-code-management">Version Code Management<a class="headerlink" href="#version-code-management" title="Permanent link">&para;</a></h2>
+<p>Both platforms require a monotonically increasing integer build number alongside the human-readable version string.</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Human version</th>
+<th>Build number</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Android</td>
+<td><code>versionName</code> (e.g. <code>"1.4.2"</code>)</td>
+<td><code>versionCode</code> (e.g. <code>47</code>)</td>
+<td>versionCode must increase with every upload</td>
+</tr>
+<tr>
+<td>iOS</td>
+<td><code>CFBundleShortVersionString</code> (e.g. <code>"1.4.2"</code>)</td>
+<td><code>CFBundleVersion</code> (e.g. <code>47</code>)</td>
+<td>Same requirement</td>
+</tr>
+</tbody>
+</table>
+<p>Capsule stores both in <code>capsule.config.ts</code> and auto-increments <code>versionCode</code>/<code>CFBundleVersion</code> on each <code>capsule publish</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// capsule.config.ts (managed by CLI — do not hand-edit build numbers)</span>
+<span class="nx">version</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">'1.4.2'</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">buildNumber</span><span class="o">:</span><span class="w"> </span><span class="kt">47</span><span class="w">   </span><span class="c1">// auto-incremented by `capsule publish`</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The CLI commits the bumped <code>buildNumber</code> back to <code>capsule.config.ts</code> after a successful upload. In CI, configure git so this commit is created by a bot account.</p>
+<hr />
+<h2 id="cicd-pipeline-full-end-to-end">CI/CD Pipeline — Full End-to-End<a class="headerlink" href="#cicd-pipeline-full-end-to-end" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># .github/workflows/release.yml</span>
+
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Release</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'v*'</span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># ─── Android ────────────────────────────────────────────────────────────────</span>
+<span class="w">  </span><span class="nt">release-android</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">container</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/capsule/build-android:latest</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Restore keystore from secret</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d &gt; /tmp/keystore.jks</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build + publish to Play Store (internal track)</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">capsule publish android --track internal</span>
+<span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">CAPSULE_KEYSTORE_PATH</span><span class="p">:</span><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">/tmp/keystore.jks</span>
+<span class="w">          </span><span class="nt">CAPSULE_KEYSTORE_PASS</span><span class="p">:</span><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.KEYSTORE_PASS }}</span>
+<span class="w">          </span><span class="nt">CAPSULE_KEY_ALIAS</span><span class="p">:</span><span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.KEY_ALIAS }}</span>
+<span class="w">          </span><span class="nt">CAPSULE_KEY_PASS</span><span class="p">:</span><span class="w">           </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.KEY_PASS }}</span>
+<span class="w">          </span><span class="nt">PLAY_STORE_JSON_KEY_DATA</span><span class="p">:</span><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.PLAY_STORE_JSON_KEY_DATA }}</span>
+
+<span class="w">  </span><span class="c1"># ─── iOS ────────────────────────────────────────────────────────────────────</span>
+<span class="w">  </span><span class="nt">release-ios</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">macos-15</span><span class="w">    </span><span class="c1"># required — Xcode only runs on macOS</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-node@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> node-version</span><span class="p">:</span><span class="w"> </span><span class="s">'22'</span><span class="w"> </span><span class="p p-Indicator">}</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm install -g @capsule/cli</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install signing via Fastlane Match</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bundle exec fastlane match appstore --readonly</span>
+<span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">MATCH_GIT_URL</span><span class="p">:</span><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.MATCH_GIT_URL }}</span>
+<span class="w">          </span><span class="nt">MATCH_PASSWORD</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.MATCH_PASSWORD }}</span>
+<span class="w">          </span><span class="nt">APPLE_TEAM_ID</span><span class="p">:</span><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.APPLE_TEAM_ID }}</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build + publish to TestFlight</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">capsule publish ios --track testflight</span>
+<span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">APP_STORE_CONNECT_KEY_ID</span><span class="p">:</span><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.ASC_KEY_ID }}</span>
+<span class="w">          </span><span class="nt">APP_STORE_CONNECT_ISSUER_ID</span><span class="p">:</span><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.ASC_ISSUER_ID }}</span>
+<span class="w">          </span><span class="nt">APP_STORE_CONNECT_KEY_CONTENT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.ASC_KEY_CONTENT }}</span>
+</code></pre></div>
+<hr />
+<h2 id="staged-rollout-coordination-store-codesync">Staged Rollout Coordination: Store + CodeSync<a class="headerlink" href="#staged-rollout-coordination-store-codesync" title="Permanent link">&para;</a></h2>
+<p>Both layers support gradual rollouts. Here is how they work together:</p>
+<div class="highlight"><pre><span></span><code>Day 0: capsule publish android --track production --rollout 5
+       → 5% of users get the new native binary
+       → They also run the new JS bundle (included in the APK)
+
+Day 1: capsule codesync publish --rollout 10
+       → All users on the OLD native version get the new JS bundle
+       → The 5% on the new native also get it (compatible)
+
+Day 3: capsule publish android --rollout 25
+       → 25% of users now on new native
+
+Day 5: capsule publish android --rollout 100
+       → All users on new native
+       capsule codesync rollout 100
+       → All devices running the latest JS bundle
+</code></pre></div>
+<p><strong>Key rule</strong>: CodeSync bundles must declare <code>minNativeVersion</code>. If a new JS bundle requires a new native feature:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Only deliver this bundle to devices on native v2.0+</span>
+<span class="nx">capsule</span><span class="w"> </span><span class="nx">codesync</span><span class="w"> </span><span class="nx">publish</span><span class="w"> </span><span class="o">--</span><span class="nx">min</span><span class="o">-</span><span class="kr">native</span><span class="o">-</span><span class="nx">version</span><span class="w"> </span><span class="mf">2.0.0</span>
+</code></pre></div>
+<p>Devices still on native v1.x keep running the previous JS bundle until they update from the store.</p>
+<hr />
+<h2 id="direct-apk-distribution-no-store">Direct APK Distribution (No Store)<a class="headerlink" href="#direct-apk-distribution-no-store" title="Permanent link">&para;</a></h2>
+<p>For enterprise apps, internal tooling, or beta testers outside TestFlight/Play:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build a signed APK (not AAB — direct install requires APK)</span>
+capsule<span class="w"> </span>build<span class="w"> </span>android<span class="w"> </span>--release<span class="w"> </span>--format<span class="w"> </span>apk
+
+<span class="c1"># Output: .capsule/android/app-release.apk</span>
+<span class="c1"># Distribute via:</span>
+<span class="c1">#   - MDM (Mobile Device Management): Intune, Jamf, VMware Workspace ONE</span>
+<span class="c1">#   - Internal download page (HTTPS required on Android 8+)</span>
+<span class="c1">#   - ADB: adb install app-release.apk</span>
+</code></pre></div>
+<p><strong>iOS direct distribution</strong> (no App Store) requires:
+- Enterprise Distribution Certificate (Apple Developer Enterprise Program — $299/yr)
+- In-house provisioning profile (no device limit, no App Store review)
+- Distributed via MDM or HTTPS manifest plist</p>
+<div class="highlight"><pre><span></span><code>capsule<span class="w"> </span>build<span class="w"> </span>ios<span class="w"> </span>--release<span class="w"> </span>--distribution<span class="w"> </span>enterprise
+<span class="c1"># Generates: .capsule/ios/MyApp.ipa + manifest.plist</span>
+<span class="c1"># Host on HTTPS server → users open itms-services://?action=download-manifest&amp;url=...</span>
+</code></pre></div>
+<hr />
+<h2 id="secrets-management-reference">Secrets Management Reference<a class="headerlink" href="#secrets-management-reference" title="Permanent link">&para;</a></h2>
+<p>Never hardcode any of these. Use environment variables, a secrets manager, or GitHub/GitLab/Azure secrets.</p>
+<table>
+<thead>
+<tr>
+<th>Secret</th>
+<th>Platform</th>
+<th>How to get</th>
+<th>How to store</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KEYSTORE_BASE64</code></td>
+<td>Android</td>
+<td><code>keytool -genkey</code> (first time)</td>
+<td>Base64-encode <code>.jks</code>, store as repo secret</td>
+</tr>
+<tr>
+<td><code>KEYSTORE_PASS</code></td>
+<td>Android</td>
+<td>You set this</td>
+<td>Repo secret</td>
+</tr>
+<tr>
+<td><code>KEY_ALIAS</code></td>
+<td>Android</td>
+<td>You set this</td>
+<td>Repo secret</td>
+</tr>
+<tr>
+<td><code>KEY_PASS</code></td>
+<td>Android</td>
+<td>You set this</td>
+<td>Repo secret</td>
+</tr>
+<tr>
+<td><code>PLAY_STORE_JSON_KEY_DATA</code></td>
+<td>Android</td>
+<td>Google Cloud service account</td>
+<td>Base64-encode JSON, repo secret</td>
+</tr>
+<tr>
+<td><code>MATCH_GIT_URL</code></td>
+<td>iOS</td>
+<td>Private git repo you create</td>
+<td>Repo secret</td>
+</tr>
+<tr>
+<td><code>MATCH_PASSWORD</code></td>
+<td>iOS</td>
+<td>You set this (encrypts the cert repo)</td>
+<td>Repo secret</td>
+</tr>
+<tr>
+<td><code>APPLE_TEAM_ID</code></td>
+<td>iOS</td>
+<td>Apple Developer portal (10-char)</td>
+<td>Repo secret</td>
+</tr>
+<tr>
+<td><code>ASC_KEY_ID</code></td>
+<td>iOS</td>
+<td>App Store Connect → Keys</td>
+<td>Repo secret</td>
+</tr>
+<tr>
+<td><code>ASC_ISSUER_ID</code></td>
+<td>iOS</td>
+<td>App Store Connect → Keys</td>
+<td>Repo secret</td>
+</tr>
+<tr>
+<td><code>ASC_KEY_CONTENT</code></td>
+<td>iOS</td>
+<td>Base64-encode the <code>.p8</code> file</td>
+<td>Repo secret</td>
+</tr>
+</tbody>
+</table>
+<p><strong>First-time keystore generation</strong> (run once, store the result):
+<div class="highlight"><pre><span></span><code>keytool<span class="w"> </span>-genkey<span class="w"> </span>-v<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-keystore<span class="w"> </span>my-release-key.jks<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-keyalg<span class="w"> </span>RSA<span class="w"> </span>-keysize<span class="w"> </span><span class="m">2048</span><span class="w"> </span>-validity<span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-alias<span class="w"> </span>my-key-alias<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-dname<span class="w"> </span><span class="s2">"CN=My App, OU=Mobile, O=My Company, L=City, S=State, C=US"</span>
+
+<span class="c1"># Then base64-encode and store:</span>
+base64<span class="w"> </span>-w0<span class="w"> </span>my-release-key.jks<span class="w"> </span>&gt;<span class="w"> </span>keystore.b64
+<span class="c1"># → paste keystore.b64 content into KEYSTORE_BASE64 repo secret</span>
+<span class="c1"># → DELETE the .jks and .b64 files from your machine</span>
+<span class="c1"># → The canonical copy is the repo secret</span>
+</code></pre></div></p>
+<blockquote>
+<p><strong>Android keystore warning</strong>: If you lose this keystore, you can never update your app on the Play Store. The Play Store ties your app's identity to the keystore forever. Fastlane Match solves the iOS equivalent. For Android, store the keystore in at minimum two independent secure locations.</p>
+</blockquote>
+<hr />
+<h2 id="what-fastlane-actually-calls">What Fastlane Actually Calls<a class="headerlink" href="#what-fastlane-actually-calls" title="Permanent link">&para;</a></h2>
+<p>For transparency — here is the raw API flow Fastlane executes on your behalf.</p>
+<h3 id="play-store-upload-flow">Play Store upload flow<a class="headerlink" href="#play-store-upload-flow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>1. POST /auth/token  (OAuth2 JWT assertion)
+   → access_token
+
+2. POST /androidpublisher/v3/applications/{pkg}/edits
+   → editId  (like a database transaction)
+
+3. POST /androidpublisher/v3/applications/{pkg}/edits/{editId}/bundles
+   (upload AAB as multipart/form-data)
+   → versionCode
+
+4. PUT /androidpublisher/v3/applications/{pkg}/edits/{editId}/tracks/{track}
+   → assign versionCode to track with rollout fraction
+
+5. POST /androidpublisher/v3/applications/{pkg}/edits/{editId}:commit
+   → edit goes live (equivalent to "save and submit")
+</code></pre></div>
+<h3 id="app-store-connect-upload-flow">App Store Connect upload flow<a class="headerlink" href="#app-store-connect-upload-flow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>1. Generate JWT from .p8 private key (expires in 20 min)
+
+2. POST /v1/apps/{appId}/appStoreVersions  (create new version record)
+
+3. POST /v1/builds  (Transporter-based upload — uses Apple's binary protocol, not REST)
+   Note: the actual .ipa upload uses Apple's Transporter tool or its REST equivalent
+   Fastlane uses `xcrun altool` (Xcode ≤14) or `xcrun notarytool` + direct REST (Xcode 15+)
+
+4. PATCH /v1/builds/{buildId}  (attach build to version, set release notes)
+
+5. POST /v1/appStoreVersionSubmissions  (submit for review)
+   → status: WAITING_FOR_REVIEW → IN_REVIEW → APPROVED → READY_FOR_SALE
+</code></pre></div>
+<hr />
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Time</th>
+<th>Review?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Upload to internal track (Play)</td>
+<td><code>capsule publish android --track internal</code></td>
+<td>~5 min</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Upload to production (Play), staged</td>
+<td><code>capsule publish android --track production --rollout 10</code></td>
+<td>~5 min</td>
+<td>No (if previously approved)</td>
+</tr>
+<tr>
+<td>Upload to TestFlight internal</td>
+<td><code>capsule publish ios --track testflight</code></td>
+<td>~15 min processing</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Submit to App Store</td>
+<td><code>capsule publish ios --track production</code></td>
+<td>24–48 hrs</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Push JS update to all devices</td>
+<td><code>capsule codesync publish</code></td>
+<td>~30 sec</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024-2026 Capsule Framework Contributors
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.highlight", "search.share", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>
