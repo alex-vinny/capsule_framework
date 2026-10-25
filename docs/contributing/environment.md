@@ -110,21 +110,21 @@ source ~/.bashrc
 
 # Accept licenses and install required components
 yes | sdkmanager --licenses
-sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+sdkmanager "platform-tools" "platforms;android-36" "build-tools;35.0.0" "ndk;27.3.13750724" "cmake;3.22.1"
 ```
 
 **Android Emulator** (skip if testing on a physical device)
 
 ```bash
-sdkmanager "emulator" "system-images;android-35;google_apis;x86_64"  # Intel/AMD
-# Apple Silicon: use system-images;android-35;google_apis_playstore;arm64-v8a
+sdkmanager "emulator" "system-images;android-36;google_apis;x86_64"  # Intel/AMD
+# Apple Silicon: use system-images;android-36;google_apis_playstore;arm64-v8a
 
 avdmanager create avd \
-    --name "Pixel_8_API35" \
+    --name "Pixel_8_API36" \
     --device "pixel_8" \
-    --package "system-images;android-35;google_apis;x86_64"
+    --package "system-images;android-36;google_apis;x86_64"
 
-emulator -avd Pixel_8_API35 -no-audio -no-boot-anim &
+emulator -avd Pixel_8_API36 -no-audio -no-boot-anim &
 ```
 
 ---
@@ -404,7 +404,7 @@ Phase 1 — Local MVP
           ├── Node.js 22 (nvm)
           ├── pnpm 9 + Turbo 2
           ├── JDK 17 (Temurin)
-          ├── Android SDK (API 35)
+          ├── Android SDK (API 36)
           └── Docker CLI (via Docker Desktop socket)
     └── Docker Desktop 4.30+         ← runs on Windows, socket shared to WSL2
     └── VS Code                      ← IDE, WSL2 + Dev Containers extension
@@ -553,8 +553,10 @@ source ~/.bashrc
 yes | sdkmanager --licenses > /dev/null 2>&1
 sdkmanager \
     "platform-tools" \
-    "platforms;android-35" \
+    "platforms;android-36" \
     "build-tools;35.0.0" \
+    "ndk;27.3.13750724" \
+    "cmake;3.22.1" \
     "extras;android;m2repository" \
     "extras;google;m2repository"
 
@@ -575,7 +577,7 @@ Download from `developer.android.com/studio` (Ladybug 2024.2 or later).
 During setup:
 
 - SDK location: `C:\Users\<you>\AppData\Local\Android\Sdk`
-- Install Android 15 (API 35) system image
+- Install Android 16 (API 36) system image
 
 ##### 5.2 Or — SDK Manager on Windows (no Android Studio)
 
@@ -588,16 +590,16 @@ During setup:
 # C:\android-sdk\cmdline-tools\latest\bin
 # C:\android-sdk\platform-tools
 
-sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
-sdkmanager "emulator" "system-images;android-35;google_apis;x86_64"
+sdkmanager "platform-tools" "platforms;android-36" "build-tools;35.0.0" "ndk;27.3.13750724" "cmake;3.22.1"
+sdkmanager "emulator" "system-images;android-36;google_apis;x86_64"
 
 avdmanager create avd `
-    --name "Pixel_8_API35" `
+    --name "Pixel_8_API36" `
     --device "pixel_8" `
-    --package "system-images;android-35;google_apis;x86_64"
+    --package "system-images;android-36;google_apis;x86_64"
 
 # Launch emulator
-emulator -avd Pixel_8_API35 -no-audio -no-boot-anim
+emulator -avd Pixel_8_API36 -no-audio -no-boot-anim
 ```
 
 ##### 5.3 ADB on Windows + WSL2 bridge
@@ -750,9 +752,9 @@ docker --version        # Docker version 27.x.x
 [ ] Node 22 in WSL2 (nvm install 22)
 [ ] pnpm 9 + Turbo 2 in WSL2
 [ ] JDK 17 Temurin in WSL2 (java -version)
-[ ] Android SDK API 35 + Build Tools 35.0.0 in WSL2
+[ ] Android SDK API 36 + Build Tools 35.0.0 + NDK 27.3 + NDK 27.3 in WSL2
 [ ] ANDROID_HOME set in WSL2 ~/.bashrc
-[ ] Android Emulator (Pixel 8 API 35) running on Windows host
+[ ] Android Emulator (Pixel 8 API 36) running on Windows host
 [ ] adb devices shows the emulator from Windows and WSL2
 [ ] Docker Desktop 4.30+ installed, WSL2 integration enabled
 [ ] VS Code with WSL2 + Dev Containers extensions
@@ -790,24 +792,19 @@ gh auth login
 
 ---
 
-#### Step 13 — GitHub Organization + Repositories
+#### Step 13 — GitHub repositories
+
+The repositories already exist; clone them and sign in to push:
 
 ```bash
-# Create the capsule-framework organization
-# GitHub web UI: github.com → + → New organization → Free plan
-# Organization name: capsule-framework
-
-# Create the monorepo
-gh repo create capsule-framework/capsule \
-  --public \
-  --description "Capsule — app ships inside a managed native capsule" \
-  --clone
-
-# iOS shell repo (separate — linked as git submodule or Swift Package URL)
-gh repo create capsule-framework/capsule-ios \
-  --public \
-  --description "Capsule iOS shell — XCFramework"
+gh auth login                                                      # or a PAT via your credential helper
+git clone https://github.com/alex-vinny/capsule_framework.git      # framework monorepo (incl. examples/)
+git clone https://github.com/alex-vinny/capsule-templates.git      # starter templates (separate: churns faster)
 ```
+
+`main` is protected: the JS, Android build, Swift Linux and Swift macOS CI jobs must pass (admins
+exempt). The iOS shell lives in this monorepo (`packages/capsule-ios`, Swift Package at the root),
+not in a separate repo.
 
 ---
 
@@ -846,8 +843,7 @@ For CI, these go into GitHub repository/organization secrets:
 
 ```
 [ ] GitHub CLI authenticated on Windows + WSL2
-[ ] GitHub org capsule-framework created
-[ ] Repo capsule-framework/capsule created and cloned
+[ ] alex-vinny/capsule_framework (and capsule-templates if needed) cloned
 [ ] GHCR: docker login ghcr.io works
 [ ] Docker buildx multi-arch builder created
 [ ] GitHub Actions CI workflow passing
@@ -1007,18 +1003,20 @@ Set SDK path to `~/android-sdk` and JDK to Eclipse Temurin 17.
 |-----------|---------|--------|
 | Node.js | 22 LTS | Matches Docker images |
 | JDK | 17 (Temurin) | AGP 8.x requirement |
-| Android SDK Platform | android-35 | targetSdk in capsule.config.ts |
-| Build Tools | 35.0.0 | Must match platform |
-| Gradle | 8.10 | Pinned via gradlew |
-| AGP | 8.7.x | Aligns with Gradle 8.10 |
+| Android SDK Platform | android-36 | compileSdk and targetSdk 36 |
+| Build Tools | 35.0.0 | AGP 8.13 default |
+| NDK | 27.3.13750724 | `ndkVersion` in `capsule/build.gradle.kts` |
+| CMake | 3.22.1 | QuickJS + CivetWeb native build |
+| Gradle | 8.14.6 | Pinned via gradlew |
+| AGP | 8.13.2 | `gradle/libs.versions.toml`; Kotlin 2.3.21 (2.4 needs a newer R8) |
 
 ---
 
 ### 5.2 Repository setup
 
 ```bash
-git clone https://github.com/capsule-framework/capsule
-cd capsule
+git clone https://github.com/alex-vinny/capsule_framework
+cd capsule_framework
 pnpm install
 pnpm build         # Turbo resolves build order automatically
 cp .env.example .env.local   # per-machine paths (JAVA_HOME, ANDROID_HOME, …) — git-ignored
@@ -1208,15 +1206,15 @@ services:
 ```
 
 ```bash
-emulator -avd Pixel_8_API35 -no-window -no-audio &
+emulator -avd Pixel_8_API36 -no-window -no-audio &
 adb wait-for-device && adb devices
 ```
 
 **Opening the Dev Container:**
 
 ```bash
-git clone https://github.com/capsule-framework/capsule
-code capsule
+git clone https://github.com/alex-vinny/capsule_framework
+code capsule_framework
 # VS Code prompts: "Reopen in Container" → click it
 # (or: Ctrl+Shift+P → Dev Containers: Reopen in Container)
 # First time: ~5–10 min to pull/build (cached after)
@@ -1265,12 +1263,12 @@ The commit message includes `[skip ci]` to prevent a loop.
 | pnpm | 9.x | ✅ host | ✅ host | ❌ container |
 | Turbo | 2.x | ❌ | ✅ host | ❌ container |
 | JDK | 17 (Temurin) | ✅ host | ✅ host | ❌ container |
-| Android SDK | API 35 | ✅ host | ✅ host | ❌ container |
+| Android SDK | API 36 | ✅ host | ✅ host | ❌ container |
 | Build Tools | 35.0.0 | ✅ host | ✅ host | ❌ container |
-| Gradle | 8.10 | auto (gradlew) | auto | auto |
+| Gradle | 8.14.6 | auto (gradlew) | auto | auto |
 | Docker Desktop | 4.30+ | ❌ optional | ✅ host | ✅ required |
 | ADB | latest | ✅ host | ✅ host | ✅ host |
-| Android Emulator | API 35 | ✅ host | ✅ host | ✅ host (Mac/Win) |
+| Android Emulator | API 36 | ✅ host | ✅ host | ✅ host (Mac/Win) |
 | VS Code Dev Containers | latest | ❌ | ❌ optional | ✅ host |
 | Xcode | 15+ | ✅ macOS (iOS) | ✅ macOS (iOS) | ✅ macOS (iOS) |
 | CocoaPods | 1.15.x | ❌ | iOS packaging | iOS packaging |
@@ -1286,7 +1284,7 @@ The commit message includes `[skip ci]` to prevent a loop.
 [ ] Node.js 22 installed (nvm)
 [ ] @capsule/cli installed globally: npm install -g @capsule/cli
 [ ] JDK 17 installed, JAVA_HOME set
-[ ] ANDROID_HOME set, Android SDK API 35 + Build Tools 35.0.0
+[ ] ANDROID_HOME set, Android SDK API 36 + Build Tools 35.0.0 + NDK 27.3 + NDK 27.3
 [ ] Emulator created and boots (or physical device connected via USB)
 [ ] capsule init my-app succeeds
 [ ] capsule add android succeeds
@@ -1300,7 +1298,7 @@ The commit message includes `[skip ci]` to prevent a loop.
 ```
 [ ] Node.js 22, pnpm 9, Turbo 2 installed
 [ ] JDK 17 installed, JAVA_HOME set
-[ ] ANDROID_HOME set, Android SDK API 35 + Build Tools 35.0.0
+[ ] ANDROID_HOME set, Android SDK API 36 + Build Tools 35.0.0 + NDK 27.3 + NDK 27.3
 [ ] Emulator created and boots
 [ ] Docker Desktop installed, docker compose version shows V2
 [ ] git clone capsule repo

@@ -93,7 +93,7 @@ Other flags: `--no-wait`, `--headless`, `--gpu host` (default is software render
 **Create the AVD (one time):**
 
 ```sh
-pnpm with-env avdmanager create avd -n CapsuleTest -k "system-images;android-35;google_apis_playstore;x86_64" -d "Nexus 5"
+pnpm with-env avdmanager create avd -n CapsuleTest -k "system-images;android-36;google_apis_playstore;x86_64" -d "Nexus 5"
 ```
 
 (`with-env` finds `avdmanager`, `adb` and `emulator` under `ANDROID_HOME`. Set `ANDROID_AVD_HOME`

@@ -31,6 +31,20 @@ emulator (`project/history.md` → 2026-10-24). Next: a **physical-device** pass
 Nano on a supported phone), then the first Phase 6 work — the OTA known gaps
 (`contributing/codesync-internals.md` → Known gaps) — and iOS bring-up on the macOS runner.
 
+**Open items** (2026-10-24, in rough priority):
+
+1. Logo — direction A (split pill) chosen; pick the pair, gap and angle, then export the icon sets
+   (SVG, favicon, Android adaptive, iOS sizes).
+2. Install the Renovate app on both repos (`renovate.json` is committed; the app needs a browser).
+3. Physical Android pass — SR-4 repeat, Gemini Nano on a supported phone.
+4. iOS on a real device or simulator — CI only builds and runs `swift test` on macOS.
+5. npm + Maven publishing (D5) — until then `capsule init` stops after scaffolding with a hint.
+6. OTA known gaps (Phase 6) — `contributing/codesync-internals.md` → Known gaps.
+7. Status-bar icon contrast under edge-to-edge (white icons on light pages).
+8. A test for the `capsule init` failure path (the `pnpm install` hint).
+9. Decide ML Kit's size cost vs adr-003's "zero size if unused".
+10. Two accepted moderate npm advisories in `examples/` — recheck on the next upkeep sweep.
+
 ## Resume a session
 
 ```sh

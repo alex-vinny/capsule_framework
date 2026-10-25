@@ -69,7 +69,7 @@ RUN yes | sdkmanager --licenses > /dev/null 2>&1
 # Install SDK components (pin exact versions for reproducibility)
 RUN sdkmanager \
     "platform-tools" \
-    "platforms;android-35" \
+    "platforms;android-36" \
     "build-tools;35.0.0" \
     "extras;android;m2repository" \
     "extras;google;m2repository"
@@ -79,9 +79,9 @@ RUN sdkmanager \
 # Each app project brings its own gradlew wrapper — we don't install Gradle globally.
 # The distribution is pre-cached at GRADLE_USER_HOME so gradlew finds it immediately.
 ENV GRADLE_USER_HOME=/root/.gradle
-RUN mkdir -p ${GRADLE_USER_HOME}/wrapper/dists/gradle-8.10-bin && \
-    wget -q https://services.gradle.org/distributions/gradle-8.10-bin.zip \
-         -O ${GRADLE_USER_HOME}/wrapper/dists/gradle-8.10-bin/gradle-8.10-bin.zip
+RUN mkdir -p ${GRADLE_USER_HOME}/wrapper/dists/gradle-8.14.6-bin && \
+    wget -q https://services.gradle.org/distributions/gradle-8.14.6-bin.zip \
+         -O ${GRADLE_USER_HOME}/wrapper/dists/gradle-8.14.6-bin/gradle-8.14.6-bin.zip
 
 # NOTE: We do NOT attempt to pre-warm the Android Gradle Plugin (AGP) here.
 # AGP warmup requires a valid Android project with settings.gradle — a stub project
@@ -130,13 +130,13 @@ RUN mkdir -p ${ANDROID_HOME}/cmdline-tools && \
     mv /tmp/cmdline-tools/cmdline-tools ${ANDROID_HOME}/cmdline-tools/latest && \
     rm /tmp/cmdline-tools.zip && \
     yes | sdkmanager --licenses > /dev/null 2>&1 && \
-    sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+    sdkmanager "platform-tools" "platforms;android-36" "build-tools;35.0.0"
 
 # Pre-cache Gradle distribution (same version as dev image — must stay in sync)
 ENV GRADLE_USER_HOME=/root/.gradle
-RUN mkdir -p ${GRADLE_USER_HOME}/wrapper/dists/gradle-8.10-bin && \
-    wget -q https://services.gradle.org/distributions/gradle-8.10-bin.zip \
-         -O ${GRADLE_USER_HOME}/wrapper/dists/gradle-8.10-bin/gradle-8.10-bin.zip
+RUN mkdir -p ${GRADLE_USER_HOME}/wrapper/dists/gradle-8.14.6-bin && \
+    wget -q https://services.gradle.org/distributions/gradle-8.14.6-bin.zip \
+         -O ${GRADLE_USER_HOME}/wrapper/dists/gradle-8.14.6-bin/gradle-8.14.6-bin.zip
 
 # Capsule CLI (installed globally so it's available as a command)
 RUN npm install -g @capsule/cli

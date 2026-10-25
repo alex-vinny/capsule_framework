@@ -41,7 +41,7 @@ body:
     attributes:
       label: Versions
       description: Capsule packages, OS, device / emulator API level, Node and JDK.
-      placeholder: "@capsule/cli 0.1.0 · Android 15 (API 35) emulator · Node 22 · JDK 17"
+      placeholder: "@capsule/cli 0.1.0 · Android 16 (API 36) emulator · Node 22 · JDK 17"
     validations:
       required: true
   - type: textarea

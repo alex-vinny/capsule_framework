@@ -871,3 +871,26 @@ layer and the sequencing, not new technical specs.
   on-device model), JVM 212, SR-4 (20 cold starts + 10 relaunches: every launch rendered), the
   `react-ts` release build end to end (page → bridge → CivetWeb → QuickJS route), all example release
   builds installed and launched.
+- **Templates + examples brought current:** Angular 19 → 22 (zoneless, TS 6.0), rspack 2, vite ≥ 6.4.5,
+  `type: module`, `@capsule/core ^0.1.0`; all 7 templates install and build clean; examples' npm
+  advisories 45 → 2 accepted moderates, templates → 0.
+- **Published:** `alex-vinny/capsule_framework` (this repo) and `alex-vinny/capsule-templates`, both
+  public, each a fresh single-commit history under the GitHub noreply author (the private histories
+  are kept outside the repo). Docs site on GitHub Pages from `gh-pages`. Nothing on npm/Maven yet (D5).
+- **First CI runs on GitHub** found five more, all fixed (`b7160df`, `62dbfb8`):
+  1. `docs:check` walked paths from a Windows drive root only — the POSIX walk never matched.
+  2. CivetWeb's `struct ah` clashed with a Darwin header under clang modules (macOS SwiftPM).
+  3. mkdocs `--strict` rejected links from `docs/` to files outside it.
+  4. `CapsuleBridge` must inherit `NSObject` to be a `WKScriptMessageHandler` — invisible to the
+     Linux job because the file sits behind `#if canImport(WebKit)`.
+  5. `docs-map.md` was stale (`gen --check`).
+  Every job green on `62dbfb8`: JS, Android build + JVM, the emulator job, Swift Linux, Swift macOS, docs.
+- **GitHub setup:** `main` protected (required: JS, Android build, Swift Linux, Swift macOS; no
+  force-push or deletion; admins exempt). A push cancels a running manual CI dispatch on the same
+  branch (shared concurrency group) — dispatch again after pushing.
+- **Fresh-clone check:** the setup docs still said SDK platform 35, Gradle 8.10, AGP 8.7 and the old
+  org URL — `contributing/environment.md`, `commands.md` and `docker.md` now say platform 36, NDK
+  27.3.13750724, CMake 3.22.1, Gradle 8.14.6, AGP 8.13.2 and `alex-vinny/capsule_framework`. CI's
+  `NDK_VERSION` (27.2) disagreed with `ndkVersion` (27.3) and now matches.
+- **Logo:** direction A (split pill) chosen; the pair (Graphite / Lagoon / crosses), the gap and the
+  angle are still open — then export SVG, favicon, Android adaptive and iOS icon sets.
